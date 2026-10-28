@@ -1,0 +1,2123 @@
+[
+  {
+    "number": 25007,
+    "author": "lmycross",
+    "experience": "PRIOR_MERGED",
+    "merged": true,
+    "cutoff": "2026-07-01T06:10:13Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25020,
+    "author": "davidnichols-ops",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-09T20:35:32Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/25020#issuecomment-4879608012",
+        "created_at": "2026-07-03T22:15:28Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "y-t-g"
+        ],
+        "reviewer_targets": [
+          "y-t-g"
+        ],
+        "prior_participants": [
+          "codecov",
+          "davidnichols-ops",
+          "github-actions",
+          "ultralyticsassistant",
+          "y-t-g"
+        ],
+        "body": "@Y-T-G Yes — the PR now contains only Fix 2 and Fix 3. Fix 1 (exporter warning for `end2end=False`) and Fix 4 (one-to-one head selection for `end2end=False`) have been removed entirely.\n\nThe squashed commit (`5cfc713`) touches only:\n- `ultralytics/utils/export/engine.py` — Sigmoid/Softmax exclusion from INT8 quantization (TRT 10 per-layer FP32 constraint + TRT 11+ ModelOpt `op_types_to_exclude`)\n- `tests/test_exports.py` — tests for the above\n- `docs/en/integrations/tensorrt.md` — short doc note\n- `tests/bench_int8_retention.py` — benchmark script\n\nNo changes to `head.py` or `exporter.py`'s end2end logic remain. The stale inline comments from UltralyticsAssistant on those files have been resolved.\n"
+      }
+    ]
+  },
+  {
+    "number": 25024,
+    "author": "Bovey0809",
+    "experience": "PRIOR_MERGED",
+    "merged": true,
+    "cutoff": "2026-07-03T14:10:18Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "Bovey0809",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-03T11:42:00Z",
+        "requestedReviewer": {
+          "__typename": "Bot"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25025,
+    "author": "ahmet-f-gumustas",
+    "experience": "PRIOR_MERGED",
+    "merged": true,
+    "cutoff": "2026-07-03T13:45:57Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25026,
+    "author": "RizwanMunawar",
+    "experience": "PRIOR_MERGED",
+    "merged": true,
+    "cutoff": "2026-07-04T18:25:18Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25032,
+    "author": "JESUSROYETH",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-06T13:33:27Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25039,
+    "author": "miles-deans-ultralytics",
+    "experience": "PRIOR_MERGED",
+    "merged": true,
+    "cutoff": "2026-07-06T16:49:09Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25050,
+    "author": "sokrisba",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-07T17:31:01Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "sokrisba",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-07T12:25:06Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "glenn-jocher"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25064,
+    "author": "dorianboille",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-08T17:55:27Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25078,
+    "author": "tbujewsk",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-14T18:35:41Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "tbujewsk",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-10T12:02:50Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "lakshanthad"
+        }
+      },
+      {
+        "actor": {
+          "login": "tbujewsk",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-10T12:02:52Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "francesco-mttl"
+        }
+      },
+      {
+        "actor": {
+          "login": "tbujewsk",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-10T12:02:58Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "tbujewsk",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-13T16:42:03Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/25078#discussion_r3558584498",
+        "created_at": "2026-07-10T11:36:09Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "ambitious-octopus",
+          "lakshanthad"
+        ],
+        "reviewer_targets": [
+          "lakshanthad"
+        ],
+        "prior_participants": [
+          "adrianboguszewski",
+          "codecov",
+          "francesco-mttl",
+          "github-actions",
+          "lakshanthad",
+          "tbujewsk",
+          "ultralyticsassistant"
+        ],
+        "body": "@ambitious-octopus , @lakshanthad can we move it next to DeepStream? However, it looks like you are keeping all guides in an alphabetic order. Let's know, thank you."
+      },
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/25078#discussion_r3558919074",
+        "created_at": "2026-07-10T12:37:29Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "lakshanthad"
+        ],
+        "reviewer_targets": [
+          "lakshanthad"
+        ],
+        "prior_participants": [
+          "adrianboguszewski",
+          "codecov",
+          "francesco-mttl",
+          "github-actions",
+          "lakshanthad",
+          "tbujewsk",
+          "ultralyticsassistant"
+        ],
+        "body": "@lakshanthad I'm getting error with this parameter 'quantize=8' -> SyntaxError: 'quantize' is not a valid YOLO argument. With 'int8=True' there is no error. Is it a matter of ultralytics version ?\n"
+      }
+    ]
+  },
+  {
+    "number": 25081,
+    "author": "Joe-KI333",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-07-09T18:39:33Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25091,
+    "author": "Hasnaathussain",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-07-12T01:10:44Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "Hasnaathussain",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-10T12:27:44Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/25091#issuecomment-4934002317",
+        "created_at": "2026-07-10T09:36:32Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "ultralyticsassistant"
+        ],
+        "reviewer_targets": [],
+        "prior_participants": [
+          "codecov",
+          "github-actions",
+          "ultralyticsassistant"
+        ],
+        "body": "I have read the CLA Document and I sign the CLA @UltralyticsAssistant \r\n\r\n"
+      }
+    ]
+  },
+  {
+    "number": 25111,
+    "author": "Functionhx",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-07-12T01:06:02Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25117,
+    "author": "zhanghuiwan",
+    "experience": "PRIOR_PR_NO_MERGE",
+    "merged": true,
+    "cutoff": "2026-07-12T11:15:58Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25122,
+    "author": "ralampay",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-07-12T09:09:27Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25132,
+    "author": "synml",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-13T11:08:48Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25135,
+    "author": "anshulll19",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-13T11:08:51Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25176,
+    "author": "Zenka737",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-14T23:24:14Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25183,
+    "author": "GiaThinh110605",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-07-15T08:50:15Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25184,
+    "author": "MohanadMahran",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-07-15T08:50:13Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25188,
+    "author": "amanharshx",
+    "experience": "PRIOR_MERGED",
+    "merged": true,
+    "cutoff": "2026-07-15T11:04:29Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "amanharshx",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-15T07:05:16Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25189,
+    "author": "laodouya",
+    "experience": "PRIOR_MERGED",
+    "merged": true,
+    "cutoff": "2026-07-16T22:26:13Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "laodouya",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-15T10:34:17Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "laodouya",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-15T15:31:52Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "laodouya",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-16T03:21:37Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "laodouya",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-16T03:39:34Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "laodouya",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-16T04:03:33Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "laodouya",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-16T12:28:09Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "laodouya",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-16T12:32:04Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "laodouya",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-16T12:49:04Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "Bovey0809"
+        }
+      },
+      {
+        "actor": {
+          "login": "laodouya",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-16T12:49:04Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "Laughing-q"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25206,
+    "author": "muzhikov",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-15T23:29:10Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "muzhikov",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-15T21:22:01Z",
+        "requestedReviewer": {
+          "__typename": "Bot"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25242,
+    "author": "XJ12-web",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-23T15:01:48Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25277,
+    "author": "54wb",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-07-27T12:28:25Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25282,
+    "author": "darshil929",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-19T11:21:41Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25299,
+    "author": "anupamme",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-07-30T12:35:44Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25317,
+    "author": "songjiahao-wq",
+    "experience": "PRIOR_PR_NO_MERGE",
+    "merged": true,
+    "cutoff": "2026-07-30T11:19:26Z",
+    "author_requested_review": false,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "Y-T-G",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-21T12:01:49Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25334,
+    "author": "Logesh1502",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-07-22T14:42:18Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25373,
+    "author": "23z156-wq",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-23T12:43:46Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25384,
+    "author": "usegitdivyansh",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-24T20:42:13Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25403,
+    "author": "nijil-ti",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-27T18:50:55Z",
+    "author_requested_review": false,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "fcakyon",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-27T08:07:16Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "francesco-mttl"
+        }
+      },
+      {
+        "actor": {
+          "login": "fcakyon",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-27T08:07:16Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "fcakyon"
+        }
+      },
+      {
+        "actor": {
+          "login": "fcakyon",
+          "__typename": "User"
+        },
+        "createdAt": "2026-09-08T06:26:58Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "fcakyon",
+          "__typename": "User"
+        },
+        "createdAt": "2026-09-08T06:35:18Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25423,
+    "author": "HussainNizamani",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-20T01:17:25Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25443,
+    "author": "ShuaiLYU",
+    "experience": "PRIOR_MERGED",
+    "merged": false,
+    "cutoff": "2026-07-28T07:46:34Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25452,
+    "author": "klemen1999",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-05T22:02:06Z",
+    "author_requested_review": false,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T12:22:21Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T12:54:50Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T12:58:41Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T13:31:16Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/25452#issuecomment-5440338234",
+        "created_at": "2026-08-27T14:08:18Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "glenn-jocher"
+        ],
+        "reviewer_targets": [
+          "glenn-jocher"
+        ],
+        "prior_participants": [
+          "codecov",
+          "github-actions",
+          "glenn-jocher",
+          "klemen1999",
+          "ultralyticsassistant"
+        ],
+        "body": "Hi @glenn-jocher,\r\n\r\nThank you for taking the time to review the PR, and apologies for the slow follow-up on your comments. We had to focus on a few other things in the meantime.\r\n\r\nI believe I’ve now addressed all of the feedback, and the PR should be ready for re-review:\r\n1. The blog post has been removed. We can work on it jointly once the integration page is finalized and merged.\r\n2. The images have been removed from the PR. I’m attaching the ones I believe should be used on the docs page in the comment below, as I’m not sure where you typically host documentation images.\r\n3. The entire local conversion flow is now pinned to a specific ModelConverter version, and the example walks through the exact commands that need to be run. I’m using the full generated output directory names, including timestamps, and I added a note that these will vary between runs.\r\n4. The tools installation section now links directly to the repository installation instructions.\r\n5. We now link to the compatibility table in `tools` and clarify that `dai.DetectionNetwork` currently supports YOLO variants for detection, instance segmentation, and pose estimation. For other tasks, such as semantic segmentation and classification, I link to our inference documentation. Conversion of these models is generally supported, but users need to handle output post-processing themselves since it is not currently handled automatically by `dai.DetectionNetwork`.\r\n6. I kept the benchmark tables and added the exact device and environment details so the results can be reproduced. The reason the `RVC2` and `RVC4` tables contain different models is that `RVC4` is significantly more powerful and can run larger models at real-time frame rates. Those same models can technically run on `RVC2`, but at much lower FPS, which is not a usage pattern we want to encourage. In practice, we would recommend nano variants for `RVC2`, while `RVC4` gives users more flexibility to choose larger variants. For that reason, I think the current benchmark tables are still useful even without a direct same-model comparison.\r\n7. I believe the current wording is now copy-neutral.\r\n\r\nHopefully you agree that this version of the integration documentation is in a better state. If there are still any issues or things you’d like changed, let me know and I’ll address them.\r\n\r\nBest,\r\nKlemen\r\n"
+      },
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/25452#issuecomment-5479136177",
+        "created_at": "2026-08-31T13:34:23Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "glenn-jocher"
+        ],
+        "reviewer_targets": [
+          "glenn-jocher"
+        ],
+        "prior_participants": [
+          "codecov",
+          "github-actions",
+          "glenn-jocher",
+          "klemen1999",
+          "ultralyticsassistant"
+        ],
+        "body": "Thanks, @glenn-jocher.\r\n\r\nI’ve removed the image references so they can be added later, and fixed the calibration command—thanks for catching that.\r\n\r\nOn the benchmark tables: do you think the rationale above is still not enough to keep them? I agree that the RVC2 and RVC4 tables do not benchmark identical models, but that is intentional. The two device families differ substantially in available AI compute (RVC2 has 1.4 TOPS, while RVC4 provides up to 52 TOPS) so in practice users would typically run larger, more capable models on RVC4 while still targeting real-time performance (~30 FPS). Benchmarking exactly the same models on both platforms would be less representative of the choices users are likely to make.\r\n\r\nI also saw the benchmark sections in the LiteRT, QNN, and OpenVINO integrations which I took as references. From a user perspective, I think a concise table is useful for quickly understanding the expected performance range. The latest version also documents the script, device, and settings used alongside each table so that the results are reproducible.\r\n\r\nI see a similar point regarding subjective wording. There is still some evaluative language, but it is always within a concrete comparison. For example, between export paths or between RVC2 and RVC4. In this sentence:\r\n\r\n> For YOLO deployment, `RVC4` is the higher-performance option and is generally the better fit when you need more throughput or more ambitious on-device pipelines.\r\n\r\n“Better fit” is specifically relative to RVC2 when higher compute throughput or more demanding models are required. Given that context, would you still prefer that we remove this wording entirely?\r\n\r\nRegarding “reduce the page to the requested minimal workflow,” I may be misunderstanding the intended scope. The document currently describes two concise, practical paths:\r\n\r\n1. Cloud conversion through Luxonis Hub—the primary path for most users.\r\n2. Local conversion with Luxonis tools and ModelConverter—for users who need a fully local workflow and control over each step.\r\n\r\nCould you clarify which parts you would consider outside that minimal workflow?\r\n\r\nLooking forward to your feedback.\r\n\r\nKlemen\r\n"
+      }
+    ]
+  },
+  {
+    "number": 25465,
+    "author": "smohan-ambarella",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-05T21:46:23Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "lakshanthad",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-30T18:29:34Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "glenn-jocher"
+        }
+      },
+      {
+        "actor": {
+          "login": "lakshanthad",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-30T18:29:39Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "francesco-mttl"
+        }
+      },
+      {
+        "actor": {
+          "login": "smohan-ambarella",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-06T18:17:23Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "lakshanthad"
+        }
+      },
+      {
+        "actor": {
+          "login": "smohan-ambarella",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-06T18:17:31Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "smohan-ambarella",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-06T18:17:47Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "glenn-jocher"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T12:24:04Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/25465#issuecomment-5505055258",
+        "created_at": "2026-09-02T05:46:09Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "glenn-jocher"
+        ],
+        "reviewer_targets": [
+          "glenn-jocher"
+        ],
+        "prior_participants": [
+          "codecov",
+          "github-actions",
+          "glenn-jocher",
+          "lakshanthad",
+          "smohan-ambarella",
+          "ultralyticsassistant"
+        ],
+        "body": "Hi @glenn-jocher, thanks for your review comments. I updated the documentation with more clarity. I have opened a ticket with IT team to enable \"Allow edits by maintainers\", I'll keep you posted on that. "
+      }
+    ]
+  },
+  {
+    "number": 25488,
+    "author": "gizembm",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-29T01:28:46Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25496,
+    "author": "Rahulbiradar9",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-29T14:38:17Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "Rahulbiradar9",
+          "__typename": "User"
+        },
+        "createdAt": "2026-07-29T08:48:52Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "Y-T-G"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25501,
+    "author": "rudrakumar07",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-07-29T18:50:48Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25508,
+    "author": "ErenAta16",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-29T15:16:43Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25527,
+    "author": "csy3699",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-20T08:34:57Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25536,
+    "author": "zgh2022",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-30T22:59:48Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25582,
+    "author": "leoventuroso",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-07-31T15:17:21Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25606,
+    "author": "MGPOCKY",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-02T17:20:59Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25610,
+    "author": "Jackstar1212",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-01T15:00:54Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25618,
+    "author": "alhatemmohanad-ui",
+    "experience": "PRIOR_PR_NO_MERGE",
+    "merged": false,
+    "cutoff": "2026-08-02T17:04:17Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25629,
+    "author": "Dorablank",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-11T06:30:34Z",
+    "author_requested_review": false,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-09T15:32:37Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25630,
+    "author": "seven7763",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-03T10:35:27Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25632,
+    "author": "toni-k8s",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-03T02:10:24Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25652,
+    "author": "Daniiiil1",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-09T02:53:50Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25656,
+    "author": "cosmo-gb",
+    "experience": "PRIOR_PR_NO_MERGE",
+    "merged": true,
+    "cutoff": "2026-08-09T03:19:00Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25687,
+    "author": "nivosco",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-09T02:27:40Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25708,
+    "author": "a-tangfan",
+    "experience": "PRIOR_MERGED",
+    "merged": false,
+    "cutoff": "2026-09-05T16:41:11Z",
+    "author_requested_review": false,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-09T15:32:30Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "lakshanthad",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-20T20:34:18Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T12:22:38Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/25708#issuecomment-5234890662",
+        "created_at": "2026-08-10T01:18:18Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "glenn-jocher"
+        ],
+        "reviewer_targets": [
+          "glenn-jocher"
+        ],
+        "prior_participants": [
+          "a-tangfan",
+          "codecov",
+          "glenn-jocher",
+          "ultralyticsassistant"
+        ],
+        "body": "@glenn-jocher thanks for the detailed review, and for validating the reduction locally before asking for it. That made it quick to apply.\r\n\r\nAll four deletions and the `==1.8.0` pins are in. The effective diff is now +113/-41 (net +72), close to the +110/-39 you measured. Ruff format and check, Prettier at the Actions settings, and both runtime guards re-verified on the merged head.\r\n\r\nDeleted: the SDK pairing table and its rollback install block, the `imgsz` aspect ratio tip, the batch throughput table, the headroom narrative, and the README older SDK note. Kept: the 1.8 driver minimum, the re-export warning, now sitting next to the manual install commands, and the batching contract.\r\n\r\n### On the driver version\r\n\r\nI think we were answering two different questions rather than disagreeing on a fact.\r\n\r\nOur table was headed \"Minimum `metis-dkms`\", and 1.4.18 is what SDK 1.7 enforces at load time. Your question is the one that matters more on a docs page: what should someone actually install? That's 1.5.5, the pairing Axelera tested and ships with 1.7. I agree with you there. The enforced floor will accept drivers that were never validated against that SDK, so publishing the tested version is safer for users.\r\n\r\nNothing else in the diff changes because of this. The table is gone, and the one number still on the page, `metis-dkms` 1.6.2 for SDK 1.8, is both the enforced minimum and the version Axelera QMS confirmed, so it holds under either reading.\r\n\r\n### How we'll pick the number for future bumps\r\n\r\nThe two values come from different places and can drift apart, so from here we'll check both before bringing you one.\r\n\r\nThe value that decides whether a device opens is compiled into the release. Each SDK's `axelera-runtime` wheel ships a `libaxldev.so` carrying `DEV_DRIVER_MIN_VERSION`, and `axl_dev_check_driver_version` compares the loaded kernel module against it, rejecting anything lower with `AXL_DRV_VERSION_TOO_OLD`. Nothing in the Python packages can soften that, which is why a wrong number here surfaces as a device that will not open rather than as a warning at install time. Reading it out of the shipped wheels gives 1.4.10 for SDK 1.6, 1.4.18 for 1.7 and 1.6.2 for 1.8.\r\n\r\nThe install guide publishes something different, the driver version validated with that SDK at release time. It's the more useful number for users, but it's written once when the SDK ships and isn't regenerated when either side moves, so it can go stale. It currently has: at tag `v1.8.0` the guide runs `sudo apt-get install -y metis-dkms=1.4.16`, which is below the 1.6.2 that same release enforces, so following it exactly produces:\r\n\r\n```text\r\n[libaxldev.c:285] Found kernel driver version 1.4.16, but at least version 1.6.2 is required. Please update the kernel driver\r\n```\r\n\r\nSo the practice is: take the tested pairing as the number to publish, then confirm it clears the floor in the shipped runtime. When they agree, as they do at 1.6.2 for SDK 1.8, there's nothing to decide. When they don't, the runtime is the one users feel, and we'll get a corrected pairing confirmed before it reaches this page.\r\n\r\n### On the pins\r\n\r\nAgreed on the coupling argument, applied to both call sites. Stating the cost for the record: a user deliberately running a newer SDK gets moved back to 1.8.0 on every `predict` and `export`. That's coherent now that the rollback prose is gone, since the Ultralytics version becomes the only thing that selects an SDK. The `sys.modules` guards were reworded from \"older version\" to \"already-imported version\", because the replaced one can now be newer.\r\n\r\n### One line I didn't simply delete\r\n\r\nRemoving the performance narrative restores this sentence, which is measurably false:\r\n\r\n> This integration uses single-core configuration for compatibility.\r\n\r\nA compiled model is single image, not single core. `aipu_cores_used` is fixed at export, and a loaded model already has all four cores of the device available, so passing `core_allocation=4` to `op.load` changes nothing. What limits this integration is that one image is processed at a time. The replacement says that instead, at the same line count.\r\n\r\nAlso worth noting that `check_requirements` gained `constrain=` in `16d2ae07`, and its `shlex.split` rework leaves our `cmds=\"--extra-index-url ...\"` working unchanged, verified on the merged head."
+      },
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/25708#issuecomment-5249084060",
+        "created_at": "2026-08-11T04:45:13Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "tamrobb"
+        ],
+        "reviewer_targets": [
+          "tamrobb"
+        ],
+        "prior_participants": [
+          "a-tangfan",
+          "codecov",
+          "glenn-jocher",
+          "ultralyticsassistant"
+        ],
+        "body": "Thanks for the review, this one was worth the round trip. I went through each finding against the installed SDK and the hardware rather than applying them on sight, and one of them found a real hole in what I had pushed.\r\n\r\n### The one that mattered\r\n\r\nChecking the SDK by metapackage dist name is not a test of whether the SDK works. `axelera-devkit` ships exactly one file, `axelera/devkit/__init__.py`, and `axelera-rt` ships only `axelera/rt/__init__.py`; the modules this code imports live in `axelera-compiler` and `axelera-runtime2`. Verified by hiding the dist-info of a working install:\r\n\r\n```\r\nmetapackage present:  dist lookup 1.7.0        | import axelera.runtime.op OK\r\nmetapackage removed:  dist lookup ABSENT       | import axelera.runtime.op OK\r\n```\r\n\r\nSo on a host whose components are installed without the metapackage, the check reported absent and pip reinstalled the pinned wheels over a working toolchain, which is the exact harm the previous commit set out to remove.\r\n\r\nDetection is back to importing the API and installing only when that fails. That also removes two hazards you and the bot pointed at: `check_requirements` returns `True` unconditionally under `ULTRALYTICS_SKIP_REQUIREMENTS_CHECKS`, so the version lookup that followed it could raise `PackageNotFoundError` where the old shape raised a clean `ImportError`; and the `sys.modules` re-entry guards are now unreachable by construction, so they are deleted rather than explained.\r\n\r\n### Also applied\r\n\r\n- `metadata.yaml` records the `axelera-compiler` version, not the metapackage's, since the compiler emits the `.axm` and the two can differ.\r\n- The load failure leads with the runtime's own message, so a truncated file or a busy device reads as itself rather than as a version mismatch. The built-with and installed versions are appended after it.\r\n- `sdk_version()` returns `None` rather than raising when a package has no metadata, and both the target and pairing checks tolerate that.\r\n- The `isolated-axelera` CI recipe derives its pin from `AXELERA_SDK`, so a bump moves one constant instead of leaving CI on the previous SDK while the code advertises the new one.\r\n- `AXELERA_SDK_MIN` records the oldest supported SDK. Older ones still run and say they are outside the supported window.\r\n- The `PATH` and protobuf mutations moved inside the `try`, so a raise between them cannot leak either variable.\r\n\r\n### Two I did not take\r\n\r\n**The numpy pin.** `IsolatedExports` passes green on this branch without the `numpy<=2.3.5` ceiling, so the CI environment resolves and exports fine without it. The docs warning that went with it described a `numpy<2` constraint that no longer exists in 1.8.0, so restoring either would document a failure that cannot occur.\r\n\r\n**The batch throughput claim.** It is measured, not asserted: 192 COCO images through `yolo predict` on one pinned Metis device, median of three runs, 36.0 img/s at `batch=1` against 31.9, 32.1, 32.4 and 32.5 for batch 4, 8, 16 and 32. The scheduler does spread work across cores internally, but end to end on a single device that does not turn into throughput, which is what the sentence claims. I have reworded it to say \"measured end to end on a single device\" so the scope is explicit.\r\n\r\n### Verification\r\n\r\n`ruff format` and `ruff check` clean, Prettier clean at the Actions settings, six unit checks over the version-reporting logic, and on hardware: `yolo predict` on a matched 1.8 environment runs with no AutoUpdate and no warnings, and on a deliberately mixed environment (devkit 1.7.0 with runtime 1.8.0) it runs, keeps both packages, and emits exactly one pairing warning.\r\n\r\n@tamrobb , can you please join the review? The scope is larger than I thought, but I think worthy to do, as we now setup the SDK support logic in Ultralytics integration."
+      }
+    ]
+  },
+  {
+    "number": 25709,
+    "author": "Nikhi00718",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-09T02:14:37Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25717,
+    "author": "Parth1353",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-08T08:22:08Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25741,
+    "author": "Q-qqq",
+    "experience": "PRIOR_MERGED",
+    "merged": true,
+    "cutoff": "2026-08-10T22:42:58Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25749,
+    "author": "doublecurry",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-10T22:29:50Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25772,
+    "author": "markyang2020",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-11T07:14:38Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25775,
+    "author": "FaresAminu",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-11T23:06:41Z",
+    "author_requested_review": false,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-11T22:31:21Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "Y-T-G"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25786,
+    "author": "eldadr",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-20T00:54:57Z",
+    "author_requested_review": false,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-12T15:15:00Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25787,
+    "author": "JaviChulvi",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-13T21:03:43Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "JaviChulvi",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-12T11:22:43Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "JaviChulvi",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-12T11:28:17Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "JaviChulvi",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-12T11:49:45Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "JaviChulvi",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-12T12:03:24Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "JaviChulvi",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-12T12:15:58Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25804,
+    "author": "sujeito-operator",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-13T21:28:03Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25815,
+    "author": "yentur",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-20T01:09:26Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25816,
+    "author": "Ajaysingh-2003",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-23T12:46:35Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25824,
+    "author": "altf4-games",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-20T00:45:09Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "altf4-games",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-16T03:51:14Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "altf4-games",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-16T06:23:40Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25828,
+    "author": "danielmorozoff",
+    "experience": "PRIOR_PR_NO_MERGE",
+    "merged": false,
+    "cutoff": "2026-08-19T21:49:10Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "danielmorozoff",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-19T21:45:42Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "glenn-jocher"
+        }
+      }
+    ],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/25828#issuecomment-5347919088",
+        "created_at": "2026-08-19T20:58:23Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "glenn-jocher"
+        ],
+        "reviewer_targets": [
+          "glenn-jocher"
+        ],
+        "prior_participants": [
+          "codecov",
+          "danielmorozoff",
+          "glenn-jocher",
+          "ultralyticsassistant",
+          "y-t-g"
+        ],
+        "body": "@glenn-jocher I will remove the test- so do you guys want me to remove the lifecycle fix or not? "
+      }
+    ]
+  },
+  {
+    "number": 25847,
+    "author": "Asher-1",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-18T09:12:20Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25850,
+    "author": "diaz3z",
+    "experience": "PRIOR_PR_NO_MERGE",
+    "merged": true,
+    "cutoff": "2026-08-19T18:27:36Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25854,
+    "author": "Sigwendice",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-19T19:39:55Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25855,
+    "author": "tandede",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-19T18:28:03Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25857,
+    "author": "uczltw6",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-19T19:39:59Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25863,
+    "author": "SergioAlmeida29",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-19T18:32:23Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "SergioAlmeida29",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-19T12:13:06Z",
+        "requestedReviewer": {
+          "__typename": "Bot"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 25872,
+    "author": "shafeeq27edu-ai",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-22T03:37:06Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25882,
+    "author": "chinazhangchao",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-30T16:37:51Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25888,
+    "author": "Kagura-Ahad",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-23T15:25:04Z",
+    "author_requested_review": false,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T12:17:14Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T12:51:55Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T13:26:35Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T13:28:45Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T13:32:12Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T15:08:13Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-08-23T15:19:30Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/25888#discussion_r3838494217",
+        "created_at": "2026-08-23T12:28:07Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "glenn-jocher"
+        ],
+        "reviewer_targets": [
+          "glenn-jocher"
+        ],
+        "prior_participants": [
+          "codecov",
+          "github-actions",
+          "kagura-ahad",
+          "ultralyticsassistant"
+        ],
+        "body": "@glenn-jocher Can you help me in finding out how my change affected the documentation?"
+      }
+    ]
+  },
+  {
+    "number": 25906,
+    "author": "aswanth-07",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-24T23:23:51Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25918,
+    "author": "minuex",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-24T23:10:28Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25926,
+    "author": "john-rocky",
+    "experience": "PRIOR_MERGED",
+    "merged": true,
+    "cutoff": "2026-08-27T17:34:42Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25943,
+    "author": "Amarnath10i",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-08-27T15:03:29Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25963,
+    "author": "idwenhui",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-28T10:23:34Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25982,
+    "author": "jahsef",
+    "experience": "PRIOR_PR_NO_MERGE",
+    "merged": true,
+    "cutoff": "2026-08-29T11:14:06Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 25986,
+    "author": "lszSamLin",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-08-30T16:37:36Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26014,
+    "author": "Marchematics",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-10-28T05:41:45.871993+00:00",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "Marchematics",
+          "__typename": "User"
+        },
+        "createdAt": "2026-09-01T02:12:45Z",
+        "requestedReviewer": {
+          "__typename": "Bot"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 26021,
+    "author": "wangjia15",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-09-07T10:51:01Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26038,
+    "author": "Gornoka",
+    "experience": "PRIOR_MERGED",
+    "merged": true,
+    "cutoff": "2026-09-05T16:32:56Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26040,
+    "author": "Erickrk",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-05T00:18:04Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26054,
+    "author": "mahesh-desu",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-10-28T05:41:45.871993+00:00",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "mahesh-desu",
+          "__typename": "User"
+        },
+        "createdAt": "2026-09-13T20:22:53Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "glenn-jocher"
+        }
+      }
+    ],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/26054#issuecomment-5620543658",
+        "created_at": "2026-09-10T14:44:46Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "glenn-jocher"
+        ],
+        "reviewer_targets": [
+          "glenn-jocher"
+        ],
+        "prior_participants": [
+          "github-actions",
+          "glenn-jocher",
+          "mahesh-desu",
+          "ultralyticsassistant"
+        ],
+        "body": "@glenn-jocher - Can you please provide your approval for the merge. Let me know if I am missing anything."
+      },
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/26054#issuecomment-6408983869",
+        "created_at": "2026-10-26T05:31:48Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "glenn-jocher"
+        ],
+        "reviewer_targets": [
+          "glenn-jocher"
+        ],
+        "prior_participants": [
+          "codecov",
+          "github-actions",
+          "glenn-jocher",
+          "mahesh-desu",
+          "ultralyticsassistant"
+        ],
+        "body": "@glenn-jocher the simplification requested in the Sep 5 review is complete: `predict_frames()` is a thin `stream_inference(source=LoadNumpyFrames(frames), text=text)` wrapper, `LoadNumpyFrames` lives in `ultralytics/data/loaders.py`, and the manual prediction loop and duplicated tracker setup are gone. CI is green. Could you re-review and dismiss the stale changes-requested review so the PR can proceed?\n"
+      }
+    ]
+  },
+  {
+    "number": 26075,
+    "author": "tritsystem",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-07T15:24:50Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26079,
+    "author": "cainiao33",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-09-07T13:54:27Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/26079#issuecomment-5571669815",
+        "created_at": "2026-09-07T13:54:26Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "y-t-g"
+        ],
+        "reviewer_targets": [
+          "y-t-g"
+        ],
+        "prior_participants": [
+          "cainiao33",
+          "codecov",
+          "github-actions",
+          "ultralyticsassistant"
+        ],
+        "body": "Closing per @Y-T-G's feedback in https://github.com/ultralytics/ultralytics/discussions/22109 — the docs cover latest-version behavior only, and external `non_max_suppression()` calls are internal-API usage whose caveats don't belong in the docs. Thanks for the review and the quick clarification!"
+      }
+    ]
+  },
+  {
+    "number": 26089,
+    "author": "KimJintak",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-09-08T14:03:43Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26101,
+    "author": "developer0hye",
+    "experience": "PRIOR_MERGED",
+    "merged": false,
+    "cutoff": "2026-10-28T05:41:45.871993+00:00",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/26101#issuecomment-5588018429",
+        "created_at": "2026-09-08T15:55:21Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "glenn-jocher"
+        ],
+        "reviewer_targets": [
+          "glenn-jocher"
+        ],
+        "prior_participants": [
+          "codecov",
+          "glenn-jocher",
+          "ultralyticsassistant"
+        ],
+        "body": "@glenn-jocher The missing wheel and dependency floor are fixed at **0451a3c9282461e74cbaeeb5d03991be9162cdaf**. Thanks for the independent validation in your follow-up. Your packaging and prediction-derived-GT findings were valid; both have concrete fixes now.\n\n**ultrafast-pycocotools 0.1.7 is public on PyPI**, including `cp38-cp38-macosx_11_0_arm64`. A fresh native M2 installation using `--only-binary=:all:` passes **249 tests** (17 optional skips). All 35 wheels plus the sdist match the tested publication artifacts. [Release and installation verification](https://github.com/developer0hye/ultrafast-pycocotools/blob/dfba260fcab6a9b2307b53b98f220e199dbe75e2/bench/results/release_v017_verification.json).\n\nI also completed a separate **94-process** before/after run on the i5-10400 / RTX 3070 host: all 5,000 COCO val2017 images for detect, segment and pose, FP32/640/batch 16/workers 2, Python 3.12.3, Torch 2.13.0+cu126, NumPy 2.4.4, faster-coco-eval 1.8.0 versus ultrafast 0.1.7. The measured replacement is 0d406853; the only later change at 0451a3c9 installs both evaluators in the regular CI matrix. Runtime/test sources are identical. These are separate predictions/settings from your ultra5 run.\n\n| Task | Main AP, before = after | Whole validation median | Cold evaluator median | Replay peak RSS |\n| --- | ---: | ---: | ---: | ---: |\n| detect | 0.4081073392 | 37.782 → 31.609 s | 7.681 → 0.849 s | 2887.0 → 1370.3 MiB |\n| segment | 0.3436595381 | 153.892 → 139.950 s | 21.844 → 5.836 s | 4293.2 → 3789.2 MiB |\n| pose | 0.5638424803 | 35.915 → 32.330 s | 5.251 → 1.817 s | 1794.4 → 1719.8 MiB |\n\nAll returned full-validation metrics and fitness are exactly equal. Complete precision/recall/score arrays differ by at most **2.23e-16**; pose arrays are exactly equal. Cold and cached calls agree with the full-validation COCO metrics, and arrays are identical across cached reuse within each backend. Whole-validation peak RSS falls for detect/segment, but **pose increases from 2726.0 to 2750.7 MiB (+0.9%)**; the report retains that result. Other processes stayed active, all samples are retained, and the report separates evaluator, whole-validation and fresh-process time.\n\nThe complete [report](https://github.com/developer0hye/ultrafast-pycocotools/blob/05e51ad5799af358b6c45d4f431a6be550650470/docs/ultralytics-pr26101-validation.md), [raw metric/telemetry JSON](https://github.com/developer0hye/ultrafast-pycocotools/blob/dfba260fcab6a9b2307b53b98f220e199dbe75e2/bench/results/ultralytics_pr26101_20260909.json), and [269 MB evidence archive](https://github.com/developer0hye/ultrafast-pycocotools/releases/download/v0.1.7/ultralytics-pr26101-evidence-20260909.tar.gz) include the actual predictions, independent annotations, full arrays, exact executed scripts and test logs. All 245 archived file hashes were verified. Archive SHA-256: `8c9dd4d1cf3a0a6e1b4e83a49a7b799023756294a2108fc7389efffc5aafa33e`.\n\nItem-by-item acceptance checklist ([expanded checklist with evidence links](https://github.com/developer0hye/ultrafast-pycocotools/blob/dfba260fcab6a9b2307b53b98f220e199dbe75e2/docs/ultralytics-review-checklist.md)):\n\n- [x] **Supported wheel:** publish and natively validate the CPython 3.8/macOS arm64 binary.\n- [x] **Dependency floor:** require >=0.1.7 in production and CI requirements.\n- [x] **Independent smoke-test GT:** use original COCO annotations, not generated predictions; compare against the reference evaluator.\n- [x] **Synthetic regressions:** retain all five COCO/LVIS edge cases; both packages are now installed in normal CI so the eight comparison cases execute.\n- [x] **Real detection accuracy:** 5,000 images / 733,070 predictions; all metrics and fitness identical.\n- [x] **Real segmentation accuracy:** 5,000 images / 724,953 predictions; all bbox/mask metrics and fitness identical.\n- [x] **Real pose accuracy:** 5,000 images / 134,663 predictions; all bbox/keypoint metrics and fitness identical.\n- [x] **LVIS compatibility:** official 100-image bbox input matches; additional 93-image annotated real-mask subset matches complete bbox/mask arrays. Details and limitations below.\n- [x] **Exact revisions/packages:** source revisions, native hashes, frozen executed scripts and complete environment saved.\n- [x] **Dataset/prediction hashes:** official source URLs, models, image hashes, manifests, annotations and identical prediction files saved.\n- [x] **Every returned metric/fitness:** full dictionaries saved for every call; key sets and full/replay results checked.\n- [x] **Complete arrays:** actual precision/recall/scores saved as NPZ, with shapes and maximum differences; diagnostic overhead excluded from timing.\n- [x] **Alternating fresh processes:** four full-validation and six replay rounds per backend, balanced order, every sample retained.\n- [x] **Peak memory/background load:** process RSS, sampled process-tree RSS, host CPU and RAM recorded; the pose whole-validation memory increase is explicit.\n- [x] **Evaluator versus whole validation:** separate nested evaluator, full-validator and fresh-process clocks.\n- [x] **Cached GT:** one cold plus two calls reusing the identical COCO object; metrics and full arrays checked after reuse.\n- [x] **No selector/shim/fallback:** the runtime replacement stays in the shared validator owner; no new user argument.\n- [ ] **Terminal-green live-head CI:** All five regular test targets pass: Linux x86, Linux ARM, macOS ARM, Windows and Python 3.8. One unrelated ARM benchmark download still needs a maintainer rerun, described below.\n\nLVIS scope: the official 100-image prediction file has no masks. For additional mask coverage, actual YOLO26n-seg masks were mapped using LVIS's pinned official COCO-to-synset mapping. On the original 100-image input, faster-coco-eval 1.8.0 and 1.7.2 both fail in mask preparation (`unordered_map::at` / `_Map_base::at`); 0.1.7 completes it, including cached reuse. The archive preserves both failures. The separately labelled 93-image annotated subset is the paired mask comparison, with metric delta <=5.56e-17 and arrays <=2.23e-16. This is a compatibility workload, not a full-taxonomy LVIS model accuracy claim.\n\nThe remaining CI failure is [ARM Benchmark SemanticSegmentationModel](https://github.com/ultralytics/ultralytics/actions/runs/34245506499/job/102126320973): `cityscapes8.zip` returned HTTP 500, then validation failed because the downloaded dataset was missing. The file now responds successfully, but my account cannot rerun upstream jobs. The workflow has now finished; rerun fails with \"Must have admin rights to Repository.\" Could you rerun that failed job? I have not labelled this run green.\n\nDocumentation clarification: COCO evaluation retains the existing defaults of `maxDets=100` for bbox/mask and `maxDets=20` for keypoints (the model prediction cap is 300). The linked report corrects the earlier prose; no measurements, arrays or package versions in this reply changed.\n"
+      },
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/26101#issuecomment-5620273735",
+        "created_at": "2026-09-10T14:25:55Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "glenn-jocher"
+        ],
+        "reviewer_targets": [
+          "glenn-jocher"
+        ],
+        "prior_participants": [
+          "codecov",
+          "developer0hye",
+          "glenn-jocher",
+          "ultralyticsassistant"
+        ],
+        "body": "@glenn-jocher Thanks for confirming the wheel and dependency-floor blockers are addressed. The reviewed head remains **0451a3c9282461e74cbaeeb5d03991be9162cdaf**, as requested.\n\nA dependency release update: **[ultrafast-pycocotools 0.1.11 is now public on PyPI](https://github.com/developer0hye/ultrafast-pycocotools/releases/tag/v0.1.11)**. It includes further pose loading/storage and numeric-decoding optimizations. The complete 35-wheel matrix, including CPython 3.8/macOS arm64, and the source archive passed their tests; all 36 public files match the tested publication checksums.\n\nThe [new comparison and audit checklist](https://github.com/developer0hye/ultrafast-pycocotools/blob/v0.1.11/docs/hotcoco-performance-goal.md) covers all 5,000 COCO images on M2 and i5-10400: the source build now shipped in 0.1.11 beat hotcoco 1.0.0 in median time and peak RSS for all 24 tested task/input/pool configurations, while retaining byte-identical pycocotools arrays. These are separate standalone evaluator measurements; the earlier Ultralytics/faster-coco-eval whole-validation results and their limitations remain unchanged.\n\n0.1.11 satisfies this PR's existing `>=0.1.7` requirement. No commits were added. The ARM `cityscapes8` benchmark check still shows the previously reported failure, so I am continuing to leave the head unchanged for the maintainer-side rerun.\n"
+      }
+    ]
+  },
+  {
+    "number": 26111,
+    "author": "leosk-knight",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-09-09T05:56:57Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26112,
+    "author": "Swish78",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-20T22:02:30Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26143,
+    "author": "geminifyj",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-09-11T15:39:02Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26152,
+    "author": "ojedavd",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-10-28T05:41:45.871993+00:00",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": [
+      {
+        "url": "https://github.com/ultralytics/ultralytics/pull/26152#issuecomment-6206308329",
+        "created_at": "2026-10-16T01:58:39Z",
+        "edited_after_cutoff": false,
+        "mentions": [
+          "pderrenger"
+        ],
+        "reviewer_targets": [
+          "pderrenger"
+        ],
+        "prior_participants": [
+          "codecov",
+          "github-actions",
+          "ojedavd",
+          "pderrenger",
+          "ultralyticsassistant"
+        ],
+        "body": "@pderrenger Fixed in c586503d6. `OCR.process` now initializes the annotator with `SolutionAnnotator(im0.copy(), self.line_width)` and continues cropping from the original `im0`, so annotations cannot contaminate subsequent overlapping OCR crops.\n\nValidation: all 3 existing OCR tests passed; Ruff lint/format checks and `git diff --check` passed.\n"
+      }
+    ]
+  },
+  {
+    "number": 26180,
+    "author": "TarzanZhao",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-16T15:18:52Z",
+    "author_requested_review": false,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-09-16T15:00:01Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      },
+      {
+        "actor": {
+          "login": "glenn-jocher",
+          "__typename": "User"
+        },
+        "createdAt": "2026-09-16T15:16:35Z",
+        "requestedReviewer": {
+          "__typename": "User",
+          "login": "UltralyticsAssistant"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 26197,
+    "author": "rahultechenable",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-09-16T09:02:56Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26200,
+    "author": "BSchilperoort",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-16T14:49:10Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26202,
+    "author": "li-lizhe",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-09-17T11:55:25Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26219,
+    "author": "hylreg",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-20T08:11:10Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26222,
+    "author": "wizzseen",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-09-20T07:42:43Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26238,
+    "author": "mayuriphad",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-09-20T07:49:13Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "mayuriphad",
+          "__typename": "User"
+        },
+        "createdAt": "2026-09-19T02:58:54Z",
+        "requestedReviewer": {
+          "__typename": "Bot"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 26240,
+    "author": "Nicholas022400701",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-20T08:12:23Z",
+    "author_requested_review": true,
+    "review_request_events": [
+      {
+        "actor": {
+          "login": "Nicholas022400701",
+          "__typename": "User"
+        },
+        "createdAt": "2026-09-19T15:00:38Z",
+        "requestedReviewer": {
+          "__typename": "Bot"
+        }
+      }
+    ],
+    "mention_comments": []
+  },
+  {
+    "number": 26252,
+    "author": "Shreyas-cpu",
+    "experience": "NEW_IN_QUARTER",
+    "merged": false,
+    "cutoff": "2026-09-21T09:00:14Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26279,
+    "author": "MohammadHijjawi97",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-22T21:37:31Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26285,
+    "author": "Vaishnavi220506",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-23T06:34:18Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26327,
+    "author": "cdeil",
+    "experience": "PRIOR_MERGED",
+    "merged": true,
+    "cutoff": "2026-09-24T21:59:57Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26394,
+    "author": "Tsingxuan",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-28T12:33:02Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  },
+  {
+    "number": 26435,
+    "author": "zkoymen",
+    "experience": "NEW_IN_QUARTER",
+    "merged": true,
+    "cutoff": "2026-09-29T18:12:03Z",
+    "author_requested_review": false,
+    "review_request_events": [],
+    "mention_comments": []
+  }
+]

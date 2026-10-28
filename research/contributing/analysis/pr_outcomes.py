@@ -1,6 +1,7 @@
 """Fetch public PR metadata with gh, or recompute the saved cohort without network access."""
 
 import json
+import re
 import subprocess
 import sys
 from collections import Counter, defaultdict
@@ -302,5 +303,158 @@ if details_path.exists():
             assert sum(len(v) for v in sizes.values()) == len(selected)
         (DATA / "pr-distribution-2026-q3.json").write_text(
             json.dumps(distribution, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
+conversation_path = DATA / "pr-review-conversations-2026-q3.json"
+if "--conversations" in sys.argv:
+    conversations = (
+        json.loads(conversation_path.read_text(encoding="utf-8"))
+        if conversation_path.exists()
+        else {"fetch_started_at": datetime.now(timezone.utc).isoformat(), "prs": {}}
+    )
+    selected = sorted((r for r in first_prs.values()), key=lambda r: r["number"])
+    connections = {
+        "comments": "author { login __typename } authorAssociation body createdAt lastEditedAt url",
+        "reviews": "author { login __typename } authorAssociation submittedAt url",
+        "timelineItems": "... on ReviewRequestedEvent { actor { login __typename } createdAt requestedReviewer { __typename ... on User { login } } }",
+        "reviewThreads": "id comments(first: 100) { totalCount nodes { author { login __typename } authorAssociation body createdAt lastEditedAt url } pageInfo { hasNextPage endCursor } }",
+    }
+    pending = [r["number"] for r in selected if "inlineComments" not in conversations["prs"].get(str(r["number"]), {})]
+    for offset in range(0, len(pending), 10):
+        fields = []
+        for n in pending[offset : offset + 10]:
+            body = "number author { login } mergedAt mergedBy { login __typename }"
+            for name, nodes in connections.items():
+                extra = ", itemTypes: [REVIEW_REQUESTED_EVENT]" if name == "timelineItems" else ""
+                body += f" {name}(first: 100{extra}) {{ totalCount nodes {{ {nodes} }} pageInfo {{ hasNextPage endCursor }} }}"
+            fields.append(f"p{n}: pullRequest(number: {n}) {{ {body} }}")
+        batch = graphql('query { repository(owner: "ultralytics", name: "ultralytics") { ' + " ".join(fields) + " } }")[
+            "repository"
+        ]
+        for pr in batch.values():
+            for name, node_fields in connections.items():
+                connection = pr[name]
+                nodes = list(connection["nodes"])
+                total = connection["totalCount"]
+                while connection["pageInfo"]["hasNextPage"]:
+                    cursor = json.dumps(connection["pageInfo"]["endCursor"])
+                    extra = ", itemTypes: [REVIEW_REQUESTED_EVENT]" if name == "timelineItems" else ""
+                    query = f'query {{ repository(owner: "ultralytics", name: "ultralytics") {{ pullRequest(number: {pr["number"]}) {{ {name}(first: 100, after: {cursor}{extra}) {{ nodes {{ {node_fields} }} pageInfo {{ hasNextPage endCursor }} }} }} }} }}'
+                    connection = graphql(query)["repository"]["pullRequest"][name]
+                    nodes.extend(connection["nodes"])
+                # Filtered timeline totalCount also includes other event types; pageInfo owns completeness.
+                if name != "timelineItems":
+                    assert len(nodes) == total, (pr["number"], name)
+                pr[name] = nodes
+            pr["inlineComments"] = []
+            for thread in pr.pop("reviewThreads"):
+                connection = thread["comments"]
+                nodes = list(connection["nodes"])
+                total = connection["totalCount"]
+                while connection["pageInfo"]["hasNextPage"]:
+                    query = f"query {{ node(id: {json.dumps(thread['id'])}) {{ ... on PullRequestReviewThread {{ comments(first: 100, after: {json.dumps(connection['pageInfo']['endCursor'])}) {{ nodes {{ {connections['comments']} }} pageInfo {{ hasNextPage endCursor }} }} }} }} }}"
+                    connection = graphql(query)["node"]["comments"]
+                    nodes.extend(connection["nodes"])
+                assert len(nodes) == total
+                pr["inlineComments"].extend(nodes)
+            # Keep other participants' identities and timing, not their full conversation text.
+            for comment in pr["comments"] + pr["inlineComments"]:
+                if not comment["author"] or comment["author"]["login"] != pr["author"]["login"]:
+                    del comment["body"]
+            conversations["prs"][str(pr["number"])] = pr
+        conversations["fetched_at"] = datetime.now(timezone.utc).isoformat()
+        conversation_path.write_text(json.dumps(conversations, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"conversations: {len(conversations['prs'])}/{len(selected)}", flush=True)
+
+if conversation_path.exists():
+    conversations = json.loads(conversation_path.read_text(encoding="utf-8"))["prs"]
+    if len(conversations) == len(first_prs) and all("inlineComments" in pr for pr in conversations.values()):
+        maintainers = {r["author"].lower() for r in rows if group(r) in {"MEMBER", "COLLABORATOR", "OWNER"}}
+        mention_rows = []
+        for (experience, _), row in first_prs.items():
+            pr = conversations[str(row["number"])]
+            cutoff = row["merged_at"] or row["closed_at"] or snapshot["fetched_at"]
+            author = row["author"].lower()
+            reviewers = {
+                r["author"]["login"].lower()
+                for r in pr["reviews"]
+                if r["author"]
+                and r["author"]["__typename"] != "Bot"
+                and r["submittedAt"]
+                and elapsed(r["submittedAt"], cutoff) >= 0
+            }
+            targets = maintainers | reviewers
+            all_comments = pr["comments"] + pr["inlineComments"]
+            targets.update(
+                c["author"]["login"].lower()
+                for c in all_comments
+                if c["author"]
+                and c["author"]["__typename"] != "Bot"
+                and c["authorAssociation"] in {"MEMBER", "OWNER", "COLLABORATOR"}
+                and elapsed(c["createdAt"], cutoff) >= 0
+            )
+            if pr["mergedBy"] and pr["mergedBy"]["__typename"] != "Bot":
+                targets.add(pr["mergedBy"]["login"].lower())
+            requests = [r for r in pr["timelineItems"] if elapsed(r["createdAt"], cutoff) >= 0]
+            for request in requests:
+                target = request["requestedReviewer"]
+                if target and target["__typename"] == "User":
+                    targets.add(target["login"].lower())
+            candidates = []
+            for comment in all_comments:
+                if "body" not in comment or elapsed(comment["createdAt"], cutoff) < 0:
+                    continue
+                body = re.sub(r"```.*?```|~~~.*?~~~", "", comment["body"], flags=re.DOTALL)
+                body = re.sub(r"(?m)^\s*>.*$|`[^`\n]+`", "", body)
+                mentions = {
+                    m.lower()
+                    for m in re.findall(r"(?<![\w/])@([A-Za-z0-9][A-Za-z0-9-]*(?:\[bot\])?(?:/[A-Za-z0-9_-]+)?)", body)
+                }
+                if mentions:
+                    candidates.append(
+                        {
+                            "url": comment["url"],
+                            "created_at": comment["createdAt"],
+                            "edited_after_cutoff": bool(
+                                comment["lastEditedAt"] and elapsed(comment["lastEditedAt"], cutoff) < 0
+                            ),
+                            "mentions": sorted(mentions),
+                            "reviewer_targets": sorted(
+                                (mentions & targets)
+                                - {author, "ultralyticsassistant", "copilot", "copilot-pull-request-reviewer"}
+                            ),
+                            "prior_participants": sorted(
+                                {
+                                    c["author"]["login"].lower()
+                                    for c in all_comments
+                                    if c["author"] and elapsed(c["createdAt"], comment["createdAt"]) > 0
+                                }
+                                | {
+                                    r["author"]["login"].lower()
+                                    for r in pr["reviews"]
+                                    if r["author"]
+                                    and r["submittedAt"]
+                                    and elapsed(r["submittedAt"], comment["createdAt"]) > 0
+                                }
+                            ),
+                            "body": comment["body"],
+                        }
+                    )
+            mention_rows.append(
+                {
+                    "number": row["number"],
+                    "author": row["author"],
+                    "experience": experience,
+                    "merged": bool(row["merged_at"]),
+                    "cutoff": cutoff,
+                    "author_requested_review": any(
+                        r["actor"] and r["actor"]["login"].lower() == author for r in requests
+                    ),
+                    "review_request_events": requests,
+                    "mention_comments": candidates,
+                }
+            )
+        assert len({r["number"] for r in mention_rows}) == len(first_prs)
+        (DATA / "pr-review-mention-candidates.json").write_text(
+            json.dumps(mention_rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )
 print(json.dumps({k: v for k, v in result.items() if k != "monthly_groups"}, ensure_ascii=False, indent=2))
