@@ -33,9 +33,9 @@ validation:
     not_found: warn
     anchors: warn
 nav:
-  - 導讀與研究結論: index.md
-  - 1. 貢獻規則與方法: contribution-workflow.md
-  - 2. 程式碼與驗證地圖: codebase-map.md
-  - 3. Issue 與論壇案例: issues-and-community.md
-  - 4. 選題與行動路線: roadmap.md
-  - 來源、範圍與更新紀錄: sources.md
+  - 導讀：先找到可重現的小問題: index.md
+  - 1. 準備一筆小型貢獻: contribution-workflow.md
+  - 2. 從症狀找到負責模組: codebase-map.md
+  - 3. 七個議題與論壇案例: issues-and-community.md
+  - 4. 選題與驗證步驟: roadmap.md
+  - 來源與查核限制: sources.md

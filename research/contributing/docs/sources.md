@@ -1,50 +1,71 @@
-# 來源、範圍與更新紀錄
+# 來源與查核限制
 
-## 研究快照
+**本書查過官方規範與七個公開案例，但尚未在本機重現模型問題。** 閱讀時請區分原作者的結果、本書的判斷，以及下一輪才要做的驗證。
 
-| 項目             | 本輪紀錄                                                               |
-| ---------------- | ---------------------------------------------------------------------- |
-| 查核日期         | 2026-10-28，工作環境時區 Asia/Taipei                                   |
-| 本地基準         | `bb3e1550dbb819bd9846d4c99f368aebe8792a0e`                             |
-| 基準 commit 日期 | 2026-10-27 22:47:32 UTC                                                |
-| origin           | `https://github.com/Echoslayer/ultralytics.git`                        |
-| 官方 main 查核   | `git ls-remote` 於本輪回傳同一 SHA；之後仍可能更新                     |
-| 研究分支         | `research/contribution-book`，不開 PR                                  |
-| 獨立 worktree    | `D:\tools\ultralytics\.worktrees\contribution-research`                |
-| 正文位置         | `research/contributing/docs/`                                          |
-| 參考出版方式     | `D:\vlm-jev\BOOKS.md`、`configs/community.yml`、`mkdocs-run.py` 與鎖檔 |
+## 研究使用哪個版本？
 
-本書的 GitHub 固定 commit 連結使用 fork 地址，因為它是本地實際讀取的基準；即時 issue／PR 則連到官方 repo。不要將 fork 永久視為與 upstream 同步。
+| 項目                         | 紀錄                                                                       |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| 研究查核日期                 | 2026-10-28；工作環境時區為 Asia/Taipei                                     |
+| 本地基準 SHA（Git 版本編號） | `bb3e1550dbb819bd9846d4c99f368aebe8792a0e`                                 |
+| 基準提交時間                 | 2026-10-27 22:47:32 UTC                                                    |
+| `origin` 遠端來源            | `https://github.com/Echoslayer/ultralytics.git`                            |
+| 官方 `main` 查核             | 研究時用 `git ls-remote` 查到相同版本；之後仍可能更新                      |
+| 研究分支                     | `research/contribution-book`，不用於提出合併請求                           |
+| 獨立工作目錄                 | `D:\tools\ultralytics\.worktrees\contribution-research`                    |
+| 正文位置                     | `research/contributing/docs/`                                              |
+| 出版方式參考                 | `D:\vlm-jev\BOOKS.md`、`configs/community.yml`、`mkdocs-run.py` 與版本鎖檔 |
+| 編寫標準                     | ISO 24495-1:2023 淺白語言原則；2026-10-28 依此改寫                         |
 
-## 第一手來源索引
+固定版本的程式連結指向個人副本，因為那是本地實際讀取的內容。議題與 PR（合併請求）則連到官方專案。個人副本不會永遠與官方同步。
 
-| 來源                                                                                                                                        | 用途與本輪閱讀範圍                                           |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [CONTRIBUTING.md](https://github.com/ultralytics/ultralytics/blob/main/CONTRIBUTING.md)                                                     | 小型首次貢獻、功能事前討論、CLA、自動 review；與本地全文對照 |
-| [官方貢獻指南](https://docs.ultralytics.com/help/contributing/)                                                                             | 貢獻種類與回報要求                                           |
-| [官方 MRE 指南](https://docs.ultralytics.com/help/minimum-reproducible-example/)                                                            | 公開模型與輸入、環境、expected／actual                       |
-| [AGENTS.md 固定快照](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/AGENTS.md)                     | owner、最小 diff、worktree、測試與 review 工作流             |
-| [docs/AGENTS.md 固定快照](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/docs/AGENTS.md)           | 文件 owner、生成 reference 與官方文件建置                    |
-| [issue 入口設定](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/.github/ISSUE_TEMPLATE/config.yml) | 官方推薦的論壇、Discord 與 Reddit 管道；未讀取私人聊天內容   |
-| [公開 issue 列表](https://github.com/ultralytics/ultralytics/issues)                                                                        | 尋找近期線索；未做完整議題統計                               |
-| [公開論壇](https://community.ultralytics.com/)                                                                                              | 社群議題與支援案例；具體案例來源見案例章                     |
-| [MkDocs configuration](https://www.mkdocs.org/user-guide/configuration/)                                                                    | 獨立 docs_dir、site_dir 與導覽設定                           |
-| [Material 搜尋](https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-search/)                                                  | 書籍搜尋配置                                                 |
+## 官方文件與原始資料索引
 
-七個案例的主文、關鍵留言、查核限制與直接連結統一放在 [Issue 與論壇案例](issues-and-community.md)，避免兩份清單日後更新不一致。
+| 來源                                                                                                                                      | 用來查證什麼？                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [CONTRIBUTING.md](https://github.com/ultralytics/ultralytics/blob/main/CONTRIBUTING.md)                                                   | 首次貢獻範圍、功能事前討論、貢獻者授權協議與自動審查；已與本地全文對照 |
+| [官方貢獻指南](https://docs.ultralytics.com/help/contributing/)                                                                           | 貢獻種類與回報要求                                                     |
+| [官方最小可重現範例指南](https://docs.ultralytics.com/help/minimum-reproducible-example/)                                                 | 公開模型與輸入、環境、預期與實際結果                                   |
+| [AGENTS.md 固定版本](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/AGENTS.md)                   | 負責模組、最小修改、獨立工作目錄、測試與審查流程                       |
+| [docs/AGENTS.md 固定版本](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/docs/AGENTS.md)         | 文件來源、自動生成參考頁與官方文件建置                                 |
+| [議題入口設定](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/.github/ISSUE_TEMPLATE/config.yml) | 官方推薦的論壇、Discord 與 Reddit 管道；未讀取私人聊天                 |
+| [公開議題列表](https://github.com/ultralytics/ultralytics/issues)                                                                         | 近期問題線索；未統計全部議題                                           |
+| [公開論壇](https://community.ultralytics.com/)                                                                                            | 使用者問題與支援案例；具體來源見案例章                                 |
+| [MkDocs 設定文件](https://www.mkdocs.org/user-guide/configuration/)                                                                       | 正文目錄 `docs_dir`、產物目錄 `site_dir` 與導覽設定                    |
+| [Material 搜尋文件](https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-search/)                                            | 書籍搜尋設定                                                           |
+| [ISO 24495-1:2023 標準介紹](https://www.iso.org/standard/78907.html)                                                                      | 淺白語言的編寫原則及適用範圍                                           |
 
-## 如何解讀本書的證據
+七個案例的主文、關鍵留言、限制與直接連結放在[案例章](issues-and-community.md)。更新時只維護那份清單，避免同一案例出現不同版本。
 
-**來源事實**表示網頁或固定程式快照可支持的敘述；它不代表本機已重現。**本書判斷**表示根據維護者回覆、驗證成本與既有實作做出的建議。**驗證門檻**是下一輪應完成的工作，不能列入已完成成果。
+## 哪些是事實，哪些是待驗證建議？
 
-網頁擷取可能使用快取，正式選題前仍要重讀 issue 最後留言與現行 PR。研究不是 exhaustive triage：沒有列出所有 open issues、完整搜尋所有重複 PR，亦未查閱 Discord 或 Reddit 的討論內容。網路來源與本地基準時間不同時，以明確版本及留言日期保留差異。
+| 本書的標示             | 代表什麼？                                   | 不代表什麼？   |
+| ---------------------- | -------------------------------------------- | -------------- |
+| 來源說了什麼／本地確認 | 網頁或固定程式版本支持的敘述                 | 本機已重現問題 |
+| 本書建議               | 根據維護者回覆、驗證成本與現有程式作出的判斷 | 官方已同意採納 |
+| 下一步驗證             | 後續要執行的檢查                             | 已完成的成果   |
 
-## 出版與模型驗證分開
+網頁可能使用快取。正式選題前，請再讀最新留言和正在審查的 PR。本書沒有列出所有未結議題，也沒有完整排除重複 PR；沒有閱讀 Discord 或 Reddit 討論內容。網頁與本地程式若來自不同時間，請以記錄的版本與留言日期區分。
 
-本輪可驗的是研究書能否嚴格建置、頁面與本地資源能否連結、搜尋索引是否產生。沒有執行 YOLO 訓練、推論、export、MPS／CUDA benchmark，也沒有確認候選 bug 可在本機重現。案例中的性能或修復敘述歸屬原作者，不能當成我們的量測結果。
+## 出版通過，不表示模型問題已驗證
 
-未對外發文、認領 issue、簽署 CLA、推送研究分支或開 PR。原 checkout 的模型程式與官方文件不屬於這次修改範圍。
+本輪出版檢查涵蓋嚴格建置、本地頁面與資源連結，以及搜尋索引。尚未執行以下工作：
 
-## 下一次更新
+- YOLO 訓練、推論或模型匯出。
+- Apple MPS 或 NVIDIA CUDA 設備的效能測試。
+- 在本機重現候選問題。
 
-先更新基準 SHA 與日期，再查候選是否已有修復／PR。若被關閉，要記錄原因並調整行動路線，而不只改狀態欄。得到本地實驗後，把命令、環境和原始輸出放在研究記錄中，再將可支持的結論寫進正文。每次修改後執行 README 中的嚴格建置。
+案例中的效能或修復結果屬於原作者，不能當成我們的測量結果。
+
+本輪也沒有對外發文、認領議題、簽署貢獻者授權協議、推送研究分支或提出 PR。原工作目錄的模型程式與官方文件不在修改範圍內。
+
+## 後續如何更新這本書？
+
+1. 記錄新的基準版本與查核日期。
+2. 檢查候選問題是否已修復，或已有同題 PR。
+3. 如果議題關閉，記下原因並調整行動路線，不只修改狀態。
+4. 如果完成本地實驗，保存命令、環境與原始輸出，再把證據支持的結論寫入正文。
+5. 依 ISO 24495-1 的相關、找得到、看得懂、用得上四項原則檢查文字。
+6. 執行書籍 README 中的嚴格建置。
+
+這次改寫保留 2026-10-28 的研究內容，沒有重新查核所有議題狀態。編寫方法採用 `iso-24495` 技能的繁體中文手法；這是本書的編輯要求，不是 ISO 認證或標準全文符合性聲明。

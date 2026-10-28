@@ -1,53 +1,60 @@
-# 4. 選題與行動路線
+# 4. 選一題，先完成可重現的驗證
 
-## 先選可驗證的題目
+**建議先調查 #26707 的分類前處理範例是否有缺口。** 你可以用自行產生的公開圖片，檢查圖片送入模型前的處理流程，較容易準備別人也能驗證的證據。
 
-本輪最值得先調查的是 **#26707 的分類前處理文件／範例缺口**。理由不是它已被確認為 bug，而是能使用人工產生的公開影像檢查既有擴充點，較容易得到可審查的證據。若既有文件已充分說明且範例可跑，就結束此題，不為了提交 PR 而製造新設定。[案例與維護者回覆](https://github.com/ultralytics/ultralytics/issues/26707)
+這不表示 #26707 已確認為程式錯誤。如果現有文件已說明完整，範例也能執行，就結束這題，不為提交修改而新增設定。[案例與維護者回覆](https://github.com/ultralytics/ultralytics/issues/26707)
 
-第二條是 **#26324 的計時與 backend 效能研究**，但 MPS 部分需要 Apple 真機，目前不能因為工作目錄在 Windows 就假定有設備。OpenVINO CPU 預取已合併，不重做；先驗證剩餘路徑、查重 PR，再投入。[討論](https://github.com/ultralytics/ultralytics/issues/26324)；[已合併 PR](https://github.com/ultralytics/ultralytics/pull/26897)
+第二個方向是 #26324 的計時與推論後端效能。推論後端指實際執行模型的軟體。其中 MPS 是 Apple GPU 的運算支援，需要 Apple 真機；目前工作目錄在 Windows，尚不能確認你有相符設備。OpenVINO CPU 預取已合併，請先查剩餘問題與同題 PR（合併請求）。[討論](https://github.com/ultralytics/ultralytics/issues/26324)；[已合併 PR](https://github.com/ultralytics/ultralytics/pull/26897)
 
-這個排序是本書推論。完整來源及排除理由見 [案例章](issues-and-community.md)。
+這個排序是本書判斷。完整來源與排除理由見[案例章](issues-and-community.md)。
 
-## 四個階段，不用承諾固定週數
+## 分四階段完成，不先承諾固定週數
 
-| 階段                   | 具體工作                                         | 完成證據                           | 停止／換題條件                        |
-| ---------------------- | ------------------------------------------------ | ---------------------------------- | ------------------------------------- |
-| A：看懂規範與版本      | 讀規範、確認 upstream SHA、挑一題查最新討論與 PR | 一張來源完整的研究卡               | 已修好、已有同範圍 PR、維護者不支持   |
-| B：得到可重現證據      | 固定輸入與環境，記錄 expected／actual            | 可獨立執行的命令、輸入與結果       | 缺設備、私人資料無法替換、無法重現    |
-| C：找到最小 owner 修正 | 搜尋所有 caller、列影響範圍、比較修改前後        | 小 diff 與相關既有驗證             | 需要新 API 或架構變更，先回到提案討論 |
-| D：正式貢獻            | 新建乾淨分支、撰寫英文 PR、跟進 review           | 遠端精確 head 的驗證與 review 紀錄 | 新結果推翻根因時，回到 B              |
+| 階段            | 你要做什麼？                                     | 完成時留下什麼？                 | 何時停止或換題？                     |
+| --------------- | ------------------------------------------------ | -------------------------------- | ------------------------------------ |
+| A：查規範與版本 | 讀規範、記錄官方版本編號、查最新討論與 PR        | 一張來源完整的研究卡             | 已修復、已有同題 PR，或維護者不支持  |
+| B：重現問題     | 固定輸入與環境，記錄預期與實際結果               | 可獨立執行的命令、輸入及結果     | 缺設備、無法替換私人資料，或無法重現 |
+| C：做最小修正   | 找負責模組與所有呼叫者，列影響範圍，比較前後結果 | 小範圍修改與相關驗證             | 需要新介面或架構變更，先回提案討論   |
+| D：正式貢獻     | 開乾淨分支、寫英文 PR、回覆審查                  | 對應遠端確切版本的驗證及審查紀錄 | 新結果推翻根因時，回到 B             |
 
-本輪完成研究書，尚未執行 B、C、D。上表是下一輪操作路線，不是已完成紀錄。
+本輪完成研究書，尚未執行 B、C、D。上表是後續步驟，不是已完成紀錄。
 
-## 第一個 probe：分類前處理
+## 第一個小型驗證：檢查分類圖片有沒有被裁掉
 
-目標是確認長寬比極端圖片的邊緣內容，在 train、val、predict 各路徑是否符合選定 transform 的契約。準備寬圖、長圖與正方形圖，在四角放明顯標記；保存「真正輸入模型前」的張量或可視化。比對現行預設與官方建議的 custom transforms，避免只展示 letterbox 輸出卻漏掉後續 crop。
+目標是確認寬圖與長圖的邊緣內容，在訓練、驗證、推論時是否符合選定的影像處理方式。這套驗證是本書建議，尚未執行。[#26707](https://github.com/ultralytics/ultralytics/issues/26707)
 
-若三條路徑都可透過現有 hook 正常達成，接著搜尋文件是否已存在同樣例子；只有確有缺口時才提最短範例。若有一條路徑不能保持同樣設定，先縮成該路徑的 MRE，不能直接跳到新增全域參數。這套 probe 是本書建議，尚未執行。[#26707](https://github.com/ultralytics/ultralytics/issues/26707)
+1. 準備寬圖、長圖與正方形圖，在四角放明顯標記。
+2. 使用現行預設流程，保存真正送入模型前的數值陣列或其圖片呈現。
+3. 改用官方建議的自訂影像轉換，在訓練、驗證與推論三條流程重做。
+4. 比較三條流程的輸入，確認補邊後是否還有裁切，以及尺寸、色彩與像素數值處理是否一致。
+5. 如果三條流程都能透過既有擴充方式達成，再搜尋文件是否已有完整範例。有缺口時才補最短範例。
+6. 如果其中一條無法維持相同設定，先整理最小可重現範例，不直接新增全域參數。
 
-## 研究卡範本
+只展示補邊結果會漏掉後續裁切；請以真正送入模型的內容作比較。
 
-每次選題可在本章末尾新增一節，先不建立新的自動化 tracker。以下欄位足夠判斷是否值得進入修復：
+## 用研究卡記錄是否值得繼續
+
+每次選題，可在本章末尾新增一節，填入以下欄位；暫時不需要新的自動追蹤工具。
 
 ```text
-題目與來源 URL：
-讀到的最後留言日期／查核時間：
-issue 狀態、相關 PR 與是否已有參與者：
-基準 SHA、套件版本、工作樹是否乾淨：
-OS、Python、torch、backend、硬體：
+題目與來源網址：
+最後讀到的留言日期、查核時間：
+議題狀態、相關 PR、是否已有參與者：
+基準 SHA（Git 版本編號）、套件版本、是否有未提交修改：
+作業系統、Python、torch、推論後端、硬體：
 預期行為及其規範來源：
 最小公開輸入與執行命令：
-實際輸出／錯誤／量測紀錄：
+實際輸出、錯誤或量測紀錄：
 已排除的假設：
-owner、caller 與受影響 task／模式：
+負責模組、呼叫者、受影響任務與模式：
 最小修正方向：
 驗證與停止條件：
-決定：繼續／等待／排除，以及理由
+決定：繼續、等待或排除；理由：
 ```
 
-## 如何搜尋，而不被標籤帶著走
+## 同時搜尋未解決議題、已合併修改與被拒方案
 
-在官方 repo 搜尋下列查詢，再用元件、症狀與錯誤字串細化。這些是查詢配方，不是本輪已完整遍歷的結果集。
+在官方 GitHub 專案貼上下列查詢，再加入元件名稱、症狀或錯誤字串。這些是搜尋範例；本輪沒有完整遍歷查詢結果。
 
 ```text
 repo:ultralytics/ultralytics is:issue is:open label:bug
@@ -57,20 +64,20 @@ repo:ultralytics/ultralytics is:pr is:merged "prefetch"
 repo:ultralytics/ultralytics is:issue is:closed "你的錯誤字串"
 ```
 
-每輪讀一筆 open issue、一筆同領域 merged PR，再看是否有 closed／rejected 方案。這樣能同時理解使用者需求和維護者接受邊界。不要只以 `good first issue`、留言數或行數決定投入。
+每輪讀一筆仍開啟的議題、一筆同領域已合併的 PR，再找已關閉或被拒的方案。這樣能同時看到使用者需求與維護者接受範圍。`good first issue`（適合首次參與的議題）標籤、留言數或修改行數，都不足以單獨決定是否投入。
 
-## 未來留言或 PR 的內容草稿
+## 重現後，用這份草稿整理留言或 PR
 
-完成重現後，可用以下英文結構整理證據；它是草稿範本，本輪沒有發送：
+以下英文範本依序寫出環境、預期、實際結果、重現方式、可能原因、驗證與未檢查範圍。本輪沒有發送這份草稿。
 
 ```text
 I reproduced <specific behavior> on <commit and environment> using <public input>.
-Expected: <documented contract>.
+Expected: <documented behavior>.
 Observed: <actual output>.
-Minimal reproduction: <command or short snippet>.
-The behavior appears to originate in <owner>, because <evidence>.
-Validation: <before/after result and related paths checked>.
+To reproduce: <command or short snippet>.
+The behavior appears to originate in <module or function>, because <evidence>.
+Checks completed: <before/after result and related paths checked>.
 Not yet checked: <specific platform or integration>.
 ```
 
-能填完這些欄位，通常比先寫大量程式更接近一筆可審查的貢獻。是否採納仍由維護者依實際 diff、需求與維護成本判斷。
+先填完研究卡，再決定是否開始修正。是否採納，仍由維護者依實際修改、需求與維護成本判斷。

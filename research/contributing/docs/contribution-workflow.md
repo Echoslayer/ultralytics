@@ -1,45 +1,70 @@
-# 1. 貢獻規則與方法
+# 1. 準備一筆小型貢獻
 
-## 先判斷貢獻種類
+**先證明問題，再修改程式。** 一份可公開重現的回報，或一個能指出文件錯誤的範例，都能幫維護者判斷下一步。官方也接受文件修改與 PR 審查（檢查別人的合併請求）。[貢獻入口](https://docs.ultralytics.com/help/contributing/)
 
-貢獻不只寫程式。把一個模糊回報縮成公開模型、公開輸入及確切環境的重現，能讓維護者作出判斷；指出文件範例與現行 API 不一致，也能形成小而完整的修正。官方同時接受 bug 回報、文件修改與 PR review。[貢獻入口](https://docs.ultralytics.com/help/contributing/)
+## 先確認你要交付哪一種成果
 
-| 類型     | 最少需要的證據                                   | 何時先停下來                                 |
-| -------- | ------------------------------------------------ | -------------------------------------------- |
-| Bug 修正 | 修改前能重現、修改後恢復契約，相關既有路徑仍正常 | 只有私人權重或缺少預期行為                   |
-| 文件修正 | 文件原句、對應程式碼與可執行範例                 | 修改生成的 reference，卻沒改 docstring owner |
-| 效能改善 | 同設備、同輸入、同精度與相同輸出品質的比較       | 只是單次計時，或改了全域設定但未驗回歸       |
-| 功能提案 | 多使用者需求、既有介面不足及維護者同意           | 只滿足自己的 pipeline，且需新增參數／依賴    |
-| 協助排查 | 環境資訊、最小輸入與可排除假設                   | 尚未確認就把使用問題定性為產品 bug           |
+| 貢獻類型 | 你要準備的證據                               | 遇到這些情況先停下來                         |
+| -------- | -------------------------------------------- | -------------------------------------------- |
+| 錯誤修正 | 修改前能重現，修改後符合預期，原有功能仍正常 | 只有私人模型權重，或還不清楚預期行為         |
+| 文件修正 | 文件原句、對應程式碼與可執行範例             | 只改自動生成的參考頁，未改來源說明           |
+| 效能改善 | 相同設備、輸入、精度與輸出品質下的比較       | 只有單次計時，或改了全域設定卻未驗證其他功能 |
+| 功能提案 | 多位使用者的需求、現有介面的限制與維護者同意 | 只適用自己的流程，且需要新增參數或套件       |
+| 協助排查 | 環境資訊、最小輸入與可排除的假設             | 尚未查證就將使用問題判定為程式錯誤           |
 
-表中的門檻是本書的執行建議；規範基礎為 [CONTRIBUTING.md](https://github.com/ultralytics/ultralytics/blob/main/CONTRIBUTING.md) 與研究基準的 [AGENTS.md](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/AGENTS.md)。
+上表是本書的執行建議，依據為 [CONTRIBUTING.md](https://github.com/ultralytics/ultralytics/blob/main/CONTRIBUTING.md) 和本地研究版本的 [AGENTS.md](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/AGENTS.md)。
 
-## 兩份規範要一起讀
+## 修改範圍要小，不能只看新增行數
 
-`CONTRIBUTING.md` 對首次貢獻約超過 50 行的實質修改持保留態度，文件／docstring／格式為例外；`AGENTS.md` 的 review gate 則將超過 50 行「淨新增非文件程式碼」以及新參數、新依賴列為高門檻。兩者的計數方式不同，不能把淨新增 49 行當作保證通過。最可靠的做法是單一目的、最小完整 diff，並說明為何不能再縮。[範圍規範](https://github.com/ultralytics/ultralytics/blob/main/CONTRIBUTING.md)；[研究基準規則](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/AGENTS.md)
+兩份規範計算修改量的方式不同：
 
-測試也有相似差異：一般貢獻指南要求適當驗證，這份 checkout 的代理規範預設不新增測試，只有未覆蓋且高風險的路徑才補最少 coverage。因此先找既有測試並執行真實路徑，不要為了讓 diff 看起來完整而新增大量 mock。
+- `CONTRIBUTING.md`：首次貢獻若約超過 50 行實質修改，通常不受鼓勵；文件、程式內說明文字（docstring）與格式修改可例外處理。
+- `AGENTS.md`：超過 50 行「淨新增非文件程式碼」，或加入新參數、新依賴套件，都需要更強的理由。
 
-## 從線索到修正的七步
+因此，淨新增 49 行並不保證通過。請讓修改只解決一個問題，保留完整解法，並能說明為何無法再縮小。[範圍規範](https://github.com/ultralytics/ultralytics/blob/main/CONTRIBUTING.md)；[研究版本規則](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/AGENTS.md)
 
-1. 搜尋同樣症狀、相關關閉 issue 和正在進行的 PR。閱讀結案理由，避免重做已解決的問題。
-2. 記錄版本與基準 SHA；確認 fork 與 upstream 是否同步。
-3. 把輸入縮成可公開分享的最小案例，留下 expected／actual 與完整錯誤。
-4. 搜尋呼叫者，找到真正觀察或擁有行為的模組。在 owner 修正，而不是在下游補例外或初始化旗標。
-5. 列出會受影響的 task、模式、平台、輸出格式與文件，再實作最小修正。
-6. 跑相關既有檢查，保留修改前後的結果。效能題同時驗輸出品質。
-7. 以小型 PR 說明問題、行為變化與驗證結果，跟進 bot 與人工 review。
+測試規則也要一起看。一般貢獻指南要求適當驗證；本地代理規範則預設不新增測試，只有既有測試未覆蓋且風險高的路徑才補最少測試。先找既有測試並執行真實功能，不要只為增加測試數量而大量模擬設備或環境。
 
-第 1–3 步呼應 [官方 MRE 方法](https://docs.ultralytics.com/help/minimum-reproducible-example/)；owner 與最小 diff 原則來自 [AGENTS.md](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/AGENTS.md)。
+## 按七個步驟準備修正
 
-## 分支與 PR 的實際安排
+1. **搜尋是否已有解法。** 查相同症狀、已關閉議題與正在審查的 PR，並讀結案理由。
+2. **記錄版本。** 保存基準 SHA（Git 用來識別版本的編號），確認個人副本與官方專案是否同步。
+3. **縮小重現範例。** 使用可公開分享的輸入，寫下預期結果、實際結果和完整錯誤。
+4. **找到負責模組。** 搜尋所有呼叫它的程式，在直接控制或觀察行為的位置修正。不要靠下游例外處理或初始化旗標掩蓋問題。
+5. **列出受影響範圍。** 包括模型任務、操作模式、平台、輸出格式與文件，再實作最小修正。
+6. **驗證修改前後。** 跑相關既有檢查並保留結果。效能題還要確認輸出品質。
+7. **準備小型 PR。** 說明問題、行為變化與驗證結果，再回覆自動工具和人工審查。
 
-目前 `origin` 是 `https://github.com/Echoslayer/ultralytics.git`，不是官方 repo。這次研究分支從 `origin/main` 建立，保留原始 checkout。日後正式貢獻時先查 `git remote -v`，若沒有官方 remote，再新增 `upstream` 並 fetch；新工作樹應以當時官方 main 為基準。本書沒有自動修改 remote，也沒有推送。
+前 3 步呼應[官方最小可重現範例方法](https://docs.ultralytics.com/help/minimum-reproducible-example/)。負責模組與最小修改原則來自 [AGENTS.md](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/AGENTS.md)。
 
-研究筆記留在研究分支；每一個正式修正獨立開 branch。不要把整本書或出版依賴帶入上游修正 PR。推送前先拉取遠端更新並 rebase；上游 bot 可能推送格式或標頭 commit，不要覆寫他人的修改。[工作樹與審查規則](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/AGENTS.md)
+## 正式修正另開分支，研究書留在原處
 
-## 審查時真正要交代的內容
+目前 `origin` 指向你的個人副本：`https://github.com/Echoslayer/ultralytics.git`。研究分支從 `origin/main` 建立，原本的工作目錄仍保留。
 
-一份有效 PR 描述可以很短：「在什麼輸入與環境下，原本哪個行為錯了；現在如何修正；跑了什麼驗證；哪些平台未覆蓋」。將問題連回 issue，避免只有「improve robustness」之類無法驗收的描述。所有自動建議都應閱讀，採用或說明不適用的原因；CI 綠燈不是完整 review 的替代品。[自動審查說明](https://github.com/ultralytics/ultralytics/blob/main/CONTRIBUTING.md)
+準備正式貢獻時：
 
-CLA 是合併前流程，請本人閱讀文件並依 bot 指示處理。本輪只有研究，沒有代簽。社群溝通遵守 [Code of Conduct](https://docs.ultralytics.com/help/code-of-conduct/)；不要把未重現的推測寫成已確認根因。
+1. 執行 `git remote -v`，查看遠端來源。
+2. 如果尚未設定官方來源，新增名為 `upstream` 的遠端來源，再用 `fetch` 取得官方版本。
+3. 以當時官方 `main` 建立新的分支與工作樹，也就是獨立工作目錄。
+4. 只帶入該題需要的修正，不帶入整本研究書或出版套件。
+
+每個正式修正使用獨立分支。推送前先拉取遠端更新並 `rebase`（將自己的提交接到更新後的版本上）。官方自動工具可能加入格式或標頭提交，請保留他人的修改。[工作樹與審查規則](https://github.com/Echoslayer/ultralytics/blob/bb3e1550dbb819bd9846d4c99f368aebe8792a0e/AGENTS.md)
+
+本輪沒有修改遠端來源設定，也沒有推送。
+
+## PR 說清楚問題、結果與未驗證範圍
+
+PR 描述至少回答四個問題：
+
+- 哪種輸入與環境會出錯？
+- 修改後的行為是什麼？
+- 跑了哪些驗證，結果如何？
+- 哪些平台或功能還沒驗證？
+
+附上原議題連結。只寫「提高穩定性」不足以讓審查者判斷是否解決問題。
+
+請閱讀每一項自動審查建議，採用或說明不適用的原因。CI（自動建置與測試流程）通過，也不能取代完整的程式審查。[自動審查說明](https://github.com/ultralytics/ultralytics/blob/main/CONTRIBUTING.md)
+
+合併前需處理 CLA（貢獻者授權協議）。請本人閱讀文件並依自動工具指示簽署，本輪沒有代簽。溝通時遵守[社群行為準則](https://docs.ultralytics.com/help/code-of-conduct/)，也要區分推測與已確認根因。
+
+下一步：選定一種貢獻，再用[第二章的檔案對照表](codebase-map.md)找出負責模組。
