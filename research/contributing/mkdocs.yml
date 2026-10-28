@@ -1,0 +1,41 @@
+site_name: Ultralytics 開源貢獻研究手冊
+site_description: 從議題、社群證據到第一個可驗證的小型貢獻
+docs_dir: docs
+site_dir: book
+use_directory_urls: false
+theme:
+  name: material
+  language: zh-TW
+  font: false
+  palette:
+    - scheme: default
+      primary: teal
+      toggle: { icon: material/weather-night, name: 深色模式 }
+    - scheme: slate
+      primary: teal
+      toggle: { icon: material/weather-sunny, name: 淺色模式 }
+  features: [navigation.sections, navigation.top, navigation.footer, content.code.copy, search.highlight]
+plugins:
+  - search:
+      lang: [en]
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences
+extra_css:
+  - assets/book.css
+validation:
+  nav:
+    omitted_files: warn
+  links:
+    not_found: warn
+    anchors: warn
+nav:
+  - 導讀與研究結論: index.md
+  - 1. 貢獻規則與方法: contribution-workflow.md
+  - 2. 程式碼與驗證地圖: codebase-map.md
+  - 3. Issue 與論壇案例: issues-and-community.md
+  - 4. 選題與行動路線: roadmap.md
+  - 來源、範圍與更新紀錄: sources.md

@@ -1,0 +1,8 @@
+body { font-family: system-ui, -apple-system, "Microsoft JhengHei", sans-serif; }
+.md-typeset { line-height: 1.9; }
+.md-typeset h1, .md-typeset h2 { font-weight: 700; letter-spacing: .02em; }
+.md-typeset h1 { color: var(--md-default-fg-color); }
+.md-typeset p, .md-typeset li { text-wrap: pretty; }
+.md-typeset img { display: block; margin: 1.5rem auto; border-radius: .6rem; }
+.book-return-link { display: inline-block; padding: .5rem 0; font-weight: 600; }
+@media print { .book-return-link { display: none; } }
