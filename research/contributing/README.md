@@ -56,6 +56,10 @@ uv run --locked mkdocs-run.py serve --dev-addr 127.0.0.1:8008
 
 ## 已完成的出版檢查（2026-10-28）
 
+新增[貢獻的分布與範圍](docs/contribution-distribution.md)。同一支分析程式現在也可重算作者集中度、修改領域與行數規模；`--details` 補取尚未保存的 PR 檔案資料，已保存資料不會自動刷新。新證據位於 `docs/assets/pr-files-2026-q3.json`，摘要位於 `docs/assets/pr-distribution-2026-q3.json`。
+
+分布研究完成後，嚴格建置、10 個 HTML 的本地連結與錨點、74 筆搜尋索引均通過。分析程式通過 Ruff，並以原始資料交叉核對 1,247 筆 PR、7,015 筆檔案變更、作者集中度及規模統計；新章預覽回應 HTTP 200。
+
 新增兩章：[貢獻者身分與合併率](docs/merge-rates.md)、[外部貢獻要先開單嗎？](docs/ticket-requirements.md)。統計程式在 `analysis/pr_outcomes.py`；公開資料與摘要在 `docs/assets/`，讀者可從書中下載。程式使用標準函式庫與 GitHub CLI，可離線重算，連網更新會覆寫相同季度的資料。研究方法與限制見合併率章。
 
 新增研究後，嚴格建置、9 個 HTML 的本地連結與錨點、56 筆搜尋索引均通過檢查。另核對 1,247 筆 PR 的總數、各結果分類，以及新人與既有作者的首筆 PR 統計。本機研究章預覽回應 HTTP 200。

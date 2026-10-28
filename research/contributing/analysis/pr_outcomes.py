@@ -18,6 +18,29 @@ def api(endpoint):
     return json.loads(subprocess.check_output(["gh", "api", endpoint], encoding="utf-8"))
 
 
+def graphql(query):
+    request = ROOT / "public-query.json"
+    request.write_text(json.dumps({"query": query}), encoding="utf-8")
+    response = json.loads(subprocess.check_output(["gh", "api", "graphql", "--input", str(request)], encoding="utf-8"))
+    assert "errors" not in response, response.get("errors")
+    request.unlink()
+    return response["data"]
+
+
+def area(path):
+    if path.startswith("docs/") or path.endswith((".md", ".rst")) or path == "mkdocs.yml":
+        return "documentation"
+    if path.startswith("ultralytics/"):
+        return "package"
+    if path.startswith("tests/"):
+        return "tests"
+    if path.startswith("examples/"):
+        return "examples"
+    if path.startswith((".github/", "docker/")):
+        return "automation"
+    return "project_other"
+
+
 def elapsed(start, end):
     return (
         datetime.fromisoformat(end.replace("Z", "+00:00")) - datetime.fromisoformat(start.replace("Z", "+00:00"))
@@ -105,6 +128,38 @@ if "--fetch" in sys.argv:
 
 snapshot = json.loads(SNAPSHOT.read_text(encoding="utf-8"))
 rows = snapshot["rows"]
+details_path = DATA / "pr-files-2026-q3.json"
+if "--details" in sys.argv:
+    details = (
+        json.loads(details_path.read_text(encoding="utf-8"))
+        if details_path.exists()
+        else {"fetch_started_at": datetime.now(timezone.utc).isoformat(), "prs": {}}
+    )
+    pending = [r["number"] for r in rows if str(r["number"]) not in details["prs"]]
+    for offset in range(0, len(pending), 25):
+        numbers = pending[offset : offset + 25]
+        fields = [
+            f"p{n}: pullRequest(number: {n}) {{ number headRefOid additions deletions changedFiles state mergedAt files(first: 100) {{ nodes {{ path additions deletions }} pageInfo {{ hasNextPage endCursor }} }} }}"
+            for n in numbers
+        ]
+        batch = graphql('query { repository(owner: "ultralytics", name: "ultralytics") { ' + " ".join(fields) + " } }")[
+            "repository"
+        ]
+        for pr in batch.values():
+            assert pr is not None
+            files = pr.pop("files")
+            paths = files["nodes"]
+            while files["pageInfo"]["hasNextPage"]:
+                cursor = json.dumps(files["pageInfo"]["endCursor"])
+                query = f'query {{ repository(owner: "ultralytics", name: "ultralytics") {{ pullRequest(number: {pr["number"]}) {{ files(first: 100, after: {cursor}) {{ nodes {{ path additions deletions }} pageInfo {{ hasNextPage endCursor }} }} }} }} }}'
+                files = graphql(query)["repository"]["pullRequest"]["files"]
+                paths.extend(files["nodes"])
+            assert len(paths) == pr["changedFiles"], pr["number"]
+            assert len({p["path"] for p in paths}) == len(paths)
+            details["prs"][str(pr["number"])] = {**pr, "files": paths}
+        details["fetched_at"] = datetime.now(timezone.utc).isoformat()
+        details_path.write_text(json.dumps(details, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"file details: {len(details['prs'])}/{len(rows)} PRs", flush=True)
 history_path = DATA / "author-history-before-2026-q3.json"
 if "--history" in sys.argv:
     authors = sorted(
@@ -118,17 +173,11 @@ if "--history" in sys.argv:
             for kind, qualifier in (("prior", "created:<2026-07-01"), ("merged", "is:merged merged:<2026-07-01")):
                 search = f"repo:ultralytics/ultralytics is:pr author:{author} {qualifier}"
                 fields.append(f"{kind}{i}: search(type: ISSUE, query: {json.dumps(search)}, first: 1) {{ issueCount }}")
-        request = ROOT / "history-query.json"
-        request.write_text(json.dumps({"query": "query { " + " ".join(fields) + " }"}), encoding="utf-8")
-        response = json.loads(
-            subprocess.check_output(["gh", "api", "graphql", "--input", str(request)], encoding="utf-8")
-        )
-        assert "errors" not in response, response.get("errors")
-        request.unlink()
+        response = graphql("query { " + " ".join(fields) + " }")
         for i, author in enumerate(batch):
             histories[author] = {
-                "prior_prs": response["data"][f"prior{i}"]["issueCount"],
-                "prior_merged": response["data"][f"merged{i}"]["issueCount"],
+                "prior_prs": response[f"prior{i}"]["issueCount"],
+                "prior_merged": response[f"merged{i}"]["issueCount"],
             }
         print(f"history: {min(offset + 10, len(authors))}/{len(authors)} authors", flush=True)
     history_path.write_text(
@@ -177,4 +226,81 @@ if history_path.exists():
 assert sum(g["prs"] for g in result["groups"].values()) == len(rows)
 assert all(g["prs"] == g["merged"] + g["closed_unmerged"] + g["open"] for g in result["groups"].values())
 (DATA / "pr-summary-2026-q3.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+if details_path.exists():
+    details = json.loads(details_path.read_text(encoding="utf-8"))["prs"]
+    if len(details) == len(rows):
+        assert set(details) == {str(r["number"]) for r in rows}
+        assert all(len(pr["files"]) == pr["changedFiles"] for pr in details.values())
+        assert all(len({f["path"] for f in pr["files"]}) == pr["changedFiles"] for pr in details.values())
+        distribution = {}
+        for status, selected in (("submitted", rows), ("merged", [r for r in rows if r["merged_at"]])):
+            human = [r for r in selected if group(r) not in {"AUTOMATION", "UNKNOWN_DELETED"}]
+            by_author, sizes, scopes, touched, modules = (
+                defaultdict(list),
+                defaultdict(list),
+                defaultdict(list),
+                defaultdict(list),
+                defaultdict(list),
+            )
+            for row in selected:
+                pr = details[str(row["number"])]
+                churn = pr["additions"] + pr["deletions"]
+                size = (
+                    "0"
+                    if churn == 0
+                    else "1-50"
+                    if churn <= 50
+                    else "51-200"
+                    if churn <= 200
+                    else "201-1000"
+                    if churn <= 1000
+                    else "1001+"
+                )
+                sizes[size].append(row)
+                areas = {area(f["path"]) for f in pr["files"]}
+                scope = "empty" if not areas else next(iter(areas)) + "_only" if len(areas) == 1 else "mixed"
+                scopes[scope].append(row)
+                for a in areas:
+                    touched[a].append(row)
+                for module in {f["path"].split("/")[1] for f in pr["files"] if f["path"].startswith("ultralytics/")}:
+                    modules[module].append(row)
+            for row in human:
+                by_author[row["author"]].append(row)
+            counts = sorted((len(v) for v in by_author.values()), reverse=True)
+            distribution[status] = {
+                "prs": len(selected),
+                "human_prs": len(human),
+                "human_authors": len(by_author),
+                "top_authors": sorted(((a, len(v)) for a, v in by_author.items()), key=lambda p: (-p[1], p[0]))[:10],
+                "top1_share": round(100 * sum(counts[:1]) / len(human), 2),
+                "top5_share": round(100 * sum(counts[:5]) / len(human), 2),
+                "top10_share": round(100 * sum(counts[:10]) / len(human), 2),
+                "authors_one_pr": sum(c == 1 for c in counts),
+                "authors_2_to_5": sum(2 <= c <= 5 for c in counts),
+                "authors_6_plus": sum(c >= 6 for c in counts),
+                "median_changed_files": median(details[str(r["number"])]["changedFiles"] for r in selected),
+                "median_churn": median(
+                    details[str(r["number"])]["additions"] + details[str(r["number"])]["deletions"] for r in selected
+                ),
+                "size_groups": {g: summarize(rs) for g, rs in sorted(sizes.items())},
+                "exclusive_scopes": {g: summarize(rs) for g, rs in sorted(scopes.items())},
+                "touched_areas": {g: summarize(rs) for g, rs in sorted(touched.items())},
+                "area_relations": {a: dict(Counter(group(r) for r in rs)) for a, rs in sorted(touched.items())},
+                "package_modules": {g: summarize(rs) for g, rs in sorted(modules.items())},
+                "external_size_groups": {
+                    g: summarize(external)
+                    for g, rs in sorted(sizes.items())
+                    if (external := [r for r in rs if r["author"] in histories])
+                },
+                "external_scopes": {
+                    g: summarize(external)
+                    for g, rs in sorted(scopes.items())
+                    if (external := [r for r in rs if r["author"] in histories])
+                },
+            }
+            assert sum(len(v) for v in scopes.values()) == len(selected)
+            assert sum(len(v) for v in sizes.values()) == len(selected)
+        (DATA / "pr-distribution-2026-q3.json").write_text(
+            json.dumps(distribution, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
 print(json.dumps({k: v for k, v in result.items() if k != "monthly_groups"}, ensure_ascii=False, indent=2))

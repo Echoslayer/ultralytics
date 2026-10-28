@@ -1,0 +1,2709 @@
+{
+  "submitted": {
+    "prs": 1247,
+    "human_prs": 1220,
+    "human_authors": 119,
+    "top_authors": [
+      [
+        "glenn-jocher",
+        328
+      ],
+      [
+        "raimbekovm",
+        246
+      ],
+      [
+        "JESUSROYETH",
+        110
+      ],
+      [
+        "Y-T-G",
+        68
+      ],
+      [
+        "cainiao33",
+        52
+      ],
+      [
+        "onuralpszr",
+        39
+      ],
+      [
+        "Bovey0809",
+        22
+      ],
+      [
+        "rudrakumar07",
+        21
+      ],
+      [
+        "RizwanMunawar",
+        18
+      ],
+      [
+        "aswanth-07",
+        18
+      ]
+    ],
+    "top1_share": 26.89,
+    "top5_share": 65.9,
+    "top10_share": 75.57,
+    "authors_one_pr": 67,
+    "authors_2_to_5": 29,
+    "authors_6_plus": 23,
+    "median_changed_files": 2,
+    "median_churn": 17,
+    "size_groups": {
+      "0": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 1,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 1,
+        "median_merged_hours": 215.13,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "Ajaysingh-2003",
+            1
+          ]
+        ]
+      },
+      "1-50": {
+        "prs": 924,
+        "authors": 91,
+        "merged": 761,
+        "closed_unmerged": 159,
+        "open": 4,
+        "merged_pct": 82.36,
+        "merged_14d": 760,
+        "median_merged_hours": 5.91,
+        "equal_author_merged_pct": 74.88,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            220
+          ],
+          [
+            "raimbekovm",
+            175
+          ],
+          [
+            "JESUSROYETH",
+            97
+          ],
+          [
+            "Y-T-G",
+            51
+          ],
+          [
+            "cainiao33",
+            44
+          ]
+        ]
+      },
+      "1001+": {
+        "prs": 27,
+        "authors": 13,
+        "merged": 14,
+        "closed_unmerged": 11,
+        "open": 2,
+        "merged_pct": 51.85,
+        "merged_14d": 14,
+        "median_merged_hours": 9.4,
+        "equal_author_merged_pct": 32.82,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            7
+          ],
+          [
+            "Bovey0809",
+            5
+          ],
+          [
+            "raimbekovm",
+            3
+          ],
+          [
+            "fcakyon",
+            2
+          ],
+          [
+            "markyang2020",
+            2
+          ]
+        ]
+      },
+      "201-1000": {
+        "prs": 100,
+        "authors": 30,
+        "merged": 63,
+        "closed_unmerged": 33,
+        "open": 4,
+        "merged_pct": 63.0,
+        "merged_14d": 63,
+        "median_merged_hours": 7.07,
+        "equal_author_merged_pct": 32.83,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            35
+          ],
+          [
+            "raimbekovm",
+            20
+          ],
+          [
+            "fcakyon",
+            6
+          ],
+          [
+            "Bovey0809",
+            4
+          ],
+          [
+            "Y-T-G",
+            4
+          ]
+        ]
+      },
+      "51-200": {
+        "prs": 195,
+        "authors": 40,
+        "merged": 153,
+        "closed_unmerged": 40,
+        "open": 2,
+        "merged_pct": 78.46,
+        "merged_14d": 149,
+        "median_merged_hours": 6.16,
+        "equal_author_merged_pct": 68.7,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            66
+          ],
+          [
+            "raimbekovm",
+            48
+          ],
+          [
+            "Y-T-G",
+            13
+          ],
+          [
+            "JESUSROYETH",
+            13
+          ],
+          [
+            "cainiao33",
+            8
+          ]
+        ]
+      }
+    },
+    "exclusive_scopes": {
+      "automation_only": {
+        "prs": 58,
+        "authors": 10,
+        "merged": 45,
+        "closed_unmerged": 13,
+        "open": 0,
+        "merged_pct": 77.59,
+        "merged_14d": 45,
+        "median_merged_hours": 0.79,
+        "equal_author_merged_pct": 52.24,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            34
+          ],
+          [
+            "UltralyticsAssistant",
+            10
+          ],
+          [
+            "dependabot[bot]",
+            3
+          ],
+          [
+            "raimbekovm",
+            3
+          ],
+          [
+            "onuralpszr",
+            2
+          ]
+        ]
+      },
+      "documentation_only": {
+        "prs": 252,
+        "authors": 39,
+        "merged": 224,
+        "closed_unmerged": 27,
+        "open": 1,
+        "merged_pct": 88.89,
+        "merged_14d": 221,
+        "median_merged_hours": 2.96,
+        "equal_author_merged_pct": 83.93,
+        "top_authors": [
+          [
+            "raimbekovm",
+            83
+          ],
+          [
+            "glenn-jocher",
+            66
+          ],
+          [
+            "onuralpszr",
+            22
+          ],
+          [
+            "RizwanMunawar",
+            18
+          ],
+          [
+            "lakshanthad",
+            6
+          ]
+        ]
+      },
+      "empty": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 1,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 1,
+        "median_merged_hours": 215.13,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "Ajaysingh-2003",
+            1
+          ]
+        ]
+      },
+      "examples_only": {
+        "prs": 3,
+        "authors": 3,
+        "merged": 2,
+        "closed_unmerged": 1,
+        "open": 0,
+        "merged_pct": 66.67,
+        "merged_14d": 2,
+        "median_merged_hours": 1.21,
+        "equal_author_merged_pct": 66.67,
+        "top_authors": [
+          [
+            "dependabot[bot]",
+            1
+          ],
+          [
+            "54wb",
+            1
+          ],
+          [
+            "onuralpszr",
+            1
+          ]
+        ]
+      },
+      "mixed": {
+        "prs": 424,
+        "authors": 68,
+        "merged": 316,
+        "closed_unmerged": 98,
+        "open": 10,
+        "merged_pct": 74.53,
+        "merged_14d": 315,
+        "median_merged_hours": 7.33,
+        "equal_author_merged_pct": 50.72,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            134
+          ],
+          [
+            "raimbekovm",
+            60
+          ],
+          [
+            "JESUSROYETH",
+            45
+          ],
+          [
+            "Y-T-G",
+            29
+          ],
+          [
+            "cainiao33",
+            24
+          ]
+        ]
+      },
+      "package_only": {
+        "prs": 476,
+        "authors": 60,
+        "merged": 384,
+        "closed_unmerged": 91,
+        "open": 1,
+        "merged_pct": 80.67,
+        "merged_14d": 383,
+        "median_merged_hours": 8.57,
+        "equal_author_merged_pct": 75.88,
+        "top_authors": [
+          [
+            "raimbekovm",
+            97
+          ],
+          [
+            "glenn-jocher",
+            83
+          ],
+          [
+            "JESUSROYETH",
+            63
+          ],
+          [
+            "Y-T-G",
+            34
+          ],
+          [
+            "cainiao33",
+            27
+          ]
+        ]
+      },
+      "project_other_only": {
+        "prs": 17,
+        "authors": 7,
+        "merged": 9,
+        "closed_unmerged": 8,
+        "open": 0,
+        "merged_pct": 52.94,
+        "merged_14d": 9,
+        "median_merged_hours": 27.97,
+        "equal_author_merged_pct": 67.86,
+        "top_authors": [
+          [
+            "dependabot[bot]",
+            8
+          ],
+          [
+            "glenn-jocher",
+            3
+          ],
+          [
+            "fcakyon",
+            2
+          ],
+          [
+            "raimbekovm",
+            1
+          ],
+          [
+            "Gornoka",
+            1
+          ]
+        ]
+      },
+      "tests_only": {
+        "prs": 16,
+        "authors": 7,
+        "merged": 11,
+        "closed_unmerged": 5,
+        "open": 0,
+        "merged_pct": 68.75,
+        "merged_14d": 11,
+        "median_merged_hours": 0.5,
+        "equal_author_merged_pct": 62.5,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            8
+          ],
+          [
+            "davidnichols-ops",
+            2
+          ],
+          [
+            "raimbekovm",
+            2
+          ],
+          [
+            "Laughing-q",
+            1
+          ],
+          [
+            "diaz3z",
+            1
+          ]
+        ]
+      }
+    },
+    "touched_areas": {
+      "automation": {
+        "prs": 112,
+        "authors": 23,
+        "merged": 86,
+        "closed_unmerged": 25,
+        "open": 1,
+        "merged_pct": 76.79,
+        "merged_14d": 85,
+        "median_merged_hours": 1.16,
+        "equal_author_merged_pct": 52.56,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            69
+          ],
+          [
+            "UltralyticsAssistant",
+            10
+          ],
+          [
+            "raimbekovm",
+            4
+          ],
+          [
+            "onuralpszr",
+            3
+          ],
+          [
+            "Bovey0809",
+            3
+          ]
+        ]
+      },
+      "documentation": {
+        "prs": 502,
+        "authors": 69,
+        "merged": 405,
+        "closed_unmerged": 86,
+        "open": 11,
+        "merged_pct": 80.68,
+        "merged_14d": 401,
+        "median_merged_hours": 4.32,
+        "equal_author_merged_pct": 57.15,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            153
+          ],
+          [
+            "raimbekovm",
+            140
+          ],
+          [
+            "onuralpszr",
+            26
+          ],
+          [
+            "Y-T-G",
+            22
+          ],
+          [
+            "RizwanMunawar",
+            18
+          ]
+        ]
+      },
+      "examples": {
+        "prs": 33,
+        "authors": 16,
+        "merged": 20,
+        "closed_unmerged": 13,
+        "open": 0,
+        "merged_pct": 60.61,
+        "merged_14d": 20,
+        "median_merged_hours": 2.5,
+        "equal_author_merged_pct": 45.14,
+        "top_authors": [
+          [
+            "raimbekovm",
+            9
+          ],
+          [
+            "glenn-jocher",
+            6
+          ],
+          [
+            "Zenka737",
+            3
+          ],
+          [
+            "amanharshx",
+            2
+          ],
+          [
+            "Bovey0809",
+            2
+          ]
+        ]
+      },
+      "package": {
+        "prs": 869,
+        "authors": 94,
+        "merged": 680,
+        "closed_unmerged": 178,
+        "open": 11,
+        "merged_pct": 78.25,
+        "merged_14d": 678,
+        "median_merged_hours": 8.48,
+        "equal_author_merged_pct": 62.64,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            200
+          ],
+          [
+            "raimbekovm",
+            152
+          ],
+          [
+            "JESUSROYETH",
+            108
+          ],
+          [
+            "Y-T-G",
+            62
+          ],
+          [
+            "cainiao33",
+            51
+          ]
+        ]
+      },
+      "project_other": {
+        "prs": 76,
+        "authors": 27,
+        "merged": 42,
+        "closed_unmerged": 32,
+        "open": 2,
+        "merged_pct": 55.26,
+        "merged_14d": 42,
+        "median_merged_hours": 2.27,
+        "equal_author_merged_pct": 42.09,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            27
+          ],
+          [
+            "dependabot[bot]",
+            8
+          ],
+          [
+            "fcakyon",
+            8
+          ],
+          [
+            "Y-T-G",
+            5
+          ],
+          [
+            "Bovey0809",
+            2
+          ]
+        ]
+      },
+      "tests": {
+        "prs": 248,
+        "authors": 56,
+        "merged": 177,
+        "closed_unmerged": 65,
+        "open": 6,
+        "merged_pct": 71.37,
+        "merged_14d": 176,
+        "median_merged_hours": 7.5,
+        "equal_author_merged_pct": 51.53,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            73
+          ],
+          [
+            "JESUSROYETH",
+            32
+          ],
+          [
+            "cainiao33",
+            24
+          ],
+          [
+            "Y-T-G",
+            11
+          ],
+          [
+            "Bovey0809",
+            10
+          ]
+        ]
+      }
+    },
+    "area_relations": {
+      "automation": {
+        "MEMBER": 78,
+        "CONTRIBUTOR": 13,
+        "AUTOMATION": 13,
+        "NONE": 4,
+        "UNKNOWN_DELETED": 2,
+        "COLLABORATOR": 2
+      },
+      "documentation": {
+        "MEMBER": 337,
+        "CONTRIBUTOR": 106,
+        "COLLABORATOR": 35,
+        "NONE": 23,
+        "AUTOMATION": 1
+      },
+      "examples": {
+        "MEMBER": 19,
+        "AUTOMATION": 1,
+        "NONE": 4,
+        "CONTRIBUTOR": 8,
+        "COLLABORATOR": 1
+      },
+      "package": {
+        "MEMBER": 392,
+        "CONTRIBUTOR": 371,
+        "COLLABORATOR": 75,
+        "NONE": 30,
+        "AUTOMATION": 1
+      },
+      "project_other": {
+        "AUTOMATION": 9,
+        "MEMBER": 39,
+        "NONE": 8,
+        "COLLABORATOR": 6,
+        "CONTRIBUTOR": 14
+      },
+      "tests": {
+        "MEMBER": 90,
+        "CONTRIBUTOR": 123,
+        "COLLABORATOR": 13,
+        "NONE": 22
+      }
+    },
+    "package_modules": {
+      "__init__.py": {
+        "prs": 90,
+        "authors": 17,
+        "merged": 86,
+        "closed_unmerged": 4,
+        "open": 0,
+        "merged_pct": 95.56,
+        "merged_14d": 86,
+        "median_merged_hours": 2.33,
+        "equal_author_merged_pct": 96.75,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            58
+          ],
+          [
+            "Y-T-G",
+            5
+          ],
+          [
+            "JESUSROYETH",
+            4
+          ],
+          [
+            "cainiao33",
+            4
+          ],
+          [
+            "Bovey0809",
+            2
+          ]
+        ]
+      },
+      "cfg": {
+        "prs": 107,
+        "authors": 28,
+        "merged": 76,
+        "closed_unmerged": 29,
+        "open": 2,
+        "merged_pct": 71.03,
+        "merged_14d": 76,
+        "median_merged_hours": 7.56,
+        "equal_author_merged_pct": 53.66,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            30
+          ],
+          [
+            "raimbekovm",
+            22
+          ],
+          [
+            "Bovey0809",
+            10
+          ],
+          [
+            "Y-T-G",
+            9
+          ],
+          [
+            "rudrakumar07",
+            4
+          ]
+        ]
+      },
+      "data": {
+        "prs": 184,
+        "authors": 43,
+        "merged": 130,
+        "closed_unmerged": 51,
+        "open": 3,
+        "merged_pct": 70.65,
+        "merged_14d": 130,
+        "median_merged_hours": 9.8,
+        "equal_author_merged_pct": 60.45,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            32
+          ],
+          [
+            "raimbekovm",
+            27
+          ],
+          [
+            "cainiao33",
+            23
+          ],
+          [
+            "JESUSROYETH",
+            11
+          ],
+          [
+            "Nikhi00718",
+            8
+          ]
+        ]
+      },
+      "engine": {
+        "prs": 268,
+        "authors": 45,
+        "merged": 210,
+        "closed_unmerged": 53,
+        "open": 5,
+        "merged_pct": 78.36,
+        "merged_14d": 210,
+        "median_merged_hours": 7.33,
+        "equal_author_merged_pct": 56.77,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            84
+          ],
+          [
+            "raimbekovm",
+            44
+          ],
+          [
+            "JESUSROYETH",
+            28
+          ],
+          [
+            "Y-T-G",
+            15
+          ],
+          [
+            "cainiao33",
+            15
+          ]
+        ]
+      },
+      "hub": {
+        "prs": 2,
+        "authors": 2,
+        "merged": 1,
+        "closed_unmerged": 1,
+        "open": 0,
+        "merged_pct": 50.0,
+        "merged_14d": 1,
+        "median_merged_hours": 5.66,
+        "equal_author_merged_pct": 50.0,
+        "top_authors": [
+          [
+            "rudrakumar07",
+            1
+          ],
+          [
+            "sergiuwaxmann",
+            1
+          ]
+        ]
+      },
+      "models": {
+        "prs": 153,
+        "authors": 36,
+        "merged": 106,
+        "closed_unmerged": 41,
+        "open": 6,
+        "merged_pct": 69.28,
+        "merged_14d": 106,
+        "median_merged_hours": 9.8,
+        "equal_author_merged_pct": 50.81,
+        "top_authors": [
+          [
+            "raimbekovm",
+            30
+          ],
+          [
+            "glenn-jocher",
+            28
+          ],
+          [
+            "JESUSROYETH",
+            20
+          ],
+          [
+            "Y-T-G",
+            10
+          ],
+          [
+            "Bovey0809",
+            7
+          ]
+        ]
+      },
+      "nn": {
+        "prs": 176,
+        "authors": 36,
+        "merged": 123,
+        "closed_unmerged": 48,
+        "open": 5,
+        "merged_pct": 69.89,
+        "merged_14d": 122,
+        "median_merged_hours": 6.51,
+        "equal_author_merged_pct": 53.46,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            52
+          ],
+          [
+            "raimbekovm",
+            21
+          ],
+          [
+            "JESUSROYETH",
+            18
+          ],
+          [
+            "Y-T-G",
+            14
+          ],
+          [
+            "fcakyon",
+            6
+          ]
+        ]
+      },
+      "optim": {
+        "prs": 17,
+        "authors": 9,
+        "merged": 8,
+        "closed_unmerged": 9,
+        "open": 0,
+        "merged_pct": 47.06,
+        "merged_14d": 8,
+        "median_merged_hours": 5.02,
+        "equal_author_merged_pct": 44.44,
+        "top_authors": [
+          [
+            "Y-T-G",
+            4
+          ],
+          [
+            "glenn-jocher",
+            3
+          ],
+          [
+            "Zenka737",
+            3
+          ],
+          [
+            "Bovey0809",
+            2
+          ],
+          [
+            "songjiahao-wq",
+            1
+          ]
+        ]
+      },
+      "solutions": {
+        "prs": 37,
+        "authors": 13,
+        "merged": 24,
+        "closed_unmerged": 12,
+        "open": 1,
+        "merged_pct": 64.86,
+        "merged_14d": 24,
+        "median_merged_hours": 8.5,
+        "equal_author_merged_pct": 47.63,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            8
+          ],
+          [
+            "JESUSROYETH",
+            7
+          ],
+          [
+            "raimbekovm",
+            5
+          ],
+          [
+            "Zenka737",
+            4
+          ],
+          [
+            "Bovey0809",
+            3
+          ]
+        ]
+      },
+      "trackers": {
+        "prs": 64,
+        "authors": 15,
+        "merged": 50,
+        "closed_unmerged": 14,
+        "open": 0,
+        "merged_pct": 78.12,
+        "merged_14d": 50,
+        "median_merged_hours": 7.86,
+        "equal_author_merged_pct": 52.66,
+        "top_authors": [
+          [
+            "raimbekovm",
+            24
+          ],
+          [
+            "JESUSROYETH",
+            15
+          ],
+          [
+            "glenn-jocher",
+            7
+          ],
+          [
+            "Zenka737",
+            3
+          ],
+          [
+            "aswanth-07",
+            3
+          ]
+        ]
+      },
+      "utils": {
+        "prs": 333,
+        "authors": 54,
+        "merged": 261,
+        "closed_unmerged": 67,
+        "open": 5,
+        "merged_pct": 78.38,
+        "merged_14d": 260,
+        "median_merged_hours": 6.6,
+        "equal_author_merged_pct": 64.1,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            101
+          ],
+          [
+            "raimbekovm",
+            47
+          ],
+          [
+            "Y-T-G",
+            31
+          ],
+          [
+            "JESUSROYETH",
+            31
+          ],
+          [
+            "cainiao33",
+            15
+          ]
+        ]
+      }
+    },
+    "external_size_groups": {
+      "0": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 1,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 1,
+        "median_merged_hours": 215.13,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "Ajaysingh-2003",
+            1
+          ]
+        ]
+      },
+      "1-50": {
+        "prs": 383,
+        "authors": 78,
+        "merged": 311,
+        "closed_unmerged": 71,
+        "open": 1,
+        "merged_pct": 81.2,
+        "merged_14d": 311,
+        "median_merged_hours": 13.86,
+        "equal_author_merged_pct": 74.72,
+        "top_authors": [
+          [
+            "JESUSROYETH",
+            97
+          ],
+          [
+            "cainiao33",
+            44
+          ],
+          [
+            "rudrakumar07",
+            21
+          ],
+          [
+            "RizwanMunawar",
+            18
+          ],
+          [
+            "aswanth-07",
+            17
+          ]
+        ]
+      },
+      "1001+": {
+        "prs": 11,
+        "authors": 6,
+        "merged": 3,
+        "closed_unmerged": 7,
+        "open": 1,
+        "merged_pct": 27.27,
+        "merged_14d": 3,
+        "median_merged_hours": 1.93,
+        "equal_author_merged_pct": 10.0,
+        "top_authors": [
+          [
+            "Bovey0809",
+            5
+          ],
+          [
+            "markyang2020",
+            2
+          ],
+          [
+            "ralampay",
+            1
+          ],
+          [
+            "Dorablank",
+            1
+          ],
+          [
+            "Asher-1",
+            1
+          ]
+        ]
+      },
+      "201-1000": {
+        "prs": 28,
+        "authors": 21,
+        "merged": 4,
+        "closed_unmerged": 21,
+        "open": 3,
+        "merged_pct": 14.29,
+        "merged_14d": 4,
+        "median_merged_hours": 27.79,
+        "equal_author_merged_pct": 11.9,
+        "top_authors": [
+          [
+            "Bovey0809",
+            4
+          ],
+          [
+            "Zenka737",
+            3
+          ],
+          [
+            "Functionhx",
+            2
+          ],
+          [
+            "MohanadMahran",
+            2
+          ],
+          [
+            "davidnichols-ops",
+            1
+          ]
+        ]
+      },
+      "51-200": {
+        "prs": 59,
+        "authors": 32,
+        "merged": 40,
+        "closed_unmerged": 17,
+        "open": 2,
+        "merged_pct": 67.8,
+        "merged_14d": 36,
+        "median_merged_hours": 18.37,
+        "equal_author_merged_pct": 62.89,
+        "top_authors": [
+          [
+            "JESUSROYETH",
+            13
+          ],
+          [
+            "cainiao33",
+            8
+          ],
+          [
+            "JaviChulvi",
+            4
+          ],
+          [
+            "davidnichols-ops",
+            3
+          ],
+          [
+            "Bovey0809",
+            3
+          ]
+        ]
+      }
+    },
+    "external_scopes": {
+      "automation_only": {
+        "prs": 3,
+        "authors": 3,
+        "merged": 1,
+        "closed_unmerged": 2,
+        "open": 0,
+        "merged_pct": 33.33,
+        "merged_14d": 1,
+        "median_merged_hours": 36.04,
+        "equal_author_merged_pct": 33.33,
+        "top_authors": [
+          [
+            "anupamme",
+            1
+          ],
+          [
+            "MGPOCKY",
+            1
+          ],
+          [
+            "sujeito-operator",
+            1
+          ]
+        ]
+      },
+      "documentation_only": {
+        "prs": 63,
+        "authors": 29,
+        "merged": 54,
+        "closed_unmerged": 8,
+        "open": 1,
+        "merged_pct": 85.71,
+        "merged_14d": 51,
+        "median_merged_hours": 6.24,
+        "equal_author_merged_pct": 81.03,
+        "top_authors": [
+          [
+            "RizwanMunawar",
+            18
+          ],
+          [
+            "Bovey0809",
+            6
+          ],
+          [
+            "JaviChulvi",
+            5
+          ],
+          [
+            "miles-deans-ultralytics",
+            3
+          ],
+          [
+            "Parth1353",
+            3
+          ]
+        ]
+      },
+      "empty": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 1,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 1,
+        "median_merged_hours": 215.13,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "Ajaysingh-2003",
+            1
+          ]
+        ]
+      },
+      "examples_only": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 0,
+        "closed_unmerged": 1,
+        "open": 0,
+        "merged_pct": 0.0,
+        "merged_14d": 0,
+        "median_merged_hours": null,
+        "equal_author_merged_pct": 0.0,
+        "top_authors": [
+          [
+            "54wb",
+            1
+          ]
+        ]
+      },
+      "mixed": {
+        "prs": 174,
+        "authors": 58,
+        "merged": 113,
+        "closed_unmerged": 55,
+        "open": 6,
+        "merged_pct": 64.94,
+        "merged_14d": 112,
+        "median_merged_hours": 16.38,
+        "equal_author_merged_pct": 46.43,
+        "top_authors": [
+          [
+            "JESUSROYETH",
+            45
+          ],
+          [
+            "cainiao33",
+            24
+          ],
+          [
+            "Bovey0809",
+            13
+          ],
+          [
+            "Zenka737",
+            7
+          ],
+          [
+            "aswanth-07",
+            6
+          ]
+        ]
+      },
+      "package_only": {
+        "prs": 235,
+        "authors": 50,
+        "merged": 189,
+        "closed_unmerged": 46,
+        "open": 0,
+        "merged_pct": 80.43,
+        "merged_14d": 189,
+        "median_merged_hours": 14.4,
+        "equal_author_merged_pct": 76.05,
+        "top_authors": [
+          [
+            "JESUSROYETH",
+            63
+          ],
+          [
+            "cainiao33",
+            27
+          ],
+          [
+            "rudrakumar07",
+            19
+          ],
+          [
+            "Nikhi00718",
+            14
+          ],
+          [
+            "MohammadHijjawi97",
+            13
+          ]
+        ]
+      },
+      "project_other_only": {
+        "prs": 2,
+        "authors": 2,
+        "merged": 1,
+        "closed_unmerged": 1,
+        "open": 0,
+        "merged_pct": 50.0,
+        "merged_14d": 1,
+        "median_merged_hours": 65.46,
+        "equal_author_merged_pct": 50.0,
+        "top_authors": [
+          [
+            "Gornoka",
+            1
+          ],
+          [
+            "hylreg",
+            1
+          ]
+        ]
+      },
+      "tests_only": {
+        "prs": 3,
+        "authors": 2,
+        "merged": 0,
+        "closed_unmerged": 3,
+        "open": 0,
+        "merged_pct": 0.0,
+        "merged_14d": 0,
+        "median_merged_hours": null,
+        "equal_author_merged_pct": 0.0,
+        "top_authors": [
+          [
+            "davidnichols-ops",
+            2
+          ],
+          [
+            "diaz3z",
+            1
+          ]
+        ]
+      }
+    }
+  },
+  "merged": {
+    "prs": 992,
+    "human_prs": 975,
+    "human_authors": 86,
+    "top_authors": [
+      [
+        "glenn-jocher",
+        296
+      ],
+      [
+        "raimbekovm",
+        194
+      ],
+      [
+        "JESUSROYETH",
+        108
+      ],
+      [
+        "Y-T-G",
+        48
+      ],
+      [
+        "cainiao33",
+        37
+      ],
+      [
+        "onuralpszr",
+        35
+      ],
+      [
+        "RizwanMunawar",
+        18
+      ],
+      [
+        "Bovey0809",
+        17
+      ],
+      [
+        "aswanth-07",
+        17
+      ],
+      [
+        "amanharshx",
+        15
+      ]
+    ],
+    "top1_share": 30.36,
+    "top5_share": 70.05,
+    "top10_share": 80.51,
+    "authors_one_pr": 51,
+    "authors_2_to_5": 14,
+    "authors_6_plus": 21,
+    "median_changed_files": 2.0,
+    "median_churn": 16.0,
+    "size_groups": {
+      "0": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 1,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 1,
+        "median_merged_hours": 215.13,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "Ajaysingh-2003",
+            1
+          ]
+        ]
+      },
+      "1-50": {
+        "prs": 761,
+        "authors": 77,
+        "merged": 761,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 760,
+        "median_merged_hours": 5.91,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            201
+          ],
+          [
+            "raimbekovm",
+            136
+          ],
+          [
+            "JESUSROYETH",
+            95
+          ],
+          [
+            "Y-T-G",
+            38
+          ],
+          [
+            "cainiao33",
+            34
+          ]
+        ]
+      },
+      "1001+": {
+        "prs": 14,
+        "authors": 5,
+        "merged": 14,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 14,
+        "median_merged_hours": 9.4,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            7
+          ],
+          [
+            "Bovey0809",
+            3
+          ],
+          [
+            "raimbekovm",
+            2
+          ],
+          [
+            "sergiuwaxmann",
+            1
+          ],
+          [
+            "Laughing-q",
+            1
+          ]
+        ]
+      },
+      "201-1000": {
+        "prs": 63,
+        "authors": 12,
+        "merged": 63,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 63,
+        "median_merged_hours": 7.07,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            32
+          ],
+          [
+            "raimbekovm",
+            17
+          ],
+          [
+            "lakshanthad",
+            2
+          ],
+          [
+            "Bovey0809",
+            2
+          ],
+          [
+            "Laughing-q",
+            2
+          ]
+        ]
+      },
+      "51-200": {
+        "prs": 153,
+        "authors": 29,
+        "merged": 153,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 149,
+        "median_merged_hours": 6.16,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            56
+          ],
+          [
+            "raimbekovm",
+            39
+          ],
+          [
+            "JESUSROYETH",
+            13
+          ],
+          [
+            "Y-T-G",
+            9
+          ],
+          [
+            "onuralpszr",
+            5
+          ]
+        ]
+      }
+    },
+    "exclusive_scopes": {
+      "automation_only": {
+        "prs": 45,
+        "authors": 6,
+        "merged": 45,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 45,
+        "median_merged_hours": 0.79,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            28
+          ],
+          [
+            "UltralyticsAssistant",
+            9
+          ],
+          [
+            "dependabot[bot]",
+            3
+          ],
+          [
+            "raimbekovm",
+            3
+          ],
+          [
+            "onuralpszr",
+            1
+          ]
+        ]
+      },
+      "documentation_only": {
+        "prs": 224,
+        "authors": 35,
+        "merged": 224,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 221,
+        "median_merged_hours": 2.96,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "raimbekovm",
+            72
+          ],
+          [
+            "glenn-jocher",
+            60
+          ],
+          [
+            "onuralpszr",
+            21
+          ],
+          [
+            "RizwanMunawar",
+            18
+          ],
+          [
+            "lakshanthad",
+            6
+          ]
+        ]
+      },
+      "empty": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 1,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 1,
+        "median_merged_hours": 215.13,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "Ajaysingh-2003",
+            1
+          ]
+        ]
+      },
+      "examples_only": {
+        "prs": 2,
+        "authors": 2,
+        "merged": 2,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 2,
+        "median_merged_hours": 1.21,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "dependabot[bot]",
+            1
+          ],
+          [
+            "onuralpszr",
+            1
+          ]
+        ]
+      },
+      "mixed": {
+        "prs": 316,
+        "authors": 42,
+        "merged": 316,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 315,
+        "median_merged_hours": 7.33,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            121
+          ],
+          [
+            "raimbekovm",
+            46
+          ],
+          [
+            "JESUSROYETH",
+            45
+          ],
+          [
+            "Y-T-G",
+            19
+          ],
+          [
+            "cainiao33",
+            15
+          ]
+        ]
+      },
+      "package_only": {
+        "prs": 384,
+        "authors": 50,
+        "merged": 384,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 383,
+        "median_merged_hours": 8.57,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            77
+          ],
+          [
+            "raimbekovm",
+            71
+          ],
+          [
+            "JESUSROYETH",
+            61
+          ],
+          [
+            "Y-T-G",
+            25
+          ],
+          [
+            "cainiao33",
+            22
+          ]
+        ]
+      },
+      "project_other_only": {
+        "prs": 9,
+        "authors": 6,
+        "merged": 9,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 9,
+        "median_merged_hours": 27.97,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            3
+          ],
+          [
+            "dependabot[bot]",
+            2
+          ],
+          [
+            "fcakyon",
+            1
+          ],
+          [
+            "raimbekovm",
+            1
+          ],
+          [
+            "hylreg",
+            1
+          ]
+        ]
+      },
+      "tests_only": {
+        "prs": 11,
+        "authors": 5,
+        "merged": 11,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 11,
+        "median_merged_hours": 0.5,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            7
+          ],
+          [
+            "Laughing-q",
+            1
+          ],
+          [
+            "onuralpszr",
+            1
+          ],
+          [
+            "Y-T-G",
+            1
+          ],
+          [
+            "raimbekovm",
+            1
+          ]
+        ]
+      }
+    },
+    "touched_areas": {
+      "automation": {
+        "prs": 86,
+        "authors": 13,
+        "merged": 86,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 85,
+        "median_merged_hours": 1.16,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            59
+          ],
+          [
+            "UltralyticsAssistant",
+            9
+          ],
+          [
+            "raimbekovm",
+            4
+          ],
+          [
+            "dependabot[bot]",
+            3
+          ],
+          [
+            "onuralpszr",
+            2
+          ]
+        ]
+      },
+      "documentation": {
+        "prs": 405,
+        "authors": 44,
+        "merged": 405,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 401,
+        "median_merged_hours": 4.32,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            141
+          ],
+          [
+            "raimbekovm",
+            115
+          ],
+          [
+            "onuralpszr",
+            24
+          ],
+          [
+            "RizwanMunawar",
+            18
+          ],
+          [
+            "JESUSROYETH",
+            16
+          ]
+        ]
+      },
+      "examples": {
+        "prs": 20,
+        "authors": 8,
+        "merged": 20,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 20,
+        "median_merged_hours": 2.5,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "raimbekovm",
+            8
+          ],
+          [
+            "glenn-jocher",
+            5
+          ],
+          [
+            "amanharshx",
+            2
+          ],
+          [
+            "dependabot[bot]",
+            1
+          ],
+          [
+            "Bovey0809",
+            1
+          ]
+        ]
+      },
+      "package": {
+        "prs": 680,
+        "authors": 69,
+        "merged": 680,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 678,
+        "median_merged_hours": 8.48,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            183
+          ],
+          [
+            "raimbekovm",
+            113
+          ],
+          [
+            "JESUSROYETH",
+            106
+          ],
+          [
+            "Y-T-G",
+            44
+          ],
+          [
+            "cainiao33",
+            37
+          ]
+        ]
+      },
+      "project_other": {
+        "prs": 42,
+        "authors": 14,
+        "merged": 42,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 42,
+        "median_merged_hours": 2.27,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            24
+          ],
+          [
+            "Y-T-G",
+            3
+          ],
+          [
+            "JESUSROYETH",
+            2
+          ],
+          [
+            "dependabot[bot]",
+            2
+          ],
+          [
+            "raimbekovm",
+            2
+          ]
+        ]
+      },
+      "tests": {
+        "prs": 177,
+        "authors": 35,
+        "merged": 177,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 176,
+        "median_merged_hours": 7.5,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            65
+          ],
+          [
+            "JESUSROYETH",
+            32
+          ],
+          [
+            "cainiao33",
+            15
+          ],
+          [
+            "Y-T-G",
+            8
+          ],
+          [
+            "Bovey0809",
+            7
+          ]
+        ]
+      }
+    },
+    "area_relations": {
+      "automation": {
+        "MEMBER": 66,
+        "CONTRIBUTOR": 8,
+        "AUTOMATION": 12
+      },
+      "documentation": {
+        "MEMBER": 291,
+        "CONTRIBUTOR": 86,
+        "COLLABORATOR": 26,
+        "NONE": 1,
+        "AUTOMATION": 1
+      },
+      "examples": {
+        "MEMBER": 16,
+        "AUTOMATION": 1,
+        "CONTRIBUTOR": 3
+      },
+      "package": {
+        "MEMBER": 326,
+        "CONTRIBUTOR": 298,
+        "COLLABORATOR": 53,
+        "NONE": 3
+      },
+      "project_other": {
+        "MEMBER": 28,
+        "COLLABORATOR": 3,
+        "CONTRIBUTOR": 8,
+        "AUTOMATION": 3
+      },
+      "tests": {
+        "MEMBER": 79,
+        "CONTRIBUTOR": 88,
+        "COLLABORATOR": 8,
+        "NONE": 2
+      }
+    },
+    "package_modules": {
+      "__init__.py": {
+        "prs": 86,
+        "authors": 17,
+        "merged": 86,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 86,
+        "median_merged_hours": 2.33,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            55
+          ],
+          [
+            "Y-T-G",
+            5
+          ],
+          [
+            "JESUSROYETH",
+            4
+          ],
+          [
+            "cainiao33",
+            4
+          ],
+          [
+            "Bovey0809",
+            2
+          ]
+        ]
+      },
+      "cfg": {
+        "prs": 76,
+        "authors": 18,
+        "merged": 76,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 76,
+        "median_merged_hours": 7.56,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            28
+          ],
+          [
+            "raimbekovm",
+            18
+          ],
+          [
+            "Bovey0809",
+            8
+          ],
+          [
+            "Y-T-G",
+            5
+          ],
+          [
+            "fcakyon",
+            3
+          ]
+        ]
+      },
+      "data": {
+        "prs": 130,
+        "authors": 29,
+        "merged": 130,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 130,
+        "median_merged_hours": 9.8,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            28
+          ],
+          [
+            "raimbekovm",
+            17
+          ],
+          [
+            "cainiao33",
+            17
+          ],
+          [
+            "JESUSROYETH",
+            11
+          ],
+          [
+            "Nikhi00718",
+            6
+          ]
+        ]
+      },
+      "engine": {
+        "prs": 210,
+        "authors": 30,
+        "merged": 210,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 210,
+        "median_merged_hours": 7.33,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            79
+          ],
+          [
+            "raimbekovm",
+            29
+          ],
+          [
+            "JESUSROYETH",
+            28
+          ],
+          [
+            "cainiao33",
+            12
+          ],
+          [
+            "Y-T-G",
+            11
+          ]
+        ]
+      },
+      "hub": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 1,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 1,
+        "median_merged_hours": 5.66,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "sergiuwaxmann",
+            1
+          ]
+        ]
+      },
+      "models": {
+        "prs": 106,
+        "authors": 22,
+        "merged": 106,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 106,
+        "median_merged_hours": 9.8,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "raimbekovm",
+            23
+          ],
+          [
+            "glenn-jocher",
+            22
+          ],
+          [
+            "JESUSROYETH",
+            20
+          ],
+          [
+            "cainiao33",
+            5
+          ],
+          [
+            "Laughing-q",
+            4
+          ]
+        ]
+      },
+      "nn": {
+        "prs": 123,
+        "authors": 25,
+        "merged": 123,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 122,
+        "median_merged_hours": 6.51,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            46
+          ],
+          [
+            "JESUSROYETH",
+            18
+          ],
+          [
+            "raimbekovm",
+            15
+          ],
+          [
+            "Y-T-G",
+            10
+          ],
+          [
+            "cainiao33",
+            5
+          ]
+        ]
+      },
+      "optim": {
+        "prs": 8,
+        "authors": 5,
+        "merged": 8,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 8,
+        "median_merged_hours": 5.02,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            3
+          ],
+          [
+            "Y-T-G",
+            2
+          ],
+          [
+            "songjiahao-wq",
+            1
+          ],
+          [
+            "Bovey0809",
+            1
+          ],
+          [
+            "synml",
+            1
+          ]
+        ]
+      },
+      "solutions": {
+        "prs": 24,
+        "authors": 8,
+        "merged": 24,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 24,
+        "median_merged_hours": 8.5,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            7
+          ],
+          [
+            "JESUSROYETH",
+            7
+          ],
+          [
+            "MohammadHijjawi97",
+            3
+          ],
+          [
+            "Bovey0809",
+            2
+          ],
+          [
+            "raimbekovm",
+            2
+          ]
+        ]
+      },
+      "trackers": {
+        "prs": 50,
+        "authors": 9,
+        "merged": 50,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 50,
+        "median_merged_hours": 7.86,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "raimbekovm",
+            21
+          ],
+          [
+            "JESUSROYETH",
+            15
+          ],
+          [
+            "glenn-jocher",
+            6
+          ],
+          [
+            "onuralpszr",
+            2
+          ],
+          [
+            "aswanth-07",
+            2
+          ]
+        ]
+      },
+      "utils": {
+        "prs": 261,
+        "authors": 40,
+        "merged": 261,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 260,
+        "median_merged_hours": 6.6,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "glenn-jocher",
+            94
+          ],
+          [
+            "raimbekovm",
+            34
+          ],
+          [
+            "JESUSROYETH",
+            29
+          ],
+          [
+            "Y-T-G",
+            25
+          ],
+          [
+            "cainiao33",
+            11
+          ]
+        ]
+      }
+    },
+    "external_size_groups": {
+      "0": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 1,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 1,
+        "median_merged_hours": 215.13,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "Ajaysingh-2003",
+            1
+          ]
+        ]
+      },
+      "1-50": {
+        "prs": 311,
+        "authors": 65,
+        "merged": 311,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 311,
+        "median_merged_hours": 13.86,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "JESUSROYETH",
+            95
+          ],
+          [
+            "cainiao33",
+            34
+          ],
+          [
+            "RizwanMunawar",
+            18
+          ],
+          [
+            "aswanth-07",
+            17
+          ],
+          [
+            "MohammadHijjawi97",
+            14
+          ]
+        ]
+      },
+      "1001+": {
+        "prs": 3,
+        "authors": 1,
+        "merged": 3,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 3,
+        "median_merged_hours": 1.93,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "Bovey0809",
+            3
+          ]
+        ]
+      },
+      "201-1000": {
+        "prs": 4,
+        "authors": 3,
+        "merged": 4,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 4,
+        "median_merged_hours": 27.79,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "Bovey0809",
+            2
+          ],
+          [
+            "laodouya",
+            1
+          ],
+          [
+            "john-rocky",
+            1
+          ]
+        ]
+      },
+      "51-200": {
+        "prs": 40,
+        "authors": 21,
+        "merged": 40,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 36,
+        "median_merged_hours": 18.37,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "JESUSROYETH",
+            13
+          ],
+          [
+            "Bovey0809",
+            3
+          ],
+          [
+            "JaviChulvi",
+            3
+          ],
+          [
+            "cainiao33",
+            3
+          ],
+          [
+            "amanharshx",
+            2
+          ]
+        ]
+      }
+    },
+    "external_scopes": {
+      "automation_only": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 1,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 1,
+        "median_merged_hours": 36.04,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "MGPOCKY",
+            1
+          ]
+        ]
+      },
+      "documentation_only": {
+        "prs": 54,
+        "authors": 25,
+        "merged": 54,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 51,
+        "median_merged_hours": 6.24,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "RizwanMunawar",
+            18
+          ],
+          [
+            "Bovey0809",
+            6
+          ],
+          [
+            "JaviChulvi",
+            5
+          ],
+          [
+            "miles-deans-ultralytics",
+            2
+          ],
+          [
+            "JESUSROYETH",
+            2
+          ]
+        ]
+      },
+      "empty": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 1,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 1,
+        "median_merged_hours": 215.13,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "Ajaysingh-2003",
+            1
+          ]
+        ]
+      },
+      "mixed": {
+        "prs": 113,
+        "authors": 32,
+        "merged": 113,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 112,
+        "median_merged_hours": 16.38,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "JESUSROYETH",
+            45
+          ],
+          [
+            "cainiao33",
+            15
+          ],
+          [
+            "Bovey0809",
+            9
+          ],
+          [
+            "aswanth-07",
+            5
+          ],
+          [
+            "amanharshx",
+            4
+          ]
+        ]
+      },
+      "package_only": {
+        "prs": 189,
+        "authors": 41,
+        "merged": 189,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 189,
+        "median_merged_hours": 14.4,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "JESUSROYETH",
+            61
+          ],
+          [
+            "cainiao33",
+            22
+          ],
+          [
+            "Nikhi00718",
+            12
+          ],
+          [
+            "aswanth-07",
+            11
+          ],
+          [
+            "MohammadHijjawi97",
+            11
+          ]
+        ]
+      },
+      "project_other_only": {
+        "prs": 1,
+        "authors": 1,
+        "merged": 1,
+        "closed_unmerged": 0,
+        "open": 0,
+        "merged_pct": 100.0,
+        "merged_14d": 1,
+        "median_merged_hours": 65.46,
+        "equal_author_merged_pct": 100.0,
+        "top_authors": [
+          [
+            "hylreg",
+            1
+          ]
+        ]
+      }
+    }
+  }
+}
