@@ -38,4 +38,6 @@ nav:
   - 2. 從症狀找到負責模組: codebase-map.md
   - 3. 七個議題與論壇案例: issues-and-community.md
   - 4. 選題與驗證步驟: roadmap.md
+  - 5. 貢獻者身分與合併率: merge-rates.md
+  - 6. 外部貢獻要先開單嗎？: ticket-requirements.md
   - 來源與查核限制: sources.md

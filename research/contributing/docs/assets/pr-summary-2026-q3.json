@@ -1,0 +1,847 @@
+{
+  "all": {
+    "prs": 1247,
+    "authors": 122,
+    "merged": 992,
+    "closed_unmerged": 243,
+    "open": 12,
+    "merged_pct": 79.55,
+    "merged_14d": 987,
+    "median_merged_hours": 6.09,
+    "equal_author_merged_pct": 61.53,
+    "top_authors": [
+      [
+        "glenn-jocher",
+        328
+      ],
+      [
+        "raimbekovm",
+        246
+      ],
+      [
+        "JESUSROYETH",
+        110
+      ],
+      [
+        "Y-T-G",
+        68
+      ],
+      [
+        "cainiao33",
+        52
+      ]
+    ]
+  },
+  "groups": {
+    "AUTOMATION": {
+      "prs": 25,
+      "authors": 2,
+      "merged": 17,
+      "closed_unmerged": 8,
+      "open": 0,
+      "merged_pct": 68.0,
+      "merged_14d": 17,
+      "median_merged_hours": 2.55,
+      "equal_author_merged_pct": 67.31,
+      "top_authors": [
+        [
+          "UltralyticsAssistant",
+          13
+        ],
+        [
+          "dependabot[bot]",
+          12
+        ]
+      ]
+    },
+    "COLLABORATOR": {
+      "prs": 89,
+      "authors": 3,
+      "merged": 65,
+      "closed_unmerged": 22,
+      "open": 2,
+      "merged_pct": 73.03,
+      "merged_14d": 64,
+      "median_merged_hours": 10.61,
+      "equal_author_merged_pct": 77.23,
+      "top_authors": [
+        [
+          "Y-T-G",
+          68
+        ],
+        [
+          "lakshanthad",
+          12
+        ],
+        [
+          "artest08",
+          9
+        ]
+      ]
+    },
+    "CONTRIBUTOR": {
+      "prs": 439,
+      "authors": 75,
+      "merged": 355,
+      "closed_unmerged": 81,
+      "open": 3,
+      "merged_pct": 80.87,
+      "merged_14d": 352,
+      "median_merged_hours": 14.16,
+      "equal_author_merged_pct": 82.53,
+      "top_authors": [
+        [
+          "JESUSROYETH",
+          110
+        ],
+        [
+          "cainiao33",
+          52
+        ],
+        [
+          "Bovey0809",
+          22
+        ],
+        [
+          "rudrakumar07",
+          21
+        ],
+        [
+          "RizwanMunawar",
+          18
+        ]
+      ]
+    },
+    "MEMBER": {
+      "prs": 649,
+      "authors": 7,
+      "merged": 551,
+      "closed_unmerged": 95,
+      "open": 3,
+      "merged_pct": 84.9,
+      "merged_14d": 551,
+      "median_merged_hours": 1.47,
+      "equal_author_merged_pct": 85.79,
+      "top_authors": [
+        [
+          "glenn-jocher",
+          328
+        ],
+        [
+          "raimbekovm",
+          246
+        ],
+        [
+          "onuralpszr",
+          39
+        ],
+        [
+          "fcakyon",
+          18
+        ],
+        [
+          "Laughing-q",
+          12
+        ]
+      ]
+    },
+    "NONE": {
+      "prs": 43,
+      "authors": 34,
+      "merged": 4,
+      "closed_unmerged": 35,
+      "open": 4,
+      "merged_pct": 9.3,
+      "merged_14d": 3,
+      "median_merged_hours": 12.52,
+      "equal_author_merged_pct": 10.29,
+      "top_authors": [
+        [
+          "Logesh1502",
+          3
+        ],
+        [
+          "Marchematics",
+          3
+        ],
+        [
+          "Functionhx",
+          2
+        ],
+        [
+          "MohanadMahran",
+          2
+        ],
+        [
+          "nijil-ti",
+          2
+        ]
+      ]
+    },
+    "UNKNOWN_DELETED": {
+      "prs": 2,
+      "authors": 1,
+      "merged": 0,
+      "closed_unmerged": 2,
+      "open": 0,
+      "merged_pct": 0.0,
+      "merged_14d": 0,
+      "median_merged_hours": null,
+      "equal_author_merged_pct": 0.0,
+      "top_authors": [
+        [
+          "ghost",
+          2
+        ]
+      ]
+    }
+  },
+  "monthly_groups": {
+    "2026-07:AUTOMATION": {
+      "prs": 8,
+      "authors": 2,
+      "merged": 5,
+      "closed_unmerged": 3,
+      "open": 0,
+      "merged_pct": 62.5,
+      "merged_14d": 5,
+      "median_merged_hours": 4.84,
+      "equal_author_merged_pct": 62.5,
+      "top_authors": [
+        [
+          "dependabot[bot]",
+          4
+        ],
+        [
+          "UltralyticsAssistant",
+          4
+        ]
+      ]
+    },
+    "2026-07:COLLABORATOR": {
+      "prs": 39,
+      "authors": 3,
+      "merged": 33,
+      "closed_unmerged": 6,
+      "open": 0,
+      "merged_pct": 84.62,
+      "merged_14d": 32,
+      "median_merged_hours": 8.41,
+      "equal_author_merged_pct": 90.71,
+      "top_authors": [
+        [
+          "Y-T-G",
+          28
+        ],
+        [
+          "lakshanthad",
+          10
+        ],
+        [
+          "artest08",
+          1
+        ]
+      ]
+    },
+    "2026-07:CONTRIBUTOR": {
+      "prs": 174,
+      "authors": 32,
+      "merged": 141,
+      "closed_unmerged": 33,
+      "open": 0,
+      "merged_pct": 81.03,
+      "merged_14d": 138,
+      "median_merged_hours": 11.54,
+      "equal_author_merged_pct": 86.27,
+      "top_authors": [
+        [
+          "JESUSROYETH",
+          72
+        ],
+        [
+          "rudrakumar07",
+          21
+        ],
+        [
+          "Bovey0809",
+          17
+        ],
+        [
+          "synml",
+          8
+        ],
+        [
+          "Zenka737",
+          8
+        ]
+      ]
+    },
+    "2026-07:MEMBER": {
+      "prs": 271,
+      "authors": 5,
+      "merged": 242,
+      "closed_unmerged": 28,
+      "open": 1,
+      "merged_pct": 89.3,
+      "merged_14d": 242,
+      "median_merged_hours": 1.03,
+      "equal_author_merged_pct": 80.47,
+      "top_authors": [
+        [
+          "glenn-jocher",
+          165
+        ],
+        [
+          "raimbekovm",
+          73
+        ],
+        [
+          "onuralpszr",
+          19
+        ],
+        [
+          "Laughing-q",
+          8
+        ],
+        [
+          "fcakyon",
+          6
+        ]
+      ]
+    },
+    "2026-07:NONE": {
+      "prs": 14,
+      "authors": 11,
+      "merged": 2,
+      "closed_unmerged": 12,
+      "open": 0,
+      "merged_pct": 14.29,
+      "merged_14d": 1,
+      "median_merged_hours": 784.6,
+      "equal_author_merged_pct": 18.18,
+      "top_authors": [
+        [
+          "Logesh1502",
+          3
+        ],
+        [
+          "MohanadMahran",
+          2
+        ],
+        [
+          "Functionhx",
+          1
+        ],
+        [
+          "ralampay",
+          1
+        ],
+        [
+          "GiaThinh110605",
+          1
+        ]
+      ]
+    },
+    "2026-07:UNKNOWN_DELETED": {
+      "prs": 2,
+      "authors": 1,
+      "merged": 0,
+      "closed_unmerged": 2,
+      "open": 0,
+      "merged_pct": 0.0,
+      "merged_14d": 0,
+      "median_merged_hours": null,
+      "equal_author_merged_pct": 0.0,
+      "top_authors": [
+        [
+          "ghost",
+          2
+        ]
+      ]
+    },
+    "2026-08:AUTOMATION": {
+      "prs": 12,
+      "authors": 2,
+      "merged": 9,
+      "closed_unmerged": 3,
+      "open": 0,
+      "merged_pct": 75.0,
+      "merged_14d": 9,
+      "median_merged_hours": 2.16,
+      "equal_author_merged_pct": 75.0,
+      "top_authors": [
+        [
+          "dependabot[bot]",
+          6
+        ],
+        [
+          "UltralyticsAssistant",
+          6
+        ]
+      ]
+    },
+    "2026-08:COLLABORATOR": {
+      "prs": 31,
+      "authors": 2,
+      "merged": 19,
+      "closed_unmerged": 11,
+      "open": 1,
+      "merged_pct": 61.29,
+      "merged_14d": 19,
+      "median_merged_hours": 20.5,
+      "equal_author_merged_pct": 65.76,
+      "top_authors": [
+        [
+          "Y-T-G",
+          23
+        ],
+        [
+          "artest08",
+          8
+        ]
+      ]
+    },
+    "2026-08:CONTRIBUTOR": {
+      "prs": 100,
+      "authors": 38,
+      "merged": 83,
+      "closed_unmerged": 16,
+      "open": 1,
+      "merged_pct": 83.0,
+      "merged_14d": 83,
+      "median_merged_hours": 29.29,
+      "equal_author_merged_pct": 79.0,
+      "top_authors": [
+        [
+          "JESUSROYETH",
+          33
+        ],
+        [
+          "RizwanMunawar",
+          7
+        ],
+        [
+          "Rahulbiradar9",
+          5
+        ],
+        [
+          "amanharshx",
+          4
+        ],
+        [
+          "Dorablank",
+          3
+        ]
+      ]
+    },
+    "2026-08:MEMBER": {
+      "prs": 193,
+      "authors": 7,
+      "merged": 143,
+      "closed_unmerged": 50,
+      "open": 0,
+      "merged_pct": 74.09,
+      "merged_14d": 143,
+      "median_merged_hours": 4.63,
+      "equal_author_merged_pct": 84.17,
+      "top_authors": [
+        [
+          "raimbekovm",
+          92
+        ],
+        [
+          "glenn-jocher",
+          76
+        ],
+        [
+          "fcakyon",
+          10
+        ],
+        [
+          "onuralpszr",
+          9
+        ],
+        [
+          "pderrenger",
+          3
+        ]
+      ]
+    },
+    "2026-08:NONE": {
+      "prs": 16,
+      "authors": 14,
+      "merged": 2,
+      "closed_unmerged": 14,
+      "open": 0,
+      "merged_pct": 12.5,
+      "merged_14d": 2,
+      "median_merged_hours": 12.52,
+      "equal_author_merged_pct": 14.29,
+      "top_authors": [
+        [
+          "seven7763",
+          2
+        ],
+        [
+          "markyang2020",
+          2
+        ],
+        [
+          "Jackstar1212",
+          1
+        ],
+        [
+          "toni-k8s",
+          1
+        ],
+        [
+          "FaresAminu",
+          1
+        ]
+      ]
+    },
+    "2026-09:AUTOMATION": {
+      "prs": 5,
+      "authors": 2,
+      "merged": 3,
+      "closed_unmerged": 2,
+      "open": 0,
+      "merged_pct": 60.0,
+      "merged_14d": 3,
+      "median_merged_hours": 1.9,
+      "equal_author_merged_pct": 50.0,
+      "top_authors": [
+        [
+          "UltralyticsAssistant",
+          3
+        ],
+        [
+          "dependabot[bot]",
+          2
+        ]
+      ]
+    },
+    "2026-09:COLLABORATOR": {
+      "prs": 19,
+      "authors": 2,
+      "merged": 13,
+      "closed_unmerged": 5,
+      "open": 1,
+      "merged_pct": 68.42,
+      "merged_14d": 13,
+      "median_merged_hours": 13.02,
+      "equal_author_merged_pct": 60.29,
+      "top_authors": [
+        [
+          "Y-T-G",
+          17
+        ],
+        [
+          "lakshanthad",
+          2
+        ]
+      ]
+    },
+    "2026-09:CONTRIBUTOR": {
+      "prs": 165,
+      "authors": 31,
+      "merged": 131,
+      "closed_unmerged": 32,
+      "open": 2,
+      "merged_pct": 79.39,
+      "merged_14d": 131,
+      "median_merged_hours": 13.59,
+      "equal_author_merged_pct": 81.64,
+      "top_authors": [
+        [
+          "cainiao33",
+          52
+        ],
+        [
+          "MohammadHijjawi97",
+          17
+        ],
+        [
+          "aswanth-07",
+          15
+        ],
+        [
+          "Nicholas022400701",
+          13
+        ],
+        [
+          "Nikhi00718",
+          13
+        ]
+      ]
+    },
+    "2026-09:MEMBER": {
+      "prs": 185,
+      "authors": 6,
+      "merged": 166,
+      "closed_unmerged": 17,
+      "open": 2,
+      "merged_pct": 89.73,
+      "merged_14d": 166,
+      "median_merged_hours": 2.45,
+      "equal_author_merged_pct": 93.61,
+      "top_authors": [
+        [
+          "glenn-jocher",
+          87
+        ],
+        [
+          "raimbekovm",
+          81
+        ],
+        [
+          "onuralpszr",
+          11
+        ],
+        [
+          "Laughing-q",
+          3
+        ],
+        [
+          "fcakyon",
+          2
+        ]
+      ]
+    },
+    "2026-09:NONE": {
+      "prs": 13,
+      "authors": 11,
+      "merged": 0,
+      "closed_unmerged": 9,
+      "open": 4,
+      "merged_pct": 0.0,
+      "merged_14d": 0,
+      "median_merged_hours": null,
+      "equal_author_merged_pct": 0.0,
+      "top_authors": [
+        [
+          "Marchematics",
+          3
+        ],
+        [
+          "wangjia15",
+          1
+        ],
+        [
+          "mahesh-desu",
+          1
+        ],
+        [
+          "KimJintak",
+          1
+        ],
+        [
+          "leosk-knight",
+          1
+        ]
+      ]
+    }
+  },
+  "baseline_external": {
+    "NEW_IN_QUARTER": {
+      "prs": 391,
+      "authors": 88,
+      "merged": 282,
+      "closed_unmerged": 105,
+      "open": 4,
+      "merged_pct": 72.12,
+      "merged_14d": 278,
+      "median_merged_hours": 15.84,
+      "equal_author_merged_pct": 57.03,
+      "top_authors": [
+        [
+          "JESUSROYETH",
+          110
+        ],
+        [
+          "cainiao33",
+          52
+        ],
+        [
+          "rudrakumar07",
+          21
+        ],
+        [
+          "aswanth-07",
+          18
+        ],
+        [
+          "MohammadHijjawi97",
+          17
+        ]
+      ]
+    },
+    "PRIOR_MERGED": {
+      "prs": 82,
+      "authors": 14,
+      "merged": 71,
+      "closed_unmerged": 8,
+      "open": 3,
+      "merged_pct": 86.59,
+      "merged_14d": 71,
+      "median_merged_hours": 6.38,
+      "equal_author_merged_pct": 76.5,
+      "top_authors": [
+        [
+          "Bovey0809",
+          22
+        ],
+        [
+          "RizwanMunawar",
+          18
+        ],
+        [
+          "amanharshx",
+          16
+        ],
+        [
+          "ahmet-f-gumustas",
+          7
+        ],
+        [
+          "miles-deans-ultralytics",
+          3
+        ]
+      ]
+    },
+    "PRIOR_PR_NO_MERGE": {
+      "prs": 9,
+      "authors": 7,
+      "merged": 6,
+      "closed_unmerged": 3,
+      "open": 0,
+      "merged_pct": 66.67,
+      "merged_14d": 6,
+      "median_merged_hours": 70.21,
+      "equal_author_merged_pct": 64.29,
+      "top_authors": [
+        [
+          "diaz3z",
+          2
+        ],
+        [
+          "jahsef",
+          2
+        ],
+        [
+          "zhanghuiwan",
+          1
+        ],
+        [
+          "songjiahao-wq",
+          1
+        ],
+        [
+          "alhatemmohanad-ui",
+          1
+        ]
+      ]
+    }
+  },
+  "first_pr_per_external_author": {
+    "NEW_IN_QUARTER": {
+      "prs": 88,
+      "authors": 88,
+      "merged": 51,
+      "closed_unmerged": 34,
+      "open": 3,
+      "merged_pct": 57.95,
+      "merged_14d": 47,
+      "median_merged_hours": 17.22,
+      "equal_author_merged_pct": 57.95,
+      "top_authors": [
+        [
+          "davidnichols-ops",
+          1
+        ],
+        [
+          "JESUSROYETH",
+          1
+        ],
+        [
+          "sokrisba",
+          1
+        ],
+        [
+          "dorianboille",
+          1
+        ],
+        [
+          "tbujewsk",
+          1
+        ]
+      ]
+    },
+    "PRIOR_MERGED": {
+      "prs": 14,
+      "authors": 14,
+      "merged": 11,
+      "closed_unmerged": 2,
+      "open": 1,
+      "merged_pct": 78.57,
+      "merged_14d": 11,
+      "median_merged_hours": 4.39,
+      "equal_author_merged_pct": 78.57,
+      "top_authors": [
+        [
+          "lmycross",
+          1
+        ],
+        [
+          "Bovey0809",
+          1
+        ],
+        [
+          "ahmet-f-gumustas",
+          1
+        ],
+        [
+          "RizwanMunawar",
+          1
+        ],
+        [
+          "miles-deans-ultralytics",
+          1
+        ]
+      ]
+    },
+    "PRIOR_PR_NO_MERGE": {
+      "prs": 7,
+      "authors": 7,
+      "merged": 5,
+      "closed_unmerged": 2,
+      "open": 0,
+      "merged_pct": 71.43,
+      "merged_14d": 5,
+      "median_merged_hours": 26.91,
+      "equal_author_merged_pct": 71.43,
+      "top_authors": [
+        [
+          "zhanghuiwan",
+          1
+        ],
+        [
+          "songjiahao-wq",
+          1
+        ],
+        [
+          "alhatemmohanad-ui",
+          1
+        ],
+        [
+          "cosmo-gb",
+          1
+        ],
+        [
+          "danielmorozoff",
+          1
+        ]
+      ]
+    }
+  }
+}

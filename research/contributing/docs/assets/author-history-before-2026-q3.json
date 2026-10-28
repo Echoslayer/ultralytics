@@ -1,0 +1,442 @@
+{
+  "cutoff_exclusive": "2026-07-01T00:00:00Z",
+  "fetched_at": "2026-10-28T05:43:06.372368+00:00",
+  "authors": {
+    "23z156-wq": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "54wb": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Ajaysingh-2003": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Amarnath10i": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Asher-1": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "BSchilperoort": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Bovey0809": {
+      "prior_prs": 13,
+      "prior_merged": 3
+    },
+    "Daniiiil1": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Dorablank": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "ErenAta16": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Erickrk": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "FaresAminu": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Functionhx": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "GiaThinh110605": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Gornoka": {
+      "prior_prs": 5,
+      "prior_merged": 2
+    },
+    "Hasnaathussain": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "HussainNizamani": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "JESUSROYETH": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Jackstar1212": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "JaviChulvi": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Joe-KI333": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Kagura-Ahad": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "KimJintak": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Logesh1502": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "MGPOCKY": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Marchematics": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "MohammadHijjawi97": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "MohanadMahran": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Nicholas022400701": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Nikhi00718": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Parth1353": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Q-qqq": {
+      "prior_prs": 1,
+      "prior_merged": 1
+    },
+    "Rahulbiradar9": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "RizwanMunawar": {
+      "prior_prs": 581,
+      "prior_merged": 463
+    },
+    "SergioAlmeida29": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Shreyas-cpu": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "ShuaiLYU": {
+      "prior_prs": 16,
+      "prior_merged": 9
+    },
+    "Sigwendice": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Swish78": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "TarzanZhao": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Tsingxuan": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Vaishnavi220506": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "XJ12-web": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "Zenka737": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "a-tangfan": {
+      "prior_prs": 2,
+      "prior_merged": 1
+    },
+    "ahmet-f-gumustas": {
+      "prior_prs": 20,
+      "prior_merged": 17
+    },
+    "alhatemmohanad-ui": {
+      "prior_prs": 2,
+      "prior_merged": 0
+    },
+    "altf4-games": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "amanharshx": {
+      "prior_prs": 5,
+      "prior_merged": 3
+    },
+    "anshulll19": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "anupamme": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "aswanth-07": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "cainiao33": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "cdeil": {
+      "prior_prs": 1,
+      "prior_merged": 1
+    },
+    "chinazhangchao": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "cosmo-gb": {
+      "prior_prs": 1,
+      "prior_merged": 0
+    },
+    "csy3699": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "danielmorozoff": {
+      "prior_prs": 1,
+      "prior_merged": 0
+    },
+    "darshil929": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "davidnichols-ops": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "developer0hye": {
+      "prior_prs": 36,
+      "prior_merged": 21
+    },
+    "diaz3z": {
+      "prior_prs": 1,
+      "prior_merged": 0
+    },
+    "dorianboille": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "doublecurry": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "eldadr": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "geminifyj": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "gizembm": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "hylreg": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "idwenhui": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "jahsef": {
+      "prior_prs": 1,
+      "prior_merged": 0
+    },
+    "john-rocky": {
+      "prior_prs": 1,
+      "prior_merged": 1
+    },
+    "klemen1999": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "laodouya": {
+      "prior_prs": 7,
+      "prior_merged": 4
+    },
+    "leosk-knight": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "leoventuroso": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "li-lizhe": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "lmycross": {
+      "prior_prs": 19,
+      "prior_merged": 17
+    },
+    "lszSamLin": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "mahesh-desu": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "markyang2020": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "mayuriphad": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "miles-deans-ultralytics": {
+      "prior_prs": 11,
+      "prior_merged": 4
+    },
+    "minuex": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "muzhikov": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "nijil-ti": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "nivosco": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "ojedavd": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "rahultechenable": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "ralampay": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "rudrakumar07": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "seven7763": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "shafeeq27edu-ai": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "smohan-ambarella": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "sokrisba": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "songjiahao-wq": {
+      "prior_prs": 2,
+      "prior_merged": 0
+    },
+    "sujeito-operator": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "synml": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "tandede": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "tbujewsk": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "toni-k8s": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "tritsystem": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "uczltw6": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "usegitdivyansh": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "wangjia15": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "wizzseen": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "yentur": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "zgh2022": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    },
+    "zhanghuiwan": {
+      "prior_prs": 1,
+      "prior_merged": 0
+    },
+    "zkoymen": {
+      "prior_prs": 0,
+      "prior_merged": 0
+    }
+  }
+}
