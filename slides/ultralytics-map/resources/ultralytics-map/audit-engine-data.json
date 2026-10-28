@@ -1,0 +1,1056 @@
+[
+  {
+    "path": "ultralytics/engine/model.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "Model 合併 overrides、動態 task_map 與 predictor 快取，再分派 train/val/predict/export/track；修改參數優先序會影響同一模型重用。YAML 模型可直接測 API，但完整模式依賴權重與資料。",
+    "symbols": [
+      "Model",
+      "Model.predict",
+      "Model.track",
+      "Model.train",
+      "Model._smart_load"
+    ],
+    "dependencies": [
+      "inspect",
+      "collections.abc",
+      "pathlib",
+      "typing",
+      "numpy",
+      "torch",
+      "PIL",
+      "ultralytics.cfg",
+      "ultralytics.engine.results",
+      "ultralytics.nn.tasks",
+      "ultralytics.utils",
+      "ultralytics.utils.torch_utils"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_model_methods",
+      "tests/test_python.py::test_predict_callback_and_setup",
+      "tests/test_engine.py::test_train_multi_custom_trainer_metrics_and_failure_keys"
+    ],
+    "testIdeas": [
+      "建議：連續兩次 predict，第二次覆寫 conf，斷言 predictor.args 更新且 callback 不重複。",
+      "建議：對不支援的 task 呼叫 _smart_load，斷言明確 NotImplementedError。"
+    ],
+    "blockers": [
+      "完整 API 回歸跨七種 task 和多後端；整合測試可能下載資產。"
+    ],
+    "impact": "YOLO/RTDETR/SAM 等 Model 子類、Python API 與 cfg.entrypoint 所有模式。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/engine/predictor.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "stream_inference 持有鎖，依序管理 source、warmup、prefetch、callbacks 和 writer；preprocess 還處理 tensor/ndarray、色彩與 FP16。前處理易測，generator 中止及影片資源清理需真實輸入。",
+    "symbols": [
+      "BasePredictor",
+      "BasePredictor.preprocess",
+      "BasePredictor.stream_inference",
+      "_prefetch"
+    ],
+    "dependencies": [
+      "platform",
+      "re",
+      "threading",
+      "concurrent.futures",
+      "copy",
+      "pathlib",
+      "typing",
+      "cv2",
+      "numpy",
+      "torch",
+      "ultralytics.cfg",
+      "ultralytics.data",
+      "ultralytics.data.augment",
+      "ultralytics.data.loaders",
+      "ultralytics.nn.autobackend",
+      "ultralytics.utils",
+      "ultralytics.utils.checks",
+      "ultralytics.utils.plotting",
+      "ultralytics.utils.torch_utils"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_predict_prefetch",
+      "tests/test_python.py::test_preprocess_values",
+      "tests/test_python.py::test_predict_callback_and_setup",
+      "tests/test_engine.py::test_task"
+    ],
+    "testIdeas": [
+      "建議：_prefetch(iter([])) 斷言空列表；順序和例外傳播已有 test_predict_prefetch，僅列回歸基線。",
+      "既有回歸基線：preprocess 的 BGR/RGB、NCHW、/255 已由 test_preprocess_values 驗；LoadTensor 浮點 epsilon 不二次 normalization 也由 test_load_tensor_uint8 驗。若補 tensor 路徑應針對 BasePredictor.preprocess 的精確值，不可宣稱 LoadTensor 邊界未測。"
+    ],
+    "blockers": [
+      "攝影機、GUI、編碼器與 generator 關閉需平台實測。"
+    ],
+    "impact": "detect/classify/semantic/depth/SAM predictor 子類及 model.predict/track。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/engine/results.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "Results._apply 將切片及裝置轉換分派到各欄位；Boxes/OBB 有明確欄數與座標契約，dense semantic/depth 的索引語意不同。固定 CPU tensor 可直接測，不需模型。",
+    "symbols": [
+      "Results",
+      "BaseTensor",
+      "_DenseResultTensor",
+      "Boxes",
+      "OBB",
+      "DepthMap",
+      "SemanticMask"
+    ],
+    "dependencies": [
+      "copy",
+      "functools",
+      "pathlib",
+      "typing",
+      "numpy",
+      "torch",
+      "ultralytics.utils",
+      "ultralytics.utils.plotting"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_results",
+      "tests/test_python.py::test_results_update_probs",
+      "tests/test_python.py::test_dense_result_tensor_indexing",
+      "tests/test_python.py::test_results_depth_none_summary_len_and_update",
+      "tests/test_python.py::test_results_plot_empty_dense_selection"
+    ],
+    "testIdeas": [
+      "快照漏行 676–680：Results.save 到不存在的巢狀 tmp_path，斷言建目錄、回傳檔名且影像可讀；隔離 cwd 省略 filename，斷言 results_<原圖名>。",
+      "快照漏行 878–882：names={0:foreground}、semantic_mask=[[0,1],[255,1]]，summary 只輸出 class=0、pixel_ratio=.5，忽略 0/255；多類另驗 ignore 255。",
+      "既有回歸基線：Boxes 座標欄位和 dense indexing 的 executable lines 已 hit；空 dense slice/plot 已由 test_dense_result_tensor_indexing/test_results_plot_empty_dense_selection 精確斷言。"
+    ],
+    "blockers": [
+      "plot 像素受字型影響；CUDA 轉換需真實 GPU。"
+    ],
+    "impact": "各 task predictor 輸出、tracking postprocess、solutions、結果匯出與繪圖。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/engine/trainer.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "BaseTrainer 同時擁有 DDP、AMP、optimizer/scheduler、EMA、resume 和 checkpoint 寫入；MultiTrainer 串多資料集。save_model/NaN recovery 決定能否恢復，需短訓練及重載 checkpoint。",
+    "symbols": [
+      "BaseTrainer",
+      "BaseTrainer.save_model",
+      "BaseTrainer.check_resume",
+      "BaseTrainer._handle_nan_recovery",
+      "MultiTrainer"
+    ],
+    "dependencies": [
+      "gc",
+      "math",
+      "os",
+      "subprocess",
+      "time",
+      "warnings",
+      "copy",
+      "datetime",
+      "functools",
+      "pathlib",
+      "numpy",
+      "torch",
+      "torch",
+      "torch",
+      "ultralytics",
+      "ultralytics.cfg",
+      "ultralytics.data.utils",
+      "ultralytics.nn.distill_model",
+      "ultralytics.nn.tasks",
+      "ultralytics.optim",
+      "ultralytics.utils",
+      "ultralytics.utils.autobatch",
+      "ultralytics.utils.checks",
+      "ultralytics.utils.dist",
+      "ultralytics.utils.files",
+      "ultralytics.utils.patches",
+      "ultralytics.utils.plotting",
+      "ultralytics.utils.torch_utils"
+    ],
+    "existingTests": [
+      "tests/test_engine.py::test_nan_recovery",
+      "tests/test_engine.py::test_checkpoint_fp16_overflow",
+      "tests/test_engine.py::test_resume_incomplete",
+      "tests/test_engine.py::test_setup_model_respects_pretrained_arg_for_pt_models"
+    ],
+    "testIdeas": [
+      "既有整合基線：CPU 短訓練與 checkpoint 重載已在 test_task、checkpoint 系列測試中執行；若補測須加針對 optimizer tensor/state 的精確恢復斷言。",
+      "斷言補強候選：test_resume_incomplete 已斷言 start_epoch=1；可進一步比較 resume 前後 scheduler.last_epoch/lr 與 optimizer momentum，避免僅重複起始 epoch 斷言。DDP 須真實多裝置。"
+    ],
+    "blockers": [
+      "不可用 monkeypatch 裝置狀態替代 CUDA/DDP 實測。",
+      "pytest sessionfinish 會清理權重相關檔案，需 scratch cwd。"
+    ],
+    "impact": "所有 task Trainer、model.train/tune、蒸餾、分散式訓練及 checkpoint 恢復。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/engine/validator.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "__call__ 同時服務 trainer 內部及 standalone AutoBackend，precision、資料設定和 callbacks 不同。match_predictions 可隔離測 IoU/class 配對，整檔修改則影響 metrics。",
+    "symbols": [
+      "BaseValidator",
+      "BaseValidator.__call__",
+      "BaseValidator.match_predictions"
+    ],
+    "dependencies": [
+      "json",
+      "time",
+      "copy",
+      "pathlib",
+      "numpy",
+      "torch",
+      "torch.distributed",
+      "ultralytics.cfg",
+      "ultralytics.data.utils",
+      "ultralytics.nn.autobackend",
+      "ultralytics.utils",
+      "ultralytics.utils.checks",
+      "ultralytics.utils.ops",
+      "ultralytics.utils.torch_utils"
+    ],
+    "existingTests": [
+      "tests/test_engine.py::test_task",
+      "tests/test_engine.py::test_semantic_polygon_val_background",
+      "tests/test_python.py::test_val"
+    ],
+    "testIdeas": [
+      "建議：固定 2x2 IoU 及 class，斷言錯類別永不匹配且 TP 維度等於預測數乘 thresholds。",
+      "建議：一個 label 對兩個高 IoU predictions，斷言每個 threshold 最多一個 TP。"
+    ],
+    "blockers": [
+      "需同時驗證 standalone/訓練內驗證；分散式 gather 及 accelerator precision 需實機。"
+    ],
+    "impact": "detect/classify/semantic/depth validators、model.val、訓練 early stopping。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/engine/exporter.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "Exporter 管理格式別名、quantize 驗證、校準、模型 deepcopy 和格式轉換；NMSModel 改變輸出圖。validate_args 易測，格式成功仍需對應 runtime 重載推論。",
+    "symbols": [
+      "Exporter",
+      "validate_args",
+      "export_formats",
+      "NMSModel",
+      "ClassMapModel"
+    ],
+    "dependencies": [
+      "json",
+      "os",
+      "shutil",
+      "tempfile",
+      "time",
+      "copy",
+      "datetime",
+      "functools",
+      "pathlib",
+      "numpy",
+      "torch",
+      "ultralytics",
+      "ultralytics.cfg",
+      "ultralytics.data",
+      "ultralytics.data.dataset",
+      "ultralytics.data.utils",
+      "ultralytics.nn.autobackend",
+      "ultralytics.nn.modules",
+      "ultralytics.nn.tasks",
+      "ultralytics.utils",
+      "ultralytics.utils.checks",
+      "ultralytics.utils.export.axelera",
+      "ultralytics.utils.files",
+      "ultralytics.utils.metrics",
+      "ultralytics.utils.nms",
+      "ultralytics.utils.ops",
+      "ultralytics.utils.patches",
+      "ultralytics.utils.torch_utils"
+    ],
+    "existingTests": [
+      "tests/test_exports.py::test_quantize_canonicalization",
+      "tests/test_exports.py::test_int8_calibration_fraction",
+      "tests/test_exports.py::test_every_format_env_is_registered",
+      "tests/test_engine.py::test_export"
+    ],
+    "testIdeas": [
+      "既有回歸基線：format/quantize 合法組合和別名已有 test_quantize_canonicalization、test_qnn_quantize_requires_w8a16 等；原提案太廣，不認定為新增漏行測試。",
+      "建議：tiny YAML 模型 ONNX export 後 CPU 推論，斷言輸出 shape、metadata names 及原模型未被改寫。"
+    ],
+    "blockers": [
+      "20+ 格式需隔離依賴、廠商 SDK、GPU 或 macOS。",
+      "slow/platform/export-env 篩選造成未執行不可視為通過。"
+    ],
+    "impact": "Model.export、AutoBackend 可載入產物、部署 metadata 和所有 export 格式。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/engine/tuner.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "Tuner 把本地 NDJSON/MongoDB 結果轉為 fitness 陣列、選父代並 constrain 超參數；整數 bounds 可直接測，__call__ 則真正重複訓練。",
+    "symbols": [
+      "Tuner",
+      "Tuner._constrain",
+      "Tuner._best_result_index",
+      "Tuner._local_results_to_array"
+    ],
+    "dependencies": [
+      "json",
+      "shutil",
+      "time",
+      "datetime",
+      "numpy",
+      "ultralytics.cfg",
+      "ultralytics.utils",
+      "ultralytics.utils.checks",
+      "ultralytics.utils.plotting"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_model_tune"
+    ],
+    "testIdeas": [
+      "建議：以 CFG_INT_KEYS 中的 epochs 為 key，bounds=(1.2,3.9)、候選 9，斷言 _constrain 回 int 3；無整數範圍拒絕。",
+      "建議：高 fitness 無訓練 metrics、低 fitness 有 metrics，斷言 _best_result_index 優先選後者。"
+    ],
+    "blockers": [
+      "MongoDB 同步需服務；完整 tune 重複訓練並依賴資料。"
+    ],
+    "impact": "Model.tune 本機搜尋、MultiTrainer 和 tuning 結果檔。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/data/annotator.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "困難",
+    "rationale": "auto_annotate 是短 detector→SAM→polygon 寫檔流程；class 與 polygon 順序、predictor.txt_path 檔名契約需真實模型驗證。改動少不代表整合驗證便宜。",
+    "symbols": [
+      "auto_annotate"
+    ],
+    "dependencies": [
+      "pathlib",
+      "ultralytics"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_data_annotator"
+    ],
+    "testIdeas": [
+      "建議：本地已知有人圖片及快取 detector/mobile_sam，斷言輸出 class 合法且 polygon 至少三點。",
+      "建議：空白圖無偵測，斷言不產生非空標註且原圖不變。"
+    ],
+    "blockers": [
+      "需要 detector/SAM 權重；完全 fake 模型不足以驗證整合。"
+    ],
+    "impact": "auto_annotate 資料集初始標註及 YOLO segmentation labels。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/data/augment.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "transform 必須同步修改 img、Instances、semantic_mask、depth；RandomPerspective 幾何及 Mosaic 跨樣本最易產生無聲 label 偏移。固定幾何與 p=0/1 可精準 CPU 驗證。",
+    "symbols": [
+      "BaseTransform",
+      "Mosaic",
+      "RandomPerspective",
+      "LetterBox",
+      "RandomFlip",
+      "DepthFormat",
+      "SemanticFormat"
+    ],
+    "dependencies": [
+      "math",
+      "random",
+      "copy",
+      "typing",
+      "cv2",
+      "numpy",
+      "torch",
+      "PIL",
+      "torch.nn",
+      "ultralytics.data.utils",
+      "ultralytics.utils",
+      "ultralytics.utils.checks",
+      "ultralytics.utils.instance",
+      "ultralytics.utils.metrics",
+      "ultralytics.utils.ops",
+      "ultralytics.utils.torch_utils"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_scale_coords_nonuniform_letterbox",
+      "tests/test_python.py::test_scale_masks_odd_letterbox_pad",
+      "tests/test_python.py::test_classify_transforms_train"
+    ],
+    "testIdeas": [
+      "建議：非正方圖片、box、semantic mask 做 scale_fill LetterBox，斷言 ratio_pad 與幾何一致。",
+      "建議：RandomFlip(p=1) 輸入非對稱圖、box、depth，斷言反轉一致；p=0 位置不變。"
+    ],
+    "blockers": [
+      "隨機增強不能只檢查 shape；可選 Albumentations/torchvision 另有相容性。"
+    ],
+    "impact": "所有訓練 transforms、predictor LetterBox、classification pipeline、export 校準前處理。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/data/base.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "BaseDataset 擁有列檔、rect 排序、resize、RAM/disk cache 和 spawn 共享快取；cache owner 改動可能造成舊圖片或 worker 記憶體倍增。小圖可測，spawn 需實際啟動程序。",
+    "symbols": [
+      "BaseDataset",
+      "BaseDataset.load_image",
+      "BaseDataset.cache_images",
+      "BaseDataset.cache_images_to_disk"
+    ],
+    "dependencies": [
+      "glob",
+      "math",
+      "os",
+      "random",
+      "shutil",
+      "copy",
+      "multiprocessing.pool",
+      "pathlib",
+      "typing",
+      "cv2",
+      "numpy",
+      "torch",
+      "torch.utils.data",
+      "ultralytics.data.utils",
+      "ultralytics.utils",
+      "ultralytics.utils.patches"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_image_cache_shared_with_spawned_workers",
+      "tests/test_python.py::test_build_yolo_dataset_hyp_isolated"
+    ],
+    "testIdeas": [
+      "建議：兩種長寬本地圖片跑 load_image/rect_mode，斷言最長邊限制與原始尺寸。",
+      "建議：寫 disk cache 後改寫較新的圖片，再呼叫 cache_images_to_disk，斷言 .npy 更新為新像素。"
+    ],
+    "blockers": [
+      "mtime 精度依檔案系統；Windows spawn 與 Unix fork 都需驗證。"
+    ],
+    "impact": "YOLODataset/GroundingDataset/SemanticDataset/DepthDataset 和所有訓練 workers。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/data/build.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "同時擁有 task dataset 選擇、distributed sampler、worker 上限及 source routing。batch/drop_last/seed 互相影響；TensorDataset 可測多數邊界，HTTP 和分散式分片另驗。",
+    "symbols": [
+      "build_dataloader",
+      "build_yolo_dataset",
+      "check_source",
+      "load_inference_source",
+      "ContiguousDistributedSampler"
+    ],
+    "dependencies": [
+      "contextlib",
+      "math",
+      "os",
+      "random",
+      "collections.abc",
+      "pathlib",
+      "typing",
+      "urllib.parse",
+      "numpy",
+      "torch",
+      "torch.distributed",
+      "PIL",
+      "torch.utils.data",
+      "ultralytics.cfg",
+      "ultralytics.data.dataset",
+      "ultralytics.data.loaders",
+      "ultralytics.data.utils",
+      "ultralytics.utils",
+      "ultralytics.utils.checks",
+      "ultralytics.utils.torch_utils"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_dataloader_caps_workers_to_batches",
+      "tests/test_python.py::test_dataloader_seed_varies_sampling_order",
+      "tests/test_python.py::test_dataloader_empty_dataset_uses_dataloader_validation",
+      "tests/test_python.py::test_build_yolo_dataset_hyp_isolated"
+    ],
+    "testIdeas": [
+      "既有回歸基線：tiny dataset 的 batch/worker cap 已有 test_dataloader_caps_workers_to_batches，不算新增 coverage。",
+      "建議：check_source 對 ndarray/tensor/list/rtsp://x/video.mp4 斷言 flags，不做 RTSP 連線。"
+    ],
+    "blockers": [
+      "裝置數量和 DDP 分片需真實硬體/程序；無副檔名 HTTP URL 會發探測請求。"
+    ],
+    "impact": "Trainer/Validator loaders、BasePredictor.setup_source、YOLOE source handling。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/data/converter.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "COCO/polygon/OBB 與非同步 NDJSON 轉換同檔；後者需保持 fraction/hash/complete、resume 及 depth 配對原子性。純 class mapping 簡單，shared converter 語意橫跨任務。",
+    "symbols": [
+      "convert_coco",
+      "convert_ndjson_to_yolo",
+      "_convert_ndjson_to_yolo",
+      "_infer_ndjson_kpt_shape",
+      "merge_multi_segment"
+    ],
+    "dependencies": [
+      "asyncio",
+      "hashlib",
+      "json",
+      "math",
+      "os",
+      "random",
+      "shutil",
+      "collections",
+      "concurrent.futures",
+      "pathlib",
+      "tempfile",
+      "uuid",
+      "cv2",
+      "numpy",
+      "PIL",
+      "ultralytics.data.utils",
+      "ultralytics.utils",
+      "ultralytics.utils.checks",
+      "ultralytics.utils.downloads",
+      "ultralytics.utils.files"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_data_converter",
+      "tests/test_python.py::test_ndjson_conversion_concurrency_and_resume",
+      "tests/test_ndjson_converter.py::test_convert_depth_ndjson_removes_incomplete_pair",
+      "tests/test_ndjson_converter.py::test_convert_ndjson_selects_split_fractions"
+    ],
+    "testIdeas": [
+      "既有回歸基線：image 成功而 depth 404 時清理配對，已有 test_convert_depth_ndjson_removes_incomplete_pair 精確斷言。",
+      "建議：小 COCO JSON 含 crowd/空標註/矩形，斷言 crowd 忽略及 normalized xywh 精確值。",
+      "建議：NDJSON pose 長度矛盾，斷言 _infer_ndjson_kpt_shape 拒絕。"
+    ],
+    "blockers": [
+      "外部下載與權杖 URL 不適合單元測試；本地 server 和 tmp_path 隔離多檔輸出。"
+    ],
+    "impact": "data.utils 自動 NDJSON conversion、train/val 資料入口與離線格式轉換。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/data/dataset.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "多 task dataset 共用 cache，卻各有 hash、verify_args、mask LUT、深度配對及 collate 契約；錯誤可讓 labels 無聲錯位。小檔可測，但需跨任務 cache invalidate。",
+    "symbols": [
+      "YOLODataset",
+      "DepthDataset",
+      "SemanticDataset",
+      "ClassificationDataset",
+      "GroundingDataset",
+      "YOLODataset.collate_fn"
+    ],
+    "dependencies": [
+      "json",
+      "os",
+      "collections",
+      "itertools",
+      "multiprocessing.pool",
+      "pathlib",
+      "typing",
+      "cv2",
+      "numpy",
+      "torch",
+      "PIL",
+      "torch.utils.data",
+      "ultralytics.nn.autobackend",
+      "ultralytics.utils",
+      "ultralytics.utils.instance",
+      "ultralytics.utils.ops",
+      "ultralytics.utils.patches",
+      "ultralytics.utils.torch_utils",
+      ".augment",
+      ".base",
+      ".converter",
+      ".utils"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_yolo_dataset_label_encoding",
+      "tests/test_python.py::test_depth_dataset_ignores_unreadable_targets",
+      "tests/test_python.py::test_classification_split_class_alignment",
+      "tests/test_python.py::test_semantic_cache_nc_edit_1bit_masks"
+    ],
+    "testIdeas": [
+      "既有回歸基線：nc=2 cache 改 nc=1 且 1-bit mask 保持 {0,1}，已有 test_semantic_cache_nc_edit_1bit_masks 精確斷言，不列新增測試。",
+      "快照漏行 452：YOLODataset.collate_fn 輸入兩份不同長度 visuals（各 1/3 行、相同 feature 維），斷言 pad_sequence 結果 shape=(2,3,D)、短項 padding 為 0，且其他 img/batch_idx 對齊。"
+    ],
+    "blockers": [
+      "需真實 image/mask/depth 和 hash 變動；Grounding Unicode 與大資料另建小 fixture。"
+    ],
+    "impact": "所有 task 訓練/驗證、export calibration；錯誤可改變 mAP/loss 而不拋例外。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/data/loaders.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "記憶體 loader 的色彩/維度/uint8 normalization 是確定行為；LoadStreams 則管理 thread、cv2 capture、buffer/stride/reconnect。因此同檔串流比 ndarray 路徑難驗。",
+    "symbols": [
+      "LoadStreams",
+      "LoadImagesAndVideos",
+      "LoadPilAndNumpy",
+      "LoadTensor",
+      "SourceTypes"
+    ],
+    "dependencies": [
+      "csv",
+      "glob",
+      "math",
+      "os",
+      "time",
+      "urllib",
+      "codecs",
+      "dataclasses",
+      "functools",
+      "io",
+      "multiprocessing.pool",
+      "pathlib",
+      "threading",
+      "typing",
+      "cv2",
+      "numpy",
+      "torch",
+      "PIL",
+      "ultralytics.data.utils",
+      "ultralytics.utils",
+      "ultralytics.utils.checks",
+      "ultralytics.utils.patches"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_load_tensor_uint8",
+      "tests/test_python.py::test_predict_ndarray_channels",
+      "tests/test_python.py::test_single_check_channel_order_and_contiguity",
+      "tests/test_python.py::test_predict_csv_multi_row"
+    ],
+    "testIdeas": [
+      "快照漏行 680/683：LoadTensor 對 2D、零高度 BCHW 和高寬不整除 stride 的 tensor 拋 ValueError；不得落入空 tensor im.max() 例外。非 contiguous ndarray 的 BGR/contiguous 已由 test_single_check_channel_order_and_contiguity 精確驗證。",
+      "建議：三幀本地短影片 vid_stride=2，斷言順序/數量及耗盡後可關閉 capture。"
+    ],
+    "blockers": [
+      "RTSP/攝影機/thread 時序要真實串流；screen capture 要桌面；編碼器依 OS。"
+    ],
+    "impact": "load_inference_source 與全部 predict/track 的圖片、影片、串流、螢幕輸入。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/data/split.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "容易",
+    "rationale": "兩函式直接操作 Path/shutil；分類 split 用局部 Random(0)，保留 cache 並移除重分派圖片的舊 split 副本。autosplit 先刪舊清單，需測重跑。",
+    "symbols": [
+      "split_classify_dataset",
+      "autosplit"
+    ],
+    "dependencies": [
+      "random",
+      "shutil",
+      "pathlib",
+      "ultralytics.data.utils",
+      "ultralytics.utils"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_data_utils"
+    ],
+    "testIdeas": [
+      "建議：兩類各十張圖重跑 80/20 split，斷言每類 8/2、無交集且 cache sentinel 保留。",
+      "建議：autosplit annotated_only=True 只列有 label 圖，重跑不追加重複行。"
+    ],
+    "blockers": [
+      "會寫檔/刪舊 manifest，需 tmp_path；既有 autosplit 測試主要只驗清單存在。"
+    ],
+    "impact": "check_cls_dataset 自動分類切分與手動 autosplit 訓練清單。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/data/split_dota.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "get_windows 處理 crop/gap 與末端回貼；bbox_iof 用 Shapely intersection，get_window_obj 原地 denormalize。小 array 可精準驗幾何，crop_and_save 另有寫檔。",
+    "symbols": [
+      "get_windows",
+      "bbox_iof",
+      "get_window_obj",
+      "crop_and_save",
+      "load_yolo_dota"
+    ],
+    "dependencies": [
+      "itertools",
+      "glob",
+      "math",
+      "pathlib",
+      "typing",
+      "cv2",
+      "numpy",
+      "PIL",
+      "ultralytics.data.utils",
+      "ultralytics.utils",
+      "ultralytics.utils.checks",
+      "ultralytics.utils.patches"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_load_yolo_dota_whitespace_lines"
+    ],
+    "testIdeas": [
+      "建議：im_size=(100,150)、crop=100/gap=20，斷言末端視窗 x=50。",
+      "建議：polygon 完全落入/離開視窗 IoF=1/0；空 label 每窗回 (0,9)。"
+    ],
+    "blockers": [
+      "需 shapely>=2，check_requirements 可能安裝；原地修改 label，測試每次重建輸入。"
+    ],
+    "impact": "DOTA 大圖切片和 OBB label 幾何，沒有訓練主迴圈耦合。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/data/utils.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "兼具 YAML/下載入口與 label/mask/depth trust boundary；polygon 去重不能只按 bbox。純解析編碼可本地測，dataset 設定會下載、寫 cache，影響面大。",
+    "symbols": [
+      "verify_image_label",
+      "verify_image_depth",
+      "save_depth_png",
+      "load_depth",
+      "check_det_dataset",
+      "check_cls_dataset",
+      "get_split_fraction"
+    ],
+    "dependencies": [
+      "os",
+      "random",
+      "subprocess",
+      "time",
+      "zipfile",
+      "pathlib",
+      "tarfile",
+      "typing",
+      "uuid",
+      "cv2",
+      "numpy",
+      "PIL",
+      "ultralytics.nn.autobackend",
+      "ultralytics.utils",
+      "ultralytics.utils.checks",
+      "ultralytics.utils.downloads",
+      "ultralytics.utils.ops",
+      "ultralytics.utils.patches"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_verify_image_label_keeps_polygons_sharing_a_box",
+      "tests/test_python.py::test_verify_image_label_whitespace_lines",
+      "tests/test_python.py::test_data_utils",
+      "tests/test_python.py::test_convert_signed_ndjson"
+    ],
+    "testIdeas": [
+      "快照漏行 83/88/94/100/121/124/127：save_depth_png 拒絕非正 scale、非 2D、有效深度超 uint16；load_depth 拒絕整數 NPY、非正 PNG scale 和 RGB PNG。一般有效值 roundtrip 已有 NDJSON depth 測試，補測應瞄準錯誤邊界。",
+      "既有回歸基線：共享 bbox 的不同 polygons 與空白行，已有 test_verify_image_label_keeps_polygons_sharing_a_box/test_verify_image_label_whitespace_lines 精確斷言。",
+      "既有回歸基線：get_split_fraction executable lines 全 hit；test_cfg_rejects_fuzzed_values 已檢查 val=0 拒絕與 test=0 的 float 邊界，不列新增 coverage。"
+    ],
+    "blockers": [
+      "下載/解壓/cache 必須隔離，不可用真實使用者資料。"
+    ],
+    "impact": "各 dataset、Model.train/val、Exporter calibration 與使用者資料驗證。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/cfg/__init__.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "get_cfg/check_cfg 是所有模式共享型別/範圍驗證；deprecation 同時映射 half/int8/end2end 與 quantize/nms。解析 helper 可直接測，entrypoint 有實際模式副作用。",
+    "symbols": [
+      "get_cfg",
+      "check_cfg",
+      "_handle_deprecation",
+      "merge_equals_args",
+      "smart_value",
+      "entrypoint"
+    ],
+    "dependencies": [
+      "ast",
+      "os",
+      "shutil",
+      "subprocess",
+      "sys",
+      "pathlib",
+      "types",
+      "typing",
+      "ultralytics",
+      "ultralytics.utils"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_cfg_rejects_fuzzed_values",
+      "tests/test_python.py::test_cfg_init",
+      "tests/test_exports.py::test_quantize_deprecation",
+      "tests/test_cli.py::test_special_modes"
+    ],
+    "testIdeas": [
+      "快照漏行 446/463/484/498：直接 check_cfg(cfg, hard=False)，cfg={degrees:\"12.5\",scale:\"0.5\",fraction:\"0.25\",epochs:\"3\"}；斷言原地轉成 12.5/0.5/0.25/3，前三者 float、epochs int。tests/ 未找到直接 check_cfg 或 hard=False 測試。",
+      "快照漏行 449–456：scale=[0.5] 或 [0.5,1,2]，hard=True 拋 TypeError；hard=False 保留原值而不誤轉 float。scale=(0.5,2.0) 通過且保留 tuple。tests/ 未找到這些 scale 長度/元素型別斷言。",
+      "既有回歸基線：degrees=None、fraction=True、未知 key、end2end/nms precedence 已由 test_cfg_rejects_fuzzed_values 精確驗證；quantize alias 已由 test_quantize_canonicalization 驗證，不列新增 coverage。"
+    ],
+    "blockers": [
+      "entrypoint 有登入/settings/下載副作用；新 argument 需同步 default.yaml、CFG_*_KEYS 和 docs。"
+    ],
+    "impact": "所有 engine config、CLI、precision/nms 和 task/mode 路由。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/trackers/basetrack.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "容易",
+    "rationale": "只有狀態欄位、全域 ID counter 和 abstract hooks；四個 TrackState 可直接實例化驗證。enum/counter 的改動仍影響所有 tracker。",
+    "symbols": [
+      "BaseTrack",
+      "TrackState",
+      "BaseTrack.next_id",
+      "BaseTrack.mark_lost",
+      "BaseTrack.reset_id"
+    ],
+    "dependencies": [
+      "typing"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_tracktrack_new_lifecycle"
+    ],
+    "testIdeas": [
+      "建議：mark_lost/mark_removed 斷言 Lost/Removed，end_frame 等於 frame_id。",
+      "建議：保存 _count，再 reset_id/next_id 斷言 1/2，finally 還原避免污染。"
+    ],
+    "blockers": [
+      "既有 lifecycle 測試只是間接用到 TrackState；全域 counter 測試須還原。"
+    ],
+    "impact": "STrack/BOTrack/OCSortTrack/TTSTrack 與全部 tracker 狀態及 ID。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/trackers/byte_tracker.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "update 擁有 high/low 二階 matching、tracked/lost/removed pools；_split_detections 濾無效框同時保留全 detection index。合成多幀 Boxes 不需影片，但所有子類共用生命週期。",
+    "symbols": [
+      "BYTETracker",
+      "STrack",
+      "BYTETracker._split_detections",
+      "BYTETracker._second_association"
+    ],
+    "dependencies": [
+      "sys",
+      "typing",
+      "numpy",
+      "..utils",
+      "..utils.ops",
+      ".basetrack",
+      ".utils",
+      ".utils.kalman_filter",
+      ".utils.stracks"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_track_second_association_indices",
+      "tests/test_python.py::test_track_split_detections_degenerate_boxes",
+      "tests/test_python.py::test_track_second_association_low_conf_keeps_id"
+    ],
+    "testIdeas": [
+      "既有回歸基線：第三框降 low band 保留原 ID/detection idx=2，已有 test_track_second_association_indices 精確斷言。",
+      "建議：track_buffer+1 空幀後重現同框，斷言 removed pool 和新 ID 行為。"
+    ],
+    "blockers": [
+      "需 lap；association 閾值邊界和 OBB 另驗。"
+    ],
+    "impact": "BOTSORT/OCSORT/FASTTRACK/DEEPOCSORT 共用更新及 Results index 對齊。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/trackers/bot_sort.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "在 BYTETracker 上加 XYWH Kalman、GMC 和 ReID cost；BOTrack 平滑 features，init_track 接受原生 features 或 encoder。motion-only 可合成測，appearance/GMC 要真圖。",
+    "symbols": [
+      "BOTSORT",
+      "BOTrack",
+      "BOTSORT.init_track",
+      "BOTSORT.get_dists"
+    ],
+    "dependencies": [
+      "typing",
+      "numpy",
+      ".basetrack",
+      ".byte_tracker",
+      ".utils",
+      ".utils.gmc",
+      ".utils.kalman_filter",
+      ".utils.reid",
+      ".utils.stracks"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_track_reid_auto_user_detections",
+      "tests/test_python.py::test_track_stream"
+    ],
+    "testIdeas": [
+      "既有回歸基線：with_reid=True/model=auto 無 feats，三幀 Boxes 保持兩個 tracks，已有 test_track_reid_auto_user_detections；可額外斷言每個 ID 穩定，但不得稱原問題未測。",
+      "建議：兩組已知 feature update，斷言 curr/smooth 有限且 norm 接近 1。"
+    ],
+    "blockers": [
+      "完整 GMC/ReID 需影像、cv2 matching 和 encoder；stream test 有 ONLINE/task 篩選。"
+    ],
+    "impact": "botsort、TrackTrack 的 BOTrack 繼承及外觀關聯。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/trackers/track.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "callbacks 建 per-stream tracker、管理 persist/video 邊界、收 ReID 再按 idx 重排 Results；register_tracker 替換 partial 防重複。跨 stream/model 狀態必須測真正 owner。",
+    "symbols": [
+      "register_tracker",
+      "on_predict_start",
+      "on_predict_postprocess_end"
+    ],
+    "dependencies": [
+      "functools",
+      "torch",
+      "ultralytics.cfg",
+      "ultralytics.utils",
+      "ultralytics.utils.checks",
+      ".bot_sort",
+      ".byte_tracker",
+      ".deep_oc_sort",
+      ".fast_tracker",
+      ".oc_sort",
+      ".track_tracker"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_track_stream",
+      "tests/test_python.py::test_track_reid_auto_user_detections",
+      "tests/test_cuda.py::test_track_exported_model"
+    ],
+    "testIdeas": [
+      "建議：真實 YAML 模型重複 register_tracker，斷言每 event 一個 callback 且 persist 更新。",
+      "建議：兩段本地影片 persist=False 切換 path 斷言 frame_id 重置；True 保持連續。"
+    ],
+    "blockers": [
+      "auto ReID 掛 hook；detect/OBB Results 不同，多 stream 和 export backend 需整合驗。"
+    ],
+    "impact": "Model.track、TRACKER_MAP、solutions 的 tracking callbacks。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/trackers/oc_sort.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "OCSORT 加 observation recovery、方向 cost、ORU 插值；observation window 與 saved covariance 決定失蹤後重現。小數值可測但多幀時序較複雜。",
+    "symbols": [
+      "OCSORT",
+      "OCSortTrack",
+      "OCSortTrack.apply_oru",
+      "OCSortTrack._compute_velocity",
+      "OCSORT._velocity_direction_cost"
+    ],
+    "dependencies": [
+      "typing",
+      "numpy",
+      "..utils.ops",
+      ".basetrack",
+      ".byte_tracker",
+      ".utils",
+      ".utils.stracks"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_track_stream"
+    ],
+    "testIdeas": [
+      "建議：固定速度後缺兩幀重現，斷言 ORU mean/covariance 有限且 ID 恢復。",
+      "建議：方向 cost 空輸入 shape=(N,M)；同向候選 cost 低於反向。"
+    ],
+    "blockers": [
+      "僅找到 streaming 間接測試，不能推定 ORU branch 已覆蓋；DeepOCSORT 繼承 hooks。"
+    ],
+    "impact": "ocsort/deepocsort motion recovery 與 association。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/trackers/track_tracker.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "自有 New→Tracked、confidence/height/angle cost、track-aware NMS，並掛 raw postprocess hook 取被抑制框。helpers 易隔離，但 hooks 與 detect/OBB 緊耦合。",
+    "symbols": [
+      "TRACKTRACK",
+      "TTSTrack",
+      "_iterative_associate",
+      "_track_aware_nms",
+      "attach_raw_preds_hook",
+      "compute_dets_del"
+    ],
+    "dependencies": [
+      "sys",
+      "collections",
+      "functools",
+      "typing",
+      "numpy",
+      "torch",
+      "ultralytics.utils.metrics",
+      "..utils",
+      ".basetrack",
+      ".bot_sort",
+      ".utils.gmc",
+      ".utils.kalman_filter",
+      ".utils.reid",
+      ".utils.stracks"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_tracktrack_new_lifecycle",
+      "tests/test_python.py::test_track_reid_auto_user_detections",
+      "tests/test_python.py::test_track_stream"
+    ],
+    "testIdeas": [
+      "既有回歸基線：min_track_len=4 的首幀/空首幀及 New→Tracked 確認時機，已有 test_tracktrack_new_lifecycle 精確斷言。",
+      "建議：_iterative_associate 空矩陣/互為最近鄰/超閾值，斷言不重複且 unmatched 完整。"
+    ],
+    "blockers": [
+      "raw hook 須驗非 track 模式；NMS extras/OBB 要真實 predictor。"
+    ],
+    "impact": "tracktrack、DetectionPredictor hooks、Results index 及 ReID features。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  },
+  {
+    "path": "ultralytics/trackers/utils/matching.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "linear_assignment 封裝 lap/ops solver 和空矩陣 unmatched；iou_distance 按 xyxy/xywha 選 IoU。固定成本可精準測，平手時不可強求 solver 同配對。",
+    "symbols": [
+      "linear_assignment",
+      "iou_distance",
+      "embedding_distance",
+      "fuse_score"
+    ],
+    "dependencies": [
+      "numpy",
+      "ultralytics.utils.metrics"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_track_second_association_indices",
+      "tests/test_python.py::test_track_stream"
+    ],
+    "testIdeas": [
+      "建議：空 (0,3) cost 斷言 matches=(0,2)、unmatched_b=(0,1,2)。",
+      "建議：無平手 2x3 cost 測兩 solver，斷言合法最佳配對、無重複及超閾值未匹配。",
+      "建議：同框/不相交 xyxy cost=0/1，空集合保持矩陣 shape。"
+    ],
+    "blockers": [
+      "import 需 lap>=0.5.12；既有 tracker 測試屬間接路徑，不代表所有 solver branches。"
+    ],
+    "impact": "BYTETracker/BOTSORT/OCSORT/FASTTRACK/DeepOCSORT assignment 和 appearance cost。",
+    "testEvidenceNote": "「既有回歸基線」不建議重寫測試；「快照漏行」已對照 1=miss；其餘為可補強斷言的案例，不代表目前無測試或可增加行覆蓋。"
+  }
+]

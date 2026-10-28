@@ -1,0 +1,697 @@
+[
+  {
+    "path": "ultralytics/utils/ops.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "容易",
+    "rationale": "座標轉換可用小型 NumPy／CPU tensor 做精確斷言；整檔同時擁有原地裁切、letterbox 還原、遮罩分塊與 SciPy 缺席時的指派演算法，修改共用語意會跨多任務。test_utils_ops 前數個 torch.allclose 僅計算未 assert，不能視為往返正確性的保證。",
+    "symbols": [
+      "scale_boxes",
+      "scale_coords",
+      "scale_masks",
+      "process_mask_native",
+      "linear_sum_assignment",
+      "_linear_sum_assignment_numpy"
+    ],
+    "dependencies": [
+      "numpy",
+      "torch",
+      "cv2",
+      "scipy.optimize（延遲、可選）"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_utils_ops",
+      "tests/test_python.py::test_scale_coords_nonuniform_letterbox",
+      "tests/test_python.py::test_scale_masks_odd_letterbox_pad",
+      "tests/test_python.py::test_process_mask_empty",
+      "tests/test_python.py::test_process_mask_native_chunked"
+    ],
+    "testIdeas": [
+      "建議：float32 NumPy 與 CPU tensor 的 xywh→xyxy→xywh 往返加 assert，並確認輸入是否按函式契約原地更新。",
+      "建議：直接對 _linear_sum_assignment_numpy 給 2×3、3×2、0×3 成本矩陣，斷言最小總成本、排序索引與空輸出。",
+      "建議：非等比 ratio_pad、奇數 padding 與無偵測遮罩，對還原後像素／座標及 dtype 做精確斷言。"
+    ],
+    "blockers": [
+      "跨裝置分支需真實 MPS／CUDA；本次僅靜態讀碼，建議測例不是已證實缺口。"
+    ],
+    "impact": "data/augment.py、data/converter.py、engine/results.py、各任務 predict/val、trackers 與 loss/tal 共用幾何語意。"
+  },
+  {
+    "path": "ultralytics/utils/metrics.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "容易",
+    "rationale": "IoU、AP 與累積矩陣可在 CPU 用手算案例驗證；但 mAP、fitness、每類別統計與 depth 對齊會決定驗證結果及最佳 checkpoint，改動的使用者影響大。已有大計數 SemanticMetrics 回歸與 pose 曲線名稱測試，並不代表所有數值邊界已覆蓋。",
+    "symbols": [
+      "box_iou",
+      "bbox_iou",
+      "compute_ap",
+      "ap_per_class",
+      "SemanticMetrics",
+      "DepthMetrics"
+    ],
+    "dependencies": [
+      "numpy",
+      "torch",
+      "plotting",
+      "matplotlib（繪圖時）"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_pose_metrics_curves",
+      "tests/test_python.py::test_semantic_confusion_matrix_large_counts"
+    ],
+    "testIdeas": [
+      "建議：相同框 IoU≈1、不相交為 0、空集合輸出形狀正確，並驗證 broadcast 維度。",
+      "建議：兩類別手算 TP/FP 序列，斷言 AP、無預測類別與 precision envelope。",
+      "建議：DepthMetrics 給 9 與 10 個有效像素、倍數深度與 median 對齊，斷言跳過門檻及 abs_rel/rmse。"
+    ],
+    "blockers": [
+      "浮點容差與 AP 積分慣例需固定；繪圖路徑另有輸出檔依賴。"
+    ],
+    "impact": "models/yolo/*/val.py 使用結果及 fitness；tal.py、nms.py、loss.py 和 trackers 使用重疊度。"
+  },
+  {
+    "path": "ultralytics/utils/loss.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "小型張量可驗證 loss 與反向梯度；整檔將模型 head、超參數、target 指派與七任務格式接在一起，改標度或 reduction 可能靜默改變訓練。現有 semantic all-ignore 測試確實檢查 finite 及 backward，CUDA 版本另驗 fp16。",
+    "symbols": [
+      "DFLoss",
+      "BboxLoss",
+      "v8DetectionLoss",
+      "DepthLoss26",
+      "SemanticSegmentationLoss",
+      "E2ELoss"
+    ],
+    "dependencies": [
+      "torch",
+      "metrics",
+      "tal",
+      "ops",
+      "模型 head 與 args"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_semantic_loss_all_ignore",
+      "tests/test_python.py::test_v26_depth_loss_lower_lambda_penalizes_scale_error_more"
+    ],
+    "testIdeas": [
+      "建議：DFLoss 給邊界 target 0 與 reg_max−1，斷言 clamp 後 loss 有限及 pred_dist 梯度有限。",
+      "建議：DepthLoss26 比較 9／10 個有效深度像素，斷言零 loss 路徑仍可 backward，10 像素走正常分支。",
+      "建議：semantic 混合 255 與有效標籤，改動被忽略區 logits 不應改變有效區 CE/Dice，並檢查 auxiliary logits 梯度。"
+    ],
+    "blockers": [
+      "高風險需真實模型與 task batch；AMP 分支需 GPU。現有測試名稱不等同整檔數值覆蓋。"
+    ],
+    "impact": "nn/tasks.py 的 init_criterion 選用各 loss；engine/trainer.py 訓練及 validator loss 依賴輸出鍵與標度。"
+  },
+  {
+    "path": "ultralytics/utils/torch_utils.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "EarlyStopping、optimizer 轉精度可輕易做 CPU 測試；整檔同時負責裝置解析、autocast、EMA、融合、QAT、profiling 與 checkpoint，涉及全域裝置與版本條件，完整驗證成本很高。現有 RMSprop 測試檢查保存與恢復更新量，profile 測試主要是 smoke。",
+    "symbols": [
+      "parse_device",
+      "select_device",
+      "autocast",
+      "ModelEMA",
+      "EarlyStopping",
+      "convert_optimizer_state_dict_to_fp16",
+      "fuse_conv_and_bn"
+    ],
+    "dependencies": [
+      "torch",
+      "numpy",
+      "torch.distributed",
+      "CPUInfo",
+      "patches",
+      "可選 torch_npu／QAT 套件"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_select_device",
+      "tests/test_python.py::test_utils_torchutils",
+      "tests/test_python.py::test_rmsprop_checkpoint_preserves_square_avg"
+    ],
+    "testIdeas": [
+      "建議：CPU 小 Conv+BatchNorm eval 融合前後輸出 allclose，包含有／無 bias。",
+      "建議：EarlyStopping patience=2、0、fitness=None 序列，斷言停止 epoch、possible_stop 與不停止行為。",
+      "建議：真實 CUDA_VISIBLE_DEVICES 限制下用子程序驗裝置索引；EMA 更新比對手算加權值及整數 buffer 不被平均。"
+    ],
+    "blockers": [
+      "完整裝置／版本矩陣需要 CUDA、MPS、NPU、XPU；既有 test_select_device 使用 monkeypatch，不可當真硬體證據。"
+    ],
+    "impact": "engine/trainer.py、predictor.py、validator.py、exporter.py、nn/tasks.py、autobackend 與幾乎所有訓練／推論路徑。"
+  },
+  {
+    "path": "ultralytics/utils/checks.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "parse_version、check_imgsz 是易測解析邏輯，但本檔也會安裝依賴、解析 Platform URI、下載檔案及驗 AMP；修改驗證邏輯會影響所有入口。現有 check_version 測試明確保留 prerelease 視同 final 的取捨，不能擅自改成另一套版本語意。",
+    "symbols": [
+      "parse_version",
+      "check_version",
+      "check_imgsz",
+      "check_file",
+      "check_is_path_safe",
+      "normalize_platform_uri"
+    ],
+    "dependencies": [
+      "標準庫 metadata／ast／pathlib",
+      "torch",
+      "cv2",
+      "downloads",
+      "Platform API（部分路徑）"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_utils_checks",
+      "tests/test_python.py::test_normalize_platform_uri"
+    ],
+    "testIdeas": [
+      "建議：check_imgsz 給 0、負值、[31,65] 與 stride tensor，斷言至少 stride 且向上整除、維度錯誤型別明確。",
+      "建議：真實 tmp_path 本地存在／缺失檔案與同名前綴兄弟目錄，斷言 check_file 與 check_is_path_safe 的結果。",
+      "建議：四段版本、短版本補零及 local suffix 的比較做參數化斷言，保持現有版本解析慣例。"
+    ],
+    "blockers": [
+      "避免測試觸發自動 pip 安裝；AMP 與平台／GPU 分支需真實環境。"
+    ],
+    "impact": "data 載入、CLI／cfg、engine 的 train/val/predict/export、nn/autobackend 與下載流程。"
+  },
+  {
+    "path": "ultralytics/utils/downloads.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "本地 zip/tar 可在暫存目錄獨立測；HTTP owner 還包含 Range 重試、atomic .part rename、gzip/deflate 解碼及 archive 安全邊界，不能只靠成功下載 smoke。既有測試證實本地解壓與 traversal 防護，HTTP 中斷／編碼需求仍需另外驗證。",
+    "symbols": [
+      "safe_download",
+      "unzip_file",
+      "check_disk_space",
+      "attempt_download_asset",
+      "zip_directory"
+    ],
+    "dependencies": [
+      "requests（延遲）",
+      "zipfile",
+      "tarfile",
+      "zlib",
+      "curl（可選）",
+      "ThreadPool"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_data_utils",
+      "tests/test_python.py::test_safe_download_unzips_local_path_archive",
+      "tests/test_python.py::test_safe_download_skips_unsafe_archive_members",
+      "tests/test_python.py::test_safe_download_skips_unsafe_tar_members"
+    ],
+    "testIdeas": [
+      "建議：本機 HTTP server 第一次截斷、第二次支援 Range，斷言檔案 bytes 完整且成功前沒有最終目的檔。",
+      "建議：gzip concatenated members 與截斷 end-of-stream body，斷言解碼內容／失敗時 .part 清理。",
+      "建議：tar symlink/hardlink 與 ../ 成員混合正常檔，斷言僅正常檔留在目的目錄。"
+    ],
+    "blockers": [
+      "真實網路易波動；建議以本機 server 重現協定，不 mock 平台狀態。寫檔與解壓測試必須隔離 cwd。"
+    ],
+    "impact": "data/utils.py 的資料集取得、nn/tasks.py 權重載入、模型建構、backend 及文字模型資源。"
+  },
+  {
+    "path": "ultralytics/utils/plotting.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "Colors 與深度色階容易輸入輸出驗證；Annotator 同時處理 PIL、OpenCV、NumPy、CPU/GPU tensor，遮罩分帶混色與 RGB/BGR 約定讓局部修正也可能影響 Results。現有 tensor image 測試檢查實際像素，depth_map 目前檢查輸出形狀。",
+    "symbols": [
+      "Colors",
+      "colorize_depth",
+      "Annotator",
+      "save_one_box",
+      "plot_images"
+    ],
+    "dependencies": [
+      "cv2",
+      "numpy",
+      "torch",
+      "PIL",
+      "matplotlib（繪圖路徑）",
+      "check_font"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_annotator_depth_map",
+      "tests/test_python.py::test_annotator_tensor_image",
+      "tests/test_python.py::test_results_plot_instance_keypoints_track_color"
+    ],
+    "testIdeas": [
+      "建議：colorize_depth 全 0、單一常數有效值、vmin=vmax，斷言無效像素全黑及 uint8 HWC。",
+      "建議：同一遮罩用 NumPy 與 CPU tensor 畫在固定底色，斷言 alpha=0／1 與重疊區像素符合各既有混色契約。",
+      "建議：PIL 與 OpenCV 模式測 Unicode label 與讀取唯讀影像，斷言結果可寫及輸出形狀／色序。"
+    ],
+    "blockers": [
+      "字型下載與 Pillow 版本會影響文字 raster；GPU 合成分支需真裝置，避免整張像素 golden 跨版本脆弱。"
+    ],
+    "impact": "engine/results.py 的 plot/save、predictor 標註、訓練 batch／曲線圖及 solutions 視覺疊圖。"
+  },
+  {
+    "path": "ultralytics/utils/patches.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "Unicode 影像 IO 可用暫存檔精確測；本檔亦覆寫全域 cv2/PIL／torch 匯出行為，影像通道、uint16 與版本 patch 的契約影響廣。torch_save 已有四次重試 mock 測試，但不能據此證明真實磁碟保存與載入可靠。",
+    "symbols": [
+      "imread",
+      "imwrite",
+      "image_open",
+      "torch_load",
+      "torch_save",
+      "arange_patch",
+      "onnx_export_patch",
+      "override_configs"
+    ],
+    "dependencies": [
+      "cv2",
+      "PIL",
+      "numpy",
+      "torch",
+      "pi-heif（延遲、可選）"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_utils_patches_torch_save",
+      "tests/test_python.py::test_rmsprop_checkpoint_preserves_square_avg",
+      "tests/test_python.py::test_depth_calibration_checkpoint_provenance"
+    ],
+    "testIdeas": [
+      "建議：暫存 Unicode 路徑保存／讀回 PNG，斷言 grayscale HWC1、BGR 值與不存在／空檔回 None。",
+      "建議：uint16 TIFF 各 flags、同形多頁灰階 TIFF，斷言降位元與堆疊通道契約。",
+      "建議：arange_patch／onnx_export_patch context 內拋出例外，斷言 finally 恢復原函式；另做真實小 tensor torch_save/load 往返。"
+    ],
+    "blockers": [
+      "HEIF 插件需可選依賴；全域函式 patch 的測試不能平行污染其他測試；匯出需對應 PyTorch 版本。"
+    ],
+    "impact": "data/base.py、dataset.py、loaders.py 影像載入，trainer checkpoint、nn/tasks 權重載入與 exporter context。"
+  },
+  {
+    "path": "ultralytics/utils/files.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "increment_path、file_size、cwd context 都可用 tmp_path 測；spaces_in_path 在 finally 把暫存成果拷回原路徑，import_execstack 更直接修改 ELF，因此整檔不能當無副作用小工具。現有 test_utils_files 對命名有 assert，對 spaces_in_path 主要是進入／離開 smoke。",
+    "symbols": [
+      "WorkingDirectory",
+      "spaces_in_path",
+      "increment_path",
+      "file_size",
+      "import_execstack",
+      "get_latest_run"
+    ],
+    "dependencies": [
+      "pathlib",
+      "shutil",
+      "tempfile",
+      "struct",
+      "importlib"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_utils_files"
+    ],
+    "testIdeas": [
+      "建議：有空白的檔案與目錄在 context 修改內容並故意 raise，斷言 finally 拷回及保留 str/Path 型別。",
+      "建議：increment_path 已有 exp、exp-2 與 results.txt，斷言 suffix、exist_ok、mkdir 的精確結果。",
+      "建議：WorkingDirectory context 拋出例外仍回原 cwd；file_size 對巢狀檔案精確加總 bytes/2**20。"
+    ],
+    "blockers": [
+      "cwd 是程序全域；import_execstack 只可在隔離測試 ELF fixture 驗證，不能動現有安裝檔。"
+    ],
+    "impact": "cfg save_dir、trainer resume、exporter 空白路徑、benchmarks、MNN backend/export 及 plotting 輸出命名。"
+  },
+  {
+    "path": "ultralytics/utils/cpu.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "中等",
+    "rationale": "_clean 是短且純粹的字串正規化，適合入門修正；name 則實際讀 Linux /proc、macOS ctypes sysctl 或 Windows registry，完整平台行為不可用本機單一平台推論。",
+    "symbols": [
+      "CPUInfo",
+      "CPUInfo._clean",
+      "CPUInfo.name",
+      "CPUInfo._sysctl"
+    ],
+    "dependencies": [
+      "platform",
+      "ctypes",
+      "re",
+      "winreg（Windows）",
+      "/proc/cpuinfo（Linux）"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "建議：_clean 給多重空白、Intel (R)/(TM) 與 AMD Ryzen CPU @ GHz，斷言標記去除與名稱保留。",
+      "建議：各真實 OS CI 執行 CPUInfo.name，斷言非空字串且 str(CPUInfo()) 同樣可用；不固定硬體型號。"
+    ],
+    "blockers": [
+      "未搜尋到此檔的直接測試；不等於零間接覆蓋。平台原生分支需 Windows/macOS/Linux runner。"
+    ],
+    "impact": "torch_utils.get_cpu_info()，進而出現在 select_device、訓練／推論的裝置日誌。"
+  },
+  {
+    "path": "ultralytics/utils/dist.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "free port 可以實際 socket 驗證；generate_ddp_command 會刪除非 resume 的 save_dir、序列化 trainer/callback 並啟動多程序，改動錯誤可能丟輸出或破壞自訂 trainer。純 command 字串測試不足以證明子程序可反序列化。",
+    "symbols": [
+      "find_free_network_port",
+      "generate_ddp_file",
+      "generate_ddp_command",
+      "ddp_cleanup"
+    ],
+    "dependencies": [
+      "socket",
+      "tempfile",
+      "shutil",
+      "cloudpickle>=3.1.1（延遲）",
+      "torch.distributed",
+      "USER_CONFIG_DIR"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "建議：真實 CPU 小 trainer 產生 script/state，另啟子程序載入並檢查自訂 callback／model 可保留。",
+      "建議：tmp save_dir 分別 resume=True/False，斷言前者保留資料、後者僅刪指定目錄且 command world_size／port 正確。",
+      "建議：ddp_cleanup 以匹配／不匹配 trainer id 檔名，斷言只刪自身 script 與 companion .pt。"
+    ],
+    "blockers": [
+      "未找到直接測試；正式 DDP 需多程序／多 GPU 與 cloudpickle。USER_CONFIG_DIR 寫入要隔離；port 釋放至 launcher 綁定仍有競爭。"
+    ],
+    "impact": "engine/trainer.py 的多卡 train 分支及 finally cleanup；所有自訂 trainer 與 callbacks 隨 state 傳遞。"
+  },
+  {
+    "path": "ultralytics/utils/nms.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "容易",
+    "rationale": "非重疊／重疊小框可在 CPU 精確比對 kept indices；同檔涵蓋 end2end、multi_label、OBB、class offset、torchvision 有無與返回原索引，修改排序或截斷順序影響實際預測。已有 end2end classes-before-max_det 回歸測試。",
+    "symbols": [
+      "non_max_suppression",
+      "TorchNMS.nms",
+      "TorchNMS.fast_nms"
+    ],
+    "dependencies": [
+      "torch",
+      "metrics.box_iou",
+      "metrics.batch_probiou",
+      "torchvision（僅已載入時）"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_nms_end2end_classes_before_max_det",
+      "tests/test_python.py::test_predict_classes_with_max_det"
+    ],
+    "testIdeas": [
+      "建議：同位置不同類別兩框對照 agnostic=False/True，斷言 kept 數與原始 return_idxs 對應。",
+      "建議：空 boxes、完全不相交與高 IoU 三框，斷言 TorchNMS.nms 索引 dtype/int64、分數排序與閾值邊界。",
+      "建議：multi_label 同一 anchor 兩類別及 rotated 角度例，斷言額外 mask 欄位／angle 不被截斷或誤置。"
+    ],
+    "blockers": [
+      "torchvision 與純 Torch 路徑均需實跑；XPU 與 rotated 效能／輸出另驗。"
+    ],
+    "impact": "detect predictor 經 utils.nms、OBB val、nn/autobackend 輸出及 engine/exporter 的嵌入 NMS。"
+  },
+  {
+    "path": "ultralytics/utils/tal.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "make_anchors 與 distance 轉換是低成本純 tensor 測試；assigner 則有 top-k 衝突解決、小框放大、pose OKS、seg mask IoU 與 OOM 分 image 重試，數值變動會改正負樣本而非直接報錯。",
+    "symbols": [
+      "TaskAlignedAssigner",
+      "PoseTaskAlignedAssigner",
+      "SegTaskAlignedAssigner",
+      "RotatedTaskAlignedAssigner",
+      "make_anchors",
+      "bbox2dist",
+      "dist2bbox",
+      "rbox2dist"
+    ],
+    "dependencies": [
+      "torch",
+      "metrics.bbox_iou／probiou",
+      "ops.crop_mask",
+      "torch_utils.autocast"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "建議：2×3 feature grid、stride=8，斷言 anchor 順序為 (x+.5,y+.5) 與 stride tensor 形狀／dtype。",
+      "建議：無 GT 的 assigner forward，斷言 background label=num_classes、全 false foreground、原 device 與 batch/anchor 維度。",
+      "建議：一個 anchor 同時在兩 GT 內，以手算 overlap／align metric 斷言只指派一 GT；angle=0 時 rotated distance 往返。"
+    ],
+    "blockers": [
+      "未發現直接 import 的測試，訓練整合會間接執行；真實 OOM 重試需 GPU 壓力，不宜 monkeypatch 假裝驗證。"
+    ],
+    "impact": "utils/loss.py 的 detection/pose/segment/OBB 訓練；nn/modules/head.py 解碼，以及 Hailo、IMX、TensorFlow export anchors。"
+  },
+  {
+    "path": "ultralytics/utils/instance.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "Bboxes/Instances 大多是 NumPy 變換，固定小陣列即可測；但 box、segment、keypoint 必須同步索引與裁切，preserve_obb 依賴 OpenCV 幾何，錯誤會污染增強後標籤。",
+    "symbols": [
+      "Bboxes",
+      "Instances",
+      "Instances.clip",
+      "Instances.concatenate",
+      "Instances.remove_zero_area_boxes"
+    ],
+    "dependencies": [
+      "numpy",
+      "cv2",
+      "ops 座標轉換與 resample_segments"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "建議：三種 bbox 格式各做 flip 兩次與 normalize/denormalize 往返，斷言 boxes/segments/keypoints 全一致。",
+      "建議：一個退化框與一個正常框，remove_zero_area_boxes 後斷言回傳 mask 與三份標註同步減少。",
+      "建議：旋轉矩形跨圖邊／完全在外，clip(preserve_obb=True) 斷言可見 bbox、保留方向及外部 keypoint visibility=0。"
+    ],
+    "blockers": [
+      "未找到直接 Bboxes/Instances 測試；augmentation 整合不等於幾何邊界已驗證。浮點多邊形需容差。"
+    ],
+    "impact": "data/augment.py 的 Mosaic/RandomPerspective/LetterBox 等標籤操作與 data/dataset.py 標籤容器。"
+  },
+  {
+    "path": "ultralytics/utils/autobatch.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "CPU/MPS 的預設值分支容易驗；核心實際跑 train-mode model、量測 accelerator memory，再線性擬合與 OOM ceiling 推導 batch，必須在真硬體驗證。現有 GPU 回歸特別確認 batch-1 BatchNorm 失敗不可當記憶體上限。",
+    "symbols": [
+      "check_train_batch_size",
+      "autobatch"
+    ],
+    "dependencies": [
+      "torch",
+      "numpy.polyfit",
+      "torch_utils.profile_ops",
+      "accelerator memory API",
+      "deepcopy"
+    ],
+    "existingTests": [
+      "tests/test_cuda.py::test_autobatch"
+    ],
+    "testIdeas": [
+      "建議：CPU 小模型呼叫 autobatch(batch_size=7)，斷言回 7 且不執行 GPU profiling。",
+      "建議：真 GPU、cudnn.benchmark=False 且成功 profiling/fit 時，dataset_size=2 應限制結果在 1..2；同時確認 probe 不超過資料集大小。CPU/MPS 或 profiling 失敗的 fallback 回 batch_size，不適用此範圍斷言。",
+      "建議：真 GPU 對 imgsz=32 BN 模型重跑既有案例，再比較較大 imgsz 的結果能否實際跑一個 train step。"
+    ],
+    "blockers": [
+      "GPU memory 與共用機器負載會變；不可從固定數字斷言估算 batch。需模型、amp 及 cuda/npu/xpu 實際環境。"
+    ],
+    "impact": "engine/trainer.py 自動 batch 決策，影響訓練記憶體、effective batch 與資料集大小限制。"
+  },
+  {
+    "path": "ultralytics/utils/autodevice.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "困難",
+    "rationale": "GPUInfo 將 NVML 讀取、錯誤 fallback 與隨機平手排序包在同一類別；演算法不長，但 constructor／refresh 都讀真裝置，穩定驗證篩選需可控制的真多卡條件。tests/test_cuda.py 在收集階段使用 GPUInfo 選卡，這是環境設定使用，並非專門正確性斷言。",
+    "symbols": [
+      "GPUInfo",
+      "GPUInfo.refresh_stats",
+      "GPUInfo.select_idle_gpu",
+      "GPUInfo.shutdown"
+    ],
+    "dependencies": [
+      "pynvml（延遲、可選）",
+      "random",
+      "LOGGER"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_select_device"
+    ],
+    "testIdeas": [
+      "建議：count=0 與負值直接回 []；min_memory_fraction>1、min_util_fraction>1 斷言 AssertionError。",
+      "建議：真 NVML 多卡環境限制 indices=[單卡]，斷言所有回傳索引都在允許清單且 count 上限正確。",
+      "建議：真無 NVML 環境初始化後呼叫 refresh/select/shutdown 兩次，斷言不拋例外且返回 []。"
+    ],
+    "blockers": [
+      "test_select_device 對 GPUInfo 使用 monkeypatch，並非真 NVML 驗證；閒置率隨時間波動與 random tie-breaker 禁止固定平手順序。"
+    ],
+    "impact": "torch_utils.parse_device 的 device=-1 自動選卡，以及 tests/test_cuda.py 的測試裝置選擇。"
+  },
+  {
+    "path": "ultralytics/utils/git.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "容易",
+    "rationale": "不用 git 子程序，只讀 .git／worktree commondir、loose 或 packed refs 與 zlib loose commit，易以小型臨時 repository 真實驗證。message 對 packed object 返回 None 是目前實作邊界，不能把無 message 自動判作 bug。",
+    "symbols": [
+      "GitRepo",
+      "GitRepo._gitdir",
+      "GitRepo._refdir",
+      "GitRepo._ref_commit",
+      "GitRepo._commit_subject"
+    ],
+    "dependencies": [
+      "pathlib",
+      "zlib",
+      "functools.cached_property"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "建議：臨時 git init/commit，斷言 branch、commit、origin 與首行 message；再 detached HEAD 驗 branch=None。",
+      "建議：真實 git worktree 與 pack-refs 後，斷言 commondir 解析與 commit 跟 git rev-parse HEAD 相同。",
+      "建議：非 repo 目錄所有屬性為 None/is_repo=False；git gc 後不要求 packed object message 非空。"
+    ],
+    "blockers": [
+      "未搜尋到直接測試；建議整合測試需 git CLI 供建立 fixture，產品碼仍不依賴 CLI。cached_property 是單次 snapshot。"
+    ],
+    "impact": "utils/__init__.py 建立 GIT，checks 與 system info／telemetry 使用 repo 來源與版本資訊。"
+  },
+  {
+    "path": "ultralytics/utils/tqdm.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "數字／時間／Unicode 寬度格式容易用 StringIO 驗證；顯示節流、非互動 console、迭代提前終止與 progress callback 牽涉輸出生命週期。disable=True 時 update 不累加 n 是現有行為，測試需按 owner 契約設計。",
+    "symbols": [
+      "TQDM",
+      "TQDM._fit",
+      "TQDM._format_time",
+      "TQDM.__iter__",
+      "TQDM.close",
+      "is_noninteractive_console"
+    ],
+    "dependencies": [
+      "time",
+      "unicodedata",
+      "shutil",
+      "typing_extensions.Self",
+      "sys.stdout"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "建議：StringIO、disable=False、mininterval=0 跑 iterable，斷言元素未改、n=total、close 兩次只結束一次。",
+      "建議：_fit 給中文全寬字與 ANSI 色碼，斷言截斷含 reset 且顯示寬度不超指定值。",
+      "建議：_format_time 在 59.94／59.95／3600 秒及 byte 格式 1023／1024，斷言邊界字串；迭代中 raise 後 closed=True。"
+    ],
+    "blockers": [
+      "未發現直接測試；GitHub Actions 環境判定有 lru_cache，需獨立子程序驗非互動模式，不靠修改已快取全域。"
+    ],
+    "impact": "utils/__init__.py 匯出 TQDM；trainer/validator、download/upload、dataset scan 與批次處理進度列。"
+  },
+  {
+    "path": "ultralytics/utils/triton.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "困難",
+    "rationale": "初始化即連線，HTTP/GRPC config 結構不同；依 output name 排序、轉 server input dtype，最後所有輸出轉回第一個 input dtype。第二輪核對發現 test_integrations.py 確有真 Docker HTTP Triton smoke，不能說沒有測試；該測試沒有單獨斷言 dtype、輸出順序與 gRPC。",
+    "symbols": [
+      "TritonRemoteModel",
+      "TritonRemoteModel.__call__"
+    ],
+    "dependencies": [
+      "numpy",
+      "tritonclient.http／grpc（延遲）",
+      "ast.literal_eval",
+      "Triton Server"
+    ],
+    "existingTests": [
+      "tests/test_integrations.py::test_triton"
+    ],
+    "testIdeas": [
+      "建議：同一小模型經真 HTTP 與 gRPC 推論，斷言輸出值／shape 一致、metadata 正確。",
+      "建議：server FP16、client FP32，斷言 output dtype 依契約回 FP32；兩輸出逆序命名時 list 按名稱排序。",
+      "建議：動態 batch 1/2 與 URL /model/task 路徑，斷言 endpoint 為第一段且 server 結果 shape 正確。"
+    ],
+    "blockers": [
+      "既有測試拉 6.4 GB Docker image、開 8000 port，需 Docker daemon／網路；不代表當次 CI 執行成功。gRPC 與多輸入模型需額外真 server fixture。"
+    ],
+    "impact": "nn/backends/triton.py 經 AutoBackend 提供遠端 predict/val；輸出排序直接影響 task 後處理。"
+  },
+  {
+    "path": "ultralytics/utils/uploads.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "HTTP PUT owner 在每次 retry 重開檔案，因此完整重傳而非 resume；400 系列除 408/429 會直接 False，finally 關閉 reader/pbar。純檔案 reader 容易測，retry 分類、Content-Length、真 socket 中斷與資源釋放需本機 HTTP server。",
+    "symbols": [
+      "_ProgressReader",
+      "safe_upload"
+    ],
+    "dependencies": [
+      "requests（延遲）",
+      "TQDM",
+      "pathlib",
+      "time.sleep"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "建議：本機 HTTP server 收取 Unicode 路徑小檔，斷言 Content-Length、完整 bytes、自訂 header 與成功 True。",
+      "建議：server 先 503 再成功，斷言兩次 body 都完整從開頭傳；403 只有一次、429 允許 retry。",
+      "建議：缺檔呼叫斷言 FileNotFoundError；progress reader 分塊讀取至 EOF，斷言 len 及 close 後 file.closed。"
+    ],
+    "blockers": [
+      "未找到直接測試；不等於沒有間接執行。真重試有 2/4 秒 sleep，應使用小 retry；對雲端 signed URL 的認證另需整合環境。"
+    ],
+    "impact": "utils/callbacks/platform.py 上傳訓練 checkpoint；False 決定 callback 是否回報上傳完成。"
+  },
+  {
+    "path": "ultralytics/utils/logger.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "ConsoleLogger 可在隔離子程序用暫存檔／callback 驗證，但它替換 stdout/stderr、附加 logging handler、啟動 flush thread 並對 progress frame 去重；SystemLogger 又讀跨平台 mount、psutil 與 NVML。測試輸出容易，證明不重複日誌、final flush 不遺漏及無執行緒競爭較難。",
+    "symbols": [
+      "ConsoleLogger",
+      "ConsoleLogger.start_capture",
+      "ConsoleLogger.stop_capture",
+      "ConsoleLogger._flush_buffer",
+      "_DriveInfo",
+      "SystemLogger"
+    ],
+    "dependencies": [
+      "threading",
+      "logging",
+      "psutil（延遲）",
+      "pynvml（延遲、可選）",
+      "requests（API destination）",
+      "diskutil／lsblk／PowerShell"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "建議：隔離子程序捕捉 stdout/stderr/logging 到 tmp 檔，stop_capture 後斷言串流與 handler 恢復、剩餘 batch 只 flush 一次。",
+      "建議：真 TQDM 經 capture 多次 redraw／close，斷言中間 frame 為 progress state、最終 frame 成一行，idle flush 不重複產生 chunk。",
+      "建議：SystemLogger(gpus=[]) 在實際 OS 讀 metrics，斷言 gpus={}、disk 至少一個可讀 mount、rates 的網路／disk 值非負。"
+    ],
+    "blockers": [
+      "未找到直接測試；全域 stream 與背景 thread 應隔離子程序，不能平行污染 pytest；NVML 與 mount 解析需實際 OS runner。"
+    ],
+    "impact": "utils/callbacks/platform.py 在訓練中串流 console 與 system metrics；logger 與 callback 是不同 coverage owner。"
+  },
+  {
+    "path": "ultralytics/utils/export/onnx.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "calibration reader 的耗盡／rewind 很容易驗；實際 INT8 量化必須確認非 weighted decode 保留 float 且輸出可推論。既有排除節點測試 mock onnx.load/quantize_static，只證明傳參；另有 slow 的真匯出＋推論 smoke。",
+    "symbols": [
+      "onnx_calibration_reader",
+      "onnx_int8_quantize"
+    ],
+    "dependencies": [
+      "onnx（延遲）",
+      "onnxruntime.quantization（延遲）",
+      "calibration dataloader",
+      "transform_fn"
+    ],
+    "existingTests": [
+      "tests/test_exports.py::test_onnx_int8_quantize_excludes_non_weighted_ops",
+      "tests/test_exports.py::test_export_onnx_int8"
+    ],
+    "testIdeas": [
+      "建議：兩筆小型 NumPy calibration batch、非預設 input_name，斷言兩次 get_next 的 dict、第三次 None，rewind 後第一筆重現。",
+      "建議：建立真實 Conv→Sigmoid 小 ONNX 圖，量化後檢查 weighted op 量化、非 weighted 節點仍可執行。",
+      "建議：固定 image 比較 FP32/INT8 輸出形狀、finite 與合理非零 confidence，避免只斷言檔名。"
+    ],
+    "blockers": [
+      "onnxruntime 是可選依賴；完整模型 slow 測試要 calibration dataset、權重與下載，預設 non-slow suite 不執行。數值容差需依圖／資料定義。"
+    ],
+    "impact": "engine/exporter.py ONNX INT8 呼叫量化；export/qnn.py、export/xilinx.py 共用 calibration reader，rewind／input name 影響三種格式。"
+  }
+]

@@ -1,0 +1,406 @@
+{
+  "snapshotCommit": "bb3e1550dbb819bd9846d4c99f368aebe8792a0e",
+  "localHead": "308ebb92e153bb0f711e46309a5b570f70a66f78",
+  "lineEncoding": "0=hit, 1=miss; absent line is not counted",
+  "sourceAlignment": "git diff snapshotCommit HEAD -- all 10 inspected files has no diff; line numbers match for these files.",
+  "scope": "逐行靜態查核；未執行提案測試。缺行屬該快照，不推論最新 CI。",
+  "findings": [
+    {
+      "path": "ultralytics/nn/modules/activation.py",
+      "symbol": "AGLU.__init__/AGLU.forward",
+      "missingLines": [
+        36,
+        37,
+        38,
+        39,
+        53,
+        54
+      ],
+      "proposal": "CPU 建立 AGLU，固定 lambd=1、kappa=1，輸入 [-2,0,2]；另用 lambd=0 驗 clamp。",
+      "assertion": "lambda=1 時輸出等於 sigmoid(x)；零 lambda 時輸出有限且 shape 保留，backward 後 kappa.grad 有限。",
+      "caution": "AGLU 為獨立自訂 layer，沒有 modules/__init__.py 匯出；測試直接 import 此 owner。快照整檔 0%，不是已執行失敗。"
+    },
+    {
+      "path": "ultralytics/optim/muon.py",
+      "symbol": "zeropower_via_newtonschulz5",
+      "missingLines": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "proposal": "測 2D/3D 零矩陣及 tall/wide 非零矩陣；另外以 1D 輸入驗維度拒絕。",
+      "assertion": "零矩陣輸出全零且有限；tall/wide 皆保持 shape；1D 拋 AssertionError。",
+      "caution": "不要斷言五次 Newton-Schulz 後是精確正交矩陣；bf16 需 dtype-aware 容差，實際 kernel 可用性須驗。"
+    },
+    {
+      "path": "ultralytics/optim/muon.py",
+      "symbol": "MuSGD.step",
+      "missingLines": [
+        230,
+        231,
+        232,
+        233,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        256,
+        258,
+        259,
+        260,
+        261,
+        262,
+        263,
+        264,
+        265
+      ],
+      "proposal": "建立小型真 Parameter：p=[1]、grad=[2]，use_muon=False、lr=.1、momentum=0、weight_decay=0，step；另放一個 grad=None 參數。",
+      "assertion": "p 更新為 .8，grad=None 參數完全不變；有 closure 時回傳其 loss，momentum_buffer 建立且等於本輪梯度。",
+      "caution": "這是可手算 SGD 分支，不能代表 Muon 分桶/channels_last 路徑已驗；optimizer 分組需明確 use_muon=False。"
+    },
+    {
+      "path": "ultralytics/utils/files.py",
+      "symbol": "spaces_in_path",
+      "missingLines": [
+        89,
+        90,
+        91,
+        101,
+        102,
+        106
+      ],
+      "proposal": "tmp_path 建立有空白的單一檔案，進 context 改內容再 raise；另以無空白 Path 走 passthrough。",
+      "assertion": "例外後原檔內容已拷回、例外仍傳播；str 輸入產 str、Path 輸入產 Path；無空白路徑原樣 yield。",
+      "caution": "已有 test_utils_files 進入有空白的目錄，目錄拷回是 hit；本提案補的是單檔 branch 和無空白 branch，不是重複目錄 smoke。"
+    },
+    {
+      "path": "ultralytics/utils/metrics.py",
+      "symbol": "bbox_iou",
+      "missingLines": [
+        138,
+        139,
+        140,
+        141,
+        171,
+        172,
+        173,
+        174
+      ],
+      "proposal": "以 xywh=[0,0,2,2] 與 [4,0,2,2]，分別呼叫普通 IoU、DIoU、GIoU；另用相同框。",
+      "assertion": "分離框 IoU=0、DIoU 約 -0.4、GIoU 約 -1/3；同框各模式約 1；保持 broadcast shape。",
+      "caution": "注意 box_iou 已全 hit；真正 miss 是 bbox_iou 的 xywh 和非 CIoU 返回分支。eps 導致近似值需容差。"
+    },
+    {
+      "path": "ultralytics/utils/metrics.py",
+      "symbol": "Metric.maps",
+      "missingLines": [
+        1006,
+        1007,
+        1008,
+        1009
+      ],
+      "proposal": "Metric 設 nc=3、ap_class_index=[0,2]，all_ap 兩列各固定 .2/.8，讀取 maps。",
+      "assertion": "maps 約 [.2,.5,.8]；未出現 class 1 使用總體 mAP=.5，不是 0；輸出 shape=(3,)。",
+      "caution": "這是明確漏行，優先於重測 compute_ap/box_iou；兩者本快照函式內列出的 executable lines 均已 hit。"
+    },
+    {
+      "path": "ultralytics/models/utils/ops.py",
+      "symbol": "HungarianMatcher.forward",
+      "missingLines": [
+        96,
+        98,
+        99,
+        102,
+        103,
+        104,
+        105,
+        106,
+        109,
+        110,
+        111,
+        112,
+        113,
+        118,
+        121,
+        124,
+        131,
+        133,
+        134,
+        135,
+        136
+      ],
+      "proposal": "CPU 建 matcher，第一組 bs=2 的 gt_groups=[0,0]；第二組兩圖各一 GT，queries 與兩個 GT 明確一對一且 logits 無平手。",
+      "assertion": "空 GT 每圖回兩個 long 空 tensor；正常組每張 query/GT 一對一，第二圖 GT index 加上前圖的全域 offset；不建立 autograd 關聯。",
+      "caution": "快照 matcher 實作全部 miss；不需下載 RT-DETR 權重。NaN cost 修正可另驗，但不可把非有限輸入通過當作合理訓練資料。"
+    },
+    {
+      "path": "ultralytics/models/utils/ops.py",
+      "symbol": "get_cdn_group",
+      "missingLines": [
+        189,
+        190,
+        191,
+        192,
+        194,
+        196,
+        197,
+        198,
+        199,
+        204,
+        205,
+        206,
+        207,
+        210,
+        211,
+        212,
+        215,
+        216,
+        217,
+        244,
+        245,
+        246,
+        247,
+        249,
+        250,
+        252,
+        253,
+        254,
+        256,
+        257,
+        259,
+        261,
+        262,
+        263,
+        264,
+        265,
+        267,
+        268,
+        269,
+        276
+      ],
+      "proposal": "training=True、num_dn=2、gt_groups=[3,1]，cls_noise_ratio=0、box_noise_scale=0，使用小 class_embed；另測 gt_groups=[0,0]。",
+      "assertion": "過密圖最多保留 num_dn 個 GT，dn_meta.dn_gt_idx 不跨圖；dn_num_split 和 padding shape 一致；matching queries 的 mask 禁看 DN 區；全空 GT 回四個 None。",
+      "caution": "不訓練時早退 187/188 已 hit，不能只測 training=False 來補 coverage。關閉噪聲可精準斷言，正噪聲分支 224–242 仍需另測。"
+    },
+    {
+      "path": "ultralytics/models/utils/loss.py",
+      "symbol": "DETRLoss._get_loss_bbox",
+      "missingLines": [
+        138,
+        139,
+        141,
+        142,
+        144,
+        145,
+        146,
+        148,
+        149,
+        150,
+        151,
+        152
+      ],
+      "proposal": "建立 DETRLoss(nc=2)，pred_bboxes requires_grad=True；分別傳空 GT 和與 prediction 完全相同的 GT。",
+      "assertion": "空 GT 的 bbox/giou loss 為 0 且 requires_grad，總和 backward 後 pred.grad 存在、有限且全零；同框 L1=0、GIoU loss 近 0。",
+      "caution": "空 GT 分支使用 pred[..., :0].sum() 保留 DDP gradient graph，不能改成 torch.tensor(0)。整檔快照為 0%。"
+    },
+    {
+      "path": "ultralytics/models/utils/loss.py",
+      "symbol": "RTDETRDetectionLoss.get_dn_match_indices",
+      "missingLines": [
+        362,
+        363,
+        364,
+        365,
+        368,
+        369
+      ],
+      "proposal": "以每圖已知 dn_pos_idx、gt_idx 及 dn_num_group=2 呼叫 staticmethod；另做長度不一致案例。",
+      "assertion": "回傳 GT 索引重複兩次且順序精確，dn_pos_idx 原樣對齊；長度錯誤拋 AssertionError 並包含預期/實際長度。",
+      "caution": "純索引測試不代表完整 RT-DETR auxiliary/focal loss 已驗，但可直接落到全部列出的漏行。"
+    },
+    {
+      "path": "ultralytics/models/sam/modules/utils.py",
+      "symbol": "select_closest_cond_frames",
+      "missingLines": [
+        34,
+        35,
+        36,
+        38,
+        39,
+        42,
+        43,
+        44,
+        47,
+        48,
+        49,
+        53,
+        54,
+        58,
+        59,
+        61
+      ],
+      "proposal": "frame_idx=5、outputs={1:a,3:b,7:c,9:d}、max=2；另測 max=-1 和 max=1。",
+      "assertion": "max=2 選 {3:b,7:c}，未選 {1:a,9:d} 且原字典不變；-1 回全量；需要裁切且 max=1 時拒絕。",
+      "caution": "函式定義行為 hit 不等於 body hit；此函式實際選幀 body 均 miss。不需 SAM 權重。"
+    },
+    {
+      "path": "ultralytics/models/sam/modules/utils.py",
+      "symbol": "window_partition/window_unpartition",
+      "missingLines": [
+        242,
+        244,
+        245,
+        246,
+        247,
+        248,
+        250,
+        251,
+        252,
+        281,
+        282,
+        283,
+        284,
+        285,
+        287,
+        288,
+        289
+      ],
+      "proposal": "arange tensor shape=(2,5,7,3)、window_size=4，partition 後再 unpartition；另測可整除尺寸。",
+      "assertion": "pad_hw=(8,8)、windows.shape=(8,4,4,3)；roundtrip 與原值完全相同且無 padding 留下；可整除時 pad_hw 原尺寸。",
+      "caution": "只驗 shape 不足以抓 permute 錯位；arange 值逐元素 roundtrip 才是核心。"
+    },
+    {
+      "path": "ultralytics/models/sam/amg.py",
+      "symbol": "is_box_near_crop_edge",
+      "missingLines": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "proposal": "crop=[100,100,200,200]、orig=[0,0,300,300]、atol=0，框分別貼 crop edge 及完全在內；另讓 crop=orig。",
+      "assertion": "貼內部 crop edge=True、內框=False；當 crop=orig，同樣貼邊框=False，因為原圖邊界不應被當成 crop 截斷。",
+      "caution": "以 CPU tensor 精確比較，不要使用預設 atol=20 導致內框意外也算近邊。"
+    },
+    {
+      "path": "ultralytics/utils/logger.py",
+      "symbol": "ConsoleLogger._flush_buffer/stop_capture",
+      "missingLines": [
+        193,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        202,
+        203,
+        206,
+        207,
+        208,
+        213,
+        214,
+        225,
+        226,
+        227
+      ],
+      "proposal": "隔離子程序以本地檔 destination 和收集型 on_flush callback 捕捉兩行 stdout，batch_size 足夠大，stop_capture 做 final flush，再呼叫空 flush。",
+      "assertion": "檔案兩行各一次；callback line_count=2、chunk_id 只增一次；再次空 flush 不增加 chunk；stdout/stderr/handler 恢復。",
+      "caution": "logger 全檔 miss。全域 stream 和背景執行緒必須 finally stop 且隔離子程序；不連外部 API，也不 mock 系統裝置。"
+    },
+    {
+      "path": "ultralytics/engine/results.py",
+      "symbol": "Results.summary semantic binary branch",
+      "missingLines": [
+        878,
+        879,
+        880,
+        882
+      ],
+      "proposal": "Results names={0:foreground}，semantic_mask=[[0,1],[255,1]]；另以兩類 names 且 mask 含 255 測 ignore。",
+      "assertion": "binary summary 只一列 class=0、name=foreground、pixel_ratio=.5，0/255 都不輸出；多類忽略 255 且 ratio 分母仍為全部像素。",
+      "caution": "Results 檔案整體 94.28% 很高，但此 binary/ignore branch 確實 miss；空 dense slice 已 hit，不應標成新增 coverage。"
+    },
+    {
+      "path": "ultralytics/engine/results.py",
+      "symbol": "Results.save",
+      "missingLines": [
+        676,
+        677,
+        678,
+        679,
+        680
+      ],
+      "proposal": "本地 synthetic image 建 Results，保存到不存在的多層 tmp_path/dir/out.jpg；另在隔離 cwd 省略 filename。",
+      "assertion": "巢狀目錄建立、回傳指定 filename 且圖片可讀；預設回傳 results_<原始檔名> 並確實落檔。",
+      "caution": "plot 路徑多數已 hit，但 save wrapper 的預設命名/建目錄 body 全 miss；避免檔名或 cwd 污染其他測試。"
+    }
+  ],
+  "corrections": [
+    {
+      "path": "ultralytics/utils/metrics.py",
+      "topic": "基本 IoU/AP 提案降級",
+      "evidence": "box_iou executable lines 全 hit；compute_ap 全 hit。",
+      "action": "保留作回歸基線；新增 coverage 優先選 bbox_iou xywh/DIoU/GIoU 或 Metric.maps 漏行。"
+    },
+    {
+      "path": "ultralytics/utils/files.py",
+      "topic": "file_size 精確加總不屬已知未覆蓋行",
+      "evidence": "file_size 172–181 的 9 個可執行行均 hit；spaces_in_path 目錄路徑已 hit。",
+      "action": "回歸價值仍在，但 coverage 入口應標為單檔 branch 89–91/101–102、passthrough 106、mkdir 155、WorkingDirectory 47–56。"
+    },
+    {
+      "path": "ultralytics/engine/results.py",
+      "topic": "Boxes/dense 索引提案降級",
+      "evidence": "Boxes 36 個 executable lines 全 hit；_DenseResultTensor 7 個 executable lines 全 hit；test_dense_result_tensor_indexing/test_results_plot_empty_dense_selection 有明確斷言。",
+      "action": "改標既有回歸基線；實際 miss 選 semantic binary summary、save wrapper 或 Probs.top1conf 1401。"
+    },
+    {
+      "path": "ultralytics/models/fastsam/utils.py",
+      "topic": "不要由低覆蓋 SAM 推及 FastSAM utils",
+      "evidence": "FastSAM utils 快照 100%；SAM modules/utils.py 11.33%。",
+      "action": "分開 owner；SAM window roundtrip/conditioning frame selection 才是此快照的低成本漏行機會。"
+    },
+    {
+      "path": "ultralytics/optim/muon.py",
+      "topic": "函式定義 hit 不等於執行",
+      "evidence": "zeropower_via_newtonschulz5、muon_update、MuSGD.step 僅定義行 hit，主要 body 全 miss。",
+      "action": "不能把 10.58% 當作已有 optimizer 行為驗證；分別測正交化、更新、SGD/Muon step。"
+    },
+    {
+      "path": "ultralytics/data/converter.py",
+      "topic": "depth 404 配對清理已測",
+      "evidence": "tests/test_ndjson_converter.py::test_convert_depth_ndjson_removes_incomplete_pair 已有精確 assert。",
+      "action": "audit-engine-data 已將該提案改為既有回歸基線，不能聲稱未覆蓋。"
+    },
+    {
+      "path": "ultralytics/data/build.py",
+      "topic": "tiny loader worker cap 已測",
+      "evidence": "tests/test_python.py::test_dataloader_caps_workers_to_batches 已測 tiny dataset batch/worker cap。",
+      "action": "audit-engine-data 已改標回歸基線。"
+    },
+    {
+      "path": "ultralytics/engine/tuner.py",
+      "topic": "整數 bounds 要指定整數 key",
+      "evidence": "Tuner._constrain 只有 k in CFG_INT_KEYS 才使用 ceil/floor/round。",
+      "action": "提案已指定 epochs；若任選浮點 key，bounds=(1.2,3.9) 候選 9 會回 3.9 而非 int 3。"
+    }
+  ]
+}

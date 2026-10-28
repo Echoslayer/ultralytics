@@ -1,0 +1,257 @@
+[
+  {
+    "path": "ultralytics/utils/tuner.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "_sanitize_tune_value 是容易測的遞迴轉換；核心適配 9 個 Ray searcher、ConfigSpace 整數上界、trial 命名、scheduler、resume 與多資料集平均分數。修改搜尋空間可能悄悄改變探索範圍／trial 參數，完整驗證要真 Ray worker。現有 random 與預設 search_alg 整合 smoke 不等於所有 searcher 都驗過。",
+    "symbols": [
+      "_sanitize_tune_value",
+      "_get_ray_search_alg_kind",
+      "_convert_bohb_search_space",
+      "_resolve_ray_search_alg",
+      "run_ray_tune"
+    ],
+    "dependencies": [
+      "numpy",
+      "ray[tune]>=2.41.0",
+      "optuna（預設）",
+      "ConfigSpace／hpbandster（BOHB）",
+      "其他 searcher 可選套件",
+      "cfg.TASK2METRIC"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_model_tune_ray",
+      "tests/test_integrations.py::test_model_ray_tune"
+    ],
+    "testIdeas": [
+      "建議：巢狀 dict/list/tuple 含 np.float32、np.int64、ndarray，斷言變 native、tuple 型別保留且原輸入不改。",
+      "建議：真 tune.randint(2,5) 轉 BOHB 後 ConfigSpace 上界為 4；grid_search／quantized sampler 分別明確 ValueError/TypeError。",
+      "建議：真 Ray CPU 兩個 one-epoch trial，斷言 trial 目錄不同、傳入 space 未被加 data、更名／resume 可恢復同 tuner。"
+    ],
+    "blockers": [
+      "需要多程序 Ray 與各 searcher 依賴；check_requirements 可能自動安裝；資源、資料集及 checkpoint 成本較高。test_model_tune_ray 是 slow；不能把一般非 Ray test_model_tune 當本檔覆蓋。"
+    ],
+    "impact": "engine/model.py::Model.tune(use_ray=True)，與 callbacks/raytune.py 的 epoch 指標回報協作。"
+  },
+  {
+    "path": "ultralytics/utils/callbacks/base.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "多數 hooks 是空函式，真正 owner 是 deepcopy default lists、根據 instance 類名與每次讀 SETTINGS 動態載入 integration、去除重複註冊。列表隔離易測，但註冊改動會影響 train/val/predict/export 所有事件順序；保留 hooks 不代表 engine 都會觸發，部分文件已註明 reserved。",
+    "symbols": [
+      "get_default_callbacks",
+      "add_integration_callbacks",
+      "on_fit_epoch_end",
+      "optimizer_step"
+    ],
+    "dependencies": [
+      "collections.defaultdict",
+      "copy.deepcopy",
+      "importlib.import_module",
+      "utils.SETTINGS",
+      "utils.events"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_predict_callback_and_setup"
+    ],
+    "testIdeas": [
+      "建議：兩次 get_default_callbacks，向其中一份 on_train_start append，斷言另一份及 default_callbacks 不變、未知 event 得新空 list。",
+      "建議：隔離程序建立真 Predictor/Trainer，add_integration_callbacks 呼叫兩次後斷言同一函式只出現一次，原有自訂 callback 順序保持。",
+      "建議：兩次建立 trainer 中間改 SETTINGS，斷言新 trainer 依當次設定載入；Predictor 不載入訓練專用 integration。"
+    ],
+    "blockers": [
+      "pyproject.toml coverage omit 明確排除此目錄，缺報告不是 0%。既有 predict callback 測試主要迭代／列印，沒有專門斷言 integration 載入集合。"
+    ],
+    "impact": "engine/model.py、trainer.py、predictor.py、validator.py、exporter.py 初始化 callback；自訂 integration 的順序與重複執行皆由此管理。"
+  },
+  {
+    "path": "ultralytics/utils/callbacks/mlflow.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "sanitize_dict 是純字串／float 轉換；MLflow 生命週期區分使用外部 active run 與自行建立 run，還有 log 失敗停用與 teardown FAILED 狀態。真 SQLite tracking 可在本地驗，修改時不能關掉使用者原有 run。現有 keep_run_active 測試確有 RUNNING／None 斷言。",
+    "symbols": [
+      "sanitize_dict",
+      "on_pretrain_routine_end",
+      "_log_metrics",
+      "on_train_end"
+    ],
+    "dependencies": [
+      "mlflow（可選 import）",
+      "os.environ",
+      "trainer args／metrics／artifacts"
+    ],
+    "existingTests": [
+      "tests/test_integrations.py::test_mlflow",
+      "tests/test_integrations.py::test_mlflow_keep_run_active"
+    ],
+    "testIdeas": [
+      "建議：sanitize_dict 對 metrics/mAP50(B) 與 NumPy scalar，斷言括號去除及 native float。",
+      "建議：真 SQLite tracking 預先 start_run，再短訓練／on_train_end，斷言 integration 不結束外部 run。",
+      "建議：真短訓練讀 tracking store，斷言 epoch metric step、關鍵 params／artifacts，及自建 run teardown 失敗狀態。"
+    ],
+    "blockers": [
+      "callbacks 被 coverage omit；需 mlflow 可選依賴及資料集。TESTS_RUNNING 時只有名稱含 test_mlflow 的 pytest path 通過 guard，新測試須符合或用隔離子程序，不可從 smoke 推定所有 hook 已跑。"
+    ],
+    "impact": "base.add_integration_callbacks 在 SETTINGS.mlflow=True 的 Trainer 掛載，影響 experiment、run ownership、metrics 與 checkpoint artifacts。"
+  },
+  {
+    "path": "ultralytics/utils/callbacks/tensorboard.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "scalar 用 epoch+1 寫入，WRITER 是 module global，graph trace 先原模型 eval、失敗後 deepcopy/fuse export fallback；teardown 關閉並清空 writer。事件檔可本地讀取驗證，但 TESTS_RUNNING 下 import guard 會令 SummaryWriter=None，所以既有 test_tensorboard 即使 train 成功也不能直接當實際 writer 覆蓋證據。",
+    "symbols": [
+      "_log_scalars",
+      "_log_tensorboard_graph",
+      "on_pretrain_routine_start",
+      "on_train_epoch_end",
+      "teardown"
+    ],
+    "dependencies": [
+      "torch.utils.tensorboard.SummaryWriter（可選）",
+      "torch.jit.trace",
+      "deepcopy",
+      "torch_utils"
+    ],
+    "existingTests": [
+      "tests/test_integrations.py::test_tensorboard"
+    ],
+    "testIdeas": [
+      "建議：非 pytest 隔離子程序啟用 TensorBoard 跑一 epoch，EventAccumulator 讀真 event file，斷言 train loss／lr／val scalars 的 step=1。",
+      "建議：連續兩次短訓練不同 save_dir，斷言各目錄各有事件、teardown 後 WRITER=None、不把第二輪數據寫入第一輪。",
+      "建議：graph trace 實跑小模型，檢查 graph event 及訓練開始時 model train/eval 狀態是否符合 engine 契約。"
+    ],
+    "blockers": [
+      "callbacks 被 coverage omit；既有 test_tensorboard 是 slow 且模組 assert not TESTS_RUNNING，不能只看測試名稱判定 writer 生效；trace 與模型版本相容性需真 PyTorch。"
+    ],
+    "impact": "Trainer TensorBoard scalars、graph 及 writer 資源生命週期；SETTINGS.tensorboard 控制動態註冊。"
+  },
+  {
+    "path": "ultralytics/utils/export/engine.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "同檔既供一般 ONNX 串行匯出與 LiteRT 座標正規化，也負責 TensorRT 7–11 的 builder API、implicit calibration／QDQ、FP16／INT8、DLA 與 metadata header。小 normalize wrapper 可 CPU 測，完整 engine 變動需要真 NVIDIA 硬體與版本矩陣。已有 thread-lock mock 測試及真 CUDA export→predict→val matrix。",
+    "symbols": [
+      "_NormalizeCoords",
+      "best_onnx_opset",
+      "torch2onnx",
+      "modelopt_quantize_onnx",
+      "onnx2engine"
+    ],
+    "dependencies": [
+      "torch",
+      "onnx",
+      "tensorrt（延遲）",
+      "nvidia-modelopt（TRT11 precision）",
+      "numpy",
+      "cv2"
+    ],
+    "existingTests": [
+      "tests/test_exports.py::test_torch2onnx_serializes_concurrent_exports",
+      "tests/test_exports.py::test_modelopt_quantize_onnx_requires_int8_dataset",
+      "tests/test_cuda.py::test_export_engine_matrix",
+      "tests/test_cuda.py::test_onnx_dynamic_spatial_outputs"
+    ],
+    "testIdeas": [
+      "建議：CPU 固定 tensor model 經 _NormalizeCoords，對非方形 h/w 與 pose visibility 做精確斷言，tuple 的 auxiliary output 不變。",
+      "建議：真 ONNX 小圖缺 calibration dataset 的 INT8 路徑，斷言明確 ValueError 且無半成品 engine；QDQ 圖依 TRT 版本確認免校準路徑。",
+      "建議：真 TensorRT 靜態／動態 batch 推論在 min/opt/max shape，驗 metadata 讀回、預測 shape/finite；Jetson DLA 另外驗精度與 GPU fallback。"
+    ],
+    "blockers": [
+      "TensorRT GPU 與 Jetson DLA 不能用 mock 證明；既有 CUDA matrix 對 TRT<11 的 dynamic+INT8 skip。onnx2engine 有硬體／SDK 分支與外部套件安裝成本。"
+    ],
+    "impact": "engine/exporter.py 的 ONNX/TensorRT、utils/export/litert.py 的 _NormalizeCoords；utils/export/__init__.py 重新匯出 torch2onnx／onnx2engine。"
+  },
+  {
+    "path": "ultralytics/utils/export/tensorflow.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "tf_wrapper 在 export 時綁定 head methods，將 box/keypoint 按 grid 正規化；onnx2saved_model 包含 TensorFlow/onnx2tf 相容依賴、calibration 暫存檔、外部 TopK 程式檔 patch 與量化產物更名；EdgeTPU 又呼叫外部 compiler。純 decode 可 CPU 精確比對，整體驗證需隔離環境，現有 test_export_pb 是 unconditional skip。",
+    "symbols": [
+      "tf_wrapper",
+      "_tf_decode_boxes",
+      "_tf_kpts_decode",
+      "onnx2saved_model",
+      "keras2pb",
+      "tflite2edgetpu",
+      "gd_outputs"
+    ],
+    "dependencies": [
+      "torch",
+      "numpy",
+      "tensorflow",
+      "tf_keras",
+      "onnx2tf>=1.26.3,<1.29.0",
+      "onnxruntime",
+      "EdgeTPU compiler（部分路徑）"
+    ],
+    "existingTests": [
+      "tests/test_exports.py::test_export_pb"
+    ],
+    "testIdeas": [
+      "建議：真 Detect／Pose／Pose26 小 head 在非方形 feature grid，比較 normalized decode 還原像素值，斷言 x/w、y/h 與 visibility sigmoid 分別正確。",
+      "建議：隔離 TensorFlow venv 匯出小模型，檢查 SavedModel signature、TFLite input/output 與 INT8 calibration 檔成功後刪除、產物命名正確。",
+      "建議：真最小 GraphDef 含 NoOp 與兩個 terminal nodes，gd_outputs 回排序 tensor 名稱；Linux x86 compiler 實跑小 TFLite 驗 _edgetpu 檔。"
+    ],
+    "blockers": [
+      "test_export_pb 用 skipif(True)，不能算目前 CI 執行證據；多大型可選依賴與 Python/OS 版本 pin，TopK patch 會修改已安裝套件檔，必須一次性隔離 venv。EdgeTPU 僅 Linux x86_64。"
+    ],
+    "impact": "engine/exporter.py SavedModel/PB/TFLite/EdgeTPU 及 head export wrapper；nn/backends/tensorflow.py 以 gd_outputs 匯入 frozen GraphDef。"
+  },
+  {
+    "path": "ultralytics/utils/export/rknn.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "early guard 與 return-code helper 容易測，但 onnx2rknn 擁有晶片 INT8 限制、calibration list、auto-hybrid、head Conv output 切圖與 tail.onnx，修改後必須驗量化後 box/score 解碼。現有 slow RKNN 測試只 assert .rknn 存在，未在硬體推論或比對數值。",
+    "symbols": [
+      "_check_rknn_return",
+      "onnx2rknn"
+    ],
+    "dependencies": [
+      "rknn-toolkit2>=2.3.2,<2.5",
+      "setuptools<82",
+      "onnx（切圖時）",
+      "YAML metadata",
+      "Rockchip 目標硬體"
+    ],
+    "existingTests": [
+      "tests/test_exports.py::test_export_rknn"
+    ],
+    "testIdeas": [
+      "建議：rv1106+quantize=16、INT8 無 dataset／缺 list 檔，斷言 ValueError 在 toolkit import 前；helper 0/None 通過、非零 RuntimeError。",
+      "建議：真 toolkit 對 FP16 與 INT8 小模型轉換，檢查 config target／metadata、INT8 hybrid head 切分產出 tail.onnx 及其 IO 名稱。",
+      "建議：真 Rockchip 執行輸出接 tail.onnx，與原始 ONNX 比對 boxes/score shape、finite、confidence 非全零；分 INT8-only 與一般晶片。"
+    ],
+    "blockers": [
+      "既有 test_export_rknn 是 slow、Linux 非 ARM64 限定，僅檔案存在證據；SDK 在 host 轉換與實機 runtime 是不同條件。Colab 分支還改 builtins.exit，全域副作用需隔離程序。"
+    ],
+    "impact": "engine/exporter.py::export_rknn 與 nn/backends/rknn.py 讀 metadata／tail；晶片名、quantize、batch 及切圖 output 改動會影響實機部署。"
+  },
+{
+  "path": "ultralytics/utils/callbacks/raytune.py",
+  "changeDifficulty": "容易",
+  "testDifficulty": "中等",
+  "rationale": "只有一個實際 hook，檢查 active trial 再 report trainer.metrics 加 epoch+1，修改量雖小卻直接決定 ASHA／BOHB 收到哪個訓練進度。純傳參 mock 不足以證明 Ray session 內真的回報，應在真本地 trial 讀結果；module import 會檢查 tune.get_context 能力並在依賴缺席時不註冊。",
+  "symbols": [
+    "on_fit_epoch_end"
+  ],
+  "dependencies": [
+    "ray.tune（可選）",
+    "trainer.metrics",
+    "trainer.epoch",
+    "callbacks/base.py SETTINGS.raytune"
+  ],
+  "existingTests": [
+    "tests/test_integrations.py::test_model_ray_tune",
+    "tests/test_python.py::test_model_tune_ray"
+  ],
+  "testIdeas": [
+    "建議：真 Ray 本地 CPU trial 執行一個 epoch，讀 Result.metrics，斷言目標 TASK2METRIC 與 epoch=1，確定不是僅 train() 回傳 final metrics。",
+    "建議：非 Ray 隔離程序在已安裝 Ray 下呼叫 hook，斷言沒有 active trial 時不 report／不改 trainer.metrics。",
+    "建議：真兩個 epoch trial 保存 metrics dataframe，斷言 report 的 epoch 為1、2且原 metrics 沒有被加入／覆寫 epoch。"
+  ],
+  "blockers": [
+    "callbacks 被 coverage omit；現有 tune 整合 smoke 未專門斷言 callback report 的歷史。Ray worker 依賴、多程序與 rank／session 上下文使完整測試高於一般純函式。"
+  ],
+  "impact": "utils/tuner.py 配置 scheduler 的 time_attr='epoch' 與 task metric；base.add_integration_callbacks 在 Ray tuning 的 trainer 註冊此 hook。"
+}
+]

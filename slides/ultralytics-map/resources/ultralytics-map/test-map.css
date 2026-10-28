@@ -1,0 +1,28 @@
+.um-tests .um-toolbar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.um-tests .um-toolbar label{font-size:12px}
+.um-tests .um-panes{height:570px;grid-template-columns:minmax(250px,.85fr) minmax(340px,1.5fr)}
+.um-tests .um-list b{font-size:14px}
+.um-tests .um-count{font-size:13px;color:#4e6778;margin:8px 0}
+.um-badge{display:inline-block;font-size:11px!important;padding:3px 7px;border-radius:5px;border:1px solid #c4d2dc;background:#e8edf2;color:#4d6271;white-space:nowrap;line-height:1.5}
+.um-d0{background:#e1f4eb;color:#16634a;border-color:#afd7c5}
+.um-d1{background:#fff1d9;color:#805514;border-color:#e8cc9d}
+.um-d2{background:#f8e4e3;color:#963c3a;border-color:#e1b9b7}
+.um-detail h4{margin:22px 0 7px;font-size:16px;color:#164a61}
+.um-detail li{font-size:14px;line-height:1.7;margin-bottom:8px;overflow-wrap:anywhere}
+.um-detail code{overflow-wrap:anywhere;font-size:12px}
+.um-file-head h3{font-size:20px;overflow-wrap:anywhere}
+.um-symbols{display:grid;gap:8px;font-size:13px}
+.um-gap summary{display:flex;justify-content:space-between;gap:10px;font-size:13px}
+.um-gap summary span{white-space:nowrap;color:#9c4a39}
+.um-gap pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:#e7eef3;border-radius:5px;padding:12px;line-height:1.8}
+.um-crosscheck{background:#e3f1ee;border-left:3px solid #12806c;padding:12px;margin:10px 0;border-radius:5px}
+.um-crosscheck b,.um-crosscheck small{font-size:13px}
+.um-next-file{border:1px solid #0b7884;background:#edf8f6;color:#065c69;border-radius:7px;padding:9px;font:inherit;cursor:pointer}
+.um-test-preview{padding:20px;background:#f0f6f8;border-radius:14px}
+.um-test-preview h3{margin-top:0}
+.um-preview-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.um-preview-grid article{background:white;padding:15px;border:1px solid #d3e2e8;border-radius:8px}
+.um-preview-grid article>b{font-size:15px}
+.um-preview-grid article>p{font-size:13px;line-height:1.6}
+.um-preview-grid article>strong{font-size:24px;color:#087d86}
+@media(max-width:700px){.um-tests .um-toolbar{grid-template-columns:repeat(2,minmax(0,1fr))}.um-tests .um-toolbar label{min-width:0}.um-tests .um-panes{grid-template-columns:1fr;height:auto}.um-tests .um-list{max-height:240px}.um-tests .um-detail{max-height:650px}.um-preview-grid{grid-template-columns:1fr}}

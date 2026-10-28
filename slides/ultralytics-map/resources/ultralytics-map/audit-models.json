@@ -1,0 +1,823 @@
+[
+  {
+    "path": "ultralytics/nn/modules/activation.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "容易",
+    "rationale": "AGLU 只有兩個 learnable parameters 與 clamp/Softplus；固定參數可在 CPU 精確驗證。",
+    "symbols": [
+      "AGLU",
+      "AGLU.forward"
+    ],
+    "dependencies": [
+      "torch",
+      "torch.nn"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "固定 lambd=1、kappa=1，比對 [-2,0,2] 與公式值。",
+      "lambd=0 時驗輸出有限、形狀不變及 kappa 梯度。"
+    ],
+    "blockers": [],
+    "impact": "自訂 AGLU 網路；未由 modules/__init__.py 匯出。"
+  },
+  {
+    "path": "ultralytics/nn/modules/utils.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "inverse_sigmoid 可解析驗算；同檔 deformable attention 涉及 grid_sample 與 CoreML rank 限制。",
+    "symbols": [
+      "inverse_sigmoid",
+      "bias_init_with_prob",
+      "_get_clones",
+      "multi_scale_deformable_attn_pytorch"
+    ],
+    "dependencies": [
+      "numpy",
+      "torch.nn.functional.grid_sample",
+      "copy"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "sigmoid(inverse_sigmoid([0.2,0.5,0.8])) 應還原輸入。",
+      "單層1x1、單頭中心採樣與權重1，attention 輸出應等於 value。"
+    ],
+    "blockers": [
+      "修改 attention rank 需 CoreML 轉換。"
+    ],
+    "impact": "RT-DETR transformer 與 SAM3 inverse_sigmoid 呼叫者。"
+  },
+  {
+    "path": "ultralytics/nn/modules/conv.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "autopad 可直接驗算；Conv2/RepConv 融合會刪除分支，必須比對融合前後。",
+    "symbols": [
+      "autopad",
+      "Conv2.fuse_convs",
+      "RepConv.fuse_convs",
+      "Focus",
+      "Concat",
+      "Index"
+    ],
+    "dependencies": [
+      "torch",
+      "numpy",
+      "torch.nn.BatchNorm2d"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_nn_modules_conv"
+    ],
+    "testIdeas": [
+      "autopad(3,d=2)=2，autopad([3,5])=[1,2]，明確 p 保留。",
+      "Conv2.eval 固定輸入，fuse_convs 前後 allclose。"
+    ],
+    "blockers": [],
+    "impact": "所有卷積骨幹、模型融合與匯出。"
+  },
+  {
+    "path": "ultralytics/nn/modules/block.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "DFL、CSP、prototype 與 attention 共存；通道拼接變更會跨大量 YAML 架構。",
+    "symbols": [
+      "DFL",
+      "C2f.forward",
+      "C2f.forward_split",
+      "SPPF",
+      "Proto"
+    ],
+    "dependencies": [
+      "torch",
+      "nn/modules/conv.py",
+      "nn/modules/transformer.py"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_nn_modules_block"
+    ],
+    "testIdeas": [
+      "C2f.eval 的 forward 與 forward_split 對同輸入 allclose。",
+      "DFL(c1=4) 全零 logits，四方向期望距離均為1.5。"
+    ],
+    "blockers": [
+      "單一模型 forward 不能代表所有 blocks。"
+    ],
+    "impact": "YOLO 骨幹、分割原型與 Detect 解碼。"
+  },
+  {
+    "path": "ultralytics/nn/modules/transformer.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "AIFI 位置編碼必須符合 flatten 行列順序；deformable attention 張量 shape 正確仍可能語意錯位。",
+    "symbols": [
+      "AIFI.build_2d_sincos_position_embedding",
+      "MSDeformAttn",
+      "LayerNorm2d",
+      "DeformableTransformerDecoder"
+    ],
+    "dependencies": [
+      "torch",
+      "nn/modules/utils.py",
+      "nn/modules/conv.py"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_nn_aifi_pos_embed_row_major"
+    ],
+    "testIdeas": [
+      "14x28 的位置編碼 row 通道沿列不變、column 通道沿行不變。",
+      "LayerNorm2d 比較手算 channel 均值及變異數。"
+    ],
+    "blockers": [
+      "attention 變更需 RT-DETR 與匯出整合。"
+    ],
+    "impact": "RT-DETR decoder 與 AIFI 特徵編碼。"
+  },
+  {
+    "path": "ultralytics/nn/modules/head.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "多任務共享 head、anchor cache、top-k、訓練與 export 回傳格式，局部 shape 測試不足以驗所有部署。",
+    "symbols": [
+      "Detect.postprocess",
+      "Detect.get_topk_index",
+      "Depth.forward",
+      "SemanticSegment.forward",
+      "RTDETRDecoder"
+    ],
+    "dependencies": [
+      "torch",
+      "utils/tal.py",
+      "nn/modules/block.py",
+      "nn/modules/transformer.py"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_nn_detect_head_export_clamps_max_det",
+      "tests/test_python.py::test_nn_depth_head_export_upsamples_to_input",
+      "tests/test_python.py::test_nn_depth_head_no_dead_parameters"
+    ],
+    "testIdeas": [
+      "Detect export 對21 anchors 應輸出 (1,21,6)，max_det 不超額。",
+      "Depth train depth.sum().backward 後所有參數有梯度。",
+      "Depth export 等於 native 以 align_corners=True 放大四倍。"
+    ],
+    "blockers": [
+      "需多任務、匯出 runtime 與 GPU 效能驗證。"
+    ],
+    "impact": "全部 YOLO head、loss 輸入及部署匯出。"
+  },
+  {
+    "path": "ultralytics/nn/tasks.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "parse_model 管理 YAML 模組解析、通道與 repeat；checkpoint 安全載入和舊名稱映射影響既有權重。",
+    "symbols": [
+      "parse_model",
+      "guess_model_task",
+      "temporary_modules",
+      "load_checkpoint",
+      "BaseModel"
+    ],
+    "dependencies": [
+      "torch",
+      "nn/modules",
+      "utils/loss.py",
+      "utils/torch_utils.py"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_all_model_yamls",
+      "tests/test_python.py::test_temporary_modules_restores_preexisting_alias",
+      "tests/test_engine.py::test_load_checkpoint_state_dict_rejected"
+    ],
+    "testIdeas": [
+      "現有 model YAML 全部可建立及推斷任務。",
+      "temporary_modules 結束後既存 sys.modules alias 回原物件。"
+    ],
+    "blockers": [
+      "需多架構與可信歷史 checkpoint。"
+    ],
+    "impact": "模型建立、checkpoint 及所有模式。"
+  },
+  {
+    "path": "ultralytics/nn/autobackend.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "集中選擇後端、NHWC、精度與靜態 batch 補零切分，影響全部部署格式。",
+    "symbols": [
+      "AutoBackend._model_type",
+      "AutoBackend.forward",
+      "check_class_names",
+      "AutoBackend.from_numpy"
+    ],
+    "dependencies": [
+      "torch",
+      "nn/backends",
+      "engine/exporter.py",
+      "utils/checks.py"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_autobackend_memory_format",
+      "tests/test_exports.py::test_export_onnx_matrix"
+    ],
+    "testIdeas": [
+      "best.pt.onnx 選 onnx；best_qnn.onnx 選 qnn。",
+      "真實靜態 batch ONNX 的超額輸入結果應與逐 batch 拼接一致。"
+    ],
+    "blockers": [
+      "需各後端 optional runtime 與硬體。"
+    ],
+    "impact": "BasePredictor、BaseValidator 與全部格式推論。"
+  },
+  {
+    "path": "ultralytics/nn/backends/onnx.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "ORT CPU/CUDA、DNN、ROCm cache、多輸入與 raw-pointer IO binding 共存，動態尺寸與 contiguous 輸入需實測。",
+    "symbols": [
+      "ONNXBackend.load_model",
+      "ONNXBackend.forward",
+      "_migraphx_cache_dir",
+      "ONNXIMXBackend"
+    ],
+    "dependencies": [
+      "onnxruntime",
+      "opencv-python",
+      "torch",
+      "MIGraphX EP",
+      "BaseBackend"
+    ],
+    "existingTests": [
+      "tests/test_exports.py::test_export_onnx_matrix",
+      "tests/test_cuda.py::test_onnx_dynamic_spatial_outputs"
+    ],
+    "testIdeas": [
+      "CPU ORT 小模型輸出與 PyTorch allclose。",
+      "動態空間模型連續輸入兩種 H/W，輸出 shape 更新。"
+    ],
+    "blockers": [
+      "CUDA／ROCm／IMX 各需相應 runtime。"
+    ],
+    "impact": "AutoBackend onnx/dnn/imx 與 ROCm 部署。"
+  },
+  {
+    "path": "ultralytics/nn/backends/tensorrt.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "TensorRT 新舊 binding API、dynamic profile、DLA 與 CUDA graph 共用 engine 狀態，地址重用錯誤可產生舊輸出。",
+    "symbols": [
+      "TensorRTBackend.load_model",
+      "TensorRTBackend.forward"
+    ],
+    "dependencies": [
+      "tensorrt>=7",
+      "CUDA",
+      "torch.cuda.CUDAGraph",
+      "BaseBackend"
+    ],
+    "existingTests": [
+      "tests/test_cuda.py::test_export_engine_matrix"
+    ],
+    "testIdeas": [
+      "真實 dynamic engine profile 內變 shape，超界應 ValueError。",
+      "graph engine 連續不同輸入，比對未 capture 參考以排除 stale output。"
+    ],
+    "blockers": [
+      "NVIDIA GPU、TensorRT engine；DLA 需 Jetson。"
+    ],
+    "impact": "所有 .engine 部署與 Jetson DLA。"
+  },
+  {
+    "path": "ultralytics/nn/backends/rknn.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "只支援 Rockchip；BHWC 浮點轉 uint8，INT8 使用 tail.onnx 逐張解碼再拼接，匯出成功不代表推論可用。",
+    "symbols": [
+      "RKNNBackend.load_model",
+      "RKNNBackend.forward"
+    ],
+    "dependencies": [
+      "Rockchip NPU",
+      "rknn-toolkit-lite2",
+      "onnxruntime",
+      "BaseBackend"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "RK3588 實機固定影像輸出比對 ONNX 容差。",
+      "帶 tail.onnx 模型 batch2 等於兩次 batch1 拼接。"
+    ],
+    "blockers": [
+      "需 Rockchip NPU；test_export_rknn 只驗產物存在。"
+    ],
+    "impact": "RK3588／RK3566 RKNN 與 INT8 host tail。"
+  },
+  {
+    "path": "ultralytics/optim/muon.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "bf16 Newton-Schulz、foreach momentum、shape 分桶與 channels_last stride 寫回交織；數值可 CPU 驗，效能與收斂需訓練。",
+    "symbols": [
+      "zeropower_via_newtonschulz5",
+      "muon_update",
+      "MuSGD.step"
+    ],
+    "dependencies": [
+      "torch.optim",
+      "torch._foreach_mul_",
+      "torch.baddbmm"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "零矩陣 orthogonalization 保持零且有限。",
+      "single/list muon_update 的回傳與 momentum 一致。",
+      "同值 NCHW/channels_last 更新轉同布局後 allclose。"
+    ],
+    "blockers": [
+      "bf16 kernel 支援及 GPU 訓練收斂需另驗。"
+    ],
+    "impact": "BaseTrainer MuSGD 與長訓練 auto optimizer。"
+  },
+  {
+    "path": "ultralytics/models/yolo/depth/calibrate.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "NumPy calibration 候選平手優先 identity；另有 buffer 還原與 checkpoint provenance，適合分層驗證。",
+    "symbols": [
+      "select_calibration",
+      "select_calibration_cv",
+      "fit_calibration_selective",
+      "calibrate_checkpoint"
+    ],
+    "dependencies": [
+      "numpy",
+      "torch",
+      "depth head cal_a/cal_b",
+      "dataloader"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_depth_calibration_checkpoint_provenance"
+    ],
+    "testIdeas": [
+      "lp=lg 且 current=(1,0) 應選 identity。",
+      "多組 lg=lp+log(2) 應選 scale-only 且 b 接近 log(2)。"
+    ],
+    "blockers": [
+      "checkpoint 寫入用 tmp_path，收集需合法 depth dataset。"
+    ],
+    "impact": "DepthTrainer 校正 checkpoint 與深度量尺。"
+  },
+  {
+    "path": "ultralytics/models/yolo/detect/predict.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "DetectionPredictor 是 segment/pose/obb 共用 NMS 與框縮放入口，也服務 tracking 索引和特徵抽取。",
+    "symbols": [
+      "DetectionPredictor.postprocess",
+      "DetectionPredictor.get_obj_feats",
+      "DetectionPredictor.construct_result"
+    ],
+    "dependencies": [
+      "BasePredictor",
+      "Results",
+      "utils/nms.py",
+      "utils/ops.py"
+    ],
+    "existingTests": [
+      "tests/test_python.py::test_predict_classes_with_max_det",
+      "tests/test_python.py::test_predict_img"
+    ],
+    "testIdeas": [
+      "固定多類候選框，classes/max_det 後筆數及類別正確。",
+      "已知 letterbox 比例 construct_result 座標對應原圖。"
+    ],
+    "blockers": [
+      "模型整合需權重；tracking IoU override 要另驗。"
+    ],
+    "impact": "detect 及繼承 predictor、TrackTrack recovery。"
+  },
+  {
+    "path": "ultralytics/models/yolo/segment/predict.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "原型 native/export 布局、retina_masks 解碼次序與移除空 mask 的框需一致。",
+    "symbols": [
+      "SegmentationPredictor.postprocess",
+      "SegmentationPredictor.construct_result"
+    ],
+    "dependencies": [
+      "DetectionPredictor",
+      "Results",
+      "ops.process_mask",
+      "ops.process_mask_native"
+    ],
+    "existingTests": [
+      "tests/test_engine.py::test_task"
+    ],
+    "testIdeas": [
+      "空 pred 的 masks=None 且 boxes 為空。",
+      "固定 proto/coefficients，retina_masks 開關都保持 mask/box 筆數對齊。"
+    ],
+    "blockers": [
+      "完整回歸需 segment 權重與原型布局。"
+    ],
+    "impact": "Results.masks、boxes 與分割繪圖。"
+  },
+  {
+    "path": "ultralytics/models/yolo/semantic/predict.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "logits 用 bilinear 再 argmax，baked class map 必須 nearest；dtype 邊界和 classes 過濾可小張量驗算。",
+    "symbols": [
+      "SemanticSegmentationPredictor._class_map_dtype",
+      "SemanticSegmentationPredictor.postprocess"
+    ],
+    "dependencies": [
+      "torch.nn.functional",
+      "Results",
+      "ops.scale_masks"
+    ],
+    "existingTests": [
+      "tests/test_engine.py::test_task",
+      "tests/test_exports.py::test_export_onnx_semantic_dnn"
+    ],
+    "testIdeas": [
+      "類別數256/257/32768/32769 的 dtype 為 uint8/int16/int16/int32。",
+      "棋盤 class map 放大只能保留原ID。",
+      "classes=[1] 其他像素標255。"
+    ],
+    "blockers": [
+      "模型整合需 semantic 權重。"
+    ],
+    "impact": "Results.semantic_mask、ONNX ArgMax 與 DNN。"
+  },
+  {
+    "path": "ultralytics/models/yolo/depth/predict.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "容易",
+    "rationale": "將3D/4D depth 統一後兩次 align_corners=True 插值，可用斜坡圖逐像素比較。",
+    "symbols": [
+      "DepthPredictor.postprocess"
+    ],
+    "dependencies": [
+      "torch.nn.functional.interpolate",
+      "Results",
+      "ops.convert_torch2numpy_batch"
+    ],
+    "existingTests": [
+      "tests/test_engine.py::test_task"
+    ],
+    "testIdeas": [
+      "同值3D與4D輸入後處理相等。",
+      "2x2斜坡到非方形原圖應等於兩次指定 bilinear 插值。"
+    ],
+    "blockers": [],
+    "impact": "Results.depth 與 native/export 深度解析度。"
+  },
+  {
+    "path": "ultralytics/models/yolo/pose/predict.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "容易",
+    "rationale": "在 detection 結果上 reshape keypoints 並 scale_coords；短邏輯須照顧 kpt_shape 和空 detection。",
+    "symbols": [
+      "PosePredictor.construct_result"
+    ],
+    "dependencies": [
+      "DetectionPredictor",
+      "ops.scale_coords",
+      "model.kpt_shape"
+    ],
+    "existingTests": [
+      "tests/test_engine.py::test_task"
+    ],
+    "testIdeas": [
+      "17x3 keypoints 輸出 shape=(1,17,3)，confidence 不變。",
+      "空 detection 回傳第一維0的 keypoints。"
+    ],
+    "blockers": [],
+    "impact": "Results.keypoints 與姿態繪圖。"
+  },
+  {
+    "path": "ultralytics/models/yolo/obb/predict.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "容易",
+    "rationale": "xywh+angle 正規化與縮放後拼 conf/class，可用固定幾何直接驗。",
+    "symbols": [
+      "OBBPredictor.construct_result"
+    ],
+    "dependencies": [
+      "DetectionPredictor",
+      "ops.regularize_rboxes",
+      "ops.scale_boxes",
+      "Results"
+    ],
+    "existingTests": [
+      "tests/test_engine.py::test_task"
+    ],
+    "testIdeas": [
+      "超範圍角度符合 regularize_rboxes 寬高與角度規則。",
+      "比例2時中心寬高乘2，角度/conf/class 不變。"
+    ],
+    "blockers": [],
+    "impact": "Results.obb、旋轉追蹤與 solutions。"
+  },
+  {
+    "path": "ultralytics/solutions/config.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "容易",
+    "rationale": "dataclass update 拒絕未知 key 並映射 half 到 quantize，不需模型。",
+    "symbols": [
+      "SolutionConfig",
+      "SolutionConfig.update"
+    ],
+    "dependencies": [
+      "dataclasses",
+      "typing",
+      "utils.deprecation_warn"
+    ],
+    "existingTests": [
+      "tests/test_solutions.py::test_config_update_method_with_invalid_argument"
+    ],
+    "testIdeas": [
+      "update(conf=0.4) 修改值且回同物件。",
+      "未知key應 ValueError。",
+      "half=True/False 映射16/None。"
+    ],
+    "blockers": [],
+    "impact": "所有 BaseSolution 共用設定。"
+  },
+  {
+    "path": "ultralytics/solutions/object_counter.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "前點、線/多邊形交會、方向及 counted_ids 決定計數；forget_tracks 需讓 ID 新生命週期可重算。",
+    "symbols": [
+      "ObjectCounter.count_objects",
+      "ObjectCounter.forget_tracks",
+      "ObjectCounter.process"
+    ],
+    "dependencies": [
+      "BaseSolution",
+      "shapely Point/LineString",
+      "SolutionAnnotator",
+      "tracker"
+    ],
+    "existingTests": [
+      "tests/test_solutions.py::test_solution",
+      "tests/test_solutions.py::test_solution_obb_boxes"
+    ],
+    "testIdeas": [
+      "垂直線x=10，ID由(5,5)到(15,5)，IN只增一次。",
+      "prev=None不計數；forget_tracks後可重算。"
+    ],
+    "blockers": [
+      "建構載入模型；完整流程需 shapely、權重與影片。"
+    ],
+    "impact": "人車流計數、Heatmap 與 classwise_count。"
+  },
+  {
+    "path": "ultralytics/solutions/speed_estimation.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "中等",
+    "rationale": "frame_count/deque 位移計速後鎖定ID並釋放歷史；公里時速準確度取決於 fps 與場景尺度。",
+    "symbols": [
+      "SpeedEstimator.process",
+      "SpeedEstimator.forget_tracks"
+    ],
+    "dependencies": [
+      "BaseSolution",
+      "collections.deque",
+      "math.sqrt",
+      "tracker"
+    ],
+    "existingTests": [
+      "tests/test_solutions.py::test_solution"
+    ],
+    "testIdeas": [
+      "fps10、meter_per_pixel1、5樣本x=0到4，速度36 km/h。",
+      "max_speed20則截20；鎖定後不再改值。",
+      "forget_tracks 清除四個追蹤狀態容器。"
+    ],
+    "blockers": [
+      "實際速度需相機尺度校正；影片 smoke 不證明準確。"
+    ],
+    "impact": "SolutionResults.speed_dict 與交通速度顯示。"
+  },
+  {
+    "path": "ultralytics/models/utils/ops.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "容易",
+    "rationale": "Hungarian 配對有 image GT offset、空標籤；denoising 限額後需保留原 GT 索引，小張量可精確驗。",
+    "symbols": [
+      "HungarianMatcher.forward",
+      "get_cdn_group"
+    ],
+    "dependencies": [
+      "torch",
+      "linear_sum_assignment",
+      "bbox_iou"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "兩圖各一個明確匹配框，第二圖 GT index 應含全域 offset；全空 GT 回空 long tensors。",
+      "training=False 或 num_dn=0 回四個 None。",
+      "700 GT、num_dn100、noise0，denoising queries不超過200且 dn_gt_idx 指回原GT。"
+    ],
+    "blockers": [
+      "AMP 與收斂需 GPU 訓練。"
+    ],
+    "impact": "DETRLoss 配對與 RTDETRDecoder denoising。"
+  },
+  {
+    "path": "ultralytics/models/utils/loss.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "中等",
+    "rationale": "分類/L1/GIoU、auxiliary 與 denoising 組合；空 GT 零loss 必須保留 gradient graph，避免 DDP unused。",
+    "symbols": [
+      "DETRLoss._get_loss_bbox",
+      "DETRLoss.forward",
+      "RTDETRDetectionLoss.get_dn_match_indices"
+    ],
+    "dependencies": [
+      "torch",
+      "HungarianMatcher",
+      "FocalLoss",
+      "VarifocalLoss"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "空GT bbox/GIoU loss為0，backward 後 pred_bboxes.grad 存在。",
+      "相同非退化 box，L1/GIoU loss 接近0。",
+      "dn_num_group2應重複原GT順序，pos長度不符應 AssertionError。"
+    ],
+    "blockers": [
+      "CPU梯度不代表多卡DDP通過。"
+    ],
+    "impact": "RTDETRDetectionModel.init_criterion 與 decoder supervision。"
+  },
+  {
+    "path": "ultralytics/models/sam/modules/utils.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "conditioning frame 選擇、window padding還原、複數RoPE各有CPU不變量；MPS repeat另有實機分支。",
+    "symbols": [
+      "select_closest_cond_frames",
+      "window_partition",
+      "window_unpartition",
+      "apply_rotary_enc",
+      "get_abs_pos"
+    ],
+    "dependencies": [
+      "torch",
+      "torch.nn.functional"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "frame5、候選1/4/6/9、上限2選4及6；-1保留全部。",
+      "arange形成(2,5,7,3)，window4 partition/unpartition應equal。",
+      "全1複數相位旋轉q/k不變，空key原樣回傳。"
+    ],
+    "blockers": [
+      "MPS複數repeat需Apple硬體。"
+    ],
+    "impact": "SAM/SAM2 attention、memory與SAM3 vitdet位置編碼。"
+  },
+  {
+    "path": "ultralytics/models/sam/amg.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "容易",
+    "rationale": "point grid、crop、uncrop、mask box與連通區可用小幾何驗算，不需SAM權重。",
+    "symbols": [
+      "build_point_grid",
+      "batch_iterator",
+      "generate_crop_boxes",
+      "batched_mask_to_box",
+      "remove_small_regions"
+    ],
+    "dependencies": [
+      "numpy",
+      "torch",
+      "cv2"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "point_grid2為0.25/0.75四點；n_layers0僅整張框。",
+      "5x7 mask僅[1:4,2:6]真，box=[2,1,5,3]；空mask零框。",
+      "batch_iterator2切五元素為2/2/1，不同長輸入應AssertionError。"
+    ],
+    "blockers": [],
+    "impact": "Predictor.generate 採樣、crop過濾與mask清理。"
+  },
+  {
+    "path": "ultralytics/models/sam/build.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "encoder/prompt decoder/memory結構必須對應checkpoint；SAM2.1由名稱啟用選項，大型ViT耗記憶體。",
+    "symbols": [
+      "build_sam",
+      "_load_checkpoint",
+      "_build_sam",
+      "_build_sam2"
+    ],
+    "dependencies": [
+      "torch",
+      "attempt_download_asset",
+      "SAMModel",
+      "SAM2Model",
+      "TinyViT"
+    ],
+    "existingTests": [
+      "tests/test_cli.py::test_mobilesam",
+      "tests/test_cuda.py::test_predict_sam"
+    ],
+    "testIdeas": [
+      "unsupported.pt應FileNotFoundError列可用模型。",
+      "小型真實Linear分別存原state_dict與嵌套model字典，載入後參數相等。",
+      "真實MobileSAM/SAM2.1小模型eval完成point推論。"
+    ],
+    "blockers": [
+      "需多代checkpoint、RAM與GPU；不以mock builder替代。"
+    ],
+    "impact": "SAM._load與SAM1/MobileSAM/SAM2.1載入。"
+  },
+  {
+    "path": "ultralytics/models/sam/predict.py",
+    "changeDifficulty": "困難",
+    "testDifficulty": "困難",
+    "rationale": "SAM1/2/3影像、互動與影片狀態共存；prompt縮放、features快取、conditioning memory及ID生命周期互相影響。",
+    "symbols": [
+      "Predictor._prepare_prompts",
+      "Predictor.reset_image",
+      "Predictor.stream_inference",
+      "SAM2VideoPredictor._prune_non_cond_memory",
+      "SAM3VideoSemanticPredictor"
+    ],
+    "dependencies": [
+      "BasePredictor",
+      "LetterBox",
+      "torch",
+      "cv2",
+      "amg"
+    ],
+    "existingTests": [
+      "tests/test_cli.py::test_mobilesam",
+      "tests/test_cuda.py::test_predict_sam"
+    ],
+    "testIdeas": [
+      "src100x200、dst1024平方，point[100,50]應乘5.12；labels不符應AssertionError。",
+      "同box prompt處理兩圖，每圖都有一個mask。",
+      "memory prune只刪window前non_cond，保留conditioning。"
+    ],
+    "blockers": [
+      "需多代大型權重、影片、GPU記憶體；MobileSAM不代表SAM3文字路徑。"
+    ],
+    "impact": "公開SAM.predict、影片傳播與互動記憶。"
+  },
+  {
+    "path": "ultralytics/models/rtdetr/predict.py",
+    "changeDifficulty": "容易",
+    "testDifficulty": "容易",
+    "rationale": "六欄normalized xywh/conf/class直接依原圖縮放，沒有YOLO letterbox逆變換，可固定tensor驗。",
+    "symbols": [
+      "RTDETRPredictor.postprocess"
+    ],
+    "dependencies": [
+      "BasePredictor",
+      "Results",
+      "ops.xywh2xyxy"
+    ],
+    "existingTests": [
+      "tests/test_cli.py::test_rtdetr"
+    ],
+    "testIdeas": [
+      "原圖100x200、xywh[.5,.5,.2,.4]應xyxy[80,30,120,70]。",
+      "classes1、conf.5、max_det1只留符合條件第一筆。"
+    ],
+    "blockers": [],
+    "impact": "RTDETR.predict框與scale_fill座標契約。"
+  },
+  {
+    "path": "ultralytics/models/rtdetr/val.py",
+    "changeDifficulty": "中等",
+    "testDifficulty": "容易",
+    "rationale": "Validator按imgsz縮放而predictor按原圖；classes透過清零分數排除，dataset fraction是另一整合邊界。",
+    "symbols": [
+      "RTDETRValidator.postprocess",
+      "RTDETRValidator.build_dataset",
+      "RTDETRDataset.load_image"
+    ],
+    "dependencies": [
+      "DetectionValidator",
+      "YOLODataset",
+      "check_imgsz",
+      "get_split_fraction"
+    ],
+    "existingTests": [],
+    "testIdeas": [
+      "imgsz[100,200]、xywh[.5,.5,.2,.4]應box[80,30,120,70]。",
+      "classes1/conf.25後cls全1且max_det限制筆數。",
+      "零queries每張仍回bboxes/conf/cls三key。"
+    ],
+    "blockers": [
+      "dataset需真實小資料集；後處理可CPU驗。"
+    ],
+    "impact": "RTDETR.val與Trainer驗證資料切分。"
+  }
+]
