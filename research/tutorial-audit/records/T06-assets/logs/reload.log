@@ -1,0 +1,8 @@
+
+image 1/1 <RUN_ROOT>\bus.jpg: 640x480 4 persons, 1 bus, 62.3ms
+Speed: 2.8ms preprocess, 62.3ms inference, 1.1ms postprocess per image at shape (1, 3, 640, 480)
+Results saved to <RUN_ROOT>\t06-online\reload-best
+
+image 1/1 <RUN_ROOT>\bus.jpg: 640x480 4 persons, 1 bus, 36.5ms
+Speed: 1.6ms preprocess, 36.5ms inference, 0.7ms postprocess per image at shape (1, 3, 640, 480)
+Results saved to <RUN_ROOT>\t06-online\reload-last

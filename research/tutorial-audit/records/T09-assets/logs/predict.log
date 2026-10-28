@@ -1,0 +1,10 @@
+
+image 1/1 <RUN_ROOT>\bus.jpg: 640x640 4 persons, 1 bus, 57.2ms
+Speed: 2.5ms preprocess, 57.2ms inference, 1.4ms postprocess per image at shape (1, 3, 640, 640)
+Results saved to <RUN_ROOT>\t09\pytorch
+Loading <RUN_ROOT>\t09\yolo26n.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+
+image 1/1 <RUN_ROOT>\bus.jpg: 640x640 4 persons, 1 bus, 198.0ms
+Speed: 65.1ms preprocess, 198.0ms inference, 41.2ms postprocess per image at shape (1, 3, 640, 640)
+Results saved to <RUN_ROOT>\t09\onnx

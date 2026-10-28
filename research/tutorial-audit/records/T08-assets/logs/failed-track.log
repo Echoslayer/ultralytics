@@ -1,0 +1,32 @@
+requirements: Ultralytics requirement ['lap>=0.5.12'] not found, attempting AutoUpdate...
+WARNING Retry 1/2 failed: 'cp950' codec can't decode byte 0xe5 in position 261: illegal multibyte sequence
+WARNING Retry 2/2 failed: 'cp950' codec can't decode byte 0xe5 in position 262: illegal multibyte sequence
+WARNING requirements:  'cp950' codec can't decode byte 0xe5 in position 262: illegal multibyte sequence
+Traceback (most recent call last):
+  File "<RUN_ROOT>\.venv\Lib\site-packages\ultralytics\trackers\utils\matching.py", line 8, in <module>
+    import lap  # for linear_assignment
+    ^^^^^^^^^^
+ModuleNotFoundError: No module named 'lap'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\tools\ultralytics\.worktrees\contribution-research\research\tutorial-audit\records\T08-assets\logs\t08.py", line 49, in <module>
+    main()
+    ~~~~^^
+  File "D:\tools\ultralytics\.worktrees\contribution-research\research\tutorial-audit\records\T08-assets\logs\t08.py", line 27, in main
+    for index, result in enumerate(model.track(source="t04/short.avi", stream=True, save=True, show=False,
+                                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                              device="cpu", project=str(out), name=name, **options)):
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<RUN_ROOT>\.venv\Lib\site-packages\ultralytics\engine\model.py", line 605, in track
+    from ultralytics.trackers import register_tracker
+  File "<RUN_ROOT>\.venv\Lib\site-packages\ultralytics\trackers\__init__.py", line 3, in <module>
+    from .bot_sort import BOTSORT
+  File "<RUN_ROOT>\.venv\Lib\site-packages\ultralytics\trackers\bot_sort.py", line 10, in <module>
+    from .byte_tracker import BYTETracker, STrack
+  File "<RUN_ROOT>\.venv\Lib\site-packages\ultralytics\trackers\byte_tracker.py", line 13, in <module>
+    from .utils import matching
+  File "<RUN_ROOT>\.venv\Lib\site-packages\ultralytics\trackers\utils\matching.py", line 15, in <module>
+    import lap
+ModuleNotFoundError: No module named 'lap'

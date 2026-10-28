@@ -1,0 +1,47 @@
+
+image 1/1 <RUN_ROOT>\t04-repeat\input\bus.jpg: 640x480 4 persons, 1 bus, 75.2ms
+Speed: 2.1ms preprocess, 75.2ms inference, 1.3ms postprocess per image at shape (1, 3, 640, 480)
+Results saved to <RUN_ROOT>\t04-repeat\single
+
+image 1/2 <RUN_ROOT>\t04-repeat\input\bus.jpg: 640x480 4 persons, 1 bus, 23.8ms
+image 2/2 <RUN_ROOT>\t04-repeat\input\zidane.jpg: 384x640 2 persons, 1 tie, 36.8ms
+Speed: 1.2ms preprocess, 30.3ms inference, 1.1ms postprocess per image at shape (1, 3, 384, 640)
+Results saved to <RUN_ROOT>\t04-repeat\folder
+
+WARNING
+Inference results will accumulate in RAM unless `stream=True` is passed, which can cause out-of-memory errors for large
+sources or long-running streams and videos. See https://docs.ultralytics.com/modes/predict for help.
+
+Example:
+    results = model(source=..., stream=True)  # generator of Results objects
+    for r in results:
+        boxes = r.boxes  # Boxes object for bbox outputs
+        masks = r.masks  # Masks object for segment masks outputs
+        probs = r.probs  # Class probabilities for classification outputs
+
+video 1/1 (frame 1/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 47.8ms
+video 1/1 (frame 2/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 40.9ms
+video 1/1 (frame 3/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 28.5ms
+video 1/1 (frame 4/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 29.6ms
+video 1/1 (frame 5/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 32.4ms
+video 1/1 (frame 6/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 26.7ms
+video 1/1 (frame 7/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 26.9ms
+video 1/1 (frame 8/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 28.1ms
+video 1/1 (frame 9/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 27.4ms
+video 1/1 (frame 10/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 24.7ms
+Speed: 1.6ms preprocess, 31.3ms inference, 1.1ms postprocess per image at shape (1, 3, 640, 512)
+Results saved to <RUN_ROOT>\t04-repeat\video_list
+
+video 1/1 (frame 1/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 30.9ms
+video 1/1 (frame 2/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 39.6ms
+video 1/1 (frame 3/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 32.3ms
+video 1/1 (frame 4/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 26.9ms
+video 1/1 (frame 5/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 33.0ms
+video 1/1 (frame 6/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 28.4ms
+video 1/1 (frame 7/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 29.5ms
+video 1/1 (frame 8/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 26.9ms
+video 1/1 (frame 9/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 35.5ms
+video 1/1 (frame 10/10) <RUN_ROOT>\t04-repeat\short.avi: 640x512 4 persons, 1 bus, 31.9ms
+Speed: 1.2ms preprocess, 31.5ms inference, 0.9ms postprocess per image at shape (1, 3, 640, 512)
+Results saved to <RUN_ROOT>\t04-repeat\video_stream
+PASS: source counts, lazy iteration, list/stream equality, saved video decoding

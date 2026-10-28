@@ -1,0 +1,4 @@
+Creating new Ultralytics Settings v0.0.8 file
+View Ultralytics Settings with 'yolo settings' or at '<RUN_ROOT>\t05-repeat\config\Ultralytics\settings.json'
+Update Settings with 'yolo settings key=value', i.e. 'yolo settings runs_dir=path/to/dir'. For help see https://docs.ultralytics.com/usage/settings.
+{'datasets_dir': '<RUN_ROOT>\\t05-repeat\\datasets_dir', 'weights_dir': '<RUN_ROOT>\\t05-repeat\\weights_dir', 'runs_dir': '<RUN_ROOT>\\t05-repeat\\runs_dir', 'tensorboard': False}

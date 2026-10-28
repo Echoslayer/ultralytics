@@ -1,0 +1,8 @@
+
+Benchmarks complete for <RUN_ROOT>\t10-repeat\onnx\yolo26n.pt on coco8.yaml at imgsz=640 (9.16s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
++-----------------------------------------------------------------------------------------+
+|     Format   Status❔   Size (MB)   metrics/mAP50-95(B)   Inference time (ms/im)   FPS  |
++=========================================================================================+
+| 1   ONNX     ✅         9.5         0.6693                314.68                   3.18 |
++-----------------------------------------------------------------------------------------+

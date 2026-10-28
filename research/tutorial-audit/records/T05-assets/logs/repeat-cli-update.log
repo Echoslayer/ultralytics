@@ -1,0 +1,22 @@
+ Updated 'tensorboard=True'
+JSONDict("<RUN_ROOT>\t05-repeat\config\Ultralytics\settings.json"):
+{
+  "settings_version": "0.0.8",
+  "datasets_dir": "<RUN_ROOT>\\t05-repeat\\datasets_dir",
+  "weights_dir": "<RUN_ROOT>\\t05-repeat\\weights_dir",
+  "runs_dir": "<RUN_ROOT>\\t05-repeat\\runs_dir",
+  "uuid": "<REDACTED>",
+  "sync": true,
+  "api_key": "",
+  "openai_api_key": "",
+  "clearml": true,
+  "comet": true,
+  "dvc": true,
+  "mlflow": true,
+  "raytune": true,
+  "tensorboard": true,
+  "wandb": false,
+  "vscode_msg": true,
+  "openvino_msg": true
+}
+ Learn more about Ultralytics Settings at https://docs.ultralytics.com/usage/settings

@@ -1,0 +1,20 @@
+Ultralytics 8.4.191  Python-3.13.14 torch-2.14.1+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 5.5 GFLOPs
+val: Fast image access  (ping: 0.0±0.0 ms, read: 367.5±207.4 MB/s, size: 54.0 KB)
+
+[Kval: Scanning <RUN_ROOT>\datasets\coco8\labels\val.cache... 4 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 4/4 798.9Kit/s 0.0s
+
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 50% ━━━━━━────── 2/4 5.4it/s 0.1s<0.4s
+[K                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 4/4 23.6it/s 0.2s
+                   all          4         17      0.943      0.619      0.894      0.669
+Speed: 0.9ms preprocess, 36.0ms inference, 0.0ms loss, 0.9ms postprocess per image
+Ultralytics 8.4.191  Python-3.13.14 torch-2.14.1+cpu CPU (Intel Core Ultra 7 265H)
+Setup complete  (16 CPUs, 31.4 GB RAM, 278.2/299.2 GB disk)
+
+Benchmarks complete for <RUN_ROOT>\t10-repeat\pytorch\yolo26n.pt on coco8.yaml at imgsz=640 (2.15s)
+Benchmarks legend:  -  Success  -  Export passed but validation failed  -  Export failed
++-------------------------------------------------------------------------------------------+
+|     Format    Status   Size (MB)   metrics/mAP50-95(B)   Inference time (ms/im)   FPS   |
++===========================================================================================+
+| 1   PyTorch            5.3         0.6693                36.04                    27.75 |
++-------------------------------------------------------------------------------------------+

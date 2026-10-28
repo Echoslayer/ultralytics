@@ -1,0 +1,12 @@
+uv : Resolved 2 packages in 1.47s
+位於 線路:2 字元:74
++ ... -uv-cache'; uv pip install --python .venv/Scripts/python.exe 'lap>=0. ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Resolved 2 packages in 1.47s:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+Downloading lap (1.4MiB)
+ Downloaded lap
+Prepared 1 package in 827ms
+Installed 1 package in 17ms
+ + lap==0.5.13

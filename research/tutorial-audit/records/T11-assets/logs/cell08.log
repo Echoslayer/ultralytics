@@ -1,0 +1,18 @@
+Ultralytics 8.4.191  Python-3.13.14 torch-2.14.1+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 5.5 GFLOPs
+val: Fast image access  (ping: 0.0±0.0 ms, read: 165.5±77.9 MB/s, size: 54.0 KB)
+
+val: Scanning <RUN_ROOT>\datasets\coco8\labels\val.cache... 4 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 4/4 578.5Kit/s 0.0s
+
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 5.2it/s 0.2s
+                   all          4         17      0.551      0.962      0.943      0.669
+                person          3         10      0.551        0.8      0.848      0.387
+                   dog          1          1       0.36          1      0.995      0.597
+                 horse          1          2       0.36          1      0.995      0.696
+              elephant          1          2      0.656      0.969      0.828      0.545
+              umbrella          1          1      0.543          1      0.995      0.895
+          potted plant          1          1      0.833          1      0.995      0.895
+Speed: 1.1ms preprocess, 37.3ms inference, 0.0ms loss, 0.7ms postprocess per image
+Results saved to <RUN_ROOT>\t11\runs\detect\cell08
+ Learn more at https://docs.ultralytics.com/modes/val
+VS Code: view Ultralytics VS Code Extension  at https://docs.ultralytics.com/integrations/vscode

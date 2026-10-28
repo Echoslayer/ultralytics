@@ -1,0 +1,23 @@
+
+image 1/1 <RUN_ROOT>\bus.jpg: 640x480 4 persons, 1 bus, 93.5ms
+Speed: 2.4ms preprocess, 93.5ms inference, 1.2ms postprocess per image at shape (1, 3, 640, 480)
+Results saved to <RUN_ROOT>\t05-repeat\runs_dir\detect\settings-default
+
+image 1/1 <RUN_ROOT>\bus.jpg: 640x480 4 persons, 1 bus, 38.2ms
+Speed: 2.0ms preprocess, 38.2ms inference, 1.2ms postprocess per image at shape (1, 3, 640, 480)
+Results saved to <RUN_ROOT>\t05-repeat\explicit-project\override
+{
+  "settings_file": "<RUN_ROOT>\\t05-repeat\\config\\Ultralytics\\settings.json",
+  "settings": {
+    "datasets_dir": "<RUN_ROOT>\\t05-repeat\\datasets_dir",
+    "weights_dir": "<RUN_ROOT>\\t05-repeat\\weights_dir",
+    "runs_dir": "<RUN_ROOT>\\t05-repeat\\runs_dir",
+    "tensorboard": true
+  },
+  "fallback": "<RUN_ROOT>\\t05-repeat\\weights_dir\\yolo26n.pt",
+  "cwd_precedence": "<RUN_ROOT>\\t05-repeat\\yolo26n.pt",
+  "default_output": "<RUN_ROOT>\\t05-repeat\\runs_dir\\detect\\settings-default",
+  "project_override": "<RUN_ROOT>\\t05-repeat\\explicit-project\\override",
+  "dataset_val": "<RUN_ROOT>\\t05-repeat\\datasets_dir\\tiny\\images",
+  "boxes": 5
+}

@@ -1,0 +1,16 @@
+Ultralytics 8.4.191  Python-3.13.14 torch-2.14.1+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 5.5 GFLOPs
+val: Fast image access  (ping: 0.0±0.0 ms, read: 50.1±23.3 MB/s, size: 54.0 KB)
+
+val: Scanning <RUN_ROOT>\datasets\coco8\labels\val.cache... 4 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 4/4 645.3Kit/s 0.0s
+
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 5.4it/s 0.2s
+                   all          4         17      0.538      0.967      0.942      0.695
+                person          3         10      0.531        0.8      0.845      0.376
+                   dog          1          1      0.375          1      0.995      0.597
+                 horse          1          2       0.33          1      0.995      0.795
+              elephant          1          2      0.663          1      0.828      0.512
+              umbrella          1          1      0.538          1      0.995      0.895
+          potted plant          1          1      0.788          1      0.995      0.995
+Speed: 0.7ms preprocess, 34.6ms inference, 0.0ms loss, 0.9ms postprocess per image
+Results saved to <RUN_ROOT>\t07\val

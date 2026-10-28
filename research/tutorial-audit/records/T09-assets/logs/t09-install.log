@@ -1,0 +1,20 @@
+uv : Resolved 12 packages in 1.72s
+位於 線路:2 字元:74
++ ... -uv-cache'; uv pip install --python .venv/Scripts/python.exe 'onnx>=1 ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Resolved 12 packages in 1.72s:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+Downloading onnxruntime (14.2MiB)
+Downloading onnx (7.5MiB)
+ Downloaded onnx
+ Downloaded onnxruntime
+Prepared 6 packages in 21.34s
+Installed 7 packages in 1.21s
+ + colorama==0.4.6
+ + flatbuffers==25.12.19
+ + ml-dtypes==0.6.0
+ + onnx==1.23.2
+ + onnxruntime==1.31.1
+ + onnxslim==0.1.98
+ + protobuf==7.36.2

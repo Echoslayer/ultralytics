@@ -1,0 +1,9 @@
+Ultralytics 8.4.191  Python-3.13.14 torch-2.14.1+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 5.5 GFLOPs
+
+image 1/1 <RUN_ROOT>\bus.jpg: 640x480 2 persons, 1 bus, 52.2ms
+Speed: 2.1ms preprocess, 52.2ms inference, 1.5ms postprocess per image at shape (1, 3, 640, 480)
+Results saved to <RUN_ROOT>\t02-repeat\high-conf
+1 label saved to <RUN_ROOT>\t02-repeat\high-conf\labels
+ Learn more at https://docs.ultralytics.com/modes/predict
+VS Code: view Ultralytics VS Code Extension  at https://docs.ultralytics.com/integrations/vscode

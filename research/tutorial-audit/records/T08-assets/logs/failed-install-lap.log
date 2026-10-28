@@ -1,0 +1,12 @@
+uv : error: Request failed after 3 retries in 11.0s
+位於 線路:2 字元:74
++ ... -uv-cache'; uv pip install --python .venv/Scripts/python.exe 'lap>=0. ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (error: Request ...etries in 11.0s:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+  Caused by: Failed to fetch: `https://pypi.org/simple/lap/`
+  Caused by: error sending request for url (https://pypi.org/simple/lap/)
+  Caused by: client error (Connect)
+  Caused by: tcp connect error
+  Caused by: 嘗試存取通訊端被拒絕，因為存取權限不足。 (os error 10013)
