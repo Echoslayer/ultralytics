@@ -1,0 +1,17 @@
+{
+  "prediction_repeat_equal": true,
+  "onnx_hash_equal": false,
+  "warnings": {
+    "export.log": [],
+    "predict.log": [],
+    "repeat-export.log": [],
+    "repeat-predict.log": []
+  },
+  "metadata_differences": {
+    "date": [
+      "2026-10-28T17:04:06.577730+08:00",
+      "2026-10-28T17:04:42.906441+08:00"
+    ]
+  },
+  "equal_after_date_normalization": true
+}

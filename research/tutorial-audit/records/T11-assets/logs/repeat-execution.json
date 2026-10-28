@@ -1,0 +1,72 @@
+{
+  "02": {
+    "command": [
+      "<RUN_ROOT>\\.venv\\Scripts\\python.exe",
+      "-c",
+      "import ultralytics; ultralytics.checks()"
+    ],
+    "exit_code": 0,
+    "seconds": 5.084684800000105
+  },
+  "04": {
+    "command": [
+      "<RUN_ROOT>\\.venv\\Scripts\\yolo.exe",
+      "predict",
+      "model=yolo26n.pt",
+      "source=zidane.jpg",
+      "device=cpu",
+      "name=cell04"
+    ],
+    "exit_code": 0,
+    "seconds": 10.393603200001962
+  },
+  "08": {
+    "command": [
+      "<RUN_ROOT>\\.venv\\Scripts\\yolo.exe",
+      "val",
+      "model=yolo26n.pt",
+      "data=coco8.yaml",
+      "device=cpu",
+      "workers=0",
+      "name=cell08"
+    ],
+    "exit_code": 0,
+    "seconds": 11.691703599997709
+  },
+  "11": {
+    "command": [
+      "<RUN_ROOT>\\.venv\\Scripts\\yolo.exe",
+      "train",
+      "model=yolo26n.pt",
+      "data=coco8.yaml",
+      "epochs=3",
+      "imgsz=640",
+      "device=cpu",
+      "workers=0",
+      "name=cell11"
+    ],
+    "exit_code": 0,
+    "seconds": 20.59819289999723
+  },
+  "13": {
+    "command": [
+      "<RUN_ROOT>\\.venv\\Scripts\\yolo.exe",
+      "export",
+      "model=yolo26n.pt",
+      "format=torchscript",
+      "device=cpu"
+    ],
+    "exit_code": 0,
+    "seconds": 4.868698300000688
+  },
+  "15": {
+    "command": [
+      "<RUN_ROOT>\\.venv\\Scripts\\python.exe",
+      "D:\\tools\\ultralytics\\.worktrees\\contribution-research\\research\\tutorial-audit\\records\\T11-assets\\logs\\t11.py",
+      "<RUN_ROOT>\\t11-repeat",
+      "python"
+    ],
+    "exit_code": 0,
+    "seconds": 26.51274139999805
+  }
+}

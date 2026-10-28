@@ -1,0 +1,4 @@
+path: tiny
+train: images
+val: images
+names: [person]

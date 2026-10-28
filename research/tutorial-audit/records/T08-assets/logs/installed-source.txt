@@ -1,0 +1,29 @@
+    @Retry(times=2, delay=1)
+    def attempt_install(packages, commands, use_uv):
+        """Attempt package installation with uv if available, falling back to pip."""
+        if use_uv:
+            # Use --python to explicitly target current interpreter (venv or system)
+            # This ensures correct installation when VIRTUAL_ENV env var isn't set
+            return subprocess.check_output(
+                [
+                    "uv",
+                    "pip",
+                    "install",
+                    "--no-cache-dir",
+                    "--python",
+                    sys.executable,
+                    *packages,
+                    *shlex.split(commands),
+                    "--index-strategy=unsafe-best-match",
+                    "--break-system-packages",
+                ],
+                stderr=subprocess.STDOUT,
+                text=True,
+            )
+        return subprocess.check_output(
+            [sys.executable, "-m", "pip", "install", "--no-cache-dir", *packages, *shlex.split(commands)],
+            stderr=subprocess.STDOUT,
+            text=True,
+        )
+
+    if pkgs:

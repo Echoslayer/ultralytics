@@ -1,0 +1,52 @@
+[
+  {
+    "name": "baseline",
+    "conf": "0.25",
+    "command": [
+      "<RUN_ROOT>\\.venv\\Scripts\\yolo.exe",
+      "detect",
+      "predict",
+      "model=<RUN_ROOT>\\yolo26n.pt",
+      "source=<RUN_ROOT>\\bus.jpg",
+      "project=<RUN_ROOT>\\t02",
+      "name=baseline",
+      "conf=0.25",
+      "save_txt=True",
+      "save_conf=True"
+    ],
+    "exit_code": 0,
+    "seconds": 7.144,
+    "labels": [
+      "5 0.4958 0.454249 0.9916 0.481681 0.8806",
+      "0 0.178365 0.6019 0.236695 0.467323 0.872011",
+      "0 0.350869 0.586034 0.151265 0.422405 0.860808",
+      "0 0.913278 0.589778 0.173116 0.44903 0.846248",
+      "0 0.0369971 0.659362 0.073481 0.29473 0.65622"
+    ],
+    "image_exists": true
+  },
+  {
+    "name": "high-conf",
+    "conf": "0.85",
+    "command": [
+      "<RUN_ROOT>\\.venv\\Scripts\\yolo.exe",
+      "detect",
+      "predict",
+      "model=<RUN_ROOT>\\yolo26n.pt",
+      "source=<RUN_ROOT>\\bus.jpg",
+      "project=<RUN_ROOT>\\t02",
+      "name=high-conf",
+      "conf=0.85",
+      "save_txt=True",
+      "save_conf=True"
+    ],
+    "exit_code": 0,
+    "seconds": 6.646,
+    "labels": [
+      "5 0.4958 0.454249 0.9916 0.481681 0.8806",
+      "0 0.178365 0.6019 0.236695 0.467323 0.872011",
+      "0 0.350869 0.586034 0.151265 0.422405 0.860808"
+    ],
+    "image_exists": true
+  }
+]

@@ -1,0 +1,2 @@
+ ,Format,Status❔,Size (MB),metrics/mAP50-95(B),Inference time (ms/im),FPS
+1,PyTorch,✅,5.3,0.6693,29.18,34.27

@@ -1,0 +1,15 @@
+{
+  "settings_file": "<RUN_ROOT>\\t05\\config\\Ultralytics\\settings.json",
+  "settings": {
+    "datasets_dir": "<RUN_ROOT>\\t05\\datasets_dir",
+    "weights_dir": "<RUN_ROOT>\\t05\\weights_dir",
+    "runs_dir": "<RUN_ROOT>\\t05\\runs_dir",
+    "tensorboard": true
+  },
+  "fallback": "<RUN_ROOT>\\t05\\weights_dir\\yolo26n.pt",
+  "cwd_precedence": "<RUN_ROOT>\\t05\\yolo26n.pt",
+  "default_output": "<RUN_ROOT>\\t05\\runs_dir\\detect\\settings-default",
+  "project_override": "<RUN_ROOT>\\t05\\explicit-project\\override",
+  "dataset_val": "<RUN_ROOT>\\t05\\datasets_dir\\tiny\\images",
+  "boxes": 5
+}

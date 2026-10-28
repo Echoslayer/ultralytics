@@ -1,0 +1,51 @@
+{
+  "summary": {
+    "t10": {
+      "pytorch": {
+        " ": "1",
+        "Format": "PyTorch",
+        "Status\u2754": "\u2705",
+        "Size (MB)": "5.3",
+        "metrics/mAP50-95(B)": "0.6693",
+        "Inference time (ms/im)": "29.18",
+        "FPS": "34.27"
+      },
+      "onnx": {
+        " ": "1",
+        "Format": "ONNX",
+        "Status\u2754": "\u2705",
+        "Size (MB)": "9.5",
+        "metrics/mAP50-95(B)": "0.6693",
+        "Inference time (ms/im)": "316.61",
+        "FPS": "3.16"
+      }
+    },
+    "t10-repeat": {
+      "pytorch": {
+        " ": "1",
+        "Format": "PyTorch",
+        "Status\u2754": "\u2705",
+        "Size (MB)": "5.3",
+        "metrics/mAP50-95(B)": "0.6693",
+        "Inference time (ms/im)": "36.04",
+        "FPS": "27.75"
+      },
+      "onnx": {
+        " ": "1",
+        "Format": "ONNX",
+        "Status\u2754": "\u2705",
+        "Size (MB)": "9.5",
+        "metrics/mAP50-95(B)": "0.6693",
+        "Inference time (ms/im)": "314.68",
+        "FPS": "3.18"
+      }
+    }
+  },
+  "warnings": {
+    "pytorch": [],
+    "onnx": [],
+    "repeat-pytorch": [],
+    "repeat-onnx": []
+  },
+  "rounded_metric_equal": true
+}

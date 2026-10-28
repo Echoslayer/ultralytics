@@ -1,0 +1,11 @@
+[
+  {
+    " ": "1",
+    "Format": "PyTorch",
+    "Status\u2754": "\u2705",
+    "Size (MB)": "5.3",
+    "metrics/mAP50-95(B)": "0.6693",
+    "Inference time (ms/im)": "36.04",
+    "FPS": "27.75"
+  }
+]

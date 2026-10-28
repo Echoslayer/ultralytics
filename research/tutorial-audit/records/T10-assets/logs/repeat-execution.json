@@ -1,0 +1,10 @@
+{
+  "pytorch": {
+    "exit_code": 0,
+    "seconds": 7.133588600001531
+  },
+  "onnx": {
+    "exit_code": 0,
+    "seconds": 14.07366809999803
+  }
+}

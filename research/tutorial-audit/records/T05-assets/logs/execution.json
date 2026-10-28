@@ -1,0 +1,47 @@
+[
+  {
+    "name": "update",
+    "exit": 0,
+    "seconds": 3.9855296999994607
+  },
+  {
+    "name": "verify",
+    "exit": 0,
+    "seconds": 3.3476183999991918
+  },
+  {
+    "name": "cli-update",
+    "exit": 0,
+    "seconds": 4.18370700000014
+  },
+  {
+    "name": "cli-verify",
+    "exit": 0,
+    "seconds": 2.850913900001615
+  },
+  {
+    "name": "paths",
+    "exit": 0,
+    "seconds": 6.782314100000804
+  },
+  {
+    "name": "cli-reset",
+    "exit": 0,
+    "seconds": 3.540990299999976
+  },
+  {
+    "name": "reset-verify",
+    "exit": 0,
+    "seconds": 7.62523069999952
+  },
+  {
+    "name": "python-reset",
+    "exit": 0,
+    "seconds": 3.5645371999999043
+  },
+  {
+    "name": "reset-reopen",
+    "exit": 0,
+    "seconds": 3.588605799999641
+  }
+]

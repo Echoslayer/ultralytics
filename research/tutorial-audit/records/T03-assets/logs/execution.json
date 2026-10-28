@@ -1,0 +1,7 @@
+{
+  "first_exit": 0,
+  "repeat_exit": 0,
+  "masks_probe_exit": 1,
+  "repeat_results_equal": true,
+  "repeat_txt_equal": true
+}
