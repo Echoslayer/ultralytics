@@ -311,7 +311,7 @@ I have read the CLA Document and I sign the CLA
 
 同日抽查 `gh pr list --state merged --limit 30` 回傳的 30 個近期已合併 PR，搜尋正文與作者主討論留言並排除機器人摘要，找到 1 個明確聲明：[PR #26912](https://github.com/ultralytics/ultralytics/pull/26912) 提到 Claude 與 GPT-6 Astra 輔助，已於 2026-10-27 合併。其餘 29 個沒有找到明確聲明，不代表沒有使用 AI。這不是按合併時間嚴格排序的全量調查，未查逐行留言、commit 訊息或歷史編輯版本，也不能推論聲明影響合併率。
 
-**本書做法（2026-10-30 起）：PR 正文預設不填 AI 輔助聲明。** 不加 `🤖 Generated with Claude Code` 標語，也不加「AI-assisted…」說明句；`proposals/*/PR.md` 的草稿也一樣。維護者詢問時如實回答。commit 訊息的 `Co-Authored-By` 是另一件事，尚未決定。[PR #26949](https://github.com/ultralytics/ultralytics/pull/26949) 是在這項決定之前送出的，正文仍保留一句說明。
+**本書做法（2026-10-30 起）：PR 與 commit 預設都不填 AI 輔助聲明。** PR 正文不加 `🤖 Generated with Claude Code` 標語，也不加「AI-assisted…」說明句；`proposals/*/PR.md` 的草稿也一樣。commit 訊息不加 `Co-Authored-By: Claude …`。維護者詢問時如實回答。[PR #26949](https://github.com/ultralytics/ultralytics/pull/26949) 是在這項決定之前送出的：正文仍保留一句說明，提交 `00e6e8030` 也帶有 `Co-Authored-By`。已推送的提交不改寫，因為規範禁止 force push。
 
 ## 實例：從 T01／T05 到文件 PR #26935
 
