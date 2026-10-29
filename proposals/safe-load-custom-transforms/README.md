@@ -1,6 +1,6 @@
 # #26707 延伸提案：安全載入模式無法載入文件範例訓練出的分類模型
 
-狀態：2026-10-29 研究草稿，優先度低。尚未開 issue 或 PR。建議**先開 issue 附重現步驟**，不要直接送 PR，因為修改會碰到安全載入的允許清單。可直接貼上的 issue 草稿見 [ISSUE.md](ISSUE.md)。
+狀態：2026-10-29 已開 issue [#26943](https://github.com/ultralytics/ultralytics/issues/26943)，等維護者選方向。優先度低。建議**先開 issue 附重現步驟**，不要直接送 PR，因為修改會碰到安全載入的允許清單。可直接貼上的 issue 草稿見 [ISSUE.md](ISSUE.md)。
 
 ## 問題是什麼
 

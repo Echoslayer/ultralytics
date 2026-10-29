@@ -1,6 +1,6 @@
 # Issue 草稿：安全載入拒絕自訂分類轉換的模型
 
-狀態：2026-10-29 草稿，尚未送出。下方英文本文可直接貼進 GitHub 的 Bug Report 範本。
+狀態：2026-10-29 已送出為 [#26943](https://github.com/ultralytics/ultralytics/issues/26943)（Echoslayer）。最新版 8.4.192 的允許清單與錯誤訊息經核對相同。下方英文本文可直接貼進 GitHub 的 Bug Report 範本。
 
 ## 送出前
 
