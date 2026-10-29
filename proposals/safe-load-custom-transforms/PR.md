@@ -31,9 +31,9 @@ Fixes #26943
 - `ruff format --check` 和 `ruff check` 通過。
 - 沒有在 Windows 或 Linux 上測試。
 
-AI 輔助（Claude Code）；上述重現與測試均在本機實際執行。
+#### AI 輔助聲明
 
-上游沒有強制揭露 AI 輔助（見[第一章](../../research/contributing/docs/contribution-workflow.md)）。這裡選擇用一句平實說明揭露，而不是 `🤖 Generated with Claude Code` 標語，避免讓審查者以為整個 PR 是自動產生的。
+依本書 2026-10-30 起的做法，PR 正文預設不填 AI 輔助聲明（見[第一章](../../research/contributing/docs/contribution-workflow.md)），所以草稿不含這一句。線上的 #26949 正文是在這項決定前改的，最後仍有「AI-assisted (Claude Code); the reproduction and tests above were run locally.」，要不要移除尚未決定。
 
 ---
 
@@ -83,9 +83,9 @@ Fixes #26943
 - `pytest tests/test_python.py -k "restricted or remaps_cls"`: 4 passed.
 - `ruff format --check` and `ruff check` passed.
 - Not tested on Windows or Linux.
-
-AI-assisted (Claude Code); the reproduction and tests above were run locally.
 ```
+
+Following the book's default from 2026-10-30, PR bodies carry no AI-assist disclosure, so this draft omits it. The live #26949 body predates that decision and still ends with "AI-assisted (Claude Code); the reproduction and tests above were run locally."; whether to remove it is undecided.
 
 The section headings follow PR #26935 and are a suggested structure, not mandatory Ultralytics fields.
 

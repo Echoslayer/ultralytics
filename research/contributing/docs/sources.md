@@ -79,3 +79,5 @@
 2026-10-29：透過 GitHub API 核對 #18435、#17513、#24150 與 #26935，補入第一章與第六章。#26935 的提交 7d58cf0fa 為 OPEN、未合併，14 個檢查成功、6 個跳過，CLA 已通過，自動審查核可。另記錄官方 PR 模板與 AI 揭露政策查核，以及 30 筆近期已合併 PR 的有限抽樣；原始抽樣檔在 Temp，未納入本書的可重算統計資料。這些更新不代表重新查核全書所有連結與議題。
 
 2026-10-29 新增[外部 PR 的回應與關閉原因](pr-response-and-closures.md)：沿用第三季 cohort，補抓 482 筆外部 PR 的留言、審查與關閉事件；116 筆關閉未合併的原因由本書人工判讀，標籤與連結保存在 `docs/assets/pr-closed-reasons-2026-q3.json`。
+
+2026-10-30：透過 GitHub API 核對 issue #26943 與 PR #26949，補入第一章的案例與 AI 輔助聲明做法。#26949 的提交 00e6e8030 為 OPEN、未合併，UltralyticsAssistant 自動核可；19 個檢查中 5 個成功、6 個跳過、8 個執行中。PR 正文改寫前後的版本以 GraphQL `userContentEdits` 核對。重複 PR 查詢（`ClassifyLetterBox safe`、`ULTRALYTICS_SAFE_LOAD`、`safe_only`）只找到 #26949 本身。
