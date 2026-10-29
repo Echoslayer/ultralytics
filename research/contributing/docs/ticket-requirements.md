@@ -17,6 +17,16 @@
 
 「沒有一律先開單的規定」不等於任何修改都能直接送。若修正會改變既有行為、增加參數或擴大架構，先確認維護者是否認同方向，能避免投入後才發現範圍不合適。
 
+## 已關閉的 issue，仍可能支持文件改善
+
+關閉狀態只告訴你討論已結束，不能單靠它判斷是否還有文件缺口。先讀解答、關閉原因與相關 PR，再決定是否貢獻。
+
+2026-10-29 核讀的 [#18435](https://github.com/ultralytics/ultralytics/issues/18435) 是下載路徑提問，被標為 #17513 的重複議題。維護者解釋 `weights_dir` 的查找用途並提供明確路徑範例，提問者於 2024-12-31 自行關閉。這不是合併修正後關閉的 bug，因此文件 PR 應引用 `Related to #18435 and #17513`，不要宣稱修復尚未解決的程式錯誤。
+
+[PR #24150](https://github.com/ultralytics/ultralytics/pull/24150) 曾嘗試改變下載目的地，但未合併；討論涉及 CI 與校正資料路徑。後續 [#26935](https://github.com/ultralytics/ultralytics/pull/26935) 選擇解釋既有行為，是不同的修改範圍。舊 PR 未合併不能直接推論文件澄清也被拒絕。
+
+新功能仍須先開功能 issue、充分討論並獲維護者明確同意；小型文件修正沒有一律先開 issue 的要求。已有相同問題時，可直接在文件 PR 附舊議題作背景，避免再開重複單。這是依[官方規範](https://github.com/ultralytics/ultralytics/blob/main/CONTRIBUTING.md#feature-prs)與上述案例整理的建議，不是先開單比例的統計。
+
 ## 公司內部管理要求，不等於外部貢獻要申請帳號
 
 官方開發手冊同時涵蓋員工與貢獻者，要求工作有明確負責人，並評估影響、優先順序與風險。它要求在議題、PR、文件或操作手冊保留決策，也區分外部貢獻者建立個人副本、員工同步有寫入權限的專案。[開發工作流程](https://handbook.ultralytics.com/workflows/development)
