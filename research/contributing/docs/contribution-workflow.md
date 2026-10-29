@@ -126,6 +126,17 @@
 
 本機操作見下方流程。單一測試產生的覆蓋率只代表該次執行，不能直接與官方多個 CI 工作合併的報告比較。
 
+### PR 上的 Codecov 留言：先看檢查狀態，再決定是否補測試
+
+送出 PR 後，codecov bot 可能留言「Patch coverage is 0%」，並標出缺少覆蓋的行數。這則留言只是報告，判斷時依序看：
+
+1. **`codecov/patch` 檢查是 pass 還是 fail。** pass 就不會擋合併。
+2. **其他 Tests 是否還在跑。** 各 CI 工作陸續上傳覆蓋率，第一則留言的數字可能還會變。
+3. **未覆蓋的行原本是否就沒有測試。** 若改動加在一段既有程式也沒被執行到的區塊，就不是這次漏的。
+4. **是否屬於高風險缺口。** 不是的話不補；維護者要求時，再補最小的回歸測試。
+
+不必回覆 codecov bot。實例見下方 #26949。
+
 <a id="local-tests"></a>
 
 ## 在 Windows 本機跑測試：先跑一項，再擴大範圍
@@ -342,6 +353,8 @@ T01 觀察到設定 `weights_dir` 後，裸模型檔名的缺檔下載仍進入�
 - **訓練輸出寫進其他專案。** 沒有指定 `project=` 時，訓練結果寫到 Ultralytics 設定中的 `runs_dir`，這次落在另一個專案的目錄下。跑重現腳本時，應指定 `project=` 到暫存目錄。
 - **改寫 PR 正文會蓋掉 bot 摘要。** Ultralytics Actions 會把「🛠️ PR Summary」寫進 PR 正文。用 `gh pr edit --body-file` 整份覆蓋前，先抓下線上正文再修改。若已蓋掉，可從 GraphQL 的 `userContentEdits` 找回 bot 的版本。
 - **再次遇到 403。** 預設的 git 憑證屬於另一個帳號。這次只在單次指令中改用 Echoslayer 的憑證（`gh auth token --user Echoslayer`），沒有切換全域登入。
+
+**Codecov 報告 0%，決定不補測試。** codecov bot 回報 `ultralytics/nn/tasks.py` 有 2 行未覆蓋，但 `codecov/patch` 檢查是 pass。新增的三項加在 torchvision 轉換區塊，這段只在 checkpoint 存有 torchvision 轉換、且開啟安全載入時才執行，原本的 5 個轉換同樣沒有測試跑到。要覆蓋它，得在 CI 訓練分類模型，或手工做一個含轉換的 checkpoint；對只多放行三項的修改來說，風險低、測試比修正還長，所以不補。若維護者要求，再加一個不需訓練的最小測試：用 `torch.save` 存下 `T.Compose([np.asarray, ClassifyLetterBox(64), T.ToPILImage()])`，再以 `torch_safe_load(..., safe_only=True)` 載入，約 6 行。
 
 此案例沒有在 Windows 或 Linux 上驗證。作者先前的實測都在 Windows，送出後可補跑一次。
 
