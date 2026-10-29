@@ -31,6 +31,10 @@ Fixes #26943
 - `ruff format --check` 和 `ruff check` 通過。
 - 沒有在 Windows 或 Linux 上測試。
 
+AI 輔助（Claude Code）；上述重現與測試均在本機實際執行。
+
+上游沒有強制揭露 AI 輔助（見[第一章](../../research/contributing/docs/contribution-workflow.md)）。這裡選擇用一句平實說明揭露，而不是 `🤖 Generated with Claude Code` 標語，避免讓審查者以為整個 PR 是自動產生的。
+
 ---
 
 ## English submission draft
@@ -79,6 +83,8 @@ Fixes #26943
 - `pytest tests/test_python.py -k "restricted or remaps_cls"`: 4 passed.
 - `ruff format --check` and `ruff check` passed.
 - Not tested on Windows or Linux.
+
+AI-assisted (Claude Code); the reproduction and tests above were run locally.
 ```
 
 The section headings follow PR #26935 and are a suggested structure, not mandatory Ultralytics fields.
