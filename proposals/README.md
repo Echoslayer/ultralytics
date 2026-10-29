@@ -12,7 +12,7 @@ Each proposal and PR draft includes Traditional Chinese and English versions wit
 | --- | --- | --- | --- |
 | [T01／T05：weights_dir 文件澄清 / Clarify weights_dir documentation](weights-dir-docs/README.md) | 文件 / Docs | 已開 PR #26935，已核可，待合併 / PR #26935 open, approved | 等合併；之後對照第九章的回應時間 / Await merge |
 | [T07：說明 maps 對未評估類別的填值 / Explain maps filler for unevaluated classes](maps-docs/README.md) | 文件 / Docs | 已查證上游與既有議題 / Upstream and issues checked | 在最新 main 重跑 COCO8，再開 PR / Rerun on latest main, then PR |
-| [#26707 延伸：安全載入無法載入自訂分類轉換 / Restricted loading rejects custom classify transforms](safe-load-custom-transforms/README.md) | 錯誤回報 / Bug report | 已開 issue #26943 / Issue #26943 filed | 等維護者回覆 / Await maintainer reply |
+| [#26707 延伸：安全載入無法載入自訂分類轉換 / Restricted loading rejects custom classify transforms](safe-load-custom-transforms/README.md) | 錯誤回報 / Bug report | 維護者同意 A 案，已開 PR #26949 / Maintainer chose option A; PR #26949 open | 等 bot 與維護者審查 / Await bot and maintainer review |
 
 ## 已評估、不建議投入 / Evaluated and set aside
 

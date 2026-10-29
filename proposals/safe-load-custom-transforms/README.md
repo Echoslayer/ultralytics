@@ -1,6 +1,6 @@
 # #26707 延伸提案：安全載入模式無法載入文件範例訓練出的分類模型
 
-狀態：2026-10-29 已開 issue [#26943](https://github.com/ultralytics/ultralytics/issues/26943)，等維護者選方向。優先度低。建議**先開 issue 附重現步驟**，不要直接送 PR，因為修改會碰到安全載入的允許清單。可直接貼上的 issue 草稿見 [ISSUE.md](ISSUE.md)。
+狀態：2026-10-29 已開 issue [#26943](https://github.com/ultralytics/ultralytics/issues/26943)。維護者 Y-T-G 回覆可以開 PR 擴充允許清單，也就是 A 案。2026-10-30 已送出 [PR #26949](https://github.com/ultralytics/ultralytics/pull/26949)，等待審查。PR 草稿與驗證結果見 [PR.md](PR.md)；issue 草稿見 [ISSUE.md](ISSUE.md)。
 
 ## 問題是什麼
 
@@ -56,9 +56,9 @@ python -I research/contributing/analysis/cls_letterbox_26707.py $env:TEMP\cls267
 
 ## 送出前要做的事
 
-1. 在官方最新 main 重跑，確認問題還在。
-2. 搜尋 `ULTRALYTICS_SAFE_LOAD`、`ClassifyLetterBox` 相關議題與 PR。2026-10-29 搜尋時，沒有找到同題討論。
-3. 先開 issue；維護者選定方向後，再依[第一章](../../research/contributing/docs/contribution-workflow.md)開乾淨分支送 PR。
+- [x] 在官方最新 main 重跑，確認問題還在。2026-10-30 在 `80c34c050` 重現成功。
+- [x] 搜尋 `ULTRALYTICS_SAFE_LOAD`、`ClassifyLetterBox` 相關議題與 PR。2026-10-29 搜尋時，沒有找到同題討論；2026-10-30 搜尋 `ClassifyLetterBox safe`、`ULTRALYTICS_SAFE_LOAD`、`safe_only`，開啟中的 PR 只有 #26949。
+- [x] 先開 issue；維護者選定 A 案後，依[第一章](../../research/contributing/docs/contribution-workflow.md)從最新上游開乾淨分支，送出 PR #26949。
 
 ## 為什麼優先度低
 
@@ -68,7 +68,7 @@ python -I research/contributing/analysis/cls_letterbox_26707.py $env:TEMP\cls267
 
 # #26707 follow-up: restricted loading rejects classifiers trained with the documented custom transforms
 
-Status: research draft, low priority, 2026-10-29. No issue or PR yet. Recommended path: **open an issue with a reproduction first**, because any fix touches the restricted-load allow-list.
+Status: filed as issue [#26943](https://github.com/ultralytics/ultralytics/issues/26943) on 2026-10-29. Maintainer Y-T-G replied that a PR extending the allow-list is welcome, which is option A. Submitted as [PR #26949](https://github.com/ultralytics/ultralytics/pull/26949) on 2026-10-30, awaiting review. See [PR.md](PR.md) for the PR draft and validation results, and [ISSUE.md](ISSUE.md) for the issue draft.
 
 ## Problem
 
@@ -124,9 +124,9 @@ The script generates synthetic images with colored corners, trains one epoch wit
 
 ## Before submitting
 
-1. Rerun on the latest upstream main.
-2. Search issues and PRs for `ULTRALYTICS_SAFE_LOAD` and `ClassifyLetterBox`; none matched on 2026-10-29.
-3. Open the issue first; open a PR only after maintainers pick a direction.
+- [x] Rerun on the latest upstream main. Reproduced on `80c34c050` on 2026-10-30.
+- [x] Search issues and PRs for `ULTRALYTICS_SAFE_LOAD` and `ClassifyLetterBox`. None matched on 2026-10-29. On 2026-10-30, searches for `ClassifyLetterBox safe`, `ULTRALYTICS_SAFE_LOAD`, and `safe_only` found no open PR other than #26949.
+- [x] Open the issue first. After the maintainer picked option A, opened PR #26949 from a clean branch on the latest upstream main.
 
 ## Why low priority
 
