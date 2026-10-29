@@ -224,6 +224,115 @@ if history_path.exists():
     result["first_pr_per_external_author"] = {
         g: summarize([r for (category, _), r in first_prs.items() if category == g]) for g in sorted(baseline)
     }
+timeline_path = DATA / "pr-external-timeline-2026-q3.json"
+if "--timeline" in sys.argv:
+    timeline = (
+        json.loads(timeline_path.read_text(encoding="utf-8"))
+        if timeline_path.exists()
+        else {"fetch_started_at": datetime.now(timezone.utc).isoformat(), "prs": {}}
+    )
+    actor = "author { login __typename } authorAssociation"
+    events = (
+        "... on ClosedEvent { actor { login __typename } createdAt } ... on MarkedAsDuplicateEvent { createdAt } "
+        "... on CrossReferencedEvent { createdAt source { __typename ... on PullRequest { number merged author { login } } } }"
+    )
+    pending = [r["number"] for r in rows if r["author"] in histories and str(r["number"]) not in timeline["prs"]]
+    for offset in range(0, len(pending), 10):
+        fields = [
+            f"p{n}: pullRequest(number: {n}) {{ number comments(first: 100) {{ nodes {{ {actor} createdAt url }} }} "
+            f"reviews(first: 100) {{ nodes {{ {actor} submittedAt url }} }} "
+            f"timelineItems(last: 50, itemTypes: [CLOSED_EVENT, MARKED_AS_DUPLICATE_EVENT, CROSS_REFERENCED_EVENT]) {{ nodes {{ __typename {events} }} }} }}"
+            for n in pending[offset : offset + 10]
+        ]
+        batch = graphql('query { repository(owner: "ultralytics", name: "ultralytics") { ' + " ".join(fields) + " } }")[
+            "repository"
+        ]
+        for pr in batch.values():
+            # First pages are chronological, so they always contain the earliest response.
+            timeline["prs"][str(pr["number"])] = {k: v["nodes"] if isinstance(v, dict) else v for k, v in pr.items()}
+        timeline["fetched_at"] = datetime.now(timezone.utc).isoformat()
+        timeline_path.write_text(json.dumps(timeline, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"timeline: {len(timeline['prs'])}/{len(pending) + len(timeline['prs']) - offset - len(fields)}", flush=True)
+if timeline_path.exists() and history_path.exists():
+    timeline = json.loads(timeline_path.read_text(encoding="utf-8"))["prs"]
+    external = [r for r in rows if r["author"] in histories]
+    if set(timeline) == {str(r["number"]) for r in external}:
+        bots = {"ultralyticsassistant", "copilot", "copilot-pull-request-reviewer"}
+
+        def responses(row, maintainers_only):
+            pr = timeline[str(row["number"])]
+            items = [(c["createdAt"], c) for c in pr["comments"]] + [
+                (r["submittedAt"], r) for r in pr["reviews"] if r["submittedAt"]
+            ]
+            # Merging, or closing by someone else, also answers the author.
+            closed = [e for e in pr["timelineItems"] if e["__typename"] == "ClosedEvent"]
+            if row["merged_at"]:
+                items.append((row["merged_at"], {"author": {"login": "", "__typename": "User"}, "authorAssociation": "MEMBER"}))
+            elif closed and closed[0]["actor"]:
+                items.append((closed[0]["createdAt"], {"author": closed[0]["actor"], "authorAssociation": "MEMBER"}))
+            return sorted(
+                t
+                for t, c in items
+                if c["author"]
+                and c["author"]["__typename"] != "Bot"
+                and c["author"]["login"].lower() not in bots | {row["author"].lower()}
+                and (not maintainers_only or c["authorAssociation"] in {"MEMBER", "OWNER", "COLLABORATOR"})
+            )
+
+        def hours_summary(values, total):
+            values = sorted(values)
+
+            def pick(p):
+                if not values:
+                    return None
+                x = (len(values) - 1) * p
+                lo = int(x)
+                return round(values[lo] + (values[min(lo + 1, len(values) - 1)] - values[lo]) * (x - lo), 2)
+
+            return {
+                "prs": total,
+                "responded": len(values),
+                "median_hours": pick(0.5),
+                "p75_hours": pick(0.75),
+                "p90_hours": pick(0.9),
+                "within_24h": sum(v <= 24 for v in values),
+                "within_72h": sum(v <= 72 for v in values),
+            }
+
+        first_response = {}
+        for status, selected in (
+            ("all", external),
+            ("merged", [r for r in external if r["merged_at"]]),
+            ("not_merged", [r for r in external if not r["merged_at"]]),
+        ):
+            first_response[status] = hours_summary(
+                [elapsed(r["created_at"], t[0]) for r in selected if (t := responses(r, True))], len(selected)
+            )
+        first_response["any_human_all"] = hours_summary(
+            [elapsed(r["created_at"], t[0]) for r in external if (t := responses(r, False))], len(external)
+        )
+        closers = Counter()
+        for row in external:
+            if row["merged_at"] or row["state"] != "closed":
+                continue
+            closed = [e for e in timeline[str(row["number"])]["timelineItems"] if e["__typename"] == "ClosedEvent"]
+            who = closed[-1]["actor"] if closed and closed[-1]["actor"] else None
+            closers[
+                "author"
+                if who and who["login"] == row["author"]
+                else "automation"
+                if not who or who["__typename"] == "Bot" or who["login"].lower() in bots
+                else "other_human"
+            ] += 1
+        result["external_first_response"] = first_response
+        result["external_closed_unmerged_by"] = dict(closers)
+        reasons_path = DATA / "pr-closed-reasons-2026-q3.json"
+        if reasons_path.exists():
+            reasons = json.loads(reasons_path.read_text(encoding="utf-8"))["labels"]
+            assert set(reasons) == {
+                str(r["number"]) for r in external if r["state"] == "closed" and not r["merged_at"]
+            }
+            result["external_closed_unmerged_reasons"] = dict(Counter(v["reason"] for v in reasons.values()).most_common())
 assert sum(g["prs"] for g in result["groups"].values()) == len(rows)
 assert all(g["prs"] == g["merged"] + g["closed_unmerged"] + g["open"] for g in result["groups"].values())
 (DATA / "pr-summary-2026-q3.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -1,0 +1,469 @@
+{
+  "method": "Manual reading of each PR's closing comments on 2026-10-29. One primary reason per PR; folded_into_maintainer_pr means the maintainer said the change lands in another PR with authorship preserved.",
+  "labels": {
+    "25081": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25081"
+    },
+    "25091": {
+      "reason": "technical_defect",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25091"
+    },
+    "25111": {
+      "reason": "technical_defect",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25111"
+    },
+    "25118": {
+      "reason": "technical_defect",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25118"
+    },
+    "25122": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25122"
+    },
+    "25125": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25125"
+    },
+    "25183": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25183"
+    },
+    "25184": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25184"
+    },
+    "25202": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25202"
+    },
+    "25203": {
+      "reason": "technical_defect",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25203"
+    },
+    "25228": {
+      "reason": "technical_defect",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25228"
+    },
+    "25239": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25239"
+    },
+    "25242": {
+      "reason": "cla_unsigned",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25242"
+    },
+    "25277": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25277"
+    },
+    "25299": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25299"
+    },
+    "25302": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25302"
+    },
+    "25325": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25325"
+    },
+    "25334": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25334"
+    },
+    "25335": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25335"
+    },
+    "25336": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25336"
+    },
+    "25385": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25385"
+    },
+    "25422": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25422"
+    },
+    "25425": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25425"
+    },
+    "25443": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25443"
+    },
+    "25481": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25481"
+    },
+    "25501": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25501"
+    },
+    "25518": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25518"
+    },
+    "25519": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25519"
+    },
+    "25520": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25520"
+    },
+    "25521": {
+      "reason": "technical_defect",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25521"
+    },
+    "25527": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25527"
+    },
+    "25566": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25566"
+    },
+    "25587": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25587"
+    },
+    "25588": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25588"
+    },
+    "25589": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25589"
+    },
+    "25590": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25590"
+    },
+    "25591": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25591"
+    },
+    "25592": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25592"
+    },
+    "25593": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25593"
+    },
+    "25594": {
+      "reason": "technical_defect",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25594"
+    },
+    "25595": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25595"
+    },
+    "25596": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25596"
+    },
+    "25597": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25597"
+    },
+    "25598": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25598"
+    },
+    "25599": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25599"
+    },
+    "25610": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25610"
+    },
+    "25618": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25618"
+    },
+    "25629": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25629"
+    },
+    "25630": {
+      "reason": "no_stated_reason",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25630"
+    },
+    "25631": {
+      "reason": "no_stated_reason",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25631"
+    },
+    "25632": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25632"
+    },
+    "25708": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25708"
+    },
+    "25716": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25716"
+    },
+    "25717": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25717"
+    },
+    "25718": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25718"
+    },
+    "25719": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25719"
+    },
+    "25767": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25767"
+    },
+    "25772": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25772"
+    },
+    "25773": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25773"
+    },
+    "25775": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25775"
+    },
+    "25783": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25783"
+    },
+    "25804": {
+      "reason": "cla_unsigned",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25804"
+    },
+    "25819": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25819"
+    },
+    "25828": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25828"
+    },
+    "25830": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25830"
+    },
+    "25847": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25847"
+    },
+    "25851": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25851"
+    },
+    "25872": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25872"
+    },
+    "25894": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25894"
+    },
+    "25902": {
+      "reason": "no_stated_reason",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25902"
+    },
+    "25918": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25918"
+    },
+    "25925": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25925"
+    },
+    "25928": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25928"
+    },
+    "25943": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/25943"
+    },
+    "26004": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26004"
+    },
+    "26017": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26017"
+    },
+    "26021": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26021"
+    },
+    "26031": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26031"
+    },
+    "26058": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26058"
+    },
+    "26059": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26059"
+    },
+    "26063": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26063"
+    },
+    "26079": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26079"
+    },
+    "26089": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26089"
+    },
+    "26090": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26090"
+    },
+    "26111": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26111"
+    },
+    "26143": {
+      "reason": "author_withdrew",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26143"
+    },
+    "26197": {
+      "reason": "no_stated_reason",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26197"
+    },
+    "26202": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26202"
+    },
+    "26222": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26222"
+    },
+    "26238": {
+      "reason": "technical_defect",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26238"
+    },
+    "26245": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26245"
+    },
+    "26252": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26252"
+    },
+    "26259": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26259"
+    },
+    "26267": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26267"
+    },
+    "26270": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26270"
+    },
+    "26303": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26303"
+    },
+    "26307": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26307"
+    },
+    "26329": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26329"
+    },
+    "26336": {
+      "reason": "scope_or_design",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26336"
+    },
+    "26351": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26351"
+    },
+    "26354": {
+      "reason": "duplicate_superseded_or_obsolete",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26354"
+    },
+    "26410": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26410"
+    },
+    "26412": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26412"
+    },
+    "26413": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26413"
+    },
+    "26417": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26417"
+    },
+    "26418": {
+      "reason": "no_reachable_bug",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26418"
+    },
+    "26421": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26421"
+    },
+    "26422": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26422"
+    },
+    "26424": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26424"
+    },
+    "26437": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26437"
+    },
+    "26438": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26438"
+    },
+    "26444": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26444"
+    },
+    "26445": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26445"
+    },
+    "26449": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26449"
+    },
+    "26450": {
+      "reason": "technical_defect",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26450"
+    },
+    "26451": {
+      "reason": "folded_into_maintainer_pr",
+      "url": "https://github.com/ultralytics/ultralytics/pull/26451"
+    }
+  }
+}

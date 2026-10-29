@@ -843,5 +843,57 @@
         ]
       ]
     }
+  },
+  "external_first_response": {
+    "all": {
+      "prs": 482,
+      "responded": 460,
+      "median_hours": 8.09,
+      "p75_hours": 15.9,
+      "p90_hours": 27.86,
+      "within_24h": 403,
+      "within_72h": 440
+    },
+    "merged": {
+      "prs": 359,
+      "responded": 359,
+      "median_hours": 7.75,
+      "p75_hours": 14.35,
+      "p90_hours": 27.1,
+      "within_24h": 314,
+      "within_72h": 345
+    },
+    "not_merged": {
+      "prs": 123,
+      "responded": 101,
+      "median_hours": 10.41,
+      "p75_hours": 20.26,
+      "p90_hours": 27.94,
+      "within_24h": 89,
+      "within_72h": 95
+    },
+    "any_human_all": {
+      "prs": 482,
+      "responded": 460,
+      "median_hours": 8.04,
+      "p75_hours": 15.83,
+      "p90_hours": 27.0,
+      "within_24h": 404,
+      "within_72h": 441
+    }
+  },
+  "external_closed_unmerged_by": {
+    "other_human": 88,
+    "author": 28
+  },
+  "external_closed_unmerged_reasons": {
+    "author_withdrew": 26,
+    "scope_or_design": 24,
+    "duplicate_superseded_or_obsolete": 21,
+    "no_reachable_bug": 16,
+    "folded_into_maintainer_pr": 14,
+    "technical_defect": 9,
+    "no_stated_reason": 4,
+    "cla_unsigned": 2
   }
 }

@@ -17,7 +17,7 @@
 | C：做最小修正   | 找負責模組與所有呼叫者，列影響範圍，比較前後結果 | 小範圍修改與相關驗證             | 需要新介面或架構變更，先回提案討論   |
 | D：正式貢獻     | 開乾淨分支、寫英文 PR、回覆審查                  | 對應遠端確切版本的驗證及審查紀錄 | 新結果推翻根因時，回到 B             |
 
-本輪完成研究書，尚未執行 B、C、D。上表是後續步驟，不是已完成紀錄。
+#26707 已於 2026-10-29 完成階段 B，結論是停止，見下方[研究卡](#26707-card)。其他題目尚未執行 B、C、D。
 
 ## 第一個小型驗證：檢查分類圖片有沒有被裁掉
 
@@ -51,6 +51,36 @@
 驗證與停止條件：
 決定：繼續、等待或排除；理由：
 ```
+
+<a id="26707-card"></a>
+
+### 研究卡：#26707 分類圖片裁切（已執行）
+
+**結論：停止。在預設載入下，文件的「Custom transforms」範例已經讓訓練、驗證、推論三條流程都保留整張圖片，不需要修改文件或程式。**
+
+```text
+題目與來源網址：#26707 https://github.com/ultralytics/ultralytics/issues/26707
+最後讀到的留言日期、查核時間：2026-10-16（發問者表示會測試）；查核 2026-10-29
+議題狀態、相關 PR、是否已有參與者：Open；未見相關 PR；維護者已建議用自訂轉換
+基準 SHA、套件版本、是否有未提交修改：cfc8e272c、ultralytics 8.4.191；研究分支有未提交的書稿修改，未改模型程式
+作業系統、Python、torch、推論後端、硬體：Windows 11、Python 3.13、torch 2.14.1+cpu、PyTorch、CPU
+預期行為及其規範來源：docs/en/tasks/classify.md「Custom transforms」：以 ClassifyLetterBox 取代裁切，保留整張圖片
+最小公開輸入與執行命令：自行產生寬、長、方形灰圖，四角放 6px 色塊；
+  python -I research/contributing/analysis/cls_letterbox_26707.py <輸出目錄>
+實際輸出：
+  - 預設 classify_transforms 處理寬圖：四角標記 0／4
+  - 文件範例的驗證轉換：4／4
+  - 訓練後從 best.pt 推論，送入模型的張量：4／4，形狀 1×3×64×64
+  - 開啟 ULTRALYTICS_SAFE_LOAD=1 後載入同一 best.pt：失敗（TypeError）
+已排除的假設：「best.pt 不會帶著自訂轉換，推論會退回裁切」——預設載入下不成立
+負責模組、呼叫者：classify/train.py 把驗證轉換存進模型；classify/predict.py 沿用；
+  nn/tasks.py 的安全載入允許清單只含 Compose、Normalize、Resize、CenterCrop、ToTensor
+最小修正方向：無（預設路徑）。安全載入模式的錯誤訊息要求「使用官方模型」，對自訂轉換的使用者會誤導
+驗證與停止條件：三條流程皆 4／4 → 停止
+決定：排除。理由：文件已完整；安全載入是選用功能，另列為低優先觀察
+```
+
+結果檔：[cls-letterbox-26707.json](assets/cls-letterbox-26707.json)。實驗只訓練 1 輪、圖片 64 像素，目的只是檢查前處理，不評估準確率。實驗前請把 `YOLO_CONFIG_DIR` 指到暫存目錄；否則匯入 ultralytics 時，可能自動更新你全域的設定檔格式。
 
 ## 同時搜尋未解決議題、已合併修改與被拒方案
 
