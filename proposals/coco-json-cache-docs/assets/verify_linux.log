@@ -1,0 +1,30 @@
+fs: ext2/ext3
+Linux 6.6.114.1-microsoft-standard-WSL2 | python 3.14.4 | work dir ~/verify_note_ext4 | gap 0.0s
+case                                       expect     observed   ok
+[top level] JSON same-size edit            rebuild    rebuild    True
+[top level] JSON edit + mtime restored     cache hit  cache hit  True
+[top level] replace an image in place      cache hit  cache hit  True
+[top level] add an image                   rebuild    rebuild    True
+[top level] remove that image              rebuild    cache hit  False
+[subfolder] replace an image in place      cache hit  cache hit  True
+[subfolder] add an image                   cache hit  cache hit  True
+[subfolder] remove that image              cache hit  cache hit  True
+MISMATCH
+dir size: 4096 -> 4096
+distinct mtimes in 20000 writes: 34 | min step ms: 4.0
+
+fs: ext2/ext3
+Linux 6.6.114.1-microsoft-standard-WSL2 | python 3.14.4 | work dir ~/verify_note_ext4 | gap 0.05s
+case                                       expect     observed   ok
+[top level] JSON same-size edit            rebuild    rebuild    True
+[top level] JSON edit + mtime restored     cache hit  cache hit  True
+[top level] replace an image in place      cache hit  cache hit  True
+[top level] add an image                   rebuild    rebuild    True
+[top level] remove that image              rebuild    rebuild    True
+[subfolder] replace an image in place      cache hit  cache hit  True
+[subfolder] add an image                   cache hit  cache hit  True
+[subfolder] remove that image              cache hit  cache hit  True
+ALL MATCH
+dir size: 4096 -> 4096
+distinct mtimes in 20000 writes: 39 | min step ms: 4.0
+
