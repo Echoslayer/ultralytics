@@ -1,6 +1,6 @@
 # #26707 延伸提案：安全載入模式無法載入文件範例訓練出的分類模型
 
-狀態：2026-10-29 已開 issue [#26943](https://github.com/ultralytics/ultralytics/issues/26943)。維護者 Y-T-G 回覆可以開 PR 擴充允許清單，也就是 A 案。2026-10-30 已送出 [PR #26949](https://github.com/ultralytics/ultralytics/pull/26949)，等待審查。PR 草稿與驗證結果見 [PR.md](PR.md)；issue 草稿見 [ISSUE.md](ISSUE.md)。
+狀態：2026-10-29 已開 issue [#26943](https://github.com/ultralytics/ultralytics/issues/26943)。維護者 Y-T-G 回覆可以開 PR 擴充允許清單，也就是 A 案。2026-10-30 已送出 [PR #26949](https://github.com/ultralytics/ultralytics/pull/26949)，同日（台灣時間）合併，issue 隨之關閉。PR 草稿與驗證結果見 [PR.md](PR.md)；issue 草稿見 [ISSUE.md](ISSUE.md)。
 
 ## 問題是什麼
 
@@ -68,7 +68,7 @@ python -I research/contributing/analysis/cls_letterbox_26707.py $env:TEMP\cls267
 
 # #26707 follow-up: restricted loading rejects classifiers trained with the documented custom transforms
 
-Status: filed as issue [#26943](https://github.com/ultralytics/ultralytics/issues/26943) on 2026-10-29. Maintainer Y-T-G replied that a PR extending the allow-list is welcome, which is option A. Submitted as [PR #26949](https://github.com/ultralytics/ultralytics/pull/26949) on 2026-10-30, awaiting review. See [PR.md](PR.md) for the PR draft and validation results, and [ISSUE.md](ISSUE.md) for the issue draft.
+Status: filed as issue [#26943](https://github.com/ultralytics/ultralytics/issues/26943) on 2026-10-29. Maintainer Y-T-G replied that a PR extending the allow-list is welcome, which is option A. Submitted as [PR #26949](https://github.com/ultralytics/ultralytics/pull/26949) on 2026-10-30 and merged the same day (Taiwan time); the issue closed with it. See [PR.md](PR.md) for the PR draft and validation results, and [ISSUE.md](ISSUE.md) for the issue draft.
 
 ## Problem
 

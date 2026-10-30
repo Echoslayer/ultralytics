@@ -1,6 +1,6 @@
 # T07 提案：說明 `metrics.box.maps` 對未評估類別的填值
 
-狀態：2026-10-29 研究草稿。尚未建立分支、修改上游或開 PR。
+狀態：2026-10-30 已在最新 main `ae2857e3e`（8.4.193）以 COCO8 重新驗證：80 類只評估 6 類，其餘 74 格等於整體 mAP 0.669。已送出 [PR #26955](https://github.com/ultralytics/ultralytics/pull/26955)，只改 `docs/en/modes/val.md` 兩處（+4/−2），分支 `docs/clarify-maps-filler`。等待審查。
 
 ## 為什麼值得做
 
@@ -38,7 +38,7 @@ metrics.box.ap_class_index  # class indices that were actually evaluated
 
 # T07 proposal: explain how `metrics.box.maps` fills classes that were not evaluated
 
-Status: research draft, 2026-10-29. No branch, upstream change, or PR yet.
+Status: revalidated on latest main `ae2857e3e` (8.4.193) on 2026-10-30 with COCO8: 6 of 80 classes evaluated, the other 74 entries equal the overall mAP 0.669. Submitted as [PR #26955](https://github.com/ultralytics/ultralytics/pull/26955), changing two places in `docs/en/modes/val.md` (+4/−2) on branch `docs/clarify-maps-filler`. Awaiting review.
 
 ## Why
 
