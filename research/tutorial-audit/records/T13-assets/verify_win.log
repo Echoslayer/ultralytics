@@ -1,0 +1,13 @@
+Windows 11 | python 3.13.14
+claim                                                        expect   parsed  images ok
+[top level] rerun, nothing changed -> cache hit              hit      False   3      True
+[JSON] same-size edit -> re-parse                            parse    True    3      True
+[JSON] edit + original mtime restored -> cache hit (stale)   hit      False   3      True
+[top level] replace an image in place -> cache hit           hit      False   3      True
+[top level] add the missing listed image -> re-parse         parse    True    4      True
+[top level] remove that image -> re-parse                    parse    True    3      True
+[subfolder] rerun, nothing changed -> cache hit              hit      False   3      True
+[subfolder] replace an image in place -> cache hit           hit      False   3      True
+[subfolder] add the missing listed image -> cache hit        hit      False   3      True
+[subfolder] remove that image -> cache hit                   hit      False   3      True
+ALL MATCH

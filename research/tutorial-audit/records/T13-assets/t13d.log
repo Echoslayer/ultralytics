@@ -1,0 +1,4 @@
+JSON lists 4 images; 3 present -> 3 images used
+added the 4th image into sub/; top folder mtime changed = False
+rerun -> 3 images used
+after deleting .cache -> 4 images used
