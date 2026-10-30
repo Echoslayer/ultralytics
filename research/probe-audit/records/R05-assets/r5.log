@@ -1,0 +1,18 @@
+ultralytics 8.4.193 D:\tools\ultralytics\.worktrees\safe-load-test\ultralytics\__init__.py torch 2.15.0+cpu
+bus box in bus.jpg (5, 229, 807, 740) image (1080, 810)
+fill=0.5 imgsz=640 retina=False crop=(995, 810) conf=0.87 box=[7, 147, 526, 474] mask_area=0.316 of frame, uncropped mask outside box=0.295%
+fill=0.5 imgsz=640 retina=True  crop=(995, 810) conf=0.87 box=[0, 229, 800, 736] mask_area=0.330 of frame, uncropped mask outside box=0.297%
+fill=0.5 imgsz=320 retina=False: no bus detected
+fill=0.5 imgsz=320 retina=True: no bus detected
+fill=0.8 imgsz=640 retina=False crop=(637, 810) conf=0.87 box=[13, 54, 634, 444] mask_area=0.502 of frame, uncropped mask outside box=0.743%
+fill=0.8 imgsz=640 retina=True  crop=(637, 810) conf=0.87 box=[16, 63, 803, 557] mask_area=0.510 of frame, uncropped mask outside box=0.704%
+fill=0.8 imgsz=320 retina=False crop=(637, 810) conf=0.84 box=[3, 27, 319, 228] mask_area=0.506 of frame, uncropped mask outside box=0.905%
+fill=0.8 imgsz=320 retina=True  crop=(637, 810) conf=0.84 box=[6, 62, 807, 571] mask_area=0.513 of frame, uncropped mask outside box=0.750%
+fill=0.9 imgsz=640 retina=False crop=(567, 810) conf=0.87 box=[23, 25, 631, 411] mask_area=0.563 of frame, uncropped mask outside box=1.682%
+fill=0.9 imgsz=640 retina=True  crop=(567, 810) conf=0.87 box=[29, 31, 799, 520] mask_area=0.563 of frame, uncropped mask outside box=1.650%
+fill=0.9 imgsz=320 retina=False crop=(567, 810) conf=0.87 box=[2, 11, 318, 212] mask_area=0.573 of frame, uncropped mask outside box=0.704%
+fill=0.9 imgsz=320 retina=True  crop=(567, 810) conf=0.87 box=[4, 27, 806, 537] mask_area=0.574 of frame, uncropped mask outside box=0.607%
+fill=0.98 imgsz=640 retina=False crop=(521, 810) conf=0.88 box=[15, 9, 634, 393] mask_area=0.612 of frame, uncropped mask outside box=1.197%
+fill=0.98 imgsz=640 retina=True  crop=(521, 810) conf=0.88 box=[19, 8, 803, 495] mask_area=0.617 of frame, uncropped mask outside box=1.080%
+fill=0.98 imgsz=320 retina=False crop=(521, 810) conf=0.88 box=[2, 11, 318, 210] mask_area=0.574 of frame, uncropped mask outside box=0.917%
+fill=0.98 imgsz=320 retina=True  crop=(521, 810) conf=0.88 box=[5, 6, 806, 508] mask_area=0.624 of frame, uncropped mask outside box=0.684%

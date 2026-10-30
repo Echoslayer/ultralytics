@@ -8,6 +8,7 @@
 | [R02](records/R02.md)（2026-10-30） | #26937 | 7 種用法 | 全部正常 | 0 |
 | [R03](records/R03.md)（2026-10-30） | `docs/en/tasks/` 五個任務頁 | 3（`.pt` 與 ONNX 各一次） | 全部與文件一致；1 個疑似缺口已在 `predict-args` 說明 | 0 |
 | [R04](records/R04.md)（2026-10-30） | FP16 ONNX、`rect` 驗證、OBB／pose 追蹤、靜態 ONNX 批次 | 5 | 1 項 mAP 落差來自 `rect`，`export.md` 與 `val.md` 已說明；其餘正常 | 0 |
+| [R05](records/R05.md)（2026-10-30） | issue #26795（大物體的分割遮罩不完整） | 1 | 無法重現：框裁掉的遮罩最多 1.7% | 0 |
 
 ## 每一輪的步驟
 
