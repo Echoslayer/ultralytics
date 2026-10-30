@@ -1,6 +1,6 @@
 # T01／T05 提案：澄清 weights_dir 的查找與下載行為
 
-狀態：2026-10-29 已在獨立功能 worktree 完成文件修改與本地驗證，已建立 [PR #26935](https://github.com/ultralytics/ultralytics/pull/26935)，2026-10-30（台灣時間）合併；合併版本為 +3/−1，比草稿的 10 行精簡。以下保留提案規劃；實際結果見 [PR 草稿的驗證段落](PR.md)。
+狀態：2026-10-29 已在獨立功能 worktree 完成文件修改與本地驗證，已建立 [PR #26935](https://github.com/ultralytics/ultralytics/pull/26935)，2026-10-30（台灣時間）合併；維護者 Glenn Jocher 以 `e53a62c0f` 把 10 行說明段改寫為 `weights_dir` 表格列的說明，加上表格後一句註記，合併版本為 +3/−1。以下保留提案規劃；實際結果見 [PR 草稿的驗證段落](PR.md)。
 
 實作位置：`D:/tools/ultralytics/.worktrees/weights-dir-docs`；分支：`docs/clarify-weights-dir`；基準：官方 main `922563eab`。最終只在 Settings Reference 前增加說明與範例，共 10 行，沒有修改表格或產品程式碼。驗證腳本位於本機 Temp 的 `verify_weights_dir_docs.py`，建置日誌為 `weights-dir-docs-build-final.log`。
 
@@ -62,7 +62,7 @@ T01／T05 舊證據使用 PyPI Ultralytics 8.4.191；本次新增驗證直接匯
 
 # English: T01/T05 proposal — clarify weights_dir lookup and downloads
 
-Status: implemented and locally validated in a separate feature worktree on 2026-10-29. Submitted as [PR #26935](https://github.com/ultralytics/ultralytics/pull/26935), merged on 2026-10-30 (Taiwan time) as +3/−1 (trimmed from the 10-line draft). The proposal below is retained as planning context; see the [PR draft](PR.md) for actual validation results.
+Status: implemented and locally validated in a separate feature worktree on 2026-10-29. Submitted as [PR #26935](https://github.com/ultralytics/ultralytics/pull/26935), merged on 2026-10-30 (Taiwan time) as +3/−1: maintainer Glenn Jocher (`e53a62c0f`) folded the 10-line note into the `weights_dir` table row plus one sentence after the table. The proposal below is retained as planning context; see the [PR draft](PR.md) for actual validation results.
 
 Worktree: `D:/tools/ultralytics/.worktrees/weights-dir-docs`; branch: `docs/clarify-weights-dir`; base: upstream main `922563eab`. The final change adds 10 lines of explanation and example before the settings table, without changing the table or product code. The local Temp directory contains `verify_weights_dir_docs.py` and the build log `weights-dir-docs-build-final.log`.
 

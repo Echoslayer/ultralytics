@@ -83,3 +83,5 @@
 2026-10-30：透過 GitHub API 核對 issue #26943 與 PR #26949，補入第一章的案例與 AI 輔助聲明做法。#26949 的提交 00e6e8030 為 OPEN、未合併，UltralyticsAssistant 自動核可；19 個檢查中 5 個成功、6 個跳過、8 個執行中。PR 正文改寫前後的版本以 GraphQL `userContentEdits` 核對。重複 PR 查詢（`ClassifyLetterBox safe`、`ULTRALYTICS_SAFE_LOAD`、`safe_only`）只找到 #26949 本身。
 
 2026-10-30：讀 #26949 的 codecov 留言（patch coverage 0%、`ultralytics/nn/tasks.py` 2 行未覆蓋）與 `gh pr checks`：`codecov/patch` 為 pass，其餘 Tests 仍在執行。補入第一章的 Codecov 判讀步驟與案例。
+
+2026-10-30：重新核對 #26949 與 #26935 的提交紀錄。#26949 的 codecov 留言最終為 3 行未覆蓋（先前記錄的 2 行是第一版留言）；Glenn Jocher 以 `874c9de03` 把 +14/−1 縮成 +4/−1。#26935 由 Glenn Jocher 以 `e53a62c0f` 把 10 行說明段改寫為表格列與表後一句註記（該提交 +3/−11），合併版本 +3/−1。

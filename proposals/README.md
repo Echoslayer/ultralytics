@@ -10,7 +10,7 @@ Each proposal and PR draft includes Traditional Chinese and English versions wit
 
 | 提案 / Proposal | 類型 / Type | 狀態 / Status | 下一步 / Next step |
 | --- | --- | --- | --- |
-| [T01／T05：weights_dir 文件澄清 / Clarify weights_dir documentation](weights-dir-docs/README.md) | 文件 / Docs | PR #26935 已於 2026-10-30 合併（+3/−1，維護者精簡）/ PR #26935 merged 2026-10-30 (+3/−1, trimmed by maintainer) | 對照草稿記下被刪減的部分 / Note what the maintainer trimmed |
+| [T01／T05：weights_dir 文件澄清 / Clarify weights_dir documentation](weights-dir-docs/README.md) | 文件 / Docs | PR #26935 已於 2026-10-30 合併；維護者把 10 行說明改寫為表格列加一句註記，最終 +3/−1 / PR #26935 merged 2026-10-30; maintainer folded the 10-line note into the table row plus one sentence (+3/−1) | 完成 / Done |
 | [T07：說明 maps 對未評估類別的填值 / Explain maps filler for unevaluated classes](maps-docs/README.md) | 文件 / Docs | 已開 PR #26955，已核可（2026-10-30）/ PR #26955 open, approved (2026-10-30) | 等審查；維護者同意再改其餘 9 處 / Await review; extend to other 9 places if asked |
 | [#26707 延伸：安全載入無法載入自訂分類轉換 / Restricted loading rejects custom classify transforms](safe-load-custom-transforms/README.md) | 錯誤回報 / Bug report | PR #26949 已於 2026-10-30 合併，issue #26943 關閉 / PR #26949 merged 2026-10-30; issue #26943 closed | 完成 / Done |
 

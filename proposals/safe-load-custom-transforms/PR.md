@@ -2,7 +2,7 @@
 
 中文版供閱讀與討論；提交上游時只複製英文標題與正文。2026-10-30 已在獨立 worktree 完成修改與本地驗證，送出 [PR #26949](https://github.com/ultralytics/ultralytics/pull/26949)，對應 issue [#26943](https://github.com/ultralytics/ultralytics/issues/26943)。
 
-實作位置：`/Users/wizard/Desktop/MacCode/ultralytics/.worktree/safe-load-cls-transforms`。分支：`safe-load-cls-transforms`。基準：官方 main `80c34c050`。只修改 `ultralytics/nn/tasks.py` 一個檔案，淨增約 12 行，沒有新增測試。
+實作位置：`/Users/wizard/Desktop/MacCode/ultralytics/.worktree/safe-load-cls-transforms`。分支：`safe-load-cls-transforms`。基準：官方 main `80c34c050`。只修改 `ultralytics/nn/tasks.py` 一個檔案，沒有新增測試。送出的提交 `00e6e8030` 為 +14/−1；維護者 Glenn Jocher 加了 `874c9de03`，把多行 tuple 縮成兩行、說明註解移到 import 行，合併版本為 +4/−1，放行的三項與行為不變。
 
 ## 中文閱讀版
 
@@ -41,7 +41,7 @@ Fixes #26943
 
 Status: implemented and locally validated on 2026-10-30 in a separate worktree. Submitted as [PR #26949](https://github.com/ultralytics/ultralytics/pull/26949) for issue [#26943](https://github.com/ultralytics/ultralytics/issues/26943).
 
-Worktree: `/Users/wizard/Desktop/MacCode/ultralytics/.worktree/safe-load-cls-transforms`. Branch: `safe-load-cls-transforms`. Base: upstream main `80c34c050`. The change touches only `ultralytics/nn/tasks.py`, adds about 12 net lines, and adds no tests.
+Worktree: `/Users/wizard/Desktop/MacCode/ultralytics/.worktree/safe-load-cls-transforms`. Branch: `safe-load-cls-transforms`. Base: upstream main `80c34c050`. The change touches only `ultralytics/nn/tasks.py` and adds no tests. The submitted commit `00e6e8030` was +14/−1; maintainer Glenn Jocher added `874c9de03`, collapsing the multi-line tuple into two lines and moving the comment to the import line. The merged diff is +4/−1 with the same three entries and behavior.
 
 ## Suggested title
 

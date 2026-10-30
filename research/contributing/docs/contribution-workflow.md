@@ -342,7 +342,7 @@ T01 觀察到設定 `weights_dir` 後，裸模型檔名的缺檔下載仍進入�
 | 方向     | issue #26943 列出 A（擴充允許清單）與 C（改錯誤訊息）兩案；維護者選 A，因此不同時改錯誤訊息                                      |
 | 基準     | 官方 main `80c34c050`；個人副本 `origin` 落後，改從上游 main 開分支                                                              |
 | 工作樹   | `ultralytics/.worktree/safe-load-cls-transforms`，功能分支 `safe-load-cls-transforms`                                            |
-| 範圍     | 只改 `ultralytics/nn/tasks.py`，淨增約 12 行；只放行實際存進 checkpoint 的驗證轉換，文件中的訓練增強不存進模型，所以不放行       |
+| 範圍     | 只改 `ultralytics/nn/tasks.py`，送出時 +14/−1，維護者縮成兩行後以 +4/−1 合併；只放行實際存進 checkpoint 的驗證轉換，文件中的訓練增強不存進模型，所以不放行       |
 | 本地驗證 | macOS／CPU、Python 3.12、torch 2.15.0：issue 的 MRE 修改前失敗、修改後可安全載入並推論；`-k "restricted or remaps_cls"` 4 個通過 |
 | 提交     | `00e6e8030`，PR 正文沿用 #26935 的 Summary／Validation 結構                                                                      |
 
@@ -354,7 +354,7 @@ T01 觀察到設定 `weights_dir` 後，裸模型檔名的缺檔下載仍進入�
 - **改寫 PR 正文會蓋掉 bot 摘要。** Ultralytics Actions 會把「🛠️ PR Summary」寫進 PR 正文。用 `gh pr edit --body-file` 整份覆蓋前，先抓下線上正文再修改。若已蓋掉，可從 GraphQL 的 `userContentEdits` 找回 bot 的版本。
 - **再次遇到 403。** 預設的 git 憑證屬於另一個帳號。這次只在單次指令中改用 Echoslayer 的憑證（`gh auth token --user Echoslayer`），沒有切換全域登入。
 
-**Codecov 報告 0%，決定不補測試。** codecov bot 回報 `ultralytics/nn/tasks.py` 有 2 行未覆蓋，但 `codecov/patch` 檢查是 pass。新增的三項加在 torchvision 轉換區塊，這段只在 checkpoint 存有 torchvision 轉換、且開啟安全載入時才執行，原本的 5 個轉換同樣沒有測試跑到。要覆蓋它，得在 CI 訓練分類模型，或手工做一個含轉換的 checkpoint；對只多放行三項的修改來說，風險低、測試比修正還長，所以不補。若維護者要求，再加一個不需訓練的最小測試：用 `torch.save` 存下 `T.Compose([np.asarray, ClassifyLetterBox(64), T.ToPILImage()])`，再以 `torch_safe_load(..., safe_only=True)` 載入，約 6 行。
+**Codecov 報告 0%，決定不補測試。** codecov bot 第一則留言回報 `ultralytics/nn/tasks.py` 有 2 行未覆蓋，維護者縮短程式、CI 跑完後，留言最終是 3 行未覆蓋，正好印證上面第 2 點：數字會變。`codecov/patch` 檢查始終是 pass。新增的三項加在 torchvision 轉換區塊，這段只在 checkpoint 存有 torchvision 轉換、且開啟安全載入時才執行，原本的 5 個轉換同樣沒有測試跑到。要覆蓋它，得在 CI 訓練分類模型，或手工做一個含轉換的 checkpoint；對只多放行三項的修改來說，風險低、測試比修正還長，所以不補。若維護者要求，再加一個不需訓練的最小測試：用 `torch.save` 存下 `T.Compose([np.asarray, ClassifyLetterBox(64), T.ToPILImage()])`，再以 `torch_safe_load(..., safe_only=True)` 載入，約 6 行。
 
 此案例沒有在 Windows 或 Linux 上驗證。作者先前的實測都在 Windows，送出後可補跑一次。
 
