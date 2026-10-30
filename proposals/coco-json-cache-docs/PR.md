@@ -8,35 +8,26 @@
 
 ### 建議標題
 
-依含修改時間的雜湊，更新 COCO JSON 指南的快取說明
+雜湊已含修改時間，更新 COCO JSON 指南的快取說明
 
 ### 建議正文
 
 #### 摘要
 
-`guides/coco-json-training.md` 的快取警告說，`get_hash()` 只看檔案大小，所以長度不變的 JSON 修改會沿用舊快取。#26283 把每個路徑的修改時間加進雜湊後，這已不成立。這段警告是一個月前（#25919）寫的，沒有跟著更新。
+COCO JSON 指南警告：標註快取只看 JSON 的檔案大小，所以位元組數不變的修改，會在不知不覺中用舊標註訓練。寫這段警告時（#25919）確實如此，但後來 #26283 把修改時間加進了 `get_hash()`，現在編輯 JSON 就會照預期重新解析。我在 main 上試過：把一個框寬從 `611.59` 改成 `211.59`，檔案大小完全一樣，下次載入就讀到了新值。
 
-在 main 上，把框寬從 `611.59` 改成 `211.59`（JSON 大小不變），下次載入就會重新解析並讀到新值。只有把原本的修改時間還原，才會沿用舊快取。
+所以這段警告現在多半是在叫大家刪一個不必刪的快取。我把它改成一段簡短的 note，並修正 FAQ 裡對應的那句。
 
-這次把警告改寫成 note，並更新 FAQ 中對應的一句。檢查時另外發現一種仍會靜默沿用舊快取的情況，新的 note 也寫進去了：圖片放在子資料夾。`get_hash()` 只看 `img_path` 這個資料夾本身，所以 `file_name` 像 `sub/img.jpg` 時，把原本缺的圖片補進 `sub/` 不會改變雜湊。在刪除 `.cache` 之前，那張圖片會一直被排除，而且沒有任何訊息：`cache_labels()` 會跳過不存在的檔案，命中快取時也不印紀錄。不修改程式碼。
+測試時我確實碰到一種情況，快取仍會在毫無跡象下過時：圖片放在子資料夾裡。雜湊只看 `img_path` 這個資料夾本身，所以如果 `file_name` 是 `sub/img.jpg` 這類路徑，事後把缺的圖片補進 `sub/`，什麼都不會變，那張圖片會一直被排除在訓練外，直到刪掉 `.cache`。note 裡寫了這點，讓大家知道什麼時候仍需要手動刪除。
+
+只改文件，不改程式碼。
 
 #### 驗證
 
-- 在 main `ae2857e3e`（Windows 11、CPU、Python 3.13.14、torch 2.15.0）上，把 COCO8 轉成 COCO JSON，跑指南的 Full Implementation 1 個 epoch；再原樣使用指南的 `COCODataset` 測以下情況：
-
-  | 修改 | 快取 |
-  | --- | --- |
-  | 不修改 | 命中 |
-  | JSON 長度不變的修改 | 重新解析 |
-  | 修改 JSON 後還原修改時間 | 命中（舊快取） |
-  | 直接在 `img_path` 底下新增／刪除圖片 | 重新解析 |
-  | 原地替換圖片 | 命中 |
-  | 在子資料夾新增／刪除圖片 | 命中（舊快取） |
-
-- Linux（WSL2 Ubuntu、ext4）：用從 `ultralytics/data/utils.py` 原樣取出的 `get_hash()` 檢查相同情況；快取只在雜湊不變時命中。全部符合。步驟間不暫停時，在同一個 4 ms 時間戳刻度內新增再刪除檔案，資料夾大小與修改時間都不變；實際修改相隔數秒，不會發生。
-- Prettier 3.9.9（`--tab-width 4 --print-width 120`）與 `git diff --check` 通過。
-- `python docs/build_docs.py`：設定 `PYTHONUTF8=1` 後完整嚴格建置通過（no issues found）。
-- 沒有在 macOS 上測試。
+- 把 COCO8 轉成 COCO JSON，跑指南的 Full Implementation 一個 epoch（main `ae2857e3e`、Windows 11、CPU、Python 3.13.14、torch 2.15.0），再用指南原樣的 `COCODataset` 逐句檢查新 note：編輯 JSON 會重新解析；還原修改時間會留下舊快取；在最上層新增或刪除圖片會重建；原地替換和子資料夾裡的變動不會。
+- 在 Linux（WSL2、ext4）上直接對 `get_hash()` 做同樣的檢查，因為快取命中與否就由它決定。結果相同。（有個小插曲：在同一個約 4 ms 的時間戳刻度內新增再刪除檔案，資料夾看起來會沒變，但實際修改不會碰到。）
+- Prettier 3.9.9 與 `git diff --check` 通過，`python docs/build_docs.py` 建置沒有問題。
+- 還沒在 macOS 上試過。
 
 ---
 
@@ -47,7 +38,7 @@ Status: implemented and locally validated on 2026-10-30 in a separate worktree. 
 ## Suggested title
 
 ```text
-Update the COCO JSON guide's cache note for mtime-aware hashing
+Update the COCO JSON guide's cache note now that the hash includes mtime
 ```
 
 ## Suggested body
@@ -55,29 +46,20 @@ Update the COCO JSON guide's cache note for mtime-aware hashing
 ```markdown
 ## Summary
 
-The cache warning in `guides/coco-json-training.md` says `get_hash()` keys on file size only, so a same-length JSON edit keeps the stale cache. That stopped being true in #26283, which added each path's modification time to the hash. The warning was written a month earlier (#25919) and was not updated.
+The COCO JSON guide warns that the label cache only looks at the JSON's file size, so an edit that keeps the same byte count would silently train on old annotations. That was true when the warning was written (#25919), but #26283 later added modification times to `get_hash()`, so editing the JSON now re-parses it as you'd expect. I tried it on main: changing a box width from `611.59` to `211.59` keeps the file size identical, and the next load picked up the new value.
 
-On main, changing a box width from `611.59` to `211.59` (JSON size unchanged) re-parses the JSON on the next load and picks up the new value. The stale cache only survives if the original modification time is restored.
+So the warning is now mostly telling people to delete a cache they don't need to delete. I've turned it into a short note and fixed the matching FAQ line.
 
-This rewrites the warning as a note and updates the matching FAQ sentence. While checking it, I found one case where the cache still goes stale silently, which the note now covers: images in a subfolder. `get_hash()` stats the `img_path` folder itself, so with a `file_name` like `sub/img.jpg`, adding a previously missing image to `sub/` does not change the key. The image stays excluded until `.cache` is deleted, with no message, since `cache_labels()` skips missing files and a cache hit logs nothing. No code changes.
+While testing I did hit one case where the cache still goes stale without any sign: images in a subfolder. The hash only looks at the `img_path` folder itself, so if `file_name` is something like `sub/img.jpg` and you add a missing image to `sub/` later, nothing changes and that image just stays out of training until you delete the `.cache`. The note mentions this so people know when a manual delete is still needed.
+
+Docs only, no code changes.
 
 ## Validation
 
-- On main `ae2857e3e` (Windows 11, CPU, Python 3.13.14, torch 2.15.0), ran the guide's Full Implementation on COCO8 converted to COCO JSON for 1 epoch, then the cases below with the guide's `COCODataset` used verbatim:
-
-  | Change | Cache |
-  | --- | --- |
-  | none | hit |
-  | same-size JSON edit | re-parse |
-  | JSON edit with original mtime restored | hit (stale) |
-  | add / remove an image directly in `img_path` | re-parse |
-  | replace an image in place | hit |
-  | add / remove an image in a subfolder | hit (stale) |
-
-- Linux (WSL2 Ubuntu, ext4): checked the same cases against `get_hash()` taken verbatim from `ultralytics/data/utils.py`, since the cache hits exactly when that hash is unchanged. All match. Without a pause between steps, adding then removing a file within one 4 ms timestamp tick leaves the folder's size and mtime unchanged; with real edits seconds apart this does not occur.
-- Prettier 3.9.9 (`--tab-width 4 --print-width 120`) and `git diff --check` passed.
-- `python docs/build_docs.py`: passed the full strict build with `PYTHONUTF8=1` (no issues found).
-- Not tested on macOS.
+- Ran the guide's Full Implementation for one epoch on COCO8 converted to COCO JSON (main `ae2857e3e`, Windows 11, CPU, Python 3.13.14, torch 2.15.0), then checked each sentence of the new note using the guide's `COCODataset` as written: JSON edits re-parse, a restored mtime keeps the old cache, top-level image adds and removes rebuild, and in-place replacements and subfolder changes don't.
+- Repeated the same checks on Linux (WSL2, ext4) against `get_hash()` directly, since that's what decides a cache hit. Same results. (One quirk: if you add and remove a file within the same ~4 ms timestamp tick, the folder looks unchanged, but real edits don't run into that.)
+- Prettier 3.9.9 and `git diff --check` pass, and `python docs/build_docs.py` builds cleanly.
+- I haven't tried macOS.
 ```
 
 The section headings above are a suggested structure, not mandatory Ultralytics fields.
