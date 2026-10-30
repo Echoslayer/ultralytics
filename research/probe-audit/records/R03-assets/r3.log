@@ -1,0 +1,138 @@
+ultralytics 8.4.193 D:\tools\ultralytics\.worktrees\safe-load-test\ultralytics\__init__.py torch 2.15.0+cpu
+Ultralytics 8.4.193  Python-3.13.14 torch-2.15.0+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 1.3 GFLOPs
+
+[34m[1mPyTorch:[0m starting from 'yolo26n.pt' with input shape (1, 3, 320, 320) BCHW and output shape(s) (1, 84, 2100) (5.3 MB)
+
+[34m[1mONNX:[0m starting export with onnx 1.23.2 opset 18...
+[34m[1mONNX:[0m slimming with onnxslim 0.1.98...
+[34m[1mONNX:[0m export success  2.0s, saved as 'yolo26n.onnx' (9.3 MB)
+
+Export complete (2.1s)
+Results saved to [1mC:\Users\edisonhsieh\AppData\Local\Temp\claude\D--tools-ultralytics\d3a91cb9-b121-4be8-b46f-b3aaa15114cc\scratchpad\probes\yolo26n.onnx[0m
+Predict:         yolo predict task=detect model=yolo26n.onnx imgsz=320 
+Validate:        yolo val task=detect model=yolo26n.onnx imgsz=320  
+Visualize:       https://netron.app
+detect   pt   boxes.data         torch.float32 (5, 6)
+detect   pt   boxes.xyxy         torch.float32 (5, 4)
+detect   pt   boxes.conf         torch.float32 (5,)
+detect   pt   boxes.cls          torch.float32 (5,)
+Loading yolo26n.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+detect   onnx boxes.data         torch.float32 (5, 6)
+detect   onnx boxes.xyxy         torch.float32 (5, 4)
+detect   onnx boxes.conf         torch.float32 (5,)
+detect   onnx boxes.cls          torch.float32 (5,)
+Ultralytics 8.4.193  Python-3.13.14 torch-2.15.0+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n-seg summary (fused): 136 layers, 2,722,980 parameters, 0 gradients, 2.3 GFLOPs
+
+[34m[1mPyTorch:[0m starting from 'yolo26n-seg.pt' with input shape (1, 3, 320, 320) BCHW and output shape(s) ((1, 116, 2100), (1, 32, 80, 80)) (6.4 MB)
+
+[34m[1mONNX:[0m starting export with onnx 1.23.2 opset 18...
+[34m[1mONNX:[0m slimming with onnxslim 0.1.98...
+[34m[1mONNX:[0m export success  1.1s, saved as 'yolo26n-seg.onnx' (10.6 MB)
+
+Export complete (1.4s)
+Results saved to [1mC:\Users\edisonhsieh\AppData\Local\Temp\claude\D--tools-ultralytics\d3a91cb9-b121-4be8-b46f-b3aaa15114cc\scratchpad\probes\yolo26n-seg.onnx[0m
+Predict:         yolo predict task=segment model=yolo26n-seg.onnx imgsz=320 
+Validate:        yolo val task=segment model=yolo26n-seg.onnx imgsz=320  
+Visualize:       https://netron.app
+segment  pt   masks.data         torch.uint8 (5, 320, 256)
+segment  pt   masks.xy           list[5] of np.float32 (173, 2)
+segment  pt   masks.xyn          list[5] of np.float32 (173, 2)
+segment  pt   boxes.cls          torch.float32 (5,)
+Loading yolo26n-seg.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+segment  onnx masks.data         torch.uint8 (5, 320, 320)
+segment  onnx masks.xy           list[5] of np.float32 (181, 2)
+segment  onnx masks.xyn          list[5] of np.float32 (181, 2)
+segment  onnx boxes.cls          torch.float32 (5,)
+Ultralytics 8.4.193  Python-3.13.14 torch-2.15.0+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n-pose summary (fused): 129 layers, 2,926,494 parameters, 0 gradients, 1.9 GFLOPs
+
+[34m[1mPyTorch:[0m starting from 'yolo26n-pose.pt' with input shape (1, 3, 320, 320) BCHW and output shape(s) (1, 56, 2100) (7.5 MB)
+
+[34m[1mONNX:[0m starting export with onnx 1.23.2 opset 18...
+[34m[1mONNX:[0m slimming with onnxslim 0.1.98...
+[34m[1mONNX:[0m export success  1.1s, saved as 'yolo26n-pose.onnx' (11.4 MB)
+
+Export complete (1.3s)
+Results saved to [1mC:\Users\edisonhsieh\AppData\Local\Temp\claude\D--tools-ultralytics\d3a91cb9-b121-4be8-b46f-b3aaa15114cc\scratchpad\probes\yolo26n-pose.onnx[0m
+Predict:         yolo predict task=pose model=yolo26n-pose.onnx imgsz=320 
+Validate:        yolo val task=pose model=yolo26n-pose.onnx imgsz=320  
+Visualize:       https://netron.app
+pose     pt   keypoints.data     torch.float32 (3, 17, 3)
+pose     pt   keypoints.xy       torch.float32 (3, 17, 2)
+pose     pt   keypoints.xyn      torch.float32 (3, 17, 2)
+pose     pt   boxes.xyxy         torch.float32 (3, 4)
+Loading yolo26n-pose.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+pose     onnx keypoints.data     torch.float32 (3, 17, 3)
+pose     onnx keypoints.xy       torch.float32 (3, 17, 2)
+pose     onnx keypoints.xyn      torch.float32 (3, 17, 2)
+pose     onnx boxes.xyxy         torch.float32 (3, 4)
+Ultralytics 8.4.193  Python-3.13.14 torch-2.15.0+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n-obb summary (fused): 129 layers, 2,449,332 parameters, 0 gradients, 1.4 GFLOPs
+
+[34m[1mPyTorch:[0m starting from 'yolo26n-obb.pt' with input shape (1, 3, 320, 320) BCHW and output shape(s) (1, 20, 2100) (5.6 MB)
+
+[34m[1mONNX:[0m starting export with onnx 1.23.2 opset 18...
+[34m[1mONNX:[0m slimming with onnxslim 0.1.98...
+[34m[1mONNX:[0m export success  0.6s, saved as 'yolo26n-obb.onnx' (9.5 MB)
+
+Export complete (0.9s)
+Results saved to [1mC:\Users\edisonhsieh\AppData\Local\Temp\claude\D--tools-ultralytics\d3a91cb9-b121-4be8-b46f-b3aaa15114cc\scratchpad\probes\yolo26n-obb.onnx[0m
+Predict:         yolo predict task=obb model=yolo26n-obb.onnx imgsz=320 
+Validate:        yolo val task=obb model=yolo26n-obb.onnx imgsz=320  
+Visualize:       https://netron.app
+Found https://ultralytics.com/images/boats.jpg locally at boats.jpg
+obb      pt   obb.data           torch.float32 (193, 7)
+obb      pt   obb.xywhr          torch.float32 (193, 5)
+obb      pt   obb.xyxyxyxy       torch.float32 (193, 4, 2)
+obb      pt   obb.conf           torch.float32 (193,)
+obb      pt   obb.cls            torch.float32 (193,)
+Loading yolo26n-obb.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+Found https://ultralytics.com/images/boats.jpg locally at boats.jpg
+obb      onnx obb.data           torch.float32 (188, 7)
+obb      onnx obb.xywhr          torch.float32 (188, 5)
+obb      onnx obb.xyxyxyxy       torch.float32 (188, 4, 2)
+obb      onnx obb.conf           torch.float32 (188,)
+obb      onnx obb.cls            torch.float32 (188,)
+Ultralytics 8.4.193  Python-3.13.14 torch-2.15.0+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n-cls summary (fused): 81 layers, 2,807,024 parameters, 0 gradients, 0.4 GFLOPs
+
+[34m[1mPyTorch:[0m starting from 'yolo26n-cls.pt' with input shape (1, 3, 224, 224) BCHW and output shape(s) (1, 1000) (5.5 MB)
+
+[34m[1mONNX:[0m starting export with onnx 1.23.2 opset 18...
+[34m[1mONNX:[0m slimming with onnxslim 0.1.98...
+[34m[1mONNX:[0m export success  0.3s, saved as 'yolo26n-cls.onnx' (10.8 MB)
+
+Export complete (0.7s)
+Results saved to [1mC:\Users\edisonhsieh\AppData\Local\Temp\claude\D--tools-ultralytics\d3a91cb9-b121-4be8-b46f-b3aaa15114cc\scratchpad\probes\yolo26n-cls.onnx[0m
+Predict:         yolo predict task=classify model=yolo26n-cls.onnx imgsz=224 
+Validate:        yolo val task=classify model=yolo26n-cls.onnx imgsz=224  
+Visualize:       https://netron.app
+classify pt   probs.data         torch.float32 (1000,)
+classify pt   probs.top1         int
+classify pt   probs.top1conf     torch.float32 ()
+classify pt   probs.top5         list[5] of int
+Loading yolo26n-cls.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+classify onnx probs.data         torch.float32 (1000,)
+classify onnx probs.top1         int
+classify onnx probs.top1conf     torch.float32 ()
+classify onnx probs.top5         list[5] of int
+
+== P2 obb long-edge snippet
+pt: n=193 raw w<h=36 after w<h=0 angle_out=0 angle_range=[-0.285,2.007] corner_maxdiff=0.000
+Loading yolo26n-obb.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+onnx: n=188 raw w<h=35 after w<h=0 angle_out=0 angle_range=[0.227,2.010] corner_maxdiff=0.000
+
+== P3 pose keypoint names
+yaml kpt_names: {0: ['nose', 'left_eye', 'right_eye', 'left_ear', 'right_ear', 'left_shoulder', 'right_shoulder', 'left_elbow', 'right_elbow', 'left_wrist', 'right_wrist', 'left_hip', 'right_hip', 'left_knee', 'right_knee', 'left_ankle', 'right_ankle']}
+pt: model kpt_names={0: ['nose', 'left_eye', 'right_eye', 'left_ear', 'right_ear', 'left_shoulder', 'right_shoulder', 'left_elbow', 'right_elbow', 'left_wrist', 'right_wrist', 'left_hip', 'right_hip', 'left_knee', 'right_knee', 'left_ankle', 'right_ankle']} kpt_shape=[17, 3]
+Loading yolo26n-pose.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+onnx: model kpt_names={0: ['nose', 'left_eye', 'right_eye', 'left_ear', 'right_ear', 'left_shoulder', 'right_shoulder', 'left_elbow', 'right_elbow', 'left_wrist', 'right_wrist', 'left_hip', 'right_hip', 'left_knee', 'right_knee', 'left_ankle', 'right_ankle']} kpt_shape=[17, 3]
