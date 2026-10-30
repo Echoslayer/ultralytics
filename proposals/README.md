@@ -23,6 +23,7 @@ Each proposal and PR draft includes Traditional Chinese and English versions wit
 | T02-B 信心分數四捨五入 / Score rounding | 正常的顯示行為 / Normal display behavior |
 | #26324 MPS 計時 / MPS timing | 需要 Apple 真機 / Needs Apple hardware |
 | T10 ONNX 較慢 / ONNX slower | 需要控制變因的效能研究，成本高 / Needs controlled benchmarking |
+| [內建 SHAP 解釋 / Built-in SHAP explanations](shap-explainability/README.md) | 已有 LayerCAM；功能 PR 須先取得 issue 同意，且新增依賴與 50 行門檻高 / LayerCAM exists; feature PR needs approved issue, high bar for new deps and 50+ lines |
 
 依據見研究書[第四章研究卡](../research/contributing/docs/roadmap.md)與 [tutorial audit](../research/tutorial-audit/README.md)。/ Evidence: research book chapter 4 and the tutorial audit.
 
