@@ -1,0 +1,50 @@
+﻿uv.exe :    Building ultralytics @ file:///D:/tools/ultralytics/.worktrees/maps-docs
+At line:1 char:480
++ ... NG='utf-8'; & "C:\Users\edisonhsieh\AppData\Local\hermes\bin\uv.exe"  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (   Building ult...trees/maps-docs:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Downloading matplotlib (8.9MiB)
+Downloading pillow (6.9MiB)
+Downloading numpy (12.0MiB)
+Downloading torch (120.9MiB)
+      Built ultralytics @ file:///D:/tools/ultralytics/.worktrees/maps-docs
+ Downloaded pillow
+ Downloaded matplotlib
+ Downloaded numpy
+ Downloaded torch
+Installed 41 packages in 4.15s
+
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 1% ──────────── 80.0KB/5.3MB 238.3KB/s 0.1s<22.4s
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 4% ╸─────────── 240.0KB/5.3MB 1.4MB/s 0.2s<3.6s
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 15% ━╸────────── 816.0KB/5.3MB 5.3MB/s 0.3s<0.8s
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 34% ━━━━──────── 1.8/5.3MB 9.3MB/s 0.4s<0.4s
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 52% ━━━━━━────── 2.8/5.3MB 9.1MB/s 0.5s<0.3s
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 72% ━━━━━━━━╸─── 3.9/5.3MB 10.4MB/s 0.6s<0.1s
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 99% ━━━━━━━━━━━╸ 5.2/5.3MB 13.2MB/s 0.7s<0.0s
+Downloading https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26n.pt to 'yolo26n.pt': 100% ━━━━━━━━━━━━ 5.3MB 7.1MB/s 0.7s
+Ultralytics 8.4.193  Python-3.13.14 torch-2.15.0+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 5.5 GFLOPs
+
+WARNING Dataset 'coco8.yaml' images not found, missing path 'D:\datasets\coco8\images\val'
+
+Downloading https://ultralytics.com/assets/coco8.zip to 'D:\datasets\coco8.zip': 18% ━━────────── 80.0/432.8KB 215.7KB/s 0.1s<1.6s
+Downloading https://ultralytics.com/assets/coco8.zip to 'D:\datasets\coco8.zip': 66% ━━━━━━━╸──── 288.0/432.8KB 2.0MB/s 0.2s<0.1s
+Downloading https://ultralytics.com/assets/coco8.zip to 'D:\datasets\coco8.zip': 100% ━━━━━━━━━━━━ 432.8KB 1.8MB/s 0.2s
+
+Unzipping D:\datasets\coco8.zip to D:\datasets\coco8...: 100% ━━━━━━━━━━━━ 25/25 1.0Kfiles/s 0.0s
+Dataset download success  (1.2s), saved to D:\datasets
+
+val: Fast image access  (ping: 0.0±0.0 ms, read: 256.4±136.3 MB/s, size: 54.0 KB)
+
+val: Scanning D:\datasets\coco8\labels\val... 4 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 4/4 206.4it/s 0.0s
+val: New cache created: D:\datasets\coco8\labels\val.cache
+
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100% ━━━━━━━━━━━━ 1/1 5.9it/s 0.2s
+                   all          4         17      0.551      0.962      0.943      0.669
+Speed: 2.4ms preprocess, 27.1ms inference, 0.0ms loss, 1.7ms postprocess per image
+ultralytics 8.4.193 D:\tools\ultralytics\.worktrees\maps-docs\ultralytics\__init__.py
+nc 80 evaluated 6 [np.int64(0), np.int64(16), np.int64(17), np.int64(20), np.int64(25), np.int64(58)]
+overall map 0.6693446205755027 filler unique [    0.66934]
+OK: filler == overall mAP; evaluated entries == per-class AP

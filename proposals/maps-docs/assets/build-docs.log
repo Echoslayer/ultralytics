@@ -1,0 +1,72 @@
+﻿uv.exe : Downloading jedi (4.7MiB)
+At line:1 char:536
++ ... NG='utf-8'; & "C:\Users\edisonhsieh\AppData\Local\hermes\bin\uv.exe"  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Downloading jedi (4.7MiB):String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Downloading zensical (18.1MiB)
+ Downloaded jedi
+ Downloaded zensical
+Installed 70 packages in 9.08s
+Removing existing build artifacts
+Loaded https://github.com/ultralytics/docs from D:\tools\ultralytics\.worktrees\maps-docs\docs\repos\docs
+
+Adding frontmatter: ──────────── 116 347.6it/s 0.1s
+Adding frontmatter: ──────────── 187 453.9it/s 0.2s
+Adding frontmatter: ──────────── 257 525.0it/s 0.3s
+Adding frontmatter: ──────────── 341 618.6it/s 0.4s
+Adding frontmatter: ──────────── 424 681.5it/s 0.5s
+Adding frontmatter: ──────────── 521 765.7it/s 0.6s
+Adding frontmatter: ──────────── 594 754.1it/s 0.7s
+Adding frontmatter: ━━━━━━━━━━━━ 665 756.3it/s 0.8s
+
+Docstrings ultralytics/ultralytics: 0% ──────────── 2/231 3.5file/s 0.2s<1:05
+Docstrings ultralytics/ultralytics: 1% ──────────── 4/231 2.8file/s 1.9s<1:21
+Docstrings ultralytics/ultralytics: 3% ──────────── 7/231 6.9file/s 2.1s<32.3s
+Docstrings ultralytics/ultralytics: 3% ──────────── 8/231 6.4file/s 2.3s<35.0s
+Docstrings ultralytics/ultralytics: 5% ╸─────────── 12/231 9.4file/s 2.5s<23.3s
+Docstrings ultralytics/ultralytics: 6% ╸─────────── 14/231 9.7file/s 2.7s<22.3s
+Docstrings ultralytics/ultralytics: 6% ╸─────────── 15/231 8.7file/s 2.9s<24.9s
+Docstrings ultralytics/ultralytics: 7% ╸─────────── 17/231 8.8file/s 3.1s<24.4s
+Docstrings ultralytics/ultralytics: 8% ━─────────── 20/231 13.5file/s 3.2s<15.6s
+Docstrings ultralytics/ultralytics: 11% ━─────────── 26/231 15.3file/s 3.6s<13.4s
+Docstrings ultralytics/ultralytics: 19% ━━────────── 45/231 32.6file/s 3.8s<5.7s
+Docstrings ultralytics/ultralytics: 22% ━━╸───────── 53/231 45.2file/s 3.9s<3.9s
+Docstrings ultralytics/ultralytics: 25% ━━━───────── 58/231 44.4file/s 4.0s<3.9s
+Docstrings ultralytics/ultralytics: 27% ━━━───────── 63/231 38.8file/s 4.2s<4.3s
+Docstrings ultralytics/ultralytics: 29% ━━━╸──────── 68/231 41.6file/s 4.3s<3.9s
+Docstrings ultralytics/ultralytics: 31% ━━━╸──────── 72/231 31.9file/s 4.8s<5.0s
+Docstrings ultralytics/ultralytics: 31% ━━━╸──────── 73/231 22.9file/s 5.3s<6.9s
+Docstrings ultralytics/ultralytics: 33% ━━━━──────── 77/231 19.0file/s 5.7s<8.1s
+Docstrings ultralytics/ultralytics: 34% ━━━━──────── 79/231 16.1file/s 5.9s<9.4s
+Docstrings ultralytics/ultralytics: 36% ━━━━──────── 84/231 21.2file/s 6.1s<6.9s
+Docstrings ultralytics/ultralytics: 42% ━━━━━─────── 98/231 54.4file/s 6.2s<2.4s
+Docstrings ultralytics/ultralytics: 48% ━━━━━╸────── 111/231 72.5file/s 6.3s<1.7s
+Docstrings ultralytics/ultralytics: 54% ━━━━━━────── 125/231 90.8file/s 6.4s<1.2s
+Docstrings ultralytics/ultralytics: 58% ━━━━━━━───── 136/231 95.9file/s 6.5s<1.0s
+Docstrings ultralytics/ultralytics: 61% ━━━━━━━───── 143/231 69.1file/s 7.6s<1.3s
+Docstrings ultralytics/ultralytics: 62% ━━━━━━━╸──── 145/231 49.3file/s 8.3s<1.7s
+Docstrings ultralytics/ultralytics: 63% ━━━━━━━╸──── 146/231 36.9file/s 8.4s<2.3s
+Docstrings ultralytics/ultralytics: 72% ━━━━━━━━╸─── 167/231 29.9file/s 9.9s<2.1s
+Docstrings ultralytics/ultralytics: 76% ━━━━━━━━━─── 176/231 46.8file/s 10.0s<1.2s
+Docstrings ultralytics/ultralytics: 80% ━━━━━━━━━╸── 187/231 65.7file/s 10.1s<0.7s
+Docstrings ultralytics/ultralytics: 88% ━━━━━━━━━━╸─ 204/231 95.0file/s 10.2s<0.3s
+Docstrings ultralytics/ultralytics: 91% ━━━━━━━━━━━─ 212/231 78.7file/s 10.4s<0.2s
+Docstrings ultralytics/ultralytics: 92% ━━━━━━━━━━━─ 214/231 61.0file/s 10.5s<0.3s
+Docstrings ultralytics/ultralytics: 93% ━━━━━━━━━━━─ 216/231 46.5file/s 10.7s<0.3s
+Docstrings ultralytics/ultralytics: 93% ━━━━━━━━━━━─ 217/231 34.5file/s 10.9s<0.4s
+Docstrings ultralytics/ultralytics: 96% ━━━━━━━━━━━╸ 222/231 35.9file/s 11.0s<0.3s
+Docstrings ultralytics/ultralytics: 99% ━━━━━━━━━━━╸ 229/231 40.6file/s 11.1s<0.0s
+Docstrings ultralytics/ultralytics: 100% ━━━━━━━━━━━━ 231/231 20.8file/s 11.1s
+
+MiniJinja: 101 macros, 25 pages: ──────────── 255 763.8it/s 0.1s
+MiniJinja: 167 macros, 60 pages: ──────────── 560 1.4Kit/s 0.2s
+MiniJinja: 182 macros, 72 pages: ━━━━━━━━━━━━ 665 1.5Kit/s 0.3s
+Building docs from D:\tools\ultralytics\.worktrees\maps-docs\docs
+Build started
+No issues found
+Build finished in 52.13s
+Site built at D:\tools\ultralytics\.worktrees\maps-docs\site
+Docs built correctly 
+Restoring docs directory from backup

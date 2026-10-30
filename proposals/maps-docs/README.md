@@ -1,6 +1,6 @@
 # T07 提案：說明 `metrics.box.maps` 對未評估類別的填值
 
-狀態：2026-10-30 已在最新 main `ae2857e3e`（8.4.193）以 COCO8 重新驗證：80 類只評估 6 類，其餘 74 格等於整體 mAP 0.669。已送出 [PR #26955](https://github.com/ultralytics/ultralytics/pull/26955)，只改 `docs/en/modes/val.md` 兩處（+4/−2），分支 `docs/clarify-maps-filler`。等待審查。
+狀態：2026-10-30 已在最新 main `ae2857e3e`（8.4.193）以 COCO8 重新驗證：80 類只評估 6 類，其餘 74 格等於整體 mAP 0.669。已送出 [PR #26955](https://github.com/ultralytics/ultralytics/pull/26955)，只改 `docs/en/modes/val.md` 兩處（+4/−2），分支 `docs/clarify-maps-filler`。等待審查。PR 草稿與驗證見 [PR.md](PR.md)。
 
 ## 為什麼值得做
 
