@@ -4,7 +4,7 @@
 
 實作位置：`D:/tools/ultralytics/.worktrees/maps-docs`。分支：`docs/clarify-maps-filler`。基準：官方 main `ae2857e3e`（8.4.193）。只修改 `docs/en/modes/val.md` 兩處註解，+4/−2，沒有修改產品程式碼。驗證腳本與日誌見 [assets](assets/)。
 
-這份草稿是在 PR 送出**之後**補寫的。送出時漏了本目錄的流程：沒有先寫 `PR.md`、沒跑文件建置，正文也沒寫未驗證範圍。之後已補跑檢查；線上正文尚未更新。
+這份草稿是在 PR 送出**之後**補寫的。送出時漏了本目錄的流程：沒有先寫 `PR.md`、沒跑文件建置，正文也沒寫未驗證範圍。之後已補跑檢查，2026-10-30 依英文版更新線上正文的 Summary 與 Validation，保留 bot 產生的 PR Summary。PR 當時已獲核可。
 
 ## 中文閱讀版
 
@@ -33,7 +33,7 @@
 
 ## English submission draft
 
-Status: implemented and locally validated on 2026-10-30 in a separate worktree. Submitted as [PR #26955](https://github.com/ultralytics/ultralytics/pull/26955). This draft was written after submission; the live body will be updated once the Validation section is final.
+Status: implemented and locally validated on 2026-10-30 in a separate worktree. Submitted as [PR #26955](https://github.com/ultralytics/ultralytics/pull/26955). This draft was written after submission; the live body was updated with this Summary and Validation on 2026-10-30, keeping the bot-generated PR Summary. The PR was already approved at that point.
 
 ## Suggested title
 
