@@ -29,7 +29,7 @@
 | [docs/en/tasks/semantic.md](../../docs/en/tasks/semantic.md) | [官方來源](https://docs.ultralytics.com/tasks/semantic/) | 未開始 | — |
 | [docs/en/guides/analytics.md](../../docs/en/guides/analytics.md) | [官方來源](https://docs.ultralytics.com/guides/analytics/) | 未開始 | — |
 | [docs/en/guides/azureml-quickstart.md](../../docs/en/guides/azureml-quickstart.md) | [官方來源](https://docs.ultralytics.com/guides/azureml-quickstart/) | 未開始 | — |
-| [docs/en/guides/coco-json-training.md](../../docs/en/guides/coco-json-training.md) | [官方來源](https://docs.ultralytics.com/guides/coco-json-training/) | 已完成 | [T13](records/T13.md)：範例跑通；快取警告已因 #26283 過時；子資料夾圖片增刪不會更新快取；修正已備妥並跨平台驗證 |
+| [docs/en/guides/coco-json-training.md](../../docs/en/guides/coco-json-training.md) | [官方來源](https://docs.ultralytics.com/guides/coco-json-training/) | 已完成 | [T13](records/T13.md)：範例跑通；快取警告已因 #26283 過時；子資料夾圖片增刪不會更新快取；修正已跨平台驗證，PR #26960 |
 | [docs/en/guides/coco-to-yolo.md](../../docs/en/guides/coco-to-yolo.md) | [官方來源](https://docs.ultralytics.com/guides/coco-to-yolo/) | 未開始 | — |
 | [docs/en/guides/conda-quickstart.md](../../docs/en/guides/conda-quickstart.md) | [官方來源](https://docs.ultralytics.com/guides/conda-quickstart/) | 未開始 | — |
 | [docs/en/guides/coral-edge-tpu-on-raspberry-pi.md](../../docs/en/guides/coral-edge-tpu-on-raspberry-pi.md) | [官方來源](https://docs.ultralytics.com/guides/coral-edge-tpu-on-raspberry-pi/) | 未開始 | — |

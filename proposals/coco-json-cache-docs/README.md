@@ -1,6 +1,6 @@
 # T13 提案：更新 COCO JSON 指南的快取說明
 
-狀態：2026-10-30 已在官方 main `ae2857e3e`（8.4.193）完成修改與本地驗證。分支 `docs/coco-json-cache-mtime` 已推到 Echoslayer fork，**尚未開 PR**。只改 `docs/en/guides/coco-json-training.md` 兩處（+3/−3），不改程式碼。PR 草稿見 [PR.md](PR.md)。
+狀態：2026-10-30 已在官方 main `ae2857e3e`（8.4.193）完成修改與本地驗證。分支 `docs/coco-json-cache-mtime`，已送出 [PR #26960](https://github.com/ultralytics/ultralytics/pull/26960)，等待審查。只改 `docs/en/guides/coco-json-training.md` 兩處（+3/−3），不改程式碼。PR 草稿見 [PR.md](PR.md)。
 
 ## 為什麼值得做
 
@@ -35,7 +35,7 @@
 
 # T13 proposal: update the COCO JSON guide's cache note
 
-Status: implemented and locally validated on official main `ae2857e3e` (8.4.193) on 2026-10-30. Branch `docs/coco-json-cache-mtime` is pushed to the Echoslayer fork; **no PR opened yet**. Changes two places in `docs/en/guides/coco-json-training.md` (+3/−3), no code changes. PR draft: [PR.md](PR.md).
+Status: implemented and locally validated on official main `ae2857e3e` (8.4.193) on 2026-10-30. Branch `docs/coco-json-cache-mtime`, submitted as [PR #26960](https://github.com/ultralytics/ultralytics/pull/26960); awaiting review. Changes two places in `docs/en/guides/coco-json-training.md` (+3/−3), no code changes. PR draft: [PR.md](PR.md).
 
 ## Why
 

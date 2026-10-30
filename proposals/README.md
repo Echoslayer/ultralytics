@@ -13,7 +13,7 @@ Each proposal and PR draft includes Traditional Chinese and English versions wit
 | [T01／T05：weights_dir 文件澄清 / Clarify weights_dir documentation](weights-dir-docs/README.md) | 文件 / Docs | PR #26935 已於 2026-10-30 合併；維護者把 10 行說明改寫為表格列加一句註記，最終 +3/−1 / PR #26935 merged 2026-10-30; maintainer folded the 10-line note into the table row plus one sentence (+3/−1) | 完成 / Done |
 | [T07：說明 maps 對未評估類別的填值 / Explain maps filler for unevaluated classes](maps-docs/README.md) | 文件 / Docs | 已開 PR #26955，已核可（2026-10-30）/ PR #26955 open, approved (2026-10-30) | 等審查；維護者同意再改其餘 9 處 / Await review; extend to other 9 places if asked |
 | [#26707 延伸：安全載入無法載入自訂分類轉換 / Restricted loading rejects custom classify transforms](safe-load-custom-transforms/README.md) | 錯誤回報 / Bug report | PR #26949 已於 2026-10-30 合併，issue #26943 關閉 / PR #26949 merged 2026-10-30; issue #26943 closed | 完成 / Done |
-| [T13：更新 COCO JSON 指南的快取說明 / Update the COCO JSON guide's cache note](coco-json-cache-docs/README.md) | 文件 / Docs | 修改與驗證完成，分支已推到 fork，尚未開 PR（2026-10-30）/ Implemented and validated, branch pushed to fork, no PR yet (2026-10-30) | 確認 [PR.md](coco-json-cache-docs/PR.md) 後開 PR / Open the PR after reviewing PR.md |
+| [T13：更新 COCO JSON 指南的快取說明 / Update the COCO JSON guide's cache note](coco-json-cache-docs/README.md) | 文件 / Docs | 已開 PR #26960（2026-10-30）/ PR #26960 open (2026-10-30) | 等審查 / Await review |
 
 ## 已評估、不建議投入 / Evaluated and set aside
 

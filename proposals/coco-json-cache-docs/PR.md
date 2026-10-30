@@ -1,6 +1,6 @@
 # PR 草稿：中英文版本 / Bilingual PR draft
 
-中文版供閱讀與討論；提交上游時只複製英文標題與正文。2026-10-30 已在獨立 worktree 完成修改與本地驗證，**尚未送出**。
+中文版供閱讀與討論；提交上游時只複製英文標題與正文。2026-10-30 已在獨立 worktree 完成修改與本地驗證，送出 [PR #26960](https://github.com/ultralytics/ultralytics/pull/26960)。
 
 實作位置：`D:/tools/ultralytics/.worktrees/coco-json-cache`。分支：`docs/coco-json-cache-mtime`（已推到 Echoslayer fork）。基準：官方 main `ae2857e3e`（8.4.193）。commit `3003c19e3`、`df0fa429b`，只修改 `docs/en/guides/coco-json-training.md` 兩處，+3/−3，沒有修改產品程式碼。驗證腳本與日誌見 [assets](assets/)。
 
@@ -33,7 +33,7 @@ COCO JSON 指南警告：標註快取只看 JSON 的檔案大小，所以位元�
 
 ## English submission draft
 
-Status: implemented and locally validated on 2026-10-30 in a separate worktree. **Not yet submitted.**
+Status: implemented and locally validated on 2026-10-30 in a separate worktree. Submitted as [PR #26960](https://github.com/ultralytics/ultralytics/pull/26960).
 
 ## Suggested title
 
