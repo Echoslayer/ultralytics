@@ -362,7 +362,7 @@ T01 觀察到設定 `weights_dir` 後，裸模型檔名的缺檔下載仍進入�
 
 ## 實例：從 issue #26943 到程式 PR #26949
 
-這個案例先開 issue，等維護者選定方向後才送 PR，因為修改會碰到安全載入的允許清單。維護者 Y-T-G 回覆「可以開 PR 加進允許清單」，也就是提案中的 A 案。最終 [PR #26949](https://github.com/ultralytics/ultralytics/pull/26949) 只在 `_SafeLoad.loading()` 原本的 torchvision 轉換群組加入 `ToPILImage`、`ClassifyLetterBox` 和 `np.asarray`。提案與 PR 草稿見 [safe-load-custom-transforms](../../../proposals/safe-load-custom-transforms/README.md)。
+這個案例先開 issue，等維護者選定方向後才送 PR，因為修改會碰到安全載入的允許清單。維護者 Y-T-G 回覆「可以開 PR 加進允許清單」，也就是提案中的 A 案。最終 [PR #26949](https://github.com/ultralytics/ultralytics/pull/26949) 只在 `_SafeLoad.loading()` 原本的 torchvision 轉換群組加入 `ToPILImage`、`ClassifyLetterBox` 和 `np.asarray`。提案與 PR 草稿見 `proposals/safe-load-custom-transforms/README.md`。
 
 | 階段     | 實際處理與證據                                                                                                                   |
 | -------- | -------------------------------------------------------------------------------------------------------------------------------- |
