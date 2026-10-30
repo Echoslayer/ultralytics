@@ -54,8 +54,8 @@ for stride in (1, 2, 3, 4, 10, 11):
         got += [round((float(im.mean()) - 10) / 20) for im in ims]
         labels += info
     expect = list(range(0, N, stride))
-    ok = got == expect and len(ds) == math.ceil(N / stride) == len(got)
-    print(f"stride={stride} len={len(ds)} read={got} expect={expect} {'OK' if ok else 'MISMATCH'} last_label={labels[-1][-40:]!r}")
+    ok = got == expect and ds.frames == math.ceil(N / stride) == len(got)  # len(ds) counts batches, not frames
+    print(f"stride={stride} frames={ds.frames} read={got} expect={expect} {'OK' if ok else 'MISMATCH'} last_label={labels[-1][-40:]!r}")
 
 # P3 #26939: export imgsz becomes the default for every export, incl. static non-square
 print("\n== P3 export imgsz default")

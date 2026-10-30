@@ -1,0 +1,66 @@
+﻿ultralytics 8.4.193 D:\tools\ultralytics\.worktrees\safe-load-test\ultralytics\__init__.py torch 2.15.0+cpu
+== P1 thread cap
+Ultralytics 8.4.193  Python-3.13.14 torch-2.15.0+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 0.1 GFLOPs
+PyTorch: starting from 'yolo26n.pt' with input shape (1, 3, 64, 64) BCHW and output shape(s) (1, 84, 84) (5.3 MB)
+ONNX: starting export with onnx 1.23.2 opset 18...
+ONNX: slimming with onnxslim 0.1.98...
+ONNX: export success  1.7s, saved as 'yolo26n.onnx' (9.3 MB)
+Export complete (1.8s)
+Results saved to C:\Users\edisonhsieh\AppData\Local\Temp\claude\D--tools-ultralytics\d3a91cb9-b121-4be8-b46f-b3aaa15114cc\scratchpad\probes\yolo26n.onnx
+Predict:         yolo predict task=detect model=yolo26n.onnx imgsz=64 
+Validate:        yolo val task=detect model=yolo26n.onnx imgsz=64  
+Visualize:       https://netron.app
+Loading yolo26n.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+threads before=16 after_onnx_predict=2; 1024x1024 matmul ms before=3.9 after=10.0
+== P2 vid_stride frames
+stride=1 frames=10 read=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9] expect=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9] OK last_label='\\scratchpad\\probes\\out-fixed\\index.avi: '
+stride=2 frames=5 read=[0, 2, 4, 6, 8] expect=[0, 2, 4, 6, 8] OK last_label='\\scratchpad\\probes\\out-fixed\\index.avi: '
+stride=3 frames=4 read=[0, 3, 6, 9] expect=[0, 3, 6, 9] OK last_label='\\scratchpad\\probes\\out-fixed\\index.avi: '
+stride=4 frames=3 read=[0, 4, 8] expect=[0, 4, 8] OK last_label='\\scratchpad\\probes\\out-fixed\\index.avi: '
+stride=10 frames=1 read=[0] expect=[0] OK last_label='\\scratchpad\\probes\\out-fixed\\index.avi: '
+stride=11 frames=1 read=[0] expect=[0] OK last_label='\\scratchpad\\probes\\out-fixed\\index.avi: '
+== P3 export imgsz default
+Ultralytics 8.4.193  Python-3.13.14 torch-2.15.0+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 0.2 GFLOPs
+PyTorch: starting from 'yolo26n.pt' with input shape (1, 3, 96, 128) BCHW and output shape(s) (1, 84, 252) (5.3 MB)
+ONNX: starting export with onnx 1.23.2 opset 18...
+ONNX: slimming with onnxslim 0.1.98...
+ONNX: export success  1.0s, saved as 'yolo26n.onnx' (9.3 MB)
+Export complete (1.1s)
+Results saved to C:\Users\edisonhsieh\AppData\Local\Temp\claude\D--tools-ultralytics\d3a91cb9-b121-4be8-b46f-b3aaa15114cc\scratchpad\probes\yolo26n.onnx
+Predict:         yolo predict task=detect model=yolo26n.onnx imgsz=96,128 
+Validate:        yolo val task=detect model=yolo26n.onnx imgsz=96,128  
+Visualize:       https://netron.app
+Loading yolo26n.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+{'imgsz': [96, 128]} -> overrides imgsz 128 | pred ok, input (96, 128), boxes=1
+Ultralytics 8.4.193  Python-3.13.14 torch-2.15.0+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 0.2 GFLOPs
+PyTorch: starting from 'yolo26n.pt' with input shape (1, 3, 96, 128) BCHW and output shape(s) (1, 84, 252) (5.3 MB)
+ONNX: starting export with onnx 1.23.2 opset 18...
+ONNX: slimming with onnxslim 0.1.98...
+ONNX: export success  1.7s, saved as 'yolo26n.onnx' (9.8 MB)
+Export complete (1.8s)
+Results saved to C:\Users\edisonhsieh\AppData\Local\Temp\claude\D--tools-ultralytics\d3a91cb9-b121-4be8-b46f-b3aaa15114cc\scratchpad\probes\yolo26n.onnx
+Predict:         yolo predict task=detect model=yolo26n.onnx imgsz=96,128 
+Validate:        yolo val task=detect model=yolo26n.onnx imgsz=96,128  
+Visualize:       https://netron.app
+Loading yolo26n.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+{'imgsz': [96, 128], 'dynamic': True} -> overrides imgsz 128 | pred ok, input (128, 128), boxes=4
+Ultralytics 8.4.193  Python-3.13.14 torch-2.15.0+cpu CPU (Intel Core Ultra 7 265H)
+YOLO26n summary (fused): 120 layers, 2,408,932 parameters, 0 gradients, 0.1 GFLOPs
+PyTorch: starting from 'yolo26n.pt' with input shape (1, 3, 96, 96) BCHW and output shape(s) (1, 84, 189) (5.3 MB)
+ONNX: starting export with onnx 1.23.2 opset 18...
+ONNX: slimming with onnxslim 0.1.98...
+ONNX: export success  0.8s, saved as 'yolo26n.onnx' (9.3 MB)
+Export complete (1.0s)
+Results saved to C:\Users\edisonhsieh\AppData\Local\Temp\claude\D--tools-ultralytics\d3a91cb9-b121-4be8-b46f-b3aaa15114cc\scratchpad\probes\yolo26n.onnx
+Predict:         yolo predict task=detect model=yolo26n.onnx imgsz=96 
+Validate:        yolo val task=detect model=yolo26n.onnx imgsz=96  
+Visualize:       https://netron.app
+Loading yolo26n.onnx for ONNX Runtime inference...
+Using ONNX Runtime 1.31.1 with CPUExecutionProvider
+{'imgsz': 96} -> overrides imgsz 96 | pred ok, input (96, 96), boxes=1
