@@ -338,7 +338,7 @@ I have read the CLA Document and I sign the CLA
 
 同日抽查 `gh pr list --state merged --limit 30` 回傳的 30 個近期已合併 PR，搜尋正文與作者主討論留言並排除機器人摘要，找到 1 個明確聲明：[PR #26912](https://github.com/ultralytics/ultralytics/pull/26912) 提到 Claude 與 GPT-6 Astra 輔助，已於 2026-10-27 合併。其餘 29 個沒有找到明確聲明，不代表沒有使用 AI。這不是按合併時間嚴格排序的全量調查，未查逐行留言、commit 訊息或歷史編輯版本，也不能推論聲明影響合併率。
 
-**本書做法（2026-10-30 起）：PR 與 commit 預設都不填 AI 輔助聲明。** PR 正文不加 `🤖 Generated with Claude Code` 標語，也不加「AI-assisted…」說明句；`proposals/*/PR.md` 的草稿也一樣。commit 訊息不加 `Co-Authored-By: Claude …`。維護者詢問時如實回答。[PR #26949](https://github.com/ultralytics/ultralytics/pull/26949) 是在這項決定之前送出的：正文仍保留一句說明，提交 `00e6e8030` 也帶有 `Co-Authored-By`。已推送的提交不改寫，因為規範禁止 force push。
+**本書做法（2026-10-30 起）：PR 與 commit 預設都不填 AI 輔助聲明。** PR 正文不加 `🤖 Generated with Claude Code` 標語，也不加「AI-assisted…」說明句；`proposals/*/PR.md` 的草稿也一樣。commit 訊息不加 `Co-Authored-By: Claude …`。維護者詢問時如實回答。[PR #26949](https://github.com/ultralytics/ultralytics/pull/26949) 是在這項決定之前送出的：正文仍保留一句說明，提交 `00e6e8030` 也帶有 `Co-Authored-By`。已推送的提交不改寫，因為規範禁止 force push。維護者合併時 squash 成 `a04a476a0`，訊息只保留 Glenn Jocher 的 `Co-authored-by`，Claude 那行沒有進 main。
 
 ## 實例：從 T01／T05 到文件 PR #26935
 
@@ -354,7 +354,9 @@ T01 觀察到設定 `weights_dir` 後，裸模型檔名的缺檔下載仍進入�
 | 提交     | `7d58cf0fa5b6616d1758c4058d0e213d2b9cc056`，只包含 Settings 文件；英文 PR 敘述附驗證結果                                   |
 | CLA      | 首次因未簽署失敗；作者本人留言後，bot 確認所有作者已簽署，檢查成功                                                         |
 
-**狀態快照：2026-10-29，PR 仍開啟，尚未合併。** 上述提交的 20 個檢查中，14 個成功、6 個跳過，沒有執行中或失敗項目。UltralyticsAssistant 已核可並表示沒有發現問題；這是自動審查，不等於人工核可或保證合併。[PR 檢查](https://github.com/ultralytics/ultralytics/pull/26935/checks)、[CLA 確認](https://github.com/ultralytics/ultralytics/pull/26935#issuecomment-6486715262)
+**狀態：2026-10-30（台灣時間）已合併。** Glenn Jocher 合併前把 10 行說明改寫成表格列加一句註記，合併為 `5fc6050fd`（+3/−1）。
+
+**合併前的狀態快照：2026-10-29。** 上述提交的 20 個檢查中，14 個成功、6 個跳過，沒有執行中或失敗項目。UltralyticsAssistant 已核可並表示沒有發現問題；這是自動審查，不等於人工核可或保證合併。[PR 檢查](https://github.com/ultralytics/ultralytics/pull/26935/checks)、[CLA 確認](https://github.com/ultralytics/ultralytics/pull/26935#issuecomment-6486715262)
 
 這次同步曾被錯誤的認證帳號擋住。`gh auth status` 顯示環境變數 `GITHUB_TOKEN` 優先於儲存的登入；`gh auth switch` 因此無法直接切換。僅在執行程序中移除該覆蓋，再切換至有權限的 Echoslayer，才完成同步。遇到 403，先查目前帳號與權限，不要公開 token，也不要把認證問題當成 Git 分支分歧。
 
@@ -364,16 +366,18 @@ T01 觀察到設定 `weights_dir` 後，裸模型檔名的缺檔下載仍進入�
 
 這個案例先開 issue，等維護者選定方向後才送 PR，因為修改會碰到安全載入的允許清單。維護者 Y-T-G 回覆「可以開 PR 加進允許清單」，也就是提案中的 A 案。最終 [PR #26949](https://github.com/ultralytics/ultralytics/pull/26949) 只在 `_SafeLoad.loading()` 原本的 torchvision 轉換群組加入 `ToPILImage`、`ClassifyLetterBox` 和 `np.asarray`。提案與 PR 草稿見 `proposals/safe-load-custom-transforms/README.md`。
 
-| 階段     | 實際處理與證據                                                                                                                   |
-| -------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| 方向     | issue #26943 列出 A（擴充允許清單）與 C（改錯誤訊息）兩案；維護者選 A，因此不同時改錯誤訊息                                      |
-| 基準     | 官方 main `80c34c050`；個人副本 `origin` 落後，改從上游 main 開分支                                                              |
-| 工作樹   | `ultralytics/.worktree/safe-load-cls-transforms`，功能分支 `safe-load-cls-transforms`                                            |
-| 範圍     | 只改 `ultralytics/nn/tasks.py`，送出時 +14/−1，維護者縮成兩行後以 +4/−1 合併；只放行實際存進 checkpoint 的驗證轉換，文件中的訓練增強不存進模型，所以不放行       |
-| 本地驗證 | macOS／CPU、Python 3.12、torch 2.15.0：issue 的 MRE 修改前失敗、修改後可安全載入並推論；`-k "restricted or remaps_cls"` 4 個通過 |
-| 提交     | `00e6e8030`，PR 正文沿用 #26935 的 Summary／Validation 結構                                                                      |
+| 階段     | 實際處理與證據                                                                                                                                             |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 方向     | issue #26943 列出 A（擴充允許清單）與 C（改錯誤訊息）兩案；維護者選 A，因此不同時改錯誤訊息                                                                |
+| 基準     | 官方 main `80c34c050`；個人副本 `origin` 落後，改從上游 main 開分支                                                                                        |
+| 工作樹   | `ultralytics/.worktree/safe-load-cls-transforms`，功能分支 `safe-load-cls-transforms`                                                                      |
+| 範圍     | 只改 `ultralytics/nn/tasks.py`，送出時 +14/−1，維護者縮成兩行後以 +4/−1 合併；只放行實際存進 checkpoint 的驗證轉換，文件中的訓練增強不存進模型，所以不放行 |
+| 本地驗證 | macOS／CPU、Python 3.12、torch 2.15.0：issue 的 MRE 修改前失敗、修改後可安全載入並推論；`-k "restricted or remaps_cls"` 4 個通過                           |
+| 提交     | `00e6e8030`，PR 正文沿用 #26935 的 Summary／Validation 結構；Glenn Jocher 加上 `874c9de03` 後 squash 合併為 `a04a476a0`                                    |
 
-**狀態快照：2026-10-30，PR 仍開啟，尚未合併。** UltralyticsAssistant 已自動核可；19 個檢查中 5 個成功、6 個跳過、8 個仍在執行。自動核可不等於人工核可或保證合併。
+**狀態：2026-10-30（台灣時間）已合併，issue #26943 關閉。** Glenn Jocher 合併前加了 `874c9de03`，把三個型別併進原本的 tuple，修改從 +14/−1 縮成 +4/−1，放行範圍不變；PR 標題也改成「Allow the docs letterbox classify transforms under safe load」。合併前的快照（2026-10-30）：UltralyticsAssistant 自動核可，19 個檢查中 5 個成功、6 個跳過、8 個仍在執行。
+
+**從維護者的改寫學到的事。** #26935 與 #26949 都被維護者在合併前縮短：一個把說明段併進表格，一個把多行 tuple 壓成兩行。送出前可以再問一次：同樣的效果，能不能用更少的行數、放進既有的結構？
 
 這次遇到三個值得記下的問題：
 
@@ -384,5 +388,17 @@ T01 觀察到設定 `weights_dir` 後，裸模型檔名的缺檔下載仍進入�
 **Codecov 報告 0%，決定不補測試。** codecov bot 第一則留言回報 `ultralytics/nn/tasks.py` 有 2 行未覆蓋，維護者縮短程式、CI 跑完後，留言最終是 3 行未覆蓋，正好印證上面第 2 點：數字會變。`codecov/patch` 檢查始終是 pass。新增的三項加在 torchvision 轉換區塊，這段只在 checkpoint 存有 torchvision 轉換、且開啟安全載入時才執行，原本的 5 個轉換同樣沒有測試跑到。要覆蓋它，得在 CI 訓練分類模型，或手工做一個含轉換的 checkpoint；對只多放行三項的修改來說，風險低、測試比修正還長，所以不補。若維護者要求，再加一個不需訓練的最小測試：用 `torch.save` 存下 `T.Compose([np.asarray, ClassifyLetterBox(64), T.ToPILImage()])`，再以 `torch_safe_load(..., safe_only=True)` 載入，約 6 行。
 
 此案例沒有在 Windows 或 Linux 上驗證。作者先前的實測都在 Windows，送出後可補跑一次。
+
+### 合併後：清理工作樹，以及在 contributors 找自己
+
+依 AGENTS.md，PR 合併後刪掉本機的 worktree 與分支。#26949 合併後，`ultralytics/.worktree/safe-load-cls-transforms` 與分支 `safe-load-cls-transforms` 已移除；fork 上的同名遠端分支另外處理。
+
+合併後在 repo 首頁或 Insights 的 Contributors 找不到自己，不代表沒有被記錄。2026-10-30 查核：
+
+- 兩個 squash 提交 `a04a476a0`、`5fc6050fd` 的作者都正確連到 `Echoslayer`（`86062345+Echoslayer@users.noreply.github.com`）。
+- REST API `repos/ultralytics/ultralytics/contributors` 的 467 個帳號中有 `Echoslayer`，`contributions=2`。
+- 首頁側欄只顯示少數頭像；Insights 圖表依提交數排名、只列前 100 名，並在背景更新。2 個提交通常不會出現在這兩處。這是推論，GitHub 的排序規則未經 API 確認。
+
+要確認自己的提交，直接看 `https://github.com/ultralytics/ultralytics/commits?author=Echoslayer`。
 
 下一步：選定一種貢獻，再用[第二章的檔案對照表](codebase-map.md)找出負責模組。

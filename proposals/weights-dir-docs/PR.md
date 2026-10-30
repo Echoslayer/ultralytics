@@ -1,6 +1,6 @@
 # PR 草稿：中英文版本 / Bilingual PR draft
 
-中文供閱讀與討論，正式提交只複製英文標題與正文。2026-10-29 已在獨立 worktree 完成文件修改與本地驗證，已建立 [PR #26935](https://github.com/ultralytics/ultralytics/pull/26935)。
+中文供閱讀與討論，正式提交只複製英文標題與正文。2026-10-29 已在獨立 worktree 完成文件修改與本地驗證，已建立 [PR #26935](https://github.com/ultralytics/ultralytics/pull/26935)，2026-10-30（台灣時間）合併為 `5fc6050fd`；維護者合併前改寫了說明，最終 +3/−1。
 
 ## 中文閱讀版
 
@@ -30,7 +30,7 @@ Settings 頁目前將它稱為儲存目錄，因此使用者可能以為 `YOLO("
 
 ## English submission draft
 
-Status: implemented and locally validated on 2026-10-29 in a separate worktree. Submitted as [PR #26935](https://github.com/ultralytics/ultralytics/pull/26935).
+Status: implemented and locally validated on 2026-10-29 in a separate worktree. Submitted as [PR #26935](https://github.com/ultralytics/ultralytics/pull/26935) and merged on 2026-10-30 (Taiwan time) as `5fc6050fd`; the maintainer rewrote the note before merging (+3/−1).
 
 ## Suggested title
 
