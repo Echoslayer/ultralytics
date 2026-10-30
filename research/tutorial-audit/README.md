@@ -31,6 +31,7 @@
 | [T11-A：notebook CLI 流程](records/T11.md#t11-a) | 本機圖、COCO8 → 預測／驗證／3 epochs 訓練／TorchScript → 圖片與模型 | 調整後通過 | TorchScript 棄用警告；未執行完整 COCO |
 | [T11-B：notebook Python 流程](records/T11.md#t11-b) | 新模型 → 訓練／驗證／預測／ONNX → 指標、5 框與模型 | 兩輪通過 | 已釐清模型狀態與回傳型別；未執行 notebook kernel |
 | [T12：分割物件去背](records/T12.md) | 三張圖＋seg 模型 → 照 Full Example 畫輪廓、去背 → 9 張 PNG | 通過 | 輪廓與模型遮罩 IoU 0.93–0.99；空輪廓會讓 drawContours 報錯，但約 400 個偵測中未出現 |
+| [T13：直接用 COCO JSON 訓練](records/T13.md) | COCO8 轉 COCO JSON → COCOTrainer 訓練 1 epoch、改 JSON 重跑 → 指標與快取行為 | 通過 | 文件說相同大小的修改會沿用舊快取，實際會重新解析（#26283 加入修改時間）；修正已備妥 |
 
 只有完成的案例會加入此表。未執行的範例不預填結果；同一頁只有部分案例完成時，整頁仍保留進行中。
 

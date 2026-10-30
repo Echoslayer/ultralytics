@@ -1,0 +1,11 @@
+== A: train 1 epoch ==
+mAP50-95: 0.5623 mAP50: 0.7843
+cache files: ['instances_train.cache', 'instances_val.cache']
+== B: cache key ==
+rerun, no edit: parsed JSON = True | first box: [0.4794999957084656, 0.6887999773025513, 0.9556000232696533, 0.5954999923706055]
+edited width 611.59 -> 211.59; JSON size 4164 -> 4164
+rerun after same-size edit: parsed JSON = True | first box: [0.16699999570846558, 0.6887999773025513, 0.33059999346733093, 0.5954999923706055]
+== C: standalone val ==
+WARNING val: No labels found in <scratch>\t13out\my_dataset\labels\val.cache. See https://docs.ultralytics.com/datasets for dataset formatting guidance.
+WARNING no labels found in detect set, cannot compute metrics without labels
+standalone mAP50-95: 0.0

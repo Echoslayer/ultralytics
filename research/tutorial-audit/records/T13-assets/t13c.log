@@ -1,0 +1,4 @@
+warm: False | rerun: False
+overwrite image in place -> parsed: False
+add an image file -> parsed: True
+remove it -> parsed: True

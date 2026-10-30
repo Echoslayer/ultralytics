@@ -109,6 +109,7 @@ repo:ultralytics/ultralytics is:issue is:closed "你的錯誤字串"
 | 文件少提的組合 | R04 | FP16 ONNX、`rect` 驗證、OBB／pose 追蹤、靜態 ONNX 批次 | 0 |
 | 未解決的 issue | R05 | #26795 大物體的分割遮罩 | 0（無法重現） |
 | 照文件逐步操作 | T12 | `guides/isolating-segmentation-objects.md`，程式碼已在 #24701 修過 | 0 |
+| 照文件逐步操作 | T13 | `guides/coco-json-training.md`，挑程式碼久未改動的頁 | 1 個文件修正（備妥未送） |
 
 探針是只在本機跑的小腳本，用來確認某段程式在特定輸入下的行為。五輪探針都沒有找到可送出的缺陷，原因各不相同：
 

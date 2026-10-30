@@ -1,0 +1,6 @@
+run 1: img_path=<scratch path> labels=4 cache_hash_matches=True
+run 2: img_path=<scratch path> labels=4 cache_hash_matches=True
+before edit: (w, parsed) = (0.3306, False)
+same-size edit: size 4164 -> 4164, mtime changed = True
+after edit: (w, parsed) = (0.4869, True)
+edit with mtime restored: (w, parsed) = (0.4869, False)
