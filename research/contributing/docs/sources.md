@@ -85,3 +85,5 @@
 2026-10-30：讀 #26949 的 codecov 留言（patch coverage 0%、`ultralytics/nn/tasks.py` 2 行未覆蓋）與 `gh pr checks`：`codecov/patch` 為 pass，其餘 Tests 仍在執行。補入第一章的 Codecov 判讀步驟與案例。
 
 2026-10-30：重新核對 #26949 與 #26935 的提交紀錄。#26949 的 codecov 留言最終為 3 行未覆蓋（先前記錄的 2 行是第一版留言）；Glenn Jocher 以 `874c9de03` 把 +14/−1 縮成 +4/−1。#26935 由 Glenn Jocher 以 `e53a62c0f` 把 10 行說明段改寫為表格列與表後一句註記（該提交 +3/−11），合併版本 +3/−1。
+
+2026-10-30：以 `analysis/test_only_prs.py` 依改動是否只在 `tests/` 分組重算 Q3 PR 結果；外部只補測試的 PR 有 3 個，皆關閉。透過 GitHub API 讀 #25425、#25481、#25851 的維護者留言，確認 #26269 為已關閉的錯誤回報。寫入第一章「不要送只補測試的 PR」。
