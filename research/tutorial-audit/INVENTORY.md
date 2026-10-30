@@ -47,7 +47,7 @@
 | [docs/en/guides/hyperparameter-tuning.md](../../docs/en/guides/hyperparameter-tuning.md) | [官方來源](https://docs.ultralytics.com/guides/hyperparameter-tuning/) | 未開始 | — |
 | [docs/en/guides/index.md](../../docs/en/guides/index.md) | [官方來源](https://docs.ultralytics.com/guides/) | 未開始 | — |
 | [docs/en/guides/instance-segmentation-and-tracking.md](../../docs/en/guides/instance-segmentation-and-tracking.md) | [官方來源](https://docs.ultralytics.com/guides/instance-segmentation-and-tracking/) | 未開始 | — |
-| [docs/en/guides/isolating-segmentation-objects.md](../../docs/en/guides/isolating-segmentation-objects.md) | [官方來源](https://docs.ultralytics.com/guides/isolating-segmentation-objects/) | 未開始 | — |
+| [docs/en/guides/isolating-segmentation-objects.md](../../docs/en/guides/isolating-segmentation-objects.md) | [官方來源](https://docs.ultralytics.com/guides/isolating-segmentation-objects/) | 已完成 | [T12](records/T12.md)：Full Example 與所有片段一致；空輪廓邊界實務未出現 |
 | [docs/en/guides/kfold-cross-validation.md](../../docs/en/guides/kfold-cross-validation.md) | [官方來源](https://docs.ultralytics.com/guides/kfold-cross-validation/) | 未開始 | — |
 | [docs/en/guides/knowledge-distillation.md](../../docs/en/guides/knowledge-distillation.md) | [官方來源](https://docs.ultralytics.com/guides/knowledge-distillation/) | 未開始 | — |
 | [docs/en/guides/modal-quickstart.md](../../docs/en/guides/modal-quickstart.md) | [官方來源](https://docs.ultralytics.com/guides/modal-quickstart/) | 未開始 | — |

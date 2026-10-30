@@ -1,0 +1,25 @@
+== A: Full Example ==
+<repo>\ultralytics\assets\bus.jpg detections: 5
+<repo>\ultralytics\assets\zidane.jpg detections: 3
+<scratch>\boats.jpg detections: 1
+files written: 9
+== B: contour mask vs model mask ==
+bus #0 person     parts=2 pts= 345 model_px=  49283 contour_px=  48808 IoU=0.974
+bus #1 person     parts=1 pts= 250 model_px=  21292 contour_px=  21027 IoU=0.955
+bus #2 bus        parts=4 pts= 722 model_px= 255370 contour_px= 254626 IoU=0.989
+bus #3 person     parts=1 pts= 211 model_px=  33302 contour_px=  33080 IoU=0.972
+bus #4 person     parts=1 pts= 125 model_px=  10745 contour_px=  10671 IoU=0.933
+zidane #0 person     parts=2 pts= 397 model_px= 171136 contour_px= 170054 IoU=0.992
+zidane #1 person     parts=2 pts= 530 model_px= 228764 contour_px= 227281 IoU=0.992
+zidane #2 tie        parts=1 pts=  69 model_px=   9992 contour_px=   9671 IoU=0.964
+boats #0 person     parts=1 pts=  48 model_px=   5054 contour_px=   4738 IoU=0.935
+== C: empty contour ==
+drawContours with (0,1,2): cv2.error OpenCV(5.0.0) D:\a\opencv-python\opencv-python\opencv\modules\imgproc\src\drawing.cpp:2121: error: (-215:Assertion faile
+== D: crop snippets ==
+tip crop box: (np.int32(52), np.int32(396), np.int32(243), np.int32(905))
+faq crop box: (np.int32(52), np.int32(396), np.int32(243), np.int32(905))
+== E: transparent PNG ==
+read back shape: (1080, 810, 4) alpha values: [0, 255]
+== F: predict() without source ==
+WARNING 'source' is missing. Using 'source=<repo>\ultralytics\assets'.
+n results: 2 ['bus.jpg', 'zidane.jpg']
