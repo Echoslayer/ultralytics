@@ -1,6 +1,6 @@
 # T07 提案：說明 `metrics.box.maps` 對未評估類別的填值
 
-狀態：2026-10-30 已在最新 main `ae2857e3e`（8.4.193）以 COCO8 重新驗證：80 類只評估 6 類，其餘 74 格等於整體 mAP 0.669。已送出 [PR #26955](https://github.com/ultralytics/ultralytics/pull/26955)，只改 `docs/en/modes/val.md` 兩處（+4/−2），分支 `docs/clarify-maps-filler`。等待審查。PR 草稿與驗證見 [PR.md](PR.md)。
+狀態：2026-10-30 已在最新 main `ae2857e3e`（8.4.193）以 COCO8 重新驗證：80 類只評估 6 類，其餘 74 格等於整體 mAP 0.669。已送出 [PR #26955](https://github.com/ultralytics/ultralytics/pull/26955)，分支 `docs/clarify-maps-filler`，第一個提交只改 `docs/en/modes/val.md` 兩處（+4/−2）。維護者 pderrenger 請我們把同樣的說明與 `ap_class_index` 那一行帶到其他頁面，追加提交 `d2fd73703` 已改完其餘 7 處，並在留言回覆。等待審查。PR 草稿與驗證見 [PR.md](PR.md)。
 
 ## 為什麼值得做
 
@@ -22,7 +22,9 @@ metrics.box.maps  # mAP50-95 per class; classes absent from the val set hold the
 metrics.box.ap_class_index  # class indices that were actually evaluated
 ```
 
-`tasks/detect.md`、`segment.md`、`pose.md`、`obb.md` 與 `guides/model-evaluation-insights.md` 有相同註解，共 9 處。先只改 `val.md`，維護者同意後再決定是否一併修改，避免一開始就擴大範圍。
+`tasks/detect.md`、`segment.md`、`pose.md`、`obb.md` 與 `guides/model-evaluation-insights.md` 有相同註解，共 7 處（連同 `val.md` 共 9 處）。先只改 `val.md`，維護者同意後再決定是否一併修改，避免一開始就擴大範圍。
+
+**後續（2026-10-30）：** 維護者要求一併修改，追加提交 `d2fd73703` 改完這 7 處。任務頁依頁面上的 metric（`box`、`seg`、`pose`）各加一行 `ap_class_index`；評估指南原本就印出 `ap_class_index`，所以只加註解。驗證見 [verify_maps_all_tasks.log](assets/verify_maps_all_tasks.log)：COCO8 `box`、COCO8-seg 的 `box` 與 `seg` 都是 6 類評估、74 類填值，DOTA8 `box` 是 3 類評估、12 類填值。COCO8-pose 只有 1 類，看不到填值，但走同一段 `Metric.maps`。
 
 ## 送出前要做的事
 
@@ -38,7 +40,7 @@ metrics.box.ap_class_index  # class indices that were actually evaluated
 
 # T07 proposal: explain how `metrics.box.maps` fills classes that were not evaluated
 
-Status: revalidated on latest main `ae2857e3e` (8.4.193) on 2026-10-30 with COCO8: 6 of 80 classes evaluated, the other 74 entries equal the overall mAP 0.669. Submitted as [PR #26955](https://github.com/ultralytics/ultralytics/pull/26955), changing two places in `docs/en/modes/val.md` (+4/−2) on branch `docs/clarify-maps-filler`. Awaiting review.
+Status: revalidated on latest main `ae2857e3e` (8.4.193) on 2026-10-30 with COCO8: 6 of 80 classes evaluated, the other 74 entries equal the overall mAP 0.669. Submitted as [PR #26955](https://github.com/ultralytics/ultralytics/pull/26955) on branch `docs/clarify-maps-filler`; the first commit changes two places in `docs/en/modes/val.md` (+4/−2). Maintainer pderrenger asked to carry the same note and `ap_class_index` line into the other pages. Follow-up commit `d2fd73703` covers the remaining 7 places, and a reply was posted. Awaiting review.
 
 ## Why
 
@@ -60,7 +62,9 @@ metrics.box.maps  # mAP50-95 per class; classes absent from the val set hold the
 metrics.box.ap_class_index  # class indices that were actually evaluated
 ```
 
-The same comment appears in 9 places across `tasks/` and `guides/`. Change `val.md` first and extend only if maintainers agree.
+The same comment appears in 7 more places across `tasks/` and `guides/` (9 including `val.md`). Change `val.md` first and extend only if maintainers agree.
+
+**Follow-up (2026-10-30):** maintainers asked for it, and commit `d2fd73703` updates those 7 places. Task pages get an `ap_class_index` line for each metric they show (`box`, `seg`, `pose`); the evaluation guide already prints `ap_class_index`, so it only gets the note. See [verify_maps_all_tasks.log](assets/verify_maps_all_tasks.log): COCO8 `box` and COCO8-seg `box`/`seg` each have 6 evaluated and 74 filler classes, and DOTA8 `box` has 3 and 12. COCO8-pose has one class, so there is no filler to observe; it uses the same `Metric.maps`.
 
 ## Before submitting
 

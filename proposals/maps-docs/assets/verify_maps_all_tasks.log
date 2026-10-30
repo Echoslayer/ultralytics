@@ -1,0 +1,8 @@
+# 2026-10-30, branch docs/clarify-maps-filler at 8f99eef4f, macOS 27 / CPU, Python 3.12, torch 2.15.0, numpy 2.5.4
+# python -I verify_maps_all_tasks.py <worktree> <runs dir>  (output filtered to result lines; all asserts passed)
+yolo26n.pt box: nc=80 evaluated=6 filler=74 map=0.669
+yolo26n-seg.pt box: nc=80 evaluated=6 filler=74 map=0.629
+yolo26n-seg.pt seg: nc=80 evaluated=6 filler=74 map=0.538
+yolo26n-pose.pt box: nc=1 evaluated=1 filler=0 map=0.686
+yolo26n-pose.pt pose: nc=1 evaluated=1 filler=0 map=0.419
+yolo26n-obb.pt box: nc=15 evaluated=3 filler=12 map=0.826

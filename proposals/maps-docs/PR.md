@@ -6,6 +6,8 @@
 
 這份草稿是在 PR 送出**之後**補寫的。送出時漏了本目錄的流程：沒有先寫 `PR.md`、沒跑文件建置，正文也沒寫未驗證範圍。之後已補跑檢查，2026-10-30 依英文版更新線上正文的 Summary 與 Validation，保留 bot 產生的 PR Summary。PR 當時已獲核可。
 
+**維護者後續要求（2026-10-30）：** pderrenger 請我們把同樣的說明與 `ap_class_index` 那一行帶到四個任務頁和評估指南，並依頁面使用 `box`、`seg` 或 `pose`。追加提交 `d2fd73703` 在既有分支上完成（實作位置：`/Users/wizard/Desktop/MacCode/ultralytics/.worktree/clarify-maps-filler`），並在[留言](https://github.com/ultralytics/ultralytics/pull/26955#issuecomment-6523685121)回覆。線上正文的 Summary 與 Validation 已依下方「追加修改後的正文」更新，bot 的 PR Summary 保留。
+
 ## 中文閱讀版
 
 ### 建議標題
@@ -69,6 +71,39 @@ too if you'd like.
 - `python docs/build_docs.py`: passed the full strict build with `PYTHONUTF8=1` (no issues found).
 - Not tested on Linux or macOS. Only detection `box.maps` was checked;
   `seg` and `pose` `maps` use the same `Metric.maps` but were not run.
+```
+
+## 追加修改後的正文 / Body after the follow-up commit
+
+中文：摘要第二段改成說明已一併修改其他頁面；驗證段把「沒有實測 seg、pose」改成 macOS 上四種任務的實測結果，並註明追加提交沒有重跑文件建置。
+
+English: the Summary's second paragraph and the last Validation item were replaced with:
+
+```markdown
+This updates the two `val.md` examples to say so and shows
+`ap_class_index`, which lists the classes that were actually evaluated.
+The same note and matching `ap_class_index` line are carried into
+`tasks/detect.md`, `segment.md`, `pose.md`, and `obb.md`, using the
+`box`, `seg`, or `pose` metric each page shows.
+`guides/model-evaluation-insights.md` already prints `ap_class_index`,
+so it only gets the note. No code changes.
+```
+
+```markdown
+- On `8f99eef4f` (macOS, CPU, Python 3.12, torch 2.15.0), asserted the
+  same split for every metric the pages show: `yolo26n` on COCO8 (`box`,
+  6 evaluated / 74 filler), `yolo26n-seg` on COCO8-seg (`box` and `seg`,
+  6 / 74 each), and `yolo26n-obb` on DOTA8 (`box`, 3 / 12).
+  `yolo26n-pose` on COCO8-pose passed too, but with one class there is no
+  filler to observe; `pose.maps` uses the same `Metric.maps`.
+- Prettier 3.9.9 passed on the five follow-up pages. The docs build was
+  not rerun for the follow-up commit.
+```
+
+Reply posted to the maintainer:
+
+```text
+Done in d2fd73703: the four task pages now carry the same note and `ap_class_index` line for their `box`, `seg`, or `pose` metrics, and the evaluation guide gets the note (it already prints `ap_class_index`). Validation in the PR description is updated.
 ```
 
 The section headings above are a suggested structure, not mandatory Ultralytics fields.

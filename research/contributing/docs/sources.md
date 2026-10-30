@@ -89,3 +89,5 @@
 2026-10-30：以 `analysis/test_only_prs.py` 依改動是否只在 `tests/` 分組重算 Q3 PR 結果；外部只補測試的 PR 有 3 個，皆關閉。透過 GitHub API 讀 #25425、#25481、#25851 的維護者留言，確認 #26269 為已關閉的錯誤回報。寫入第一章「不要送只補測試的 PR」。
 
 2026-10-30：第四章新增「選題起點的實測」，彙整 `research/probe-audit/` 的 R01–R05 與 `research/tutorial-audit/` 的 T01–T11。探針全部在官方 main `ae2857e3e`（8.4.193）、Windows CPU 上執行；R05 讀 issue 清單的時間為 2026-10-30。PR 來源依 `proposals/README.md`：#26935、#26955 來自 T01–T11，#26949 來自 #26707 研究卡的延伸。
+
+2026-10-30：pderrenger 在 #26955 要求把 `maps` 說明帶到任務頁與評估指南。追加提交 `d2fd73703` 改完其餘 7 處（`git grep '\.maps\b' -- docs/en` 修改前共 9 處，含 `val.md` 2 處），並以 COCO8、COCO8-seg、COCO8-pose、DOTA8 實測填值行為，紀錄在 `proposals/maps-docs/assets/verify_maps_all_tasks.log`。
