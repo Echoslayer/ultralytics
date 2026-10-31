@@ -1,0 +1,8 @@
+Overriding model.yaml nc=80 with nc=5
+Transferred 696/708 items from pretrained weights
+LOG5: ['Transferred 696/708 items from pretrained weights']
+target state tensors 708 src 708
+layers 0-11: [(0, 'Conv'), (1, 'Conv'), (2, 'C3k2'), (3, 'Conv'), (4, 'C3k2'), (5, 'Conv'), (6, 'C3k2'), (7, 'Conv'), (8, 'C3k2'), (9, 'SPPF'), (10, 'C2PSA'), (11, 'Upsample')]
+Detect idx: 23 Detect
+head attrs: ['cv2', 'cv3', 'one2one_cv2', 'one2one_cv3']
+['def build_optimizer(self, model, name="auto", lr=0.001, momentum=0.9, decay=1e-5, iterations=1e5):', "name (str, optional): The name of the optimizer to use. If 'auto', the optimizer is selected based on the", "iterations (float, optional): The number of iterations, which determines the optimizer if name is 'auto'.", 'optimizers = {"Adam", "Adamax", "AdamW", "NAdam", "RAdam", "RMSprop", "SGD", "

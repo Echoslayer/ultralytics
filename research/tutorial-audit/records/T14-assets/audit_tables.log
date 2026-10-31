@@ -1,0 +1,75 @@
+== default.yaml keys never mentioned in docs/macros or usage/cfg.md
+[]
+== macro table rows: documented default vs default.yaml
+  export-args.md: imgsz doc='int` or `tuple' yaml=640
+  export-args.md: quantize doc='int` or `str' yaml=None
+  export-args.md: workspace doc='float` or `None' yaml=None
+  export-args.md: nms doc='bool`, optional' yaml=None
+  export-args.md: batch doc='1' yaml=16
+  export-args.md: verbose doc='False' yaml=True
+  export-args.md: fraction doc='float`, `int`, or `list' yaml=1.0
+  platform-inference-parameters.md: `file` not in default.yaml
+  platform-inference-parameters.md: conf doc='0.25' yaml=None
+  platform-inference-parameters.md: imgsz doc='-' yaml=640
+  platform-inference-parameters.md: `normalize` not in default.yaml
+  platform-inference-parameters.md: `decimals` not in default.yaml
+  platform-inference-parameters.md: `bits` not in default.yaml
+  platform-inference-parameters.md: source doc='string' yaml=None
+  predict-args.md: source doc='str` or `int` or `None' yaml=None
+  predict-args.md: conf doc='0.25' yaml=None
+  predict-args.md: imgsz doc='int` or `tuple' yaml=640
+  predict-args.md: rect doc='True' yaml=False
+  predict-args.md: quantize doc='int` or `str' yaml=None
+  predict-args.md: batch doc='1' yaml=16
+  predict-args.md: classes doc='list[int]' yaml=None
+  predict-args.md: embed doc='list[int]' yaml=None
+  predict-args.md: `stream` not in default.yaml
+  predict-args.md: compile doc='bool` or `str' yaml=False
+  predict-args.md: nms doc='bool`, optional' yaml=None
+  sam-auto-annotate.md: data doc='required' yaml=None
+  sam-auto-annotate.md: `det_model` not in default.yaml
+  sam-auto-annotate.md: `sam_model` not in default.yaml
+  sam-auto-annotate.md: device doc="''" yaml=None
+  sam-auto-annotate.md: conf doc='0.25' yaml=None
+  sam-auto-annotate.md: iou doc='0.45' yaml=0.7
+  sam-auto-annotate.md: classes doc='list[int]' yaml=None
+  sam-auto-annotate.md: `output_dir` not in default.yaml
+  solutions-args.md: `{{ param }}` not in default.yaml
+  solutions-args.md: `{{ param }}` not in default.yaml
+  solutions-track-args.md: conf doc='0.25' yaml=None
+  solutions-track-args.md: imgsz doc='int or tuple' yaml=640
+  solutions-track-args.md: quantize doc='int or str' yaml=None
+  train-args.md: batch doc='int` or `float' yaml=16
+  train-args.md: cache doc='bool` or `str' yaml=False
+  train-args.md: device doc='int` or `str` or `list' yaml=None
+  train-args.md: `save_dir` not in default.yaml
+  train-args.md: pretrained doc='bool` or `str' yaml=True
+  train-args.md: classes doc='list[int]' yaml=None
+  train-args.md: amp doc='bool` or `str' yaml=True
+  train-args.md: quantize doc='int` or `str' yaml=None
+  train-args.md: fraction doc='float`, `int`, or `list' yaml=1.0
+  train-args.md: freeze doc='int` or `list' yaml=None
+  train-args.md: nms doc='bool`, optional' yaml=None
+  train-args.md: compile doc='bool` or `str' yaml=False
+  validation-args.md: conf doc='0.001' yaml=None
+  validation-args.md: quantize doc='int` or `str' yaml=None
+  validation-args.md: classes doc='list[int]' yaml=None
+  validation-args.md: rect doc='True' yaml=False
+  validation-args.md: fraction doc='float`, `int`, or `list' yaml=1.0
+  validation-args.md: compile doc='bool` or `str' yaml=False
+  validation-args.md: nms doc='bool`, optional' yaml=None
+  visualization-args.md: `{{ param }}` not in default.yaml
+  visualization-args.md: `{{ param }}` not in default.yaml
+== tracker YAML vs track.md
+botsort.yaml keys missing from track.md: []
+bytetrack.yaml keys missing from track.md: []
+deepocsort.yaml keys missing from track.md: []
+fasttrack.yaml keys missing from track.md: []
+ocsort.yaml keys missing from track.md: []
+tracktrack.yaml keys missing from track.md: []
+== SolutionConfig vs docs/macros/solutions-args.md
+  {{ param }}: doc='`{{ details[1] }}`' live='<<absent>>'
+  {{ param }}: doc='`{{ default_params[param][1] }}`' live='<<absent>>'
+  undocumented: ['source', 'model', 'classes', 'show_conf', 'show_labels', 'show_boxes', 'region', 'colormap', 'show_in', 'show_out', 'up_angle', 'down_angle', 'kpts', 'analytics_type', 'figsize', 'blur_ratio', 'vision_point', 'crop_dir', 'json_file', 'line_width', 'records', 'fps', 'max_hist', 'meter_per_pixel', 'max_speed', 'show', 'iou', 'conf', 'device', 'max_det', 'quantize', 'imgsz', 'tracke
+== broken relative links / anchors in docs/en
+0

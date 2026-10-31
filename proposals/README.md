@@ -14,11 +14,13 @@ Each proposal and PR draft includes Traditional Chinese and English versions wit
 | [T07：說明 maps 對未評估類別的填值 / Explain maps filler for unevaluated classes](maps-docs/README.md) | 文件 / Docs | 已開 PR #26955，已核可（2026-10-30）/ PR #26955 open, approved (2026-10-30) | 維護者要求後，`d2fd73703` 已改完其餘 7 處並回覆；等審查 / Remaining 7 places done in `d2fd73703` at maintainer request; await review |
 | [#26707 延伸：安全載入無法載入自訂分類轉換 / Restricted loading rejects custom classify transforms](safe-load-custom-transforms/README.md) | 錯誤回報 / Bug report | PR #26949 已於 2026-10-30 合併，issue #26943 關閉 / PR #26949 merged 2026-10-30; issue #26943 closed | 完成 / Done |
 | [T13：更新 COCO JSON 指南的快取說明 / Update the COCO JSON guide's cache note](coco-json-cache-docs/README.md) | 文件 / Docs | 已開 PR #26960（2026-10-30）/ PR #26960 open (2026-10-30) | 等審查 / Await review |
+| [T14：修正 mask 轉換工具的輸入格式說明 / Correct the mask converter's input format](mask-converter-docs/README.md) | 文件 / Docs | 已開 PR #26971（2026-10-31）/ PR #26971 open (2026-10-31) | 等審查 / Await review |
 
 ## 已評估、不建議投入 / Evaluated and set aside
 
 | 方向 / Direction | 理由 / Reason |
 | --- | --- |
+| [T14 候選 2：predict 來源表與 `batch` 說明 / predict source table and `batch` description](../research/tutorial-audit/records/T14.md) | 暫緩：沒有使用者回報，先看候選 1 的審查結果 / On hold: no user report; revisit after candidate 1's review |
 | #26707 分類裁切的文件缺口 / docs gap for classify crop | 已驗證：文件範例在預設載入下完整 / Verified complete under default loading |
 | T03-B `masks` 為 `None` / `masks` is `None` | 文件已標示 `Masks, optional` / Already documented as optional |
 | T02-B 信心分數四捨五入 / Score rounding | 正常的顯示行為 / Normal display behavior |

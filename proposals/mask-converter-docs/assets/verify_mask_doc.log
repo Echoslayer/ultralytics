@@ -1,0 +1,16 @@
+ultralytics 8.4.194 python 3.13.12
+Processing <tmp> imgsz = 64 x 64
+Processed and stored at <tmp> imgsz = 64 x 64
+index + 1: pixel values [1, 2, 3], classes=80 -> class ids [0, 1, 2]
+Processing <tmp> imgsz = 64 x 64
+Processed and stored at <tmp> imgsz = 64 x 64
+background only: pixel values [], classes=80 -> class ids []
+Processing <tmp> imgsz = 64 x 64
+WARNING ⚠️ Unknown class for pixel value 255 in file <tmp> skipping.
+Processed and stored at <tmp> imgsz = 64 x 64
+0/255 binary mask: pixel values [255], classes=80 -> class ids []
+Processing <tmp> imgsz = 64 x 64
+WARNING ⚠️ Unknown class for pixel value 255 in file <tmp> skipping.
+Processed and stored at <tmp> imgsz = 64 x 64
+1 mixed with 255: pixel values [1, 255], classes=80 -> class ids [0]
+all checks passed

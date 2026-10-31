@@ -1,0 +1,18 @@
+[KAnnotations <tmp>/ds1True/annotations/instances_train.json: 100% ━━━━━━━━━━━━ 1/1 5.1Kit/s 0.0s
+COCO data converted successfully.
+Results saved to <tmp>/ds1True/converted
+1 {'cls91to80': False} {'labels/train/a.txt': '0 0.2 0.2 0.2 0.2 | 1 0.5 0.5 0.2 0.2'}
+[KAnnotations <tmp>/ds0True/annotations/instances_train.json: 100% ━━━━━━━━━━━━ 1/1 7.1Kit/s 0.0s
+COCO data converted successfully.
+Results saved to <tmp>/ds0True/converted
+0 {'cls91to80': False} {'labels/train/a.txt': '-1 0.2 0.2 0.2 0.2 | 0 0.5 0.5 0.2 0.2'}
+[KAnnotations <tmp>/ds1False/annotations/instances_train.json: 100% ━━━━━━━━━━━━ 1/1 7.3Kit/s 0.0s
+COCO data converted successfully.
+Results saved to <tmp>/ds1False/converted
+1 {} {'labels/train/a.txt': '0 0.2 0.2 0.2 0.2 | 1 0.5 0.5 0.2 0.2'}
+[KAnnotations <tmp>/ds0False/annotations/instances_train.json: 0% ──────────── 0/1  0.0s
+0 {} EXC TypeError must be real number, not NoneType
+[KAnnotations <tmp>/ds1True/annotations/instances_train.json: 100% ━━━━━━━━━━━━ 1/1 8.4Kit/s 0.0s
+COCO data converted successfully.
+Results saved to <tmp>/ds1True/converted-2
+['annotations', 'converted', 'converted-2']

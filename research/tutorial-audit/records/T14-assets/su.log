@@ -1,0 +1,32 @@
+W <tmp>
+[formats] {'img_extra': set(), 'img_missing': set(), 'vid_extra': set(), 'vid_missing': set()}
+[make_div] (9, 8)
+[seg2box] ([[804.5, 553.0, 15.0, 322.0], [131.5, 354.0, 37.0, 112.0], [282.5, 416.0, 35.0, 8.0]], dtype('float32'))
+[profile] Elapsed time is 7.089984137564898e-07 s
+[bboxes] ([411041.52712000004, 99215.71170000001], [[413.92900000000003, 494.05, 782.102, 525.5600000000001], [146.951, 650.635, 196.798, 504.15000000000003]])
+Processing <tmp>/m/a.png imgsz = 100 x 100
+WARNING ⚠️ Unknown class for pixel value 255 in file <tmp>/m/a.png, skipping.
+Processed and stored at <tmp>/o/a.txt imgsz = 100 x 100
+Processing <tmp>/m/b.png imgsz = 100 x 100
+WARNING ⚠️ Unknown class for pixel value 255 in file <tmp>/m/b.png, skipping.
+Processed and stored at <tmp>/o/b.txt imgsz = 100 x 100
+[masks2seg binary?] {'a.txt': ['0'], 'b.txt': []}
+[compress] (137419, 137308, (1080, 810, 3), 'small', 25471, 7946, (100, 200, 3))
+[polygon2mask] ((1080, 810), dtype('uint8'), [0, 255])
+Autosplitting images from <tmp>/ds/images
+[K: 100% ━━━━━━━━━━━━ 10/10 23.9Kit/s 0.0s
+[autosplit] ['ds/autosplit_train.txt']
+[KAnnotations <tmp>/coco/annotations/instances_train2017.json: 100% ━━━━━━━━━━━━ 1/1 7.1Kit/s 0.0s
+COCO data converted successfully.
+Results saved to <tmp>/coco_converted
+[coco convert] ['coco_converted/images', 'coco_converted/labels', 'coco_converted/labels/train2017', 'coco_converted/labels/train2017/x.txt']
+Fast image access ✅ (ping: 0.0±0.0 ms, read: 4344.2±0.0 MB/s, size: 134.2 KB)
+[KScanning <tmp>/data/labels... 1 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 1/1 1.1Kit/s 0.0s
+New cache created: <tmp>/data/labels.cache
+Detection labels detected, generating segment labels by SAM model!
+[KGenerating segment labels: 100% ━━━━━━━━━━━━ 1/1 3.0it/s 0.3s
+Generated segment labels saved in <tmp>/data/labels-segment
+<scratch>/um/ultralytics/data/utils.py:560: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()
+[bbox2seg] (['data/images/001.jpg', 'data/labels-segment/001.txt', 'data/labels.cache', 'data/labels/001.txt'], [2631])
+[visualize] None

@@ -1,0 +1,115 @@
+114 blocks
+FAIL  docs/en/guides/kfold-cross-validation.md:61  FileNotFoundError: 'path/to/data.yaml' does not exist
+FAIL  docs/en/guides/kfold-cross-validation.md:81  NameError: name 'data' is not defined
+FAIL  docs/en/guides/kfold-cross-validation.md:88  ModuleNotFoundError: No module named 'pandas'
+FAIL  docs/en/guides/kfold-cross-validation.md:96  NameError: name 'images' is not defined
+FAIL  docs/en/guides/kfold-cross-validation.md:130  ModuleNotFoundError: No module named 'sklearn'
+FAIL  docs/en/guides/kfold-cross-validation.md:141  NameError: name 'ksplit' is not defined
+FAIL  docs/en/guides/kfold-cross-validation.md:152  NameError: name 'pd' is not defined. Did you mean: 'id'?
+FAIL  docs/en/guides/kfold-cross-validation.md:168  NameError: name 'dataset_path' is not defined
+FAIL  docs/en/guides/kfold-cross-validation.md:199  NameError: name 'folds_df' is not defined
+FAIL  docs/en/guides/kfold-cross-validation.md:208  FileNotFoundError: [Errno 2] No such file or directory: 'path/to/weights.pt'
+FAIL  docs/en/guides/kfold-cross-validation.md:217  NameError: name 'ds_yamls' is not defined
+OK    docs/en/guides/kfold-cross-validation.md:234
+OK    docs/en/guides/coco-to-yolo.md:36
+OK    docs/en/guides/coco-to-yolo.md:103
+OK    docs/en/guides/coco-to-yolo.md:115
+OK    docs/en/guides/coco-to-yolo.md:128
+FAIL  docs/en/guides/coco-to-yolo.md:160  FileNotFoundError: [Errno 2] No such file or directory: 'my_dataset/converted/labels'
+FAIL  docs/en/guides/coco-to-yolo.md:201  FileNotFoundError: [Errno 2] No such file or directory: 'my_dataset/annotations/instances_train.json'
+SKIP  docs/en/guides/coco-to-yolo.md:250 live/heavy
+FAIL  docs/en/guides/coco-to-yolo.md:269  FileNotFoundError: [Errno 2] No such file or directory: 'my_dataset/labels/train/img_001.txt'
+OK    docs/en/guides/coco-to-yolo.md:333
+OK    docs/en/guides/coco-to-yolo.md:357
+OK    docs/en/guides/coco-to-yolo.md:367
+SKIP  docs/en/guides/model-yaml-config.md:155 live/heavy
+FAIL  docs/en/guides/model-yaml-config.md:211  NameError: name 'm' is not defined
+OK    docs/en/guides/model-yaml-config.md:230
+FAIL  docs/en/guides/model-yaml-config.md:252  NameError: name 'nn' is not defined
+FAIL  docs/en/guides/model-yaml-config.md:268  ImportError: attempted relative import with no known parent package
+FAIL  docs/en/guides/model-yaml-config.md:274  ImportError: cannot import name 'CustomBlock' from 'ultralytics.nn.modules' (/private/tmp/claude-501/-Users-wizard-Desktop-MacCode-ultralytics-contribution-book/ddf5be30-
+FAIL  docs/en/guides/model-yaml-config.md:280  NameError: name 'CustomBlock' is not defined
+FAIL  docs/en/guides/model-yaml-config.md:302  FileNotFoundError: 'custom_model.yaml' does not exist
+FAIL  docs/en/guides/model-yaml-config.md:420  FileNotFoundError: 'debug_model.yaml' does not exist
+FAIL  docs/en/guides/model-yaml-config.md:434  FileNotFoundError: 'debug_model.yaml' does not exist
+OK    docs/en/guides/custom-trainer.md:29
+OK    docs/en/guides/custom-trainer.md:50
+FAIL  docs/en/guides/custom-trainer.md:107  RuntimeError: Dataset 'custom.yaml' error ❌ 'custom.yaml' does not exist
+SKIP  docs/en/guides/custom-trainer.md:135 live/heavy
+SKIP  docs/en/guides/custom-trainer.md:175 live/heavy
+SKIP  docs/en/guides/custom-trainer.md:225 live/heavy
+SKIP  docs/en/guides/custom-trainer.md:276 live/heavy
+SKIP  docs/en/guides/custom-trainer.md:311 live/heavy
+TIME  docs/en/guides/custom-trainer.md:357
+TIME  docs/en/guides/custom-trainer.md:397
+OK    docs/en/guides/yolo-common-issues.md:66
+FAIL  docs/en/guides/yolo-common-issues.md:88  NameError: name 'model' is not defined
+FAIL  docs/en/guides/yolo-common-issues.md:103  NameError: name 'model' is not defined
+FAIL  docs/en/guides/yolo-common-issues.md:138  See https://pytorch.org/get-started/locally/ for up-to-date torch install instructions if no CUDA devices are seen by torch.
+FAIL  docs/en/guides/yolo-common-issues.md:197  NameError: name 'x1' is not defined
+OK    docs/en/guides/yolo-common-issues.md:229
+FAIL  docs/en/guides/yolo-common-issues.md:297  NameError: name 'model' is not defined
+OK    docs/en/guides/yolo-thread-safe-inference.md:42
+OK    docs/en/guides/yolo-thread-safe-inference.md:69
+OK    docs/en/guides/yolo-thread-safe-inference.md:101
+OK    docs/en/guides/yolo-thread-safe-inference.md:126
+OK    docs/en/guides/yolo-thread-safe-inference.md:165
+OK    docs/en/guides/yolo-thread-safe-inference.md:195
+SKIP  docs/en/guides/finetuning-guide.md:46 live/heavy
+SKIP  docs/en/guides/finetuning-guide.md:75 live/heavy
+SKIP  docs/en/guides/finetuning-guide.md:118 live/heavy
+SKIP  docs/en/guides/finetuning-guide.md:127 live/heavy
+SKIP  docs/en/guides/finetuning-guide.md:136 live/heavy
+SKIP  docs/en/guides/finetuning-guide.md:174 live/heavy
+SKIP  docs/en/guides/yolo26-training-recipe.md:85 live/heavy
+OK    docs/en/guides/yolo26-training-recipe.md:108
+FAIL  docs/en/guides/yolo26-training-recipe.md:117  FileNotFoundError: [Errno 2] No such file or directory: 'yolo26n.pt'
+OK    docs/en/guides/yolo26-training-recipe.md:160
+SKIP  docs/en/guides/yolo26-training-recipe.md:259 live/heavy
+SKIP  docs/en/guides/knowledge-distillation.md:17 live/heavy
+SKIP  docs/en/guides/knowledge-distillation.md:122 live/heavy
+SKIP  docs/en/guides/knowledge-distillation.md:161 live/heavy
+SKIP  docs/en/guides/knowledge-distillation.md:185 live/heavy
+FAIL  docs/en/guides/knowledge-distillation.md:206  FileNotFoundError: [Errno 2] No such file or directory: 'runs/detect/train/weights/last.pt'
+SKIP  docs/en/guides/yolo-data-augmentation.md:47 live/heavy
+FAIL  docs/en/guides/yolo-data-augmentation.md:114  FileNotFoundError: 'train_custom.yaml' does not exist
+SKIP  docs/en/guides/yolo-data-augmentation.md:411 live/heavy
+SKIP  docs/en/guides/yolo-data-augmentation.md:439 live/heavy
+FAIL  docs/en/guides/similarity-search.md:59  ModuleNotFoundError: No module named 'flask'
+FAIL  docs/en/guides/similarity-search.md:82  ModuleNotFoundError: No module named 'clip'
+FAIL  docs/en/guides/similarity-search.md:137  ModuleNotFoundError: No module named 'clip'
+OK    docs/en/guides/model-testing.md:53
+FAIL  docs/en/guides/model-testing.md:80  FileNotFoundError: path/to/test_images does not exist
+OK    docs/en/guides/model-evaluation-insights.md:78
+OK    docs/en/guides/model-evaluation-insights.md:154
+OK    docs/en/guides/preprocessing-annotated-data.md:94
+SKIP  docs/en/guides/end2end-detection.md:26 live/heavy
+OK    docs/en/guides/yolo-architecture.md:106
+OK    docs/en/guides/yolo-architecture.md:207
+FAIL  docs/en/guides/object-cropping.md:59  AssertionError: Error reading video file
+FAIL  docs/en/guides/export-non-yolo-models.md:25  ModuleNotFoundError: No module named 'timm'
+FAIL  docs/en/guides/export-non-yolo-models.md:61  ModuleNotFoundError: No module named 'timm'
+FAIL  docs/en/guides/export-non-yolo-models.md:75  NameError: name 'model' is not defined
+FAIL  docs/en/guides/export-non-yolo-models.md:83  NameError: name 'torch2onnx' is not defined
+FAIL  docs/en/guides/export-non-yolo-models.md:93  NameError: name 'model' is not defined
+FAIL  docs/en/guides/export-non-yolo-models.md:101  NameError: name 'model' is not defined
+FAIL  docs/en/guides/export-non-yolo-models.md:121  ModuleNotFoundError: No module named 'coremltools'
+FAIL  docs/en/guides/export-non-yolo-models.md:140  NameError: name 'model' is not defined
+FAIL  docs/en/guides/export-non-yolo-models.md:161  NameError: name 'model' is not defined
+FAIL  docs/en/guides/export-non-yolo-models.md:200  NameError: name 'keras_model' is not defined
+FAIL  docs/en/guides/export-non-yolo-models.md:210  NameError: name 'model' is not defined
+FAIL  docs/en/guides/export-non-yolo-models.md:229  NameError: name 'model' is not defined
+FAIL  docs/en/guides/export-non-yolo-models.md:240  NameError: name 'model' is not defined
+FAIL  docs/en/guides/export-non-yolo-models.md:267  NameError: name 'model' is not defined
+FAIL  docs/en/guides/export-non-yolo-models.md:286  ModuleNotFoundError: No module named 'timm'
+FAIL  docs/en/guides/export-non-yolo-models.md:315  FileNotFoundError: 'resnet18.onnx' does not exist
+FAIL  docs/en/guides/sahi-tiled-inference.md:76  ModuleNotFoundError: No module named 'sahi'
+FAIL  docs/en/guides/sahi-tiled-inference.md:96  ModuleNotFoundError: No module named 'sahi'
+FAIL  docs/en/guides/sahi-tiled-inference.md:111  ModuleNotFoundError: No module named 'sahi'
+FAIL  docs/en/guides/sahi-tiled-inference.md:123  FileNotFoundError: [Errno 2] No such file or directory: 'demo_data/prediction_visual.png'
+FAIL  docs/en/guides/sahi-tiled-inference.md:137  ModuleNotFoundError: No module named 'sahi'
+FAIL  docs/en/guides/sahi-tiled-inference.md:164  NameError: name 'result' is not defined
+FAIL  docs/en/guides/sahi-tiled-inference.md:181  ModuleNotFoundError: No module named 'sahi'
+FAIL  docs/en/guides/sahi-tiled-inference.md:232  ModuleNotFoundError: No module named 'sahi'
+FAIL  docs/en/guides/sahi-tiled-inference.md:262  NameError: name 'result' is not defined
+FAIL  docs/en/guides/sahi-tiled-inference.md:294  ModuleNotFoundError: No module named 'sahi'

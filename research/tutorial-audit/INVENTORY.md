@@ -11,7 +11,7 @@
 | [docs/en/usage/engine.md](../../docs/en/usage/engine.md) | [官方來源](https://docs.ultralytics.com/usage/engine/) | 未開始 | — |
 | [docs/en/usage/python.md](../../docs/en/usage/python.md) | [官方來源](https://docs.ultralytics.com/usage/python/) | 進行中（部分完成） | [T03：偵測結果讀取與跨任務欄位探測](records/T03.md)；其他案例未驗證 |
 | [docs/en/usage/settings.md](../../docs/en/usage/settings.md) | [官方來源](https://docs.ultralytics.com/usage/settings/) | 進行中（部分完成） | [T05](records/T05.md) |
-| [docs/en/usage/simple-utilities.md](../../docs/en/usage/simple-utilities.md) | [官方來源](https://docs.ultralytics.com/usage/simple-utilities/) | 未開始 | — |
+| [docs/en/usage/simple-utilities.md](../../docs/en/usage/simple-utilities.md) | [官方來源](https://docs.ultralytics.com/usage/simple-utilities/) | 進行中（部分完成） | [T14](records/T14.md)：資料轉換、壓縮、autosplit、格式常數與數值範例已驗證；`binary` 說法已送 PR #26971；標註繪圖的 OBB 範例未驗證 |
 | [docs/en/modes/benchmark.md](../../docs/en/modes/benchmark.md) | [官方來源](https://docs.ultralytics.com/modes/benchmark/) | 部分完成 | [T10：PyTorch／ONNX CPU 比較與重跑](records/T10.md) |
 | [docs/en/modes/export.md](../../docs/en/modes/export.md) | [官方來源](https://docs.ultralytics.com/modes/export/) | 部分完成 | [T09：ONNX CPU 匯出、重載比較與重跑](records/T09.md) |
 | [docs/en/modes/index.md](../../docs/en/modes/index.md) | [官方來源](https://docs.ultralytics.com/modes/) | 未開始 | — |

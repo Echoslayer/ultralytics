@@ -1,0 +1,7 @@
+abs.txt      LoadImagesAndVideos    bs=2 batches=[2, 1]
+csv          LoadImagesAndVideos    bs=2 batches=[2, 1]
+glob         LoadImagesAndVideos    bs=2 batches=[2, 1]
+dir          LoadImagesAndVideos    bs=2 batches=[2, 1]
+list         LoadPilAndNumpy        bs=3 batches=[3]
+rel ./ txt   LoadImagesAndVideos    bs=2 batches=[2]
+bare txt     LoadImagesAndVideos    bs=2 batches=[2]
