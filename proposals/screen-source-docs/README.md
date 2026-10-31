@@ -1,6 +1,6 @@
 # T15 提案：修正不會結束的 screen 與 webcam 範例
 
-狀態：2026-11-01 已在官方 main `58876de55`（8.4.194）完成修改與本地驗證。工作樹 `ultralytics/.worktree/screen-source-docs`，分支 `docs/screen-source-stream`，commit `dd7daad40`，已送出 [PR #26979](https://github.com/ultralytics/ultralytics/pull/26979)，等待審查。改 `docs/en/modes/predict.md` 與 `docs/en/usage/python.md`（+8/−6），不改程式碼。PR 草稿見 [PR.md](PR.md)。
+狀態：2026-11-01 已在官方 main `58876de55`（8.4.194）完成修改與本地驗證。工作樹 `ultralytics/.worktree/screen-source-docs`，分支 `docs/screen-source-stream`，commit `dd7daad40`、`3f1e876d7`，已送出 [PR #26979](https://github.com/ultralytics/ultralytics/pull/26979)，等待審查。改 `docs/en/modes/predict.md` 與 `docs/en/usage/python.md`（+9/−6），不改程式碼。PR 草稿見 [PR.md](PR.md)。
 
 ## 為什麼值得做
 
@@ -18,7 +18,7 @@
 1. 來源表：列標上 ✅，Notes 改成 “Capture the screen continuously until you stop.”
 2. screenshot 分頁的說明改成來源會持續擷取。
 3. 範例改用 `stream=True` 的迴圈，取到第一幀就 `break`。
-4. `usage/python.md:138` 加上 `stream=True`，並註明要迭代這個 generator。
+4. `usage/python.md:138` 改成同樣的 `stream=True` 迴圈，取到第一幀就 `break`。
 
 這件事不需要先開 issue：只改文件，問題可以直接重現。
 
@@ -27,7 +27,7 @@
 環境：macOS（Apple Silicon）、Python 3.13.12、torch 2.15.0、CPU。
 
 - [`verify_screen_doc.py`](assets/verify_screen_doc.py) 從修改後的頁面取出範例原樣執行：3.7 秒結束，exit 0，有印出 boxes，沒有記憶體警告（[`verify_screen_doc.log`](assets/verify_screen_doc.log)）。
-- [`verify_webcam_line.py`](assets/verify_webcam_line.py) 用假鏡頭跑修改後的 webcam 寫法：立刻回傳 generator，開啟的來源是 `0`，迭代 3 幀正常（[`verify_webcam_line.log`](assets/verify_webcam_line.log)）。
+- [`verify_webcam_line.py`](assets/verify_webcam_line.py) 從修改後的頁面取出 webcam 寫法，用假鏡頭原樣執行：開啟的來源是 `0`，讀到一幀就停止（[`verify_webcam_line.log`](assets/verify_webcam_line.log)）。
 - Prettier 3.9.9（`--tab-width 4 --print-width 120`）與 `git diff --check` 通過。
 - `python docs/build_docs.py` 完整嚴格建置通過（No issues found，[`build-docs.log`](assets/build-docs.log)），工作樹只留這兩個檔案的修改。
 - 沒有用實體鏡頭測試，也沒有在 Windows、Linux 或無顯示器環境測試。
@@ -41,7 +41,7 @@
 
 # T15 proposal: fix the screen and webcam examples that never end
 
-Status: implemented and locally validated on official main `58876de55` (8.4.194) on 2026-11-01. Worktree `ultralytics/.worktree/screen-source-docs`, branch `docs/screen-source-stream`, commit `dd7daad40`, submitted as [PR #26979](https://github.com/ultralytics/ultralytics/pull/26979); awaiting review. Changes `docs/en/modes/predict.md` and `docs/en/usage/python.md` (+8/−6), no code changes. PR draft: [PR.md](PR.md).
+Status: implemented and locally validated on official main `58876de55` (8.4.194) on 2026-11-01. Worktree `ultralytics/.worktree/screen-source-docs`, branch `docs/screen-source-stream`, commits `dd7daad40` and `3f1e876d7`, submitted as [PR #26979](https://github.com/ultralytics/ultralytics/pull/26979); awaiting review. Changes `docs/en/modes/predict.md` and `docs/en/usage/python.md` (+9/−6), no code changes. PR draft: [PR.md](PR.md).
 
 ## Why
 
@@ -59,7 +59,7 @@ The docs describe `"screen"` as taking one screenshot, and the example is `resul
 1. Source table: mark the row ✅ and change Notes to "Capture the screen continuously until you stop."
 2. Change the screenshot tab's description to say the source keeps capturing.
 3. Change the example to a `stream=True` loop that breaks after the first frame.
-4. Add `stream=True` at `usage/python.md:138` with a note to iterate the generator.
+4. Change `usage/python.md:138` to the same `stream=True` loop, breaking after the first frame.
 
 No issue is needed first: this is docs only and directly reproducible.
 
@@ -68,7 +68,7 @@ No issue is needed first: this is docs only and directly reproducible.
 Environment: macOS (Apple Silicon), Python 3.13.12, torch 2.15.0, CPU.
 
 - [`verify_screen_doc.py`](assets/verify_screen_doc.py) takes the example from the changed page and runs it as written: finished in 3.7 s, exit 0, boxes printed, no memory warning ([`verify_screen_doc.log`](assets/verify_screen_doc.log)).
-- [`verify_webcam_line.py`](assets/verify_webcam_line.py) runs the changed webcam line on a fake camera: it returns a generator at once, opens source `0`, and yields 3 frames ([`verify_webcam_line.log`](assets/verify_webcam_line.log)).
+- [`verify_webcam_line.py`](assets/verify_webcam_line.py) takes the webcam lines from the changed page and runs them on a fake camera: it opens source `0` and stops after one frame ([`verify_webcam_line.log`](assets/verify_webcam_line.log)).
 - Prettier 3.9.9 (`--tab-width 4 --print-width 120`) and `git diff --check` pass.
 - `python docs/build_docs.py`: full strict build passed (no issues found, [`build-docs.log`](assets/build-docs.log)); only these two files remain changed in the working tree.
 - Not tested with a real camera, on Windows or Linux, or without a display.

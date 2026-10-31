@@ -1,3 +1,4 @@
-predict returned: generator
+for result in model.predict(source="0", stream=True):  # a webcam never ends on its own
+    break  # stop after the first frame
 VideoCapture opened with 0
-frames read: 3 shape: (480, 640)
+frames read: 20 result shape: (480, 640)

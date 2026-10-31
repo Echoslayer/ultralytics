@@ -1,6 +1,8 @@
-"""Run the fixed usage/python.md webcam line against a fake camera, since no real camera was used."""
+"""Run the webcam lines from usage/python.md as written against a fake camera, since no real camera was used."""
 
+import re
 import sys
+import textwrap
 from pathlib import Path
 
 import cv2
@@ -10,12 +12,20 @@ from probe_mem import FakeCam  # noqa: E402
 
 from ultralytics import YOLO  # noqa: E402
 
+text = Path(sys.argv[1]).read_text(encoding="utf-8")
+code = textwrap.dedent(re.search(r'^ +for result in model\.predict\(source="0".*?\n.*?\n', text, re.M).group(0))
+print(code)
+calls = []
+real = FakeCam.read
+
+
+def read(self):
+    calls.append(1)
+    return real(self)
+
+
+FakeCam.read = read
 cv2.VideoCapture = FakeCam
 model = YOLO("yolo26n.pt")
-results = model.predict(source="0", stream=True)  # a webcam never ends on its own, so iterate this generator
-print("predict returned:", type(results).__name__, flush=True)
-for i, r in enumerate(results):
-    if i == 2:
-        break
-print("frames read:", i + 1, "shape:", r.orig_shape)
-results.close()
+exec(code)
+print("frames read:", len(calls), "result shape:", result.orig_shape)
