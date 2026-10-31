@@ -93,3 +93,7 @@
 2026-10-30：pderrenger 在 #26955 要求把 `maps` 說明帶到任務頁與評估指南。追加提交 `d2fd73703` 改完其餘 7 處（`git grep '\.maps\b' -- docs/en` 修改前共 9 處，含 `val.md` 2 處），並以 COCO8、COCO8-seg、COCO8-pose、DOTA8 實測填值行為，紀錄在 `proposals/maps-docs/assets/verify_maps_all_tasks.log`。
 
 2026-10-30：以 GitHub API 核對 #26949、#26935 的合併提交 `a04a476a0`、`5fc6050fd`（作者 `author.login=Echoslayer`，合併者 glenn-jocher），以及 `repos/ultralytics/ultralytics/contributors` 分頁結果（467 個帳號，`Echoslayer` contributions=2）。補入第一章的合併狀態與「合併後」一節。
+
+2026-11-01：第四章補入 T14、T15 的選題結果，第一章新增 #26971、#26979 的實例，證據在 `research/tutorial-audit/records/T14.md`、`T15.md` 與 `proposals/mask-converter-docs/`、`proposals/screen-source-docs/`。實測基準為官方 main `82fe708b6`（8.4.193，T14）與 `58876de55`（8.4.194，T15），環境是 macOS（Apple Silicon）、Python 3.13.12、torch 2.15.0、CPU。以 GitHub API 核對：#26955 合併提交 `e936f4688`、#26960 合併提交 `97b741ccb`，合併時間為 UTC 2026-10-30 17:0x，即台灣時間 10-31，合併者 glenn-jocher；#26935、#26949、#26955、#26960、#26971 的 UltralyticsAssistant 審查都是 APPROVED 且 inline 留言 0 則，#26979 的 `dd7daad40` 為 COMMENTED、1 則 LOW。#26979 的 `userContentEdits` 顯示 bot 摘要曾被覆蓋，已從歷史版本還原，還原後的 Key Changes 仍是 bot 當時對第一個提交的描述。
+
+核對當下 #26971 為 OPEN、bot 核可；#26979 為 OPEN，`3f1e876d7` 的檢查 4 個成功、6 個跳過、9 個執行中，尚未有 bot 重審。

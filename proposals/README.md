@@ -11,9 +11,9 @@ Each proposal and PR draft includes Traditional Chinese and English versions wit
 | 提案 / Proposal | 類型 / Type | 狀態 / Status | 下一步 / Next step |
 | --- | --- | --- | --- |
 | [T01／T05：weights_dir 文件澄清 / Clarify weights_dir documentation](weights-dir-docs/README.md) | 文件 / Docs | PR #26935 已於 2026-10-30 合併；維護者把 10 行說明改寫為表格列加一句註記，最終 +3/−1 / PR #26935 merged 2026-10-30; maintainer folded the 10-line note into the table row plus one sentence (+3/−1) | 完成 / Done |
-| [T07：說明 maps 對未評估類別的填值 / Explain maps filler for unevaluated classes](maps-docs/README.md) | 文件 / Docs | PR #26955 已於 2026-10-30 合併 / PR #26955 merged 2026-10-30 | 完成 / Done |
+| [T07：說明 maps 對未評估類別的填值 / Explain maps filler for unevaluated classes](maps-docs/README.md) | 文件 / Docs | PR #26955 已於 2026-10-31（台灣時間）合併 / PR #26955 merged 2026-10-31 (Taiwan time) | 完成 / Done |
 | [#26707 延伸：安全載入無法載入自訂分類轉換 / Restricted loading rejects custom classify transforms](safe-load-custom-transforms/README.md) | 錯誤回報 / Bug report | PR #26949 已於 2026-10-30 合併，issue #26943 關閉 / PR #26949 merged 2026-10-30; issue #26943 closed | 完成 / Done |
-| [T13：更新 COCO JSON 指南的快取說明 / Update the COCO JSON guide's cache note](coco-json-cache-docs/README.md) | 文件 / Docs | PR #26960 已於 2026-10-30 合併 / PR #26960 merged 2026-10-30 | 完成 / Done |
+| [T13：更新 COCO JSON 指南的快取說明 / Update the COCO JSON guide's cache note](coco-json-cache-docs/README.md) | 文件 / Docs | PR #26960 已於 2026-10-31（台灣時間）合併 / PR #26960 merged 2026-10-31 (Taiwan time) | 完成 / Done |
 | [T14：修正 mask 轉換工具的輸入格式說明 / Correct the mask converter's input format](mask-converter-docs/README.md) | 文件 / Docs | 已開 PR #26971（2026-10-31）/ PR #26971 open (2026-10-31) | 等審查 / Await review |
 | [T15：修正不會結束的 screen 與 webcam 範例 / Fix the screen and webcam examples that never end](screen-source-docs/README.md) | 文件 / Docs | 已開 PR #26979（2026-11-01）/ PR #26979 open (2026-11-01) | 等審查 / Await review |
 

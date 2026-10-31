@@ -381,7 +381,7 @@ T01 觀察到設定 `weights_dir` 後，裸模型檔名的缺檔下載仍進入�
 
 這次遇到三個值得記下的問題：
 
-- **訓練輸出寫進其他專案。** 沒有指定 `project=` 時，訓練結果寫到 Ultralytics 設定中的 `runs_dir`，這次落在另一個專案的目錄下。跑重現腳本時，應指定 `project=` 到暫存目錄。
+- **訓練輸出寫進其他專案。** 沒有指定 `project=` 時，訓練結果寫到 Ultralytics 設定中的 `runs_dir`，這次落在另一個專案的目錄下。跑重現腳本時，應指定 `project=` 到暫存目錄；更穩的做法見 [#26971、#26979 的實例](#t14-t15-case)。
 - **改寫 PR 正文會蓋掉 bot 摘要。** Ultralytics Actions 會把「🛠️ PR Summary」寫進 PR 正文。用 `gh pr edit --body-file` 整份覆蓋前，先抓下線上正文再修改。若已蓋掉，可從 GraphQL 的 `userContentEdits` 找回 bot 的版本。
 - **再次遇到 403。** 預設的 git 憑證屬於另一個帳號。這次只在單次指令中改用 Echoslayer 的憑證（`gh auth token --user Echoslayer`），沒有切換全域登入。
 
@@ -402,3 +402,42 @@ T01 觀察到設定 `weights_dir` 後，裸模型檔名的缺檔下載仍進入�
 要確認自己的提交，直接看 `https://github.com/ultralytics/ultralytics/commits?author=Echoslayer`。
 
 下一步：選定一種貢獻，再用[第二章的檔案對照表](codebase-map.md)找出負責模組。
+
+<a id="t14-t15-case"></a>
+
+## 實例：從 T14、T15 到文件 PR #26971、#26979
+
+這兩個 PR 都只改文件，也都沒有先開 issue，因為問題能直接重現，修正也不動程式行為。它們的差別在審查結果：#26971 第一次就通過 bot 審查，#26979 被 bot 指出錯誤。
+
+| 項目 | [#26971](https://github.com/ultralytics/ultralytics/pull/26971) | [#26979](https://github.com/ultralytics/ultralytics/pull/26979) |
+| --- | --- | --- |
+| 問題 | `simple-utilities.md` 說 mask 是 “binary format”，0/255 圖片只會得到空標籤 | `"screen"` 與 `source="0"` 的範例沒有 `stream=True`，永遠不返回，記憶體持續增加 |
+| 怎麼找到 | T14 比對同一函式在不同頁的說法 | T15 查明 T14 留下的逾時區塊 |
+| 修改 | `docs/en/usage/simple-utilities.md`，+1/−1 | `docs/en/modes/predict.md`、`docs/en/usage/python.md`，+9/−6 |
+| 驗證 | macOS／CPU，真實 PNG mask | macOS／CPU，真實螢幕擷取；webcam 用假的 `cv2.VideoCapture` |
+| bot 審查 | 核可，沒有 inline comment | 留 1 則 LOW inline comment，沒有核可 |
+| 工作樹 | `ultralytics/.worktree/mask-converter-docs` | `ultralytics/.worktree/screen-source-docs` |
+
+**狀態：2026-11-01（台灣時間）兩個 PR 都還開著，等維護者審查。** 合併需要一位有寫入權限的維護者核可，bot 的核可不算數。#26971 收到 pderrenger 的感謝留言，但留言不是核可。#26979 的第二個提交 `3f1e876d7` 還在等 CI 與 bot 重新審查。
+
+同期的 [#26955](https://github.com/ultralytics/ultralytics/pull/26955)（`e936f4688`）與 [#26960](https://github.com/ultralytics/ultralytics/pull/26960)（`97b741ccb`）已在 2026-10-31（台灣時間）由 Glenn Jocher 合併。
+
+### bot 留下 inline comment 時
+
+UltralyticsAssistant 每個 PR 都會審。沒問題就直接核可，有問題才留 inline comment。本書前 5 個 PR 都是核可，#26979 是第一次收到修改意見，所以看起來像 bot 突然開始回覆。
+
+先確認它說得對不對，再修。這次 bot 是對的：webcam 那行只加了 `stream=True`，generator 從未被迭代，下一行又蓋掉 `results`。原本會卡住的範例，被改成什麼都不做的範例。修法是改成迴圈，推新的提交到同一個分支，不要開新 PR。
+
+推上新提交後，舊留言會標成 outdated，但討論串不會自動解決。AGENTS.md 要求合併時沒有未解決的討論串。
+
+### 這次學到的事
+
+- **驗證要跑頁面上的原文。** 第一版的驗證腳本自己補了迴圈，所以沒發現範例不會執行。修正後改成從文件取出區塊原樣執行。
+- **`gh pr edit --body-file` 又蓋掉一次 bot 摘要。** 前面 #26949 已記過這個陷阱，這次在 #26979 再犯，寫這一節前核對才發現，並從 GraphQL 的 `userContentEdits` 還原。更新正文前，先用 `gh pr view --json body` 抓線上版本，只改要改的句子。
+- **commit 前先比對上游。** #26979 開完才發現 #26976 也改過同兩個檔案。那次是文句潤飾，沒有衝突，但比對應該放在送出之前。
+- **跑訓練前先隔離 settings。** T15 忘了設定，9 個訓練目錄又寫進另一個專案，`datasets_dir` 底下的 `labels/train.cache` 也被重寫。`project=` 只管輸出目錄，改設 `YOLO_CONFIG_DIR` 到暫存目錄，才能同時隔離 `runs_dir`、`weights_dir` 與 `datasets_dir`。
+- **帳號從第一個指令就指定。** 這台機器的 `gh` 預設帳號不是 Echoslayer。每個連到 GitHub 的指令先設 `GH_TOKEN=$(gh auth token --user Echoslayer)`，不要等 403 才換，也不必切換全域登入。
+- **macOS 量記憶體要看 footprint。** 系統會壓縮閒置記憶體，被壓縮的部分不算進 RSS。screenshot 範例 RSS 只有 1.3 GB 時，`top` 的 footprint 已是 6.9 GB。只看 RSS 時，本書曾寫下「增加得比預期少」的錯誤判斷。
+- **不要為了測試擅自開鏡頭。** webcam 改用假的 `cv2.VideoCapture`，其餘走真正的 `LoadStreams` 與 predictor，並在 PR 明寫沒有用實體鏡頭。
+
+兩個案例都只在 macOS／CPU 驗證，沒有測 Windows、Linux 或無顯示器環境。#26979 沒有測實體鏡頭、`Ctrl+C` 之後的行為，以及 CLI 的 `source=screen`；16 GB 機器會耗盡記憶體是依增長速度推算，沒有實際跑到 OOM。
