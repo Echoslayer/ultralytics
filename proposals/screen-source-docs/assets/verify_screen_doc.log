@@ -1,0 +1,15 @@
+from ultralytics import YOLO
+
+# Load a pretrained YOLO26n model
+model = YOLO("yolo26n.pt")
+
+# Define the screen as source
+source = "screen"
+
+# Run inference on the source and stop after the first capture
+for result in model(source, stream=True):
+    print(result.boxes)
+    break
+
+exit=0 seconds=3.7 printed_boxes=True
+stream warning shown: False

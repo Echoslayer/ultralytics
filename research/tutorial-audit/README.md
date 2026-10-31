@@ -33,6 +33,7 @@
 | [T12：分割物件去背](records/T12.md) | 三張圖＋seg 模型 → 照 Full Example 畫輪廓、去背 → 9 張 PNG | 通過 | 輪廓與模型遮罩 IoU 0.93–0.99；空輪廓會讓 drawContours 報錯，但約 400 個偵測中未出現 |
 | [T13：直接用 COCO JSON 訓練](records/T13.md) | COCO8 轉 COCO JSON → COCOTrainer 訓練 1 epoch、改 JSON 重跑 → 指標與快取行為 | 通過 | 文件說相同大小的修改會沿用舊快取，實際會重新解析（#26283 加入修改時間）；PR #26960 |
 | [T14：文件與程式的批次比對](records/T14.md) | 全部文件的 import、參數、連結＋221 個區塊實跑 → 與程式比對 → 落差清單 | 通過 | 2 個文件候選：`simple-utilities` 的 binary mask 說法與實際不符（0/255 會得到空標籤）；predict 來源表缺 `.txt`、`batch` 適用範圍不全（暫緩）；第一項已送 PR #26971 |
+| [T15：查明逾時區塊與串接執行](records/T15.md) | 逾時區塊、`custom-trainer` 實跑、同頁串接 → 檢查實際行為 | 通過 | 1 個文件候選：`predict.md` 的 screen 範例與 `python.md` 的 webcam 寫法不會返回，記憶體持續增加；已送 PR #26979 |
 
 只有完成的案例會加入此表。未執行的範例不預填結果；同一頁只有部分案例完成時，整頁仍保留進行中。
 

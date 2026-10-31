@@ -1,0 +1,13 @@
+RUNS_DIR runs
+class_weights mean=1.0000 w0/w2=2.000 w1/w2=3.000
+default cls_pw, override class_weights: None
+PerLayerLR: 120 backbone params at 0.1x the head rate
+groups (lr, initial_lr, n, wd): {'g': [(4.046e-05, 0.000119, 86, 0.0005), (4.046000000000001e-06, 1.1900000000000001e-05, 40, 0.0005), (4.046e-05, 0.000119, 74, 0.0), (4.046000000000001e-06, 1.1900000000000001e-05, 40, 0.0), (4.046e-05, 0.000119, 86, 0.0), (4.046000000000001e-06, 1.1900000000000001e-05, 40, 0.0)], 'ep': 3}
+epoch 1 layer0 trainable=0 weight changed=False
+epoch 2 layer0 trainable=0 weight changed=False
+epoch 3 layer0 trainable=0 weight changed=False
+epoch 4 layer0 trainable=0 weight changed=False
+epoch 5 layer0 trainable=3 weight changed=True
+epoch 6 layer0 trainable=3 weight changed=True
+epoch 7 layer0 trainable=3 weight changed=True
+epoch, fitness, best, map50, map: [(0, 0.5046, 0.5046, 0.5046, 0.2691), (1, 0.4633, 0.5046, 0.4633, 0.2657), (2, 0.4667, 0.5046, 0.4667, 0.266), (3, 0.4667, 0.5046, 0.5046, 0.2691)]

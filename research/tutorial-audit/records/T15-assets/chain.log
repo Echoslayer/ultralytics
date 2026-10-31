@@ -1,0 +1,63 @@
+### docs/en/guides/export-non-yolo-models.md
+FAIL 25 ModuleNotFoundError: No module named 'timm'
+FAIL 61 ModuleNotFoundError: No module named 'timm'
+FAIL 75 NameError: name 'model' is not defined
+FAIL 83 NameError: name 'model' is not defined
+FAIL 93 NameError: name 'model' is not defined
+FAIL 101 NameError: name 'model' is not defined
+FAIL 121 ModuleNotFoundError: No module named 'coremltools'
+FAIL 140 NameError: name 'model' is not defined
+FAIL 161 NameError: name 'model' is not defined
+FAIL 200 NameError: name 'keras_model' is not defined
+FAIL 210 NameError: name 'model' is not defined
+FAIL 229 NameError: name 'model' is not defined
+FAIL 240 NameError: name 'model' is not defined
+FAIL 267 NameError: name 'model' is not defined
+FAIL 286 ModuleNotFoundError: No module named 'timm'
+FAIL 315 FileNotFoundError: 'resnet18.onnx' does not exist
+### docs/en/guides/model-yaml-config.md
+FAIL 155 FileNotFoundError: 'convnext_backbone.yaml' does not exist
+FAIL 211 NameError: name 'm' is not defined
+OK   230
+FAIL 252 NameError: name 'nn' is not defined
+FAIL 268 ImportError: attempted relative import with no known parent package
+FAIL 274 ImportError: cannot import name 'CustomBlock' from 'ultralytics.nn.modules' (<scratch path>
+FAIL 280 NameError: name 'CustomBlock' is not defined
+FAIL 302 FileNotFoundError: 'custom_model.yaml' does not exist
+FAIL 420 FileNotFoundError: 'debug_model.yaml' does not exist
+FAIL 434 FileNotFoundError: 'debug_model.yaml' does not exist
+### docs/en/usage/python.md
+OK   27
+OK   57
+OK   66
+FAIL 75 FileNotFoundError: [Errno 2] No such file or directory: 'last.pt'
+OK   92
+FAIL 107 FileNotFoundError: 'path/to/separate/data.yaml' does not exist
+SKIP 130
+SKIP 155
+OK   202
+FAIL 212 ValueError: Invalid CUDA 'device=0' requested. Use 'device=cpu' or pass valid CUDA device(s) if available, i.e. 'device=0' or 'device=0,1,2,3' for Multi-GPU.
+SKIP 229
+FAIL 253 ValueError: Invalid CUDA 'device=0' requested. Use 'device=cpu' or pass valid CUDA device(s) if available, i.e. 'device=0' or 'device=0,1,2,3' for Multi-GPU.
+FAIL 268 AssertionError: runs/detect/train-6/weights/last.pt training to 3 epochs is finished, nothing to resume.
+SKIP 301
+FAIL 334 RuntimeError: Dataset 'path/to/your/dataset.yaml' error ❌ 'path/to/your/dataset.yaml' does not exist
+OK   350
+FAIL 366 FileNotFoundError: 'path/to/separate/data.yaml' does not exist
+### docs/en/modes/val.md
+FAIL 62 FileNotFoundError: [Errno 2] No such file or directory: 'path/to/best.pt'
+FAIL 124 ValueError: Invalid CUDA 'device=0' requested. Use 'device=cpu' or pass valid CUDA device(s) if available, i.e. 'device=0' or 'device=0,1,2,3' for Multi-GPU.
+OK   144
+FAIL 159 KeyError: 'image1.jpg'
+OK   210
+OK   239
+FAIL 272 FileNotFoundError: 'path/to/your/custom_dataset.yaml' does not exist
+OK   297
+### docs/en/guides/yolo-common-issues.md
+OK   66
+FAIL 88 NameError: name 'model' is not defined
+FAIL 103 NameError: name 'model' is not defined
+FAIL 138 ValueError: Invalid CUDA 'device=0' requested. Use 'device=cpu' or pass valid CUDA device(s) if available, i.e. 'device=0' or 'device=0,1,2,3' for Multi-GPU.
+FAIL 197 NameError: name 'x1' is not defined
+OK   229
+FAIL 297 ValueError: Invalid CUDA 'device=0,1,2,3' requested. Use 'device=cpu' or pass valid CUDA device(s) if available, i.e. 'device=0' or 'device=0,1,2,3' for Multi-GPU.

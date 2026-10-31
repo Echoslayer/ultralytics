@@ -1,0 +1,14 @@
+screen t=16s rss=953 MB footprint=1857M
+screen t=32s rss=1324 MB footprint=3541M
+screen t=48s rss=1385 MB footprint=5219M
+screen t=63s rss=1294 MB footprint=6903M
+screen exited by itself: False | RETURNED line: []
+screen ['frames=1100 retained_orig_img=4422 MB', 'frames=1200 retained_orig_img=4824 MB']
+cam t=16s rss=759 MB footprint=651M
+cam t=32s rss=1184 MB footprint=1030M
+cam t=48s rss=910 MB footprint=1471M
+cam t=64s rss=909 MB footprint=1795M
+cam exited by itself: False | RETURNED line: []
+cam ['frames=1400 retained_orig_img=1230 MB', 'frames=1500 retained_orig_img=1318 MB']
+cam_ends exited by itself: True | RETURNED line: ['RETURNED 46']
+cam_ends ['VideoCapture opened with 0']

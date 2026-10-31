@@ -1,0 +1,6 @@
+stream=True: 389 frames in 20s, shape (956, 1470, 3), stopped by the caller
+docs example t=50s rss=373 MB alive=True
+docs example t=80s rss=436 MB alive=True
+docs example t=110s rss=464 MB alive=True
+returned to caller: False
+stream warning shown: True

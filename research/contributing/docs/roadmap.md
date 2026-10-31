@@ -111,6 +111,7 @@ repo:ultralytics/ultralytics is:issue is:closed "你的錯誤字串"
 | 照文件逐步操作 | T12 | `guides/isolating-segmentation-objects.md`，程式碼已在 #24701 修過 | 0 |
 | 照文件逐步操作 | T13 | `guides/coco-json-training.md`，挑程式碼久未改動的頁 | 1 個 PR：#26960 |
 | 批次比對文件與程式 | T14 | 全部文件的 import、參數、連結，221 個區塊實跑 | 1 個 PR：#26971 |
+| 查明逾時區塊 | T15 | `predict.md` 逾時、`custom-trainer.md` 實跑、同頁串接 | 1 個 PR：#26979 |
 
 探針是只在本機跑的小腳本，用來確認某段程式在特定輸入下的行為。五輪探針都沒有找到可送出的缺陷，原因各不相同：
 

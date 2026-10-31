@@ -1,0 +1,9 @@
+frame 1 t=0.8
+frame 10 t=1.2
+frame 50 t=3.2
+frame 100 t=5.7
+frame 200 t=10.7
+frame 300 t=15.8
+frame 500 t=26.2
+frame 800 t=41.4
+killed by a 60s alarm; the call had not returned
